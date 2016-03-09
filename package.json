@@ -1,0 +1,22 @@
+{
+  "name": "2016-01-thesis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hrr12-04pistons/2016-01-thesis.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hrr12-04pistons/2016-01-thesis/issues"
+  },
+  "homepage": "https://github.com/hrr12-04pistons/2016-01-thesis#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
