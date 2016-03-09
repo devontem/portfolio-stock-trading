@@ -1,0 +1,11 @@
+node_modules/
+bower_components/
+*.log
+.DS_Store
+
+build/
+dist/
+
+.floo
+.flooignore
+config.js
