@@ -67,8 +67,8 @@ User.hasMany(Portfolio);
 Portfolio.belongsTo(User);
 
 //Transaction to User - One to Many
-User.hasMany(Transaction);
-Transaction.belongsTo(User);
+Portfolio.hasMany(Transaction);
+Transaction.belongsTo(Portfolio);
 
 User.sync();
 League.sync();

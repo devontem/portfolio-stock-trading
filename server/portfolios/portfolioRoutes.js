@@ -1,5 +1,5 @@
-var portfolioController = require('./portfolioController.js');
+var portfolioController = require('./portfolioController');
 
-module.exports = function (app){
-
-};
+module.exports = function(app){
+  
+}
