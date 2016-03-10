@@ -1,8 +1,4 @@
-(function(){
-
-  'use strict';
-
-  var app = angular.module('app', ['ui.router']);
+var app = angular.module('app', ['ui.router']);
 
   app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
@@ -22,6 +18,14 @@
         controller: 'LobbyController',
         controllerAs: 'lobby',
         templateUrl: 'lobby/lobby.html'
+
+      })
+
+      .state('profile', {
+        url: '/profile',
+        controller: 'ProfileController',
+        controllerAs: 'profile',
+        templateUrl: 'profile/profile.html'
 
       })
 
@@ -62,5 +66,3 @@
       })
 
   }]);
-
-}());
