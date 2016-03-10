@@ -1,4 +1,4 @@
-var roomController = require('./roomController');
+var LeagueController = require('./leagueController');
 
 module.exports = function(app){
 
