@@ -74,7 +74,9 @@ module.exports = function (app, express) {
   app.use('/api/portfolios', portfolioRouter);
 
   require('../users/userRoutes.js')(userRouter);
+
   require('../leagues/leagueRoutes.js')(leagueRouter);
+
   require('../portfolios/portfolioRoutes.js')(portfolioRouter);
 
 }
