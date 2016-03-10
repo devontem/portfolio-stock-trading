@@ -28,7 +28,7 @@ module.exports.getAllLeagues = function (req, res) {
   		console.log('No leagues found.');
   		res.end();
   	} else {
-  		res.send(leauges: leagues)
+  		res.send(leagues: leagues)
   	}
   })
   .catch(function (err) {
