@@ -1,5 +1,1 @@
-
-
-module.exports = function(app){
-
-}
+var Portfolio = require('../../db/models').Portfolio;

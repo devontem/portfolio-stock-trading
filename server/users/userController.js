@@ -1,5 +1,1 @@
-
-
-module.exports = function(app){
-
-}
+var User = require('../../db/models').User;
