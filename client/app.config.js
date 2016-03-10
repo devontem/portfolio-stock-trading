@@ -1,8 +1,4 @@
-(function(){
-
-  'use strict';
-
-  var app = angular.module('app', ['ngMaterial', 'ui.router']);
+var app = angular.module('app', ['ui.router']);
 
   app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
@@ -13,15 +9,23 @@
       .state('signin', {
         url: '/',
         controller: 'SigninController',
-        controllerAs: 'signin'
+        controllerAs: 'signin',
         templateUrl: 'signin/signin.html'
       })
 
       .state('lobby', {
         url: '/lobby',
         controller: 'LobbyController',
-        controllerAs: 'lobby'
+        controllerAs: 'lobby',
         templateUrl: 'lobby/lobby.html'
+
+      })
+
+      .state('profile', {
+        url: '/profile',
+        controller: 'ProfileController',
+        controllerAs: 'profile',
+        templateUrl: 'profile/profile.html'
 
       })
 
@@ -30,17 +34,17 @@
         controller: 'LeagueController',
         controllerAs: 'league',
         templateUrl: 'league/league.html'
-        resolve: {
+        /*resolve: {
           activities: function(leagueService){
             return leagueService.getLeague();
           }
-        }
+        }*/
       })
 
       .state('portfolio', {
         url: '/portfolio',
         controller: 'PortfolioController',
-        controllerAs: 'portfolio'
+        controllerAs: 'portfolio',
         templateUrl: 'portfolio/portfolio.html'
 
       })
@@ -48,7 +52,7 @@
       .state('faqs', {
         url: '/faqs',
         controller: 'FaqsController',
-        controllerAs: 'faqs'
+        controllerAs: 'faqs',
         templateUrl: 'faqs/faqs.html'
 
       })
@@ -56,11 +60,9 @@
       .state('account', {
         url: '/account',
         controller: 'AccountController',
-        controllerAs: 'account'
+        controllerAs: 'account',
         templateUrl: 'account/account.html'
 
       })
 
   }]);
-
-}());
