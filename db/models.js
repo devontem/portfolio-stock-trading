@@ -2,12 +2,6 @@ var Sequelize = require('sequelize');
 var bcrypt = require('bcrypt-nodejs');
 var Promise = require('bluebird');
 
-// if (process.env.DEPLOYED === 'true'){
-//   var orm = new Sequelize(process.env.JAWSDB_URL);
-// } else {
-var orm = new Sequelize('Pistonsdb', 'root', '',{
-	dialect: 'mysql'
-})
 
 
 //JAWSDB for Heroku deployment
@@ -54,15 +48,17 @@ var Transaction = orm.define('Transaction', {
 
 	symbol: Sequelize.STRING,
 	price: Sequelize.STRING,
+
 	buysell: Sequelize.BOOLEAN,
   shares: Sequelize.INTEGER
+
 });
 
 
 //League Model
 var League = orm.define('league', {
 	name: Sequelize.STRING,
-  maxNum: Sequelize.INTEGER
+    maxNum: Sequelize.INTEGER
 });
 
 //Joint table for League and user 
@@ -79,7 +75,9 @@ User.hasMany(Portfolio);
 Portfolio.belongsTo(User);
 
 
+
 //Transaction to User - One to Many
+
 Portfolio.hasMany(Transaction);
 Transaction.belongsTo(Portfolio);
 
@@ -92,7 +90,6 @@ League_user.sync();
 
 exports.League_user = League_user;
 exports.User = User;
-
 exports.League = League;
 exports.Portfolio = Portfolio;
 exports.Transaction = Transaction;

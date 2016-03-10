@@ -3,7 +3,6 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var http = require('http-request');
-
 var League = require('../../db/models').League;
 var User = require('../../db/models').User;
 var Portfolio = require('../../db/models').Portfolio;
