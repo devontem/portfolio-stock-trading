@@ -81,6 +81,7 @@ Portfolio.belongsTo(User);
 Portfolio.hasMany(Transaction);
 Transaction.belongsTo(Portfolio);
 
+
 User.sync();
 League.sync();
 Portfolio.sync();

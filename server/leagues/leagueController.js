@@ -16,10 +16,7 @@ module.exports.addLeagueToDB = function (req, res){
   	console.error('Error creating league: ', err.message);
   	res.end();
   })
-
 }
-
-
 module.exports.getAllLeagues = function (req, res) {
   
   League.findAll({})
