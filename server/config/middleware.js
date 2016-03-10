@@ -26,6 +26,7 @@ module.exports = function (app, express) {
       console.error(err);
       return
     }
+
     console.log(res.buffer.toString());
   });
 
@@ -37,5 +38,11 @@ module.exports = function (app, express) {
   require('../users/userRoutes.js')(userRouter);
   require('../rooms/roomRoutes.js')(roomRouter);
   require('../portfolios/portfolioRoutes.js')(portfolioRouter);
+
+    var res1 = res.buffer.toString();
+    res1 = JSON.parse(res1).query.results.quote
+    console.log(res1.symbol, res1.Ask, res1.Change_PercentChange);
+  })
+
 
 }
