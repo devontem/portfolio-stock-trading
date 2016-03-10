@@ -1,5 +1,5 @@
 
-var League = require('../../db/models').League;
+var League = require('../../db/models').Review;
 var config = require('../config/config');
 var http = require('http-request');
 
