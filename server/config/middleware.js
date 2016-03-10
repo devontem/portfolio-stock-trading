@@ -54,8 +54,8 @@ module.exports = function (app, express) {
 
   // Connecting Router to route files
   app.use('/api/users', userRouter);
-  app.use('/api/league', leagueRouter);
-  app.use('/api/portfolo', portfolioRouter);
+  app.use('/api/leagues', leagueRouter);
+  app.use('/api/portfolios', portfolioRouter);
 
   require('../users/userRoutes.js')(userRouter);
   require('../leagues/leagueRoutes.js')(leagueRouter);
