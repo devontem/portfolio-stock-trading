@@ -1,0 +1,5 @@
+app.controller('LobbyController', function(){
+
+
+
+});
