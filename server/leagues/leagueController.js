@@ -1,6 +1,6 @@
 
 var League = require('../../db/models').League;
-var config = require('../config/config');
+var config = require('../config');
 var http = require('http-request');
 
 module.exports.addLeagueToDB = function (req, res){
