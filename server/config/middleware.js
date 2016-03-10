@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var http = require('http-request');
 var League = require('../../db/models').League;
 var User = require('../../db/models').User;
-var Portfolio = require('../../db/models').Porfolio;
+var Portfolio = require('../../db/models').Portfolio;
 var Transaction = require('../../db/models').Transaction;
 var Room_user = require('../../db/models').Room_user;
 
@@ -13,7 +13,7 @@ module.exports = function (app, express) {
 
   // Creating routers
   var userRouter = express.Router();
-  var roomRouter = express.Router();
+  var leagueRouter = express.Router();
   var portfolioRouter = express.Router();
 
   // Configuring middleware
@@ -48,13 +48,17 @@ module.exports = function (app, express) {
     })
   })
 
+  Portfolio.create({balance: 10000, UserId: 1}).then(function(){
+    Transaction.create({symbol:'aapl', price: 50, action: true, shares: 300, PortfolioId:1})
+  });
+
   // Connecting Router to route files
   app.use('/api/users', userRouter);
-  app.use('/api/rooms', roomRouter);
+  app.use('/api/rooms', leagueRouter);
   app.use('/api/portfolo', portfolioRouter);
 
   require('../users/userRoutes.js')(userRouter);
-  require('../rooms/roomRoutes.js')(roomRouter);
+  require('../leagues/leagueRoutes.js')(leagueRouter);
   require('../portfolios/portfolioRoutes.js')(portfolioRouter);
 
 }
