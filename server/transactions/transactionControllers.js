@@ -25,11 +25,29 @@ module.exports.getTransactionsByPortfolioId = function(req, res){
       res.json(sessions);
     }else{
       console.log('No transaction found!');
+      res.status(404);
       res.end();
     } 
   })
+  .catch(function(err) {
+    console.log('Error getting users:', err);
+  });
 }
 
-module.exports.getLastTransactions = function(req,res){
-  Transaction.findById()
+//Get all transactions
+module.exports.getAllTransactions = function(req,res){
+  Transaction.findAll({}).then(function(transactions){
+    if(transactions){
+      res.json(transactions);
+    }else{
+      console.log('No user found!');
+      res.status(404);
+      res.end();
+    }
+  })
+  .catch(function(err) {
+    console.log('Error getting users:', err);
+  });
 }
+
+
