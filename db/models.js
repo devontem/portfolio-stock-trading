@@ -37,7 +37,7 @@ User.beforeCreate(function(user, options) {
 
 //Portfolio Model
 var Portfolio = orm.define('Portfolio', {
-	Balance: Sequelize.INTEGER
+	balance: Sequelize.INTEGER
 });
 
 //Transaction Model
