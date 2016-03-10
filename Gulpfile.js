@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
+var jshint = require('gulp-jshint');
 
 gulp.task('sass', function () {
   return gulp.src('./client/assets/css/*.scss')
@@ -9,4 +10,10 @@ gulp.task('sass', function () {
 
 gulp.task('sass:watch', function () {
   gulp.watch('./client/assets/css/*.scss', ['sass']);
+});
+
+gulp.task('lint', function() {
+  return gulp.src('./lib/*.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
 });
