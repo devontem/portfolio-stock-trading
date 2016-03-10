@@ -17,6 +17,12 @@
   },
   "homepage": "https://github.com/hrr12-04pistons/2016-01-thesis#readme",
   "dependencies": {
-    "express": "^4.13.4"
+    "body-parser": "^1.15.0",
+    "cookie-parser": "^1.4.1",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "http-request": "^0.7.0",
+    "passport": "^0.3.2",
+    "sequelize": "^3.19.3"
   }
 }
