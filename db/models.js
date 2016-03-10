@@ -1,75 +1,84 @@
 var Sequelize = require('sequelize');
 var bcrypt = require('bcrypt-nodejs');
 var Promise = require('bluebird');
-// if (process.env.DEPLOYED === 'true'){
-//   var orm = new Sequelize(process.env.JAWSDB_URL);
-// } else {
-var orm = new Sequelize('Pistonsdb', 'root', '')
 
+//JAWSDB for Heroku deployment
+if (process.env.DEPLOYED === 'true'){
+  var orm = new Sequelize(process.env.JAWSDB_URL);
+} else {
+  var orm = new Sequelize('Pistonsdb', 'root', '')
+}
 
+//User Model
 var User = orm.define('User', {
-
-	username: {
+	 username: {
 		type: Sequelize.STRING,
 		unique: true
     },
-
     email: {
     	type: Sequelize.STRING,
     	unique:true
     },
-
     password: Sequelize.STRING
-    }, {
-
-   
-  instanceMethods: {
-    hashPassword: function() {
+  }, {
+    instanceMethods: {
+      hashPassword: function() {
       return bcrypt.hashSync(this.password);
     },
-    validPassword: function(pass) {
+      validPassword: function(pass) {
       return bcrypt.compareSync(pass, this.password);
     }
   }
- 
 });
 
 User.beforeCreate(function(user, options) {
   user.password = user.hashPassword();
 });
 
+//Portfolio Model
 var Portfolio = orm.define('Portfolio', {
-	PortfolioName: Sequelize.STRING
+	Balance: Sequelize.INTEGER
 });
 
-var Stocks = orm.define('Stocks', {
+//Transaction Model
+var Transaction = orm.define('Transaction', {
 	symbol: Sequelize.STRING,
-	Ask: Sequelize.STRING,
-	PercentChange: Sequelize.INTEGER,
-	Buy: Sequelize.BOOLEAN,
-	Sell: Sequelize.BOOLEAN
+	price: Sequelize.STRING,
+	action: Sequelize.BOOLEAN,
+  shares: Sequelize.INTEGER
 });
 
-var Rooms = orm.define('Rooms', {
-	roomName: Sequelize.STRING
+//League Model
+var League = orm.define('league', {
+	name: Sequelize.STRING,
+  maxNum: Sequelize.INTEGER
 });
 
-Rooms.hasMany(User);
-//User.belongsToMany(Rooms);
+//Joint table for League and user 
+var League_user = orm.define('League_user', {
+})
 
+//League to User - Many to Many
+League.belongsToMany(User, { through: 'League_user'});
+User.belongsToMany(League, { through: 'League_user'});
+
+//Portfolio to User - One to Many
 User.hasMany(Portfolio);
 Portfolio.belongsTo(User);
 
-// Portfolio.belongsToMany(Stocks, { through: PortfolioStocks});
-// Stocks.belongsToMany(Portfolio, { through: PortfolioStocks});
+//Transaction to User - One to Many
+User.hasMany(Transaction);
+Transaction.belongsTo(User);
 
 User.sync();
-Rooms.sync();
+League.sync();
 Portfolio.sync();
-Stocks.sync();
+Transaction.sync();
+League_user.sync();
 
+exports.League_user = League_user;
 exports.User = User;
-exports.Rooms = Rooms;
+exports.League = League;
 exports.Portfolio = Portfolio;
-exports.Stocks = Stocks;
+exports.Transaction = Transaction;
 
