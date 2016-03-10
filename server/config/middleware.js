@@ -31,7 +31,6 @@ module.exports = function (app, express) {
       console.error(err);
       return
     }
-
     res = JSON.parse(res.buffer.toString()).query.results.quote
     console.log(res.symbol, res.Ask, res.Change_PercentChange);
   });
