@@ -1,4 +1,7 @@
-app.directive('signupDirective', function() {
+app
+
+//modal for signup 
+.directive('signupDirective', function() {
   return {
     restrict: 'E',
     scope: {
@@ -22,6 +25,7 @@ app.directive('signupDirective', function() {
   }
 })
 
+//modal for login
 .directive('loginDirective', function() {
   return {
     restrict: 'E',
@@ -46,6 +50,7 @@ app.directive('signupDirective', function() {
   }
 })
 
+//signin signup controller
 .controller('SigninController', function($scope, $window, Auth){
   $scope.user = {};
 
@@ -61,12 +66,13 @@ app.directive('signupDirective', function() {
 
   $scope.signup = function(user){
     Auth.createuser(user).then(function(token){
-      console.log('HEY')
       $window.sessionStorage.token = token;
+      console.log(token)
     });
   }
 })
 
+//factor, move it to a centralize factory later!
 .factory('Auth', function($http, $location){
 
   var createuser = function(user){
