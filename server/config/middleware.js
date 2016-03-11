@@ -64,16 +64,10 @@ module.exports = function (app, express) {
   // })
 
 
-<<<<<<< HEAD
+
   Portfolio.create({balance: 10000, UserId: 1}).then(function(){
     Transaction.create({symbol:'aapl', price: 50, buysell: true, shares: 300, PortfolioId:1})
   });
-=======
-
-
-
-
->>>>>>> d4ee1974dd47da9b56eefd6e00385c9e85116a49
 
   // Connecting Router to route files
   app.use('/api/users', userRouter);
