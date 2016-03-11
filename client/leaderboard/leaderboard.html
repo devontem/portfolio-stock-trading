@@ -16,28 +16,12 @@
     </thead>
 
     <tbody>
-      <tr ng-repeat="member in members">
+      <tr ng-repeat="member in members | orderBy:'-value'">
         <td>1</td>
         <td>{{member.username}}</td>
-        <td>{{member.value}}</td>
+        <td>{{member.value | currency : symbol : fractionSize}}</td>
         <td>{{member.return}}</td>
         <td>{{member.transactions}}</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Jellybean</td>
-        <td>$19,500</td>
-        <td>7%</td>
-        <td>Walmart</td>
-        <td>2</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Lollipop</td>
-        <td>$34,500</td>
-        <td>-3%</td>
-        <td>Cisco</td>
-        <td>45</td>
       </tr>
     </tbody>
   </table>

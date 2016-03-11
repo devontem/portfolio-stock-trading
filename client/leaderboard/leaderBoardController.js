@@ -6,9 +6,21 @@ app.controller('LeaderBoardController', function($scope, leaderBoardFactory){
   $scope.members = [
     {
       username: 'Sonny',
-      value: '$15,000',
+      value: 15000,
       return: '10%',
       transactions: 25
+    },
+    {
+      username: 'Ted',
+      value: 9000,
+      return: '20%',
+      transactions: 45
+    },
+    {
+      username: 'Devonte',
+      value: 3567,
+      return: '6%',
+      transactions: 5
     }
   ];
 
