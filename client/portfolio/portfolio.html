@@ -35,6 +35,75 @@
 	margin-top: 0px;
 }
 
+.trade-button{
+	width: 80%;
+	display: block;
+	margin: 0px auto;
+	margin-top: 20px;
+}
+
+.action-toggle{
+	padding: 10px 0px;
+}
+
+.stock-calculator{
+	margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+/*.stock-calculator section{
+	display: inline-block;
+	margin-right: 5px;
+}*/
+
+.stock-calculator section span{
+	font-size: 0.7em;
+	font-weight: bold;
+	text-align: center;
+  display: block;
+}
+
+.stock-calculator section .chip{
+	font-size: 18px;
+  text-align: center;
+  width: 75px;
+  border: solid 1px #DDDDDD;
+  width: 100%;
+}
+
+.stock-data p{
+	margin: 0px;
+}
+
+.stock-data .sym{
+	font-size: 30px;
+}
+
+.stock-data .comp{
+	margin-top: -12px;
+	margin-left: 2px;
+}
+
+.stock-data .price{
+	font-weight: bold;
+	margin-top: 10px;
+	color: green;
+}
+
+.larger{
+	font-size: 1.5em
+}
+.action-title{
+	margin: 5px;
+	text-transform: uppercase;
+	font-size: 0.8em;
+	font-weight: bold;
+}
+
+input.stockAmount:focus{
+	border: none;
+}
+
 /*.portfolio-search input{
 	display: inline-block;
 	width: 70%;
@@ -52,7 +121,7 @@ th{
 </style>
 
 <!-- STOCKS MODAL -->
-<!-- <div class="row">
+<div class="row">
 	<div class="myPortfolio">
 		<nav>
 	    <div class="nav-wrapper blue darken-3">
@@ -80,42 +149,22 @@ th{
 					</tr>
 				</thead>
 				<tbody>
-		      <tr>
-		        <td><span class="company-symbol">APPL</span>
-		        <span class="company-name">APPLE INC</span></td>
-		        <td>10</td>
-		        <td>$0.87</td>
-		        <td>$0.87</td>
-		        <td>$0.87</td>
-		        <td>$0.87</td>
-		        <td>$0.87</td>
-		        <td><a class="btn-floating red sell-button"><i class="material-icons">supervisor_account</i></a></td>
-		      </tr>
-		      <tr>
-		        <td>Alvin</td>
-		        <td>10</td>
-		        <td>$0.87</td>
-		        <td>$0.87</td>
-		        <td>$0.87</td>
-		        <td>$0.87</td>
-		        <td>$0.87</td>
-		        <td><a class="btn-floating red sell-button"><i class="material-icons">supervisor_account</i></a></td>
-		      </tr>
-		      <tr>
-		        <td>Alvin</td>
-		        <td>10</td>
-		        <td>$0.87</td>
-		        <td>$0.87</td>
-		        <td>$0.87</td>
-		        <td>$0.87</td>
-		        <td>$0.87</td>
+		      <tr ng-repeat="stock in stocks">
+		        <td><span class="company-symbol">{{stock.symbol}}</span>
+		        <span class="company-name">{{stock.name}}</span></td>
+		        <td>{{stock.qty}}</td>
+		        <td>{{stock.price | currency}}</td>
+		        <td>{{stock.marketval | currency}}</td>
+		        <td>{{stock.marketprice | currency}}</td>
+		        <td>{{stock.lifetime | currency}}</td>
+		        <td>{{stock.pl | currency}}</td>
 		        <td><a class="btn-floating red sell-button"><i class="material-icons">supervisor_account</i></a></td>
 		      </tr>
 		    </tbody>
 			</table>
 		</div>
 	</div>
-</div> -->
+</div>
 
 <!-- TRADING MODAL -->
 <div class="row">
@@ -134,47 +183,66 @@ th{
 		 <div class="card-panel portfolio-content">
 			<div class="row portfolio-search">
 				<article class="col s6">
-					<p>SEARCH FOR A STOCK</p>
-					<input class="col s8" type="text" /> 
-					<a class="waves-effect waves-light btn col s4"><i class="material-icons">search</i></a>
+					<p class="action-title">SEARCH FOR A STOCK</p>
+					<input ng-model="stockInput" class="col s8" type="text" required> 
+					<a ng-click="chooseStock" class="waves-effect waves-light btn col s4"><i class="material-icons">search</i></a>
+
+					<section class="stock-data">
+						<section class="col s6">
+							<p class="sym">{{stock.symbol}}</p>
+							<p class="comp">{{stock.name}}</p>
+						</section>
+						<section class="col s6">
+							<p class="price">{{stock.price | currency}}</p>
+							<p class="perc">{{stock.amt}}</p>
+						</section>
+					</section>
 				</article>
 				<article class="widget-container col s6">
-					<p>MOST ACTIVE STOCKS</p>
+					<p class="action-title">MOST ACTIVE STOCKS</p>
 					<!-- HTML WIDGET -->
 					<!-- Start FreeStockCharts.com WatchList Widget --><p class="widget" width="100%" align="center"><iframe width="200" height="120" scrolling="no" frameborder="0" style="border:none;" src="http://widgets.freestockcharts.com/WidgetServer/WatchListWidget.aspx?sym=BAC,WLL,SIRI,FCX,CHK,EEM,CBK,MSFT&style=WLBlueStyle&w=200"></iframe></p> <!-- End FreeStockCharts.com WatchList Widget -->
 					<!-- END OF EIDGET -->
 				</article>
 				<article class="col s12">
 					<div class="divider"></div>
-					<p>BUY OR SELL</p>
-					<div class="switch">
+					<div class="switch action-toggle">
 				    <label>
 				      BUY
-				      <input type="checkbox">
+				      <input type="checkbox" class="test" ng-model="action">
 				      <span class="lever"></span>
 				      SELL
 				    </label>
 				  </div>
+				  <div class="divider"></div>
 
-				  <section>
-				  	<span>NUMBER OF STOCKS</span>
-					  <div class="chip">
-					    30
-					  </div>
-				  </section>
-				  <section>
-				  	<span>x Est. Price</span>
-					  <div class="chip">
-					    5000
-					  </div>
-				  </section>
-				  <section>
-				  	<span>+ FEES</span>
-					  <div class="chip">
-					    10
-					  </div>
-				  </section>
+				  <div class="row stock-calculator">
+					  <section class="col s4">
+					  	<span>NUMBER OF STOCKS: </span>
+						  <div class="chip">
+						    <input class="stockAmount" ng-change="updateAmounts()" ng-model="stockAmount" required>
+						  </div>
+					  </section>
+					  <section class="col s4">
+					  	<span><b>x</b> Est. Price </span>
+						  <div class="chip">
+						    {{estPrice | currency}}
+						  </div>
+					  </section>
+					  <section class="col s4">
+					  	<span><b>+</b> FEES </span>
+						  <div class="chip">
+						    {{ fees | currency}}
+						  </div>
+					  </section>
+					 </div>
 
+				  <div class="divider"></div>
+				  <article>
+						<a ng-click='performAction()' class="waves-effect waves-light btn center trade-button">TRADE FOR A TOTAL OF <span class="larger">{{ total || 0 | currency}}</span></a>
+				  </article>
+
+				  	
 
 				</article>
 			</div>
