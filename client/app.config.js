@@ -31,12 +31,11 @@ var app = angular.module('app', ['ui.router', 'app.profile']);
 
       .state('league', {
         url: '/league',
+        templateUrl: 'league/league.html',
         views: {
-          /*main view of the entire template*/
+          /*main view of the entire league template*/
           '': {
             templateUrl: 'league/league.html'
-            controller: 'LeagueController',
-            controllerAs: 'league',
           },
           // portfolio view within the league page
           'portfolio@league': {
@@ -48,7 +47,7 @@ var app = angular.module('app', ['ui.router', 'app.profile']);
           'leaderboard@league': {
             controller: 'LeaderBoardController',
             controllerAs: 'leaderboard',
-            templateUrl: 'leaderboard/leaderboard.html'
+            template: '<h1 style="background-color: white">HELLO</H1>'
           }
         }
 
