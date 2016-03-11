@@ -15,6 +15,7 @@ module.exports.newUser = function (req, res){
 };
 
 module.exports.getUsers = function(req, res){
+	console.log('inside get users');
   User.findAll().then(function (users) {
     if(!users) {
       res.send('No users found.');
