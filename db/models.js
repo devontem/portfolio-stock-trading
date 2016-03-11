@@ -44,7 +44,7 @@ var Portfolio = orm.define('Portfolio', {
 var Transaction = orm.define('Transaction', {
 	symbol: Sequelize.STRING,
 	price: Sequelize.STRING,
-	action: Sequelize.BOOLEAN,
+	buysell: Sequelize.BOOLEAN,
   shares: Sequelize.INTEGER
 });
 
