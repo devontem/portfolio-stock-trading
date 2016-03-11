@@ -49,7 +49,7 @@ var app = angular.module('app', ['ui.router', 'app.profile']);
             templateUrl: 'leaderboard/leaderboard.html'
           },
           // news/analysis view within league page
-          'news@league': {
+/*          'news@league': {
             controller: 'NewsController',
             controllerAs: 'news',
             templateUrl: 'news/news.html'
@@ -59,7 +59,7 @@ var app = angular.module('app', ['ui.router', 'app.profile']);
             controller: 'MessageBoardController',
             controllerAs: 'messageboard',
             templateUrl: 'messageboard/messageboard.html'
-          }
+          }*/
         }
 
       })
