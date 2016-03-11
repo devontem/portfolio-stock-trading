@@ -10,14 +10,13 @@
           <th data-field="user">Name</th>
           <th data-field="value">Portfolio</th>
           <th data-field="percentage">Return</th>
-          <th data-field="stock">Best Stock</th>
           <th data-field="trades"># of Trades</th>
 
       </tr>
     </thead>
 
     <tbody>
-      <tr>
+      <tr ng-repeat="member in members">
         <td>1</td>
         <td>Eclair</td>
         <td>$25,000</td>
