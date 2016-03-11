@@ -18,16 +18,18 @@
   },
   "homepage": "https://github.com/hrr12-04pistons/2016-01-thesis#readme",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "bluebird": "^3.3.1",
     "body-parser": "^1.15.0",
     "cookie-parser": "^1.4.1",
     "express": "^4.13.4",
+    "express-jwt": "^3.3.0",
     "express-session": "^1.13.0",
     "http-request": "^0.7.0",
+    "jsonwebtoken": "^5.7.0",
     "mysql": "^2.10.2",
     "passport": "^0.3.2",
     "pg": "^4.5.1",
-    "bcrypt-nodejs": "0.0.3",
-    "bluebird": "^3.3.1",
     "sequelize": "^3.19.3"
   },
   "devDependencies": {
