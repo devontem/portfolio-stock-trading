@@ -3,11 +3,16 @@ var config = require('../config/middleware.js');
 
 module.exports.addPortfolioToDB = function (req,res) {
   
+  //var userid = req.body.userid;
+  console.log("^^^^^^")
+  var userid = 2
   Portfolio.create({
-  	balance: 10000
+  	balance: 12000,
+  	UserId: userid
   })
   .then(function (portfolio){
-  	res.send(portfolio)
+  	console.log(portfolio, 'port')
+  	res.send('hi')
   })
   .catch(function(err){
   	console.error('Error creating portfolio: ', err.message);
@@ -20,7 +25,7 @@ module.exports.updatePortfolio = function (req,res) {
   
   var newBalance = req.body.balance;
   var userid = req.body.userid;
-  var id = parseInt(req.body.id);
+  var id = parseInt(req.params.id);
 
   Portfolio.findById(id,{where: {UserId: userid}})
   .then(function (portfolio) {
@@ -35,7 +40,7 @@ module.exports.updatePortfolio = function (req,res) {
 }
 //get all user's portfolios
 module.exports.getAllPortfolio = function (req, res){
-	Portfolio.findAll({where: {UserId: req.body.userId}})
+	Portfolio.findAll({where: {UserId: 2}})
 	.then(function (portfolios){
 		if(portfolios){
 		  res.send(portfolios);	

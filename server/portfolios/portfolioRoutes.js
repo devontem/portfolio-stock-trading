@@ -2,7 +2,11 @@ var portfolioController = require('./portfolioController');
 
 module.exports = function(app){
   
-  app.post('/portfolio', portfolioController.addPortfolioToDB);
+  app.post('/', portfolioController.addPortfolioToDB);
 
-  app.get('/')
+
+
+  app.put('/:id', portfolioController.updatePortfolio);
+
+  app.get('/', portfolioController.getAllPortfolio);
 }
