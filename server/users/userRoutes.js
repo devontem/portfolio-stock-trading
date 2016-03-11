@@ -7,7 +7,7 @@ module.exports = function(app){
 
 	app.post('/users', userController.newUser);
 
-  app.post('/users/signin', userController.signIn);
+  app.post('/signin', userController.signIn);
 
 	app.get('/users/:id', userController.getUserById);
 

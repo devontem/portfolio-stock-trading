@@ -53,6 +53,7 @@ app
 //signin signup controller
 .controller('SigninController', function($scope, $window, Auth){
   $scope.user = {};
+  $scope.loggedin = false;
 
   $scope.showsignup = false;
   $scope.toggleSignup = function() {
@@ -69,6 +70,9 @@ app
     Auth.createuser(user).then(function(token){
       $window.sessionStorage.token = token;
       console.log(token)
+      $scope.toggleSignup();
+      $scope.loggedin = true;
+      $window.location.href = '/#/profile';
     });
   }
 
@@ -76,6 +80,9 @@ app
     Auth.loginuser(user).then(function(token){
       $window.sessionStorage.token = token;
       console.log('login***', token)
+      $scope.toggleLogin();
+      $scope.loggedin = true;
+      $window.location.href = '/#/profile';
     });
   }
 })
