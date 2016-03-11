@@ -1,4 +1,5 @@
 var User = require('../../db/models').User;
+var jwt = require('jsonwebtoken');
 
 module.exports.newUser = function (req, res){
   User.create({ 
@@ -6,12 +7,17 @@ module.exports.newUser = function (req, res){
     password: req.body.password, 
     email: req.body.email 
   })
-  .then(function (user) {
-    res.send({username: user.username, email: user.email});
-  })
-  .catch(function (err) {
-    res.send('Error creating user: ', err.message);
-  });
+  User.findOne({ username: req.body.username })
+    .then(function (user) {
+      console.log('hihifasdlf')
+      var myToken = jwt.sign(user,
+                             'secret',
+                             { expiresIn: 24 * 60 * 60 });
+      res.status(200).json(myToken);
+    })
+    .catch(function (err) {
+      res.send('Error creating user: ', err.message);
+    });
 };
 
 module.exports.getUsers = function(req, res){
