@@ -32,8 +32,9 @@
       <div class="nav-wrapper">
         <a href="#" class="brand-logo">Portfol.io</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a ng-click="toggleLogin()">Login</a></li>
-          <li><a ng-click="toggleSignup()">Sign Up</a></li>
+          <li><a ng-show="!loggedin" ng-click="toggleLogin()">Login</a></li>
+          <li><a ng-show="!loggedin" ng-click="toggleSignup()">Sign Up</a></li>
+          <li><a ng-show="loggedin" ng-click="toggleSignup()">Log Out</a></li>
         </ul>
       </div>
     </nav>
