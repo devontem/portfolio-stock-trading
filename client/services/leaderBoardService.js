@@ -1,4 +1,4 @@
-angular.module('leaderBoardService', [])
+app
 
   .factory('leaderBoardFactory', function($http){
 
