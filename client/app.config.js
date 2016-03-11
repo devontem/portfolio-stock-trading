@@ -65,4 +65,11 @@ var app = angular.module('app', ['ui.router', 'app.profile']);
 
       })
 
+      .state('leaderboard', {
+        url: '/leaderboard',
+        controller: 'LeaderBoardController',
+        controllerAs: 'leaderboard',
+        templateUrl: 'leaderboard/leaderboard.html'
+      })
+
   }]);
