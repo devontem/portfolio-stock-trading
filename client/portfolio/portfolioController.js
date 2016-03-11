@@ -54,9 +54,10 @@ angular.module('app.portfolio', [])
   var getStock = function(stockName){
     $http({
       method: 'GET',
-      url: '/api/stocks/:stockName'
+      url: '/api/stocks/'+stockName
     }).then(function(stock){
-    	return stock;
+    	console.log(stock)
+    	return data.stock.query;
     })
   }
 

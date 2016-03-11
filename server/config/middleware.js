@@ -18,6 +18,7 @@ module.exports = function (app, express) {
   var userRouter = express.Router();
   var leagueRouter = express.Router();
   var portfolioRouter = express.Router();
+  var stockRouter = express.Router();
 
   // Configuring middleware
   app.use(bodyParser.urlencoded({ extend: true }));
@@ -73,6 +74,9 @@ module.exports = function (app, express) {
   app.use('/api/users', userRouter);
   app.use('/api/leagues', leagueRouter);
   app.use('/api/portfolios', portfolioRouter);
+  app.use('/api/stocks', stockRouter);
+
+  require('../stocks/stockRoutes.js')(stockRouter);
 
   require('../users/userRoutes.js')(userRouter);
 
