@@ -29,6 +29,14 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio'])
 
       })
 
+      .state('news', {
+        url:'/news',
+        controller: 'NewsController',
+        controllerAs: 'news',
+        templateUrl: 'news/news.html'
+      })
+
+
       .state('league', {
         url: '/league',
         views: {
