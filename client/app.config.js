@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ui.router']);
+var app = angular.module('app', ['ui.router', 'app.profile']);
 
   app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
@@ -30,7 +30,7 @@ var app = angular.module('app', ['ui.router']);
       })
 
       .state('league', {
-        url: '/league/{id}',
+        url: '/league',
         controller: 'LeagueController',
         controllerAs: 'league',
         templateUrl: 'league/league.html'
