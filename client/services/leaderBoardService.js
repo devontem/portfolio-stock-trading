@@ -1,10 +1,10 @@
-angular.module('leaderBoardService', [])
+app
 
   .factory('leaderBoardFactory', function($http){
 
     var getMembers = function(leagueID){
       return $http({
-        method: 'POST',
+        method: 'GET',
         url: '/api/leagues/',
         data: leagueID
       })
