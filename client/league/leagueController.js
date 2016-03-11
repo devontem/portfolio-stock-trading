@@ -1,5 +1,4 @@
 app.controller('LeagueController', function(){
 
 
-
 });
