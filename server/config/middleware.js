@@ -8,6 +8,8 @@ var User = require('../../db/models').User;
 var Portfolio = require('../../db/models').Portfolio;
 var Transaction = require('../../db/models').Transaction;
 var Room_user = require('../../db/models').Room_user;
+var expressJwt = require('express-jwt');
+var jwt = require('jsonwebtoken');
 
 module.exports = function (app, express) {
 
@@ -24,6 +26,11 @@ module.exports = function (app, express) {
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(express.static(__dirname + '/../../client'));
+  // We are going to protect /api routes with JWT
+  app.use('/api', expressJwt({secret: secret}));
+
+  app.use(express.json());
+  app.use(express.urlencoded());
 
   // test for sample query
   http.get('http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22AAPL%22)&env=store://datatables.org/alltableswithkeys&format=json', function(err, res){
