@@ -2,6 +2,8 @@ var Sequelize = require('sequelize');
 var bcrypt = require('bcrypt-nodejs');
 var Promise = require('bluebird');
 
+var salt = bcrypt.genSaltSync(10);
+
 //JAWSDB for Heroku deployment
 if (process.env.DEPLOYED === 'true'){
   var orm = new Sequelize(process.env.JAWSDB_URL);
@@ -23,7 +25,7 @@ var User = orm.define('User', {
   }, {
     instanceMethods: {
       hashPassword: function() {
-      return bcrypt.hashSync(this.password);
+      return bcrypt.hashSync(this.password, salt);
     },
       validPassword: function(pass) {
       return bcrypt.compareSync(pass, this.password);
@@ -40,18 +42,23 @@ var Portfolio = orm.define('Portfolio', {
 	balance: Sequelize.INTEGER
 });
 
+
 //Transaction Model
 var Transaction = orm.define('Transaction', {
+
 	symbol: Sequelize.STRING,
 	price: Sequelize.STRING,
+
 	buysell: Sequelize.BOOLEAN,
-  shares: Sequelize.INTEGER
+    shares: Sequelize.INTEGER
+
 });
+
 
 //League Model
 var League = orm.define('league', {
 	name: Sequelize.STRING,
-  maxNum: Sequelize.INTEGER
+    maxNum: Sequelize.INTEGER
 });
 
 //Joint table for League and user 
@@ -62,13 +69,18 @@ var League_user = orm.define('League_user', {
 League.belongsToMany(User, { through: 'League_user'});
 User.belongsToMany(League, { through: 'League_user'});
 
+
 //Portfolio to User - One to Many
 User.hasMany(Portfolio);
 Portfolio.belongsTo(User);
 
+
+
 //Transaction to User - One to Many
+
 Portfolio.hasMany(Transaction);
 Transaction.belongsTo(Portfolio);
+
 
 User.sync();
 League.sync();
@@ -76,9 +88,11 @@ Portfolio.sync();
 Transaction.sync();
 League_user.sync();
 
+
 exports.League_user = League_user;
 exports.User = User;
 exports.League = League;
 exports.Portfolio = Portfolio;
 exports.Transaction = Transaction;
+
 

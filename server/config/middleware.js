@@ -11,6 +11,7 @@ var Room_user = require('../../db/models').Room_user;
 var expressJwt = require('express-jwt');
 var jwt = require('jsonwebtoken');
 
+
 module.exports = function (app, express) {
 
   // Creating routers
@@ -31,6 +32,7 @@ module.exports = function (app, express) {
 
 
   // test for sample query
+
   // http.get('http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22AAPL%22)&env=store://datatables.org/alltableswithkeys&format=json', function(err, res){
   //   if(err){
   //     console.error(err);
@@ -41,6 +43,7 @@ module.exports = function (app, express) {
   // });
 
   //TEST - create join table
+
   // User.create({name: "tdsafd", email:"fdsf3e4", password:"hi"})
   // User.create({name: "tdsaf", email:"fdsf3e", password:"hi"})
 
@@ -61,9 +64,16 @@ module.exports = function (app, express) {
   // })
 
 
+<<<<<<< HEAD
   Portfolio.create({balance: 10000, UserId: 1}).then(function(){
     Transaction.create({symbol:'aapl', price: 50, buysell: true, shares: 300, PortfolioId:1})
   });
+=======
+
+
+
+
+>>>>>>> d4ee1974dd47da9b56eefd6e00385c9e85116a49
 
   // Connecting Router to route files
   app.use('/api/users', userRouter);
@@ -71,7 +81,9 @@ module.exports = function (app, express) {
   app.use('/api/portfolios', portfolioRouter);
 
   require('../users/userRoutes.js')(userRouter);
+
   require('../leagues/leagueRoutes.js')(leagueRouter);
+
   require('../portfolios/portfolioRoutes.js')(portfolioRouter);
 
 }

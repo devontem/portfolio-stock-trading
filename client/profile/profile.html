@@ -1,33 +1,76 @@
 <div class="container">
-  <h2>Your Profile</h2>
-
+  <!-- Initial Card for the Header -->
   <div class="row">
-    <div ng-if="leagues.length > 0" class="col s12 m6">
-
-    <div  ng-repeat="league in leagues">
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title activator grey-text text-darken-4">{{league.name}}<i class="material-icons right">more_vert</i></span>
-          <p><a href="#">Link to the specific league</a></p>
-        </div>
-        <div class="card-reveal">
-          <span class="card-title grey-text text-darken-4">Your Rank: {{league.userRank}}<i class="material-icons right">close</i></span>
-          <p>Percentage Change {{league.percentChange}}</p>
-          <p>Total Value: ${{league.totalValue}}</p>
-          <p>Change Since Yesterday: %{{league.changeYesterday}}</p>
-        </div>
+    <div class="col s12 m5">
+      <div class="card-panel teal">
+        <h2>Profile</h2>
       </div>
     </div>
   </div>
+  <!-- Sets up the tabs -->
+  <div class="row">
+    <div class="col s9">
+      <ul class="tabs">
+        <li class="tab col s3 m5"><span ng-click="showToJoin()">Leagues To Join</span></li>
+        <li class="tab col s3 m5"><span ng-click="showUserLeagues()" class="active" href="#test2">Leagues You Are In</span></li>
+      </ul>
+    </div>
+  </div>
 
-    <div class="col s12 m6" ng-if="leagues.length === 0">
+  <div class="row" ng-show="currentTab === 'user'">
+    <!-- If user is in leagues, prompt to join -->
+    <div ng-if="userLeagues.length > 0">
+
+      <div class="teal col s9">
+
+        <table class="striped">
+          <thead>
+            <tr>
+              <th data-field="name">League Name</th>
+              <th data-field="rank">Your Rank</th>
+              <th data-field="percentChange">% Change</th>
+              <th data-field="totVal">Total Value</th>
+              <th data-field="changeYest">Change Since Yesterday</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr ng-repeat="league in userLeagues">
+              <td>{{league.name}}</td>
+              <td>{{league.userRank}}</td>
+              <td>%{{league.percentChange}}</td>
+              <td>${{league.totalValue}}</td>
+              <td>%{{league.changeYesterday}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+        <!-- If the user is not in leagues, prompt them to join one -->
+      <div class="col s12 m6" ng-if="userLeagues.length === 0">
+        <!-- TODO: Update this to match the color scheme -->
+        <div class="card blue-grey darken-1 z-depth-4">
+          <div class="card-content white-text">
+            <span class="card-title">What?</span>
+            <p>It looks like you haven't joined any leagues yet. :(
+              <br> Don't worry. It's incredibly easy to get started.</p>
+          </div>
+          <div class="card-action">
+            <!-- TODO: Set up the correct route -->
+            <a href="#">Check Out Available Leagues</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- If user is in leagues, show those -->
+    <div class="col s12 m6" ng-if="userLeagues.length === 0">
       <!-- TODO: Update this to match the color scheme -->
       <div class="card blue-grey darken-1 z-depth-4">
         <div class="card-content white-text">
           <span class="card-title">What?</span>
           <p>It looks like you haven't joined any leagues yet. :(
-          <br>
-          Don't worry. It's incredibly easy to get started.</p>
+            <br> Don't worry. It's incredibly easy to get started.</p>
         </div>
         <div class="card-action">
           <!-- TODO: Set up the correct route -->
@@ -35,9 +78,53 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="row" ng-show="currentTab === 'toJoin'">
+      <div  ng-if="leaguesToJoin.length > 0">
+        <div class="teal col s9">
 
-    <div class="col s12 m6" ng-if="portfolios.length === 0">
-      <!-- TODO: Update this to match the color scheme -->
+        <table class="striped">
+          <thead>
+            <tr>
+              <th data-field="name">League Name</th>
+              <th data-field="rank">Your Rank</th>
+              <th data-field="percentChange">% Change</th>
+              <th data-field="totVal">Total Value</th>
+              <th data-field="changeYest">Change Since Yesterday</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr ng-repeat="league in leaguesToJoin">
+              <td>{{league.name}}</td>
+              <td>{{league.userRank}}</td>
+              <td>%{{league.percentChange}}</td>
+              <td>${{league.totalValue}}</td>
+              <td>%{{league.changeYesterday}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+      </div>
+      <!-- Prompt user to create  league if none exist -->
+      <div class="col s12 m6" ng-if="leaguesToJoin.length === 0">
+        <!-- TODO: Update this to match the color scheme -->
+        <div class="card blue-grey darken-1 z-depth-4">
+          <div class="card-content white-text">
+            <span class="card-title">Uh oh!</span>
+            <p>It looks like there are no currently available public leagues. If you would like to make, be our guest.
+          </div>
+          <div class="card-action">
+            <!-- TODO: Set up the correct route -->
+            <a href="#">Create a League</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- This view will be moved to league specific page -->
+  <!-- <div class="col s12 m6" ng-if="portfolios.length === 0">
       <div class="card blue-grey darken-1 z-depth-4">
         <div class="card-content white-text">
           <span class="card-title">What?</span>
@@ -46,12 +133,8 @@
           Don't worry. It's incredibly easy to get started.</p>
         </div>
         <div class="card-action">
-          <!-- TODO: Set up the correct route -->
           <a href="#">Make your first portfolio today!</a>
         </div>
       </div>
-    </div>
-
-  </div>
-
+    </div> -->
 </div>

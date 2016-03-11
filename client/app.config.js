@@ -47,7 +47,19 @@ var app = angular.module('app', ['ui.router', 'app.profile', 'app.portfolio']);
             controller: 'LeaderBoardController',
             controllerAs: 'leaderboard',
             templateUrl: 'leaderboard/leaderboard.html'
-          }
+          },
+          // news/analysis view within league page
+/*          'news@league': {
+            controller: 'NewsController',
+            controllerAs: 'news',
+            templateUrl: 'news/news.html'
+          },
+          // message board view within league page
+          'messageboard@league': {
+            controller: 'MessageBoardController',
+            controllerAs: 'messageboard',
+            templateUrl: 'messageboard/messageboard.html'
+          }*/
         }
 
       })

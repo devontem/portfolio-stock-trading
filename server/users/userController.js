@@ -9,7 +9,6 @@ module.exports.newUser = function (req, res){
   })
   User.findOne({ username: req.body.username })
     .then(function (user) {
-      console.log('hihifasdlf')
       var myToken = jwt.sign(user,
                              'secret',
                              { expiresIn: 24 * 60 * 60 });
@@ -69,7 +68,24 @@ module.exports.deleteUser= function (req, res) {
 };
 
 module.exports.signIn = function (req, res){
- 
+  User.findOne({ username: req.body.username })
+    .then(function (user) {
+      if(!user){
+        res.json('User not found')
+      }else{
+        if(user.validPassword(req.body.password)){
+          var myToken = jwt.sign(user,
+                                'secret',
+                                { expiresIn: 24 * 60 * 60 });
+          res.status(200).json(myToken);
+        }else{
+          res.status(404).json('Authentication failed. Wrong password.')
+        }
+      }
+    })
+    .catch(function (err) {
+      res.send('Error finding user: ', err.message);
+    });
 };
 
 module.exports.signOut = function (req, res){
