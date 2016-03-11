@@ -24,19 +24,52 @@
 </head>
 
  <!-- adding angular app to site -->
-<body ng-app="app">
+<body ng-app="app" ng-controller="SigninController">
 
   <!-- Top Navigation Bar -->
 
-  <nav>
+    <nav>
       <div class="nav-wrapper">
         <a href="#" class="brand-logo">Portfol.io</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a href="#signin">Login</a></li>
-          <li><a href="#signin">Sign Up</a></li>
+          <li><a ng-click="toggleLogin()">Login</a></li>
+          <li><a ng-click="toggleSignup()">Sign Up</a></li>
         </ul>
       </div>
     </nav>
+
+    <login-directive show='showlogin' width='350px' height='400px'>
+      <div ng-if="showlogin" class="signup">
+        <h1 class="brand-logo"> Log In </h1>
+        <form name="signinForm" ng-submit='signin(user)'>
+          <label>Email </label><br>
+          <input type='text' ng-model='user.email' required>
+          <br>
+          <label>Password </label><br>
+          <input type="password" ng-model='user.password' required><br>
+          <br>
+          <button class="waves-effect waves-light btn">Log In</button>
+        </form>
+      </div>
+    </login-directive>
+
+    <signup-directive show='showsignup' width='350px' height='500px'>
+      <div ng-if="showsignup" class="signup">
+        <h1 class="brand-logo"> Sign Up </h1>
+        <form name="signinForm" ng-submit='signup(user)'>
+          <label>User Name </label><br>
+          <input type='text' ng-model='user.username' required>
+          <br>
+          <label>Email </label><br>
+          <input type='text' ng-model='user.email' required>
+          <br>
+          <label>Password </label><br>
+          <input type="password" ng-model='user.password' required><br>
+          <br>
+          <button class="waves-effect waves-light btn">Sign Up</button>
+        </form>
+      </div>
+    </signup-directive>
 
   <!-- Angular view goes here -->
   <div ui-view></div>
