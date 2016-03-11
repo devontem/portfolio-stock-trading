@@ -30,7 +30,8 @@ module.exports.getTransactionsByPortfolioId = function(req, res){
     } 
   })
   .catch(function(err) {
-    console.log('Error getting users:', err);
+    console.error('Error getting users:', err);
+    res.end();
   });
 }
 
@@ -46,7 +47,8 @@ module.exports.getAllTransactions = function(req,res){
     }
   })
   .catch(function(err) {
-    console.log('Error getting users:', err);
+    console.error('Error getting users:', err);
+    res.end();
   });
 }
 
