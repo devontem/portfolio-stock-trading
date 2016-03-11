@@ -18,6 +18,7 @@ module.exports = function (app, express) {
   var userRouter = express.Router();
   var leagueRouter = express.Router();
   var portfolioRouter = express.Router();
+  var stockRouter = express.Router();
 
   // Configuring middleware
   app.use(bodyParser.urlencoded({ extend: true }));
@@ -42,8 +43,6 @@ module.exports = function (app, express) {
   //   console.log(res.symbol, res.Ask, res.Change_PercentChange);
   // });
 
-  
-
   //TEST - create join table
 
   // User.create({name: "tdsafd", email:"fdsf3e4", password:"hi"})
@@ -67,14 +66,17 @@ module.exports = function (app, express) {
 
 
 
-
-
-
+  Portfolio.create({balance: 10000, UserId: 1}).then(function(){
+    Transaction.create({symbol:'aapl', price: 50, buysell: true, shares: 300, PortfolioId:1})
+  });
 
   // Connecting Router to route files
   app.use('/api/users', userRouter);
   app.use('/api/leagues', leagueRouter);
   app.use('/api/portfolios', portfolioRouter);
+  app.use('/api/stocks', stockRouter);
+
+  require('../stocks/stockRoutes.js')(stockRouter);
 
   require('../users/userRoutes.js')(userRouter);
 
