@@ -37,6 +37,7 @@ module.exports = function (app, express) {
   
   //TEST - create join table
   User.create({name: "tdsafd", email:"fdsf3e4", password:"hi"})
+  User.create({name: "tdsaf", email:"fdsf3e", password:"hi"})
 
   League.create({name: "lobby2", maxNum: 3}).then(function(){
     User.findOne({where: {email:"fdsf3e4"}})
@@ -44,13 +45,16 @@ module.exports = function (app, express) {
         League.findOne({where: {name: "lobby2"}})
           .then(function(league){
         user.addLeague(league, {symbol: "AAPL"});
+        Portfolio.create({balance: 10000, UserId: 1}).then(function(){
+          Transaction.create({symbol:'aapl', price: 50, buysell: true, shares: 300, PortfolioId:1})
+        });
+        Portfolio.create({balance: 10000, UserId: 2}).then(function(){
+          Transaction.create({symbol:'aapl', price: 50, buysell: true, shares: 300, PortfolioId:2})
+        });
       })
     })
   })
 
-  Portfolio.create({balance: 10000, UserId: 1}).then(function(){
-    Transaction.create({symbol:'aapl', price: 50, buysell: true, shares: 300, PortfolioId:1})
-  });
 
   // Connecting Router to route files
   app.use('/api/users', userRouter);
