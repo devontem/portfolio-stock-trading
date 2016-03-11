@@ -1,6 +1,6 @@
 app
 
-//modal for signup 
+//modal for signup
 .directive('signupDirective', function() {
   return {
     restrict: 'E',

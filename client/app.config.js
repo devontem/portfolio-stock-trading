@@ -31,23 +31,34 @@ var app = angular.module('app', ['ui.router', 'app.profile']);
 
       .state('league', {
         url: '/league',
-        controller: 'LeagueController',
-        controllerAs: 'league',
-        templateUrl: 'league/league.html'
-        /*resolve: {
-          activities: function(leagueService){
-            return leagueService.getLeague();
+        views: {
+          /*main view of the entire league template*/
+          '': {
+            templateUrl: 'league/league.html'
+          },
+          // portfolio view within the league page
+          'portfolio@league': {
+            controller: 'PortfolioController',
+            controllerAs: 'portfolio',
+            templateUrl: 'portfolio/portfolio.html'
+          },
+          // leaderboard view within league page
+          'leaderboard@league': {
+            controller: 'LeaderBoardController',
+            controllerAs: 'leaderboard',
+            templateUrl: 'leaderboard/leaderboard.html'
           }
-        }*/
-      })
-
-      .state('portfolio', {
-        url: '/portfolio',
-        controller: 'PortfolioController',
-        controllerAs: 'portfolio',
-        templateUrl: 'portfolio/portfolio.html'
+        }
 
       })
+
+      // .state('portfolio', {
+      //   url: '/portfolio',
+      //   controller: 'PortfolioController',
+      //   controllerAs: 'portfolio',
+      //   templateUrl: 'portfolio/portfolio.html'
+
+      // })
 
       .state('faqs', {
         url: '/faqs',
@@ -64,5 +75,12 @@ var app = angular.module('app', ['ui.router', 'app.profile']);
         templateUrl: 'account/account.html'
 
       })
+
+      // .state('leaderboard', {
+      //   url: '/leaderboard',
+      //   controller: 'LeaderBoardController',
+      //   controllerAs: 'leaderboard',
+      //   templateUrl: 'leaderboard/leaderboard.html'
+      // })
 
   }]);
