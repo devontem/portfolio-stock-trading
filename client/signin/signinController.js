@@ -65,9 +65,17 @@ app
   };
 
   $scope.signup = function(user){
+    console.log('')
     Auth.createuser(user).then(function(token){
       $window.sessionStorage.token = token;
       console.log(token)
+    });
+  }
+
+  $scope.signin = function(user){
+    Auth.loginuser(user).then(function(token){
+      $window.sessionStorage.token = token;
+      console.log('login***', token)
     });
   }
 })
@@ -86,8 +94,20 @@ app
     });
   };
 
+  var loginuser = function(user){
+    return $http({
+      method: 'POST',
+      url: '/api/users/signin',
+      data: user
+    })
+    .then(function(token){
+      return token;
+    })
+  }
+
   return {
-    createuser: createuser
+    createuser: createuser,
+    loginuser: loginuser
   };
 
 });

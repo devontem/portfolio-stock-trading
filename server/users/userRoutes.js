@@ -7,6 +7,8 @@ module.exports = function(app){
 
 	app.post('/users', userController.newUser);
 
+  app.post('/users/signin', userController.signIn);
+
 	app.get('/users/:id', userController.getUserById);
 
 	app.put('/users/:id', userController.updateUser);

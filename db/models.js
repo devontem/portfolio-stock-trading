@@ -2,7 +2,7 @@ var Sequelize = require('sequelize');
 var bcrypt = require('bcrypt-nodejs');
 var Promise = require('bluebird');
 
-
+var salt = bcrypt.genSaltSync(10);
 
 //JAWSDB for Heroku deployment
 if (process.env.DEPLOYED === 'true'){
@@ -25,7 +25,7 @@ var User = orm.define('User', {
   }, {
     instanceMethods: {
       hashPassword: function() {
-      return bcrypt.hashSync(this.password);
+      return bcrypt.hashSync(this.password, salt);
     },
       validPassword: function(pass) {
       return bcrypt.compareSync(pass, this.password);
