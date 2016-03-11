@@ -1,0 +1,183 @@
+<style type="text/css">
+
+
+.portfolio-content{
+	margin-top: 0px;
+	border-radius: 0px;
+	padding-top: 10px;
+}
+
+.sell-button{
+	display: block;
+	margin: 0px auto;
+}
+.company-name{
+	margin: 0px auto;
+	text-align:  center;
+	display: block;
+	font-size: 0.8em
+}
+.company-symbol{
+	margin: 0px auto;
+	text-align:  center;
+	padding-bottom: 0px;
+	display: block;
+	font-weight: bold;
+	text-transform: uppercase;
+	margin-bottom: -5px;
+}
+
+.widget{
+	margin-top: 0px;
+}
+
+.widget-container{
+	margin-top: 0px;
+}
+
+/*.portfolio-search input{
+	display: inline-block;
+	width: 70%;
+}
+.portfolio-search a.btn{
+	display: inline-block;
+	width: 25%;
+}
+*/
+th{
+	font-size: 0.8em;
+	text-align: center;
+}
+
+</style>
+
+<!-- STOCKS MODAL -->
+<!-- <div class="row">
+	<div class="myPortfolio">
+		<nav>
+	    <div class="nav-wrapper blue darken-3">
+	      <a class="brand-logo">My Stocks</a>
+	      <ul class="right hide-on-med-and-down">
+	        <li><a href="sass.html"><i class="material-icons">search</i></a></li>
+	        <li><a href="badges.html"><i class="material-icons">view_module</i></a></li>
+	        <li><a href="collapsible.html"><i class="material-icons">refresh</i></a></li>
+	        <li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li>
+	      </ul>
+	    </div>
+	  </nav>
+		 <div class="card-panel portfolio-content">
+			<table>
+				<thead>
+					<tr>
+						<th>COMPANY</th>
+						<th>QTY</th>
+						<th>PRICE<br/>PAID</th>
+						<th>MARKET<br/>PRICE</th>
+						<th>MARKET<br/>VALUE</th>
+						<th>LIFETIME<br/>RETURN</th>
+						<th>P&L</th>
+						<th>SELL</th>
+					</tr>
+				</thead>
+				<tbody>
+		      <tr>
+		        <td><span class="company-symbol">APPL</span>
+		        <span class="company-name">APPLE INC</span></td>
+		        <td>10</td>
+		        <td>$0.87</td>
+		        <td>$0.87</td>
+		        <td>$0.87</td>
+		        <td>$0.87</td>
+		        <td>$0.87</td>
+		        <td><a class="btn-floating red sell-button"><i class="material-icons">supervisor_account</i></a></td>
+		      </tr>
+		      <tr>
+		        <td>Alvin</td>
+		        <td>10</td>
+		        <td>$0.87</td>
+		        <td>$0.87</td>
+		        <td>$0.87</td>
+		        <td>$0.87</td>
+		        <td>$0.87</td>
+		        <td><a class="btn-floating red sell-button"><i class="material-icons">supervisor_account</i></a></td>
+		      </tr>
+		      <tr>
+		        <td>Alvin</td>
+		        <td>10</td>
+		        <td>$0.87</td>
+		        <td>$0.87</td>
+		        <td>$0.87</td>
+		        <td>$0.87</td>
+		        <td>$0.87</td>
+		        <td><a class="btn-floating red sell-button"><i class="material-icons">supervisor_account</i></a></td>
+		      </tr>
+		    </tbody>
+			</table>
+		</div>
+	</div>
+</div> -->
+
+<!-- TRADING MODAL -->
+<div class="row">
+	<div class="myPortfolio">
+		<nav>
+	    <div class="nav-wrapper blue darken-3">
+	      <a class="brand-logo">Make a Trade</a>
+	      <ul class="right hide-on-med-and-down">
+	        <li><a href="sass.html"><i class="material-icons">search</i></a></li>
+	        <li><a href="badges.html"><i class="material-icons">view_module</i></a></li>
+	        <li><a href="collapsible.html"><i class="material-icons">refresh</i></a></li>
+	        <li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li>
+	      </ul>
+	    </div>
+	  </nav>
+		 <div class="card-panel portfolio-content">
+			<div class="row portfolio-search">
+				<article class="col s6">
+					<p>SEARCH FOR A STOCK</p>
+					<input class="col s8" type="text" /> 
+					<a class="waves-effect waves-light btn col s4"><i class="material-icons">search</i></a>
+				</article>
+				<article class="widget-container col s6">
+					<p>MOST ACTIVE STOCKS</p>
+					<!-- HTML WIDGET -->
+					<!-- Start FreeStockCharts.com WatchList Widget --><p class="widget" width="100%" align="center"><iframe width="200" height="120" scrolling="no" frameborder="0" style="border:none;" src="http://widgets.freestockcharts.com/WidgetServer/WatchListWidget.aspx?sym=BAC,WLL,SIRI,FCX,CHK,EEM,CBK,MSFT&style=WLBlueStyle&w=200"></iframe></p> <!-- End FreeStockCharts.com WatchList Widget -->
+					<!-- END OF EIDGET -->
+				</article>
+				<article class="col s12">
+					<div class="divider"></div>
+					<p>BUY OR SELL</p>
+					<div class="switch">
+				    <label>
+				      BUY
+				      <input type="checkbox">
+				      <span class="lever"></span>
+				      SELL
+				    </label>
+				  </div>
+
+				  <section>
+				  	<span>NUMBER OF STOCKS</span>
+					  <div class="chip">
+					    30
+					  </div>
+				  </section>
+				  <section>
+				  	<span>x Est. Price</span>
+					  <div class="chip">
+					    5000
+					  </div>
+				  </section>
+				  <section>
+				  	<span>+ FEES</span>
+					  <div class="chip">
+					    10
+					  </div>
+				  </section>
+
+
+				</article>
+			</div>
+		</div>
+	</div>
+</div>
