@@ -50,7 +50,7 @@ var Transaction = orm.define('Transaction', {
 	price: Sequelize.STRING,
 
 	buysell: Sequelize.BOOLEAN,
-  shares: Sequelize.INTEGER
+    shares: Sequelize.INTEGER
 
 });
 

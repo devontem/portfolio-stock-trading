@@ -4,7 +4,6 @@ var config = require('../config/middleware.js');
 module.exports.addPortfolioToDB = function (req,res) {
   
   //var userid = req.body.userid;
-  console.log("^^^^^^")
   var userid = 2
   Portfolio.create({
   	balance: 12000,
@@ -12,7 +11,7 @@ module.exports.addPortfolioToDB = function (req,res) {
   })
   .then(function (portfolio){
   	console.log(portfolio, 'port')
-  	res.send('hi')
+  	res.send(portfolio)
   })
   .catch(function(err){
   	console.error('Error creating portfolio: ', err.message);

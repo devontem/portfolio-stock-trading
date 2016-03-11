@@ -3,7 +3,9 @@ var LeagueController = require('./leagueController');
 module.exports = function(app){
 
 
-  app.post('/addLeague' , LeagueController.addLeagueToDB)
+  app.post('/' , LeagueController.addLeagueToDB);
   
-  app.get('/')
+  app.get('/', LeagueController.getAllLeagues);
+
+  app.get('/:id', LeagueController.getOneLeague);
 }
