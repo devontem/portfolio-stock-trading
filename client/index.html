@@ -101,8 +101,14 @@
             </div>
   </footer>
 
-  <div class="botBar">
-    <input>
+  <div class="botBar row" ng-controller="footerSearch">
+    <form ng-submit="functionToSearch()">
+      <div class="col s1 offset-s1">Search Stock Values</div>
+      <input class="col s2" type="text">
+    </form>
+    <div>
+      <span>{{result.blank}}</span>
+    </div>
   </div>
 
   <!-- script files -->
