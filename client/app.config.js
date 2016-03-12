@@ -50,18 +50,17 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio'])
             templateUrl: 'leaderboard/leaderboard.html'
           },
           // news/analysis view within league page
-<<<<<<< 9cc058ef9c49359db33f9fb13c3f1ab0d272a861
+
           'news@league': {
             controller: 'NewsController',
             templateUrl: 'news/news.html'
           },
-=======
+
           // 'news@league': {
           //   controller: 'NewsController',
           //   controllerAs: 'news',
           //   templateUrl: 'news/news.html'
           // },
->>>>>>> (style) create table
           // message board view within league page
           /*'messageboard@league': {
             controller: 'MessageBoardController',
