@@ -18,6 +18,23 @@ module.exports.addLeague = function (req, res){
   })
 }
 
+module.exports.joinLeague = function (req, res){
+  console.log(req.body.userId,'*********');
+  Portfolio.create({
+    leagueId: req.body.leagueId,
+    balance: req.body.balance,
+    UserId: 1
+  })
+  .then(function (league) {
+    console.log("HEY")
+    res.send(league)
+  })
+  .catch(function (err) {
+    console.error('Error creating league: ', err.message);
+    res.end();
+  })
+}
+
 module.exports.getAllLeagues = function (req, res) {
 
   League.findAll({})
@@ -26,7 +43,7 @@ module.exports.getAllLeagues = function (req, res) {
   		console.log('No leagues found.');
   		res.end();
   	} else {
-  		res.send({leagues: leagues})
+  		res.json(leagues)
   	}
   })
   .catch(function (err) {

@@ -11,4 +11,6 @@ module.exports = function(app){
 
   app.post('/getusers', LeagueController.getUsers);
 
+  app.post('/joinleague', LeagueController.joinLeague);
+
 }

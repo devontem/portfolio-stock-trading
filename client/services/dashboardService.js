@@ -13,6 +13,19 @@ app
       })
     }
 
+    var joinLeague = function(leagueId, userId){
+      return $http({
+        method: 'POST',
+        url: '/api/leagues/joinleague',
+        data: { leagueId: leagueId,
+                userId: userId,
+                balance: 100000 }
+      })
+      .then( function(data){
+        return data;
+      })
+    }
+
     var getUserLeagues = function(user){
       return $http({
         method: 'GET',
@@ -33,14 +46,15 @@ app
       })
       .then(function(leagues){
         // TODO: Structure this appropriately once you have the exact route
-        return leagues;
+        return leagues.data;
       });
     };
 
     return {
       addLeague: addLeague,
       getUserLeagues: getUserLeagues,
-      getAvailLeagues: getAvailLeagues
+      getAvailLeagues: getAvailLeagues,
+      joinLeague: joinLeague
     };
 
   })

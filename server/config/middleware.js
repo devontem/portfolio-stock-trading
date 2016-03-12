@@ -32,8 +32,6 @@ module.exports = function (app, express) {
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(express.static(__dirname + '/../../client'));
-  // We are going to protect /api routes with JWT
-  //app.use('/api', expressJwt({secret: 'secret'}));
 
 
   // test for sample query
@@ -51,24 +49,24 @@ module.exports = function (app, express) {
 
 
 
-  User.create({name: "tdsafd", email:"fdsf3e4", password:"hi"})
-  User.create({name: "tdsaf", email:"fdsf3e", password:"hi"})
+  // User.create({name: "tdsafd", email:"fdsf3e4", password:"hi"})
+  // User.create({name: "tdsaf", email:"fdsf3e", password:"hi"})
 
-  League.create({name: "lobby2", maxNum: 3}).then(function(){
-    User.findOne({where: {email:"fdsf3e4"}})
-      .then(function(user){
-        League.findOne({where: {name: "lobby2"}})
-          .then(function(league){
-        user.addLeague(league, {symbol: "AAPL"});
-        Portfolio.create({balance: 10000, UserId: 1}).then(function(){
-          Transaction.create({symbol:'aapl', price: 50, buysell: true, shares: 300, PortfolioId:1})
-        });
-        Portfolio.create({balance: 10000, UserId: 2}).then(function(){
-          Transaction.create({symbol:'aapl', price: 50, buysell: true, shares: 300, PortfolioId:2})
-        });
-      })
-    })
-  })
+  // League.create({name: "lobby2", maxNum: 3}).then(function(){
+  //   User.findOne({where: {email:"fdsf3e4"}})
+  //     .then(function(user){
+  //       League.findOne({where: {name: "lobby2"}})
+  //         .then(function(league){
+  //       user.addLeague(league, {symbol: "AAPL"});
+  //       Portfolio.create({balance: 10000, UserId: 1}).then(function(){
+  //         Transaction.create({symbol:'aapl', price: 50, buysell: true, shares: 300, PortfolioId:1})
+  //       });
+  //       Portfolio.create({balance: 10000, UserId: 2}).then(function(){
+  //         Transaction.create({symbol:'aapl', price: 50, buysell: true, shares: 300, PortfolioId:2})
+  //       });
+  //     })
+  //   })
+  // })
 
 
   // User.create({name: "tdsafd", email:"fdsf3e4", password:"hi"})
@@ -92,15 +90,11 @@ module.exports = function (app, express) {
 
 
 
+  // Portfolio.create({balance: 10000, UserId: 1}).then(function(){
+  //   Transaction.create({symbol:'aapl', price: 50, buysell: true, shares: 300, PortfolioId:1})
+  // });
 
-
-
-
-  Portfolio.create({balance: 10000, UserId: 1}).then(function(){
-    Transaction.create({symbol:'aapl', price: 50, buysell: true, shares: 300, PortfolioId:1})
-  });
-
-  Message.create({name: 'Sonny', message: 'Hey, what is up!'})
+  // Message.create({name: 'Sonny', message: 'Hey, what is up!'})
 
   // Connecting Router to route files
   app.use('/api/users', userRouter);
@@ -108,11 +102,9 @@ module.exports = function (app, express) {
   app.use('/api/portfolios', portfolioRouter);
   app.use('/api/stocks', stockRouter);
   app.use('/api/tweets', tweetRouter);
-
-  require('../tweets/tweetRoutes.js')(tweetRouter);
-
   app.use('/api/messages', messageRouter);
 
+  require('../tweets/tweetRoutes.js')(tweetRouter);
 
   require('../stocks/stockRoutes.js')(stockRouter);
 

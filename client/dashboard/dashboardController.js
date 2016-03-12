@@ -24,14 +24,15 @@ angular.module('app.dashboard', [])
   }
 })
 
-.controller('DashboardController', ['$scope', 'DashboardFactory', function ($scope, DashboardFactory) {
+.controller('DashboardController', ['$scope', '$window', 'DashboardFactory', function ($scope, $window, DashboardFactory) {
 
   $scope.userLeagues = [{name:"league1", userRank: 2, percentChange: -1.3, gainLoss: '123.00', totalValue: 14000, changeYesterday: 2.5}, {name:"league2", userRank: 17, percentChange: 15, gainLoss: '2000', totalValue: 9888, changeYesterday: 2.5}, {name:"league3", userRank: 1, percentChange: 2.5, gainLoss: '12.00', totalValue: 9012, changeYesterday: 2.5}];
   $scope.leaguesToJoin = [{name:"league4", userRank: 2, percentChange: -1.3, gainLoss: '123.00', totalValue: 14000, changeYesterday: 2.5}, {name:"league5", userRank: 17, percentChange: 15, gainLoss: '2000', totalValue: 9888, changeYesterday: 2.5}, {name:"league6", userRank: 1, percentChange: 2.5, gainLoss: '12.00', totalValue: 9012, changeYesterday: 2.5}];
 
   $scope.currentTab = 'user';
+  $scope.leagues;
+  $scope.league = {};
 
-  $scope.league = {}
   //toggle add form
   $scope.showadd = false;
   $scope.toggleAdd = function(){
@@ -39,7 +40,12 @@ angular.module('app.dashboard', [])
   }
 
   $scope.addLeague = function (league) {
-    DashboardFactory.addLeague(league);
+    DashboardFactory.addLeague(league)
+      .then(function(){
+        $scope.toggleAdd();
+        $window.location.href = '/#/league'
+      });
+
   }
 
   $scope.showToJoin = function () {
@@ -56,9 +62,24 @@ angular.module('app.dashboard', [])
     return;
   }
 
-  $scope.getLeaguesToJoin = function () {
-    // TODO: connect to factory to get leagues to join
-    return;
+  $scope.joinLeague = function (leagueId) {
+    var userId = $window.localStorage.getItem('com.tp.user');
+    console.log(userId,'********')
+    DashboardFactory.joinLeague(leagueId, userId)
+      .then(function(){
+        $window.location.href = '/#/league'
+        // $window.location.href = '/#/leagues/:'+leagueId;
+      })
   }
+
+  $scope.getLeaguesToJoin = function () {
+    DashboardFactory.getAvailLeagues()
+      .then(function(leagues){
+        $scope.leagues = leagues;
+        console.log($scope.leagues)});
+    // TODO: connect to factory to get leagues to join
+  }
+
+  $scope.getLeaguesToJoin();
   // TODO: Call both of the above functions to get relevant league data for the views on initialization
 }])

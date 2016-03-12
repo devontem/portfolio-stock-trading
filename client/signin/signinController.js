@@ -79,9 +79,9 @@ app
 
   $scope.signin = function(user){
     Auth.loginuser(user).then(function(data){
+      console.log(data,'fdiafsjdflajsf;s');
       $window.localStorage.setItem('com.tp', data.token);
       $window.localStorage.setItem('com.tp.user', data.user);
-      console.log('login***', data)
       $scope.toggleLogin();
       $scope.loggedin = true;
       $window.location.href = '/#/dashboard';
@@ -96,39 +96,3 @@ app
   }
 })
 
-//factor, move it to a centralize factory later!
-.factory('Auth', function($http, $location){
-
-  var createuser = function(user){
-    return $http({
-      method: 'POST',
-      url: '/api/users',
-      data: user
-    })
-    .then(function(data){
-      return data;
-    });
-  };
-
-  var loginuser = function(user){
-    return $http({
-      method: 'POST',
-      url: '/api/users/signin',
-      data: user
-    })
-    .then(function(data){
-      return data;
-    })
-  }
-
-  var isAuth = function() {
-    return !!$window.localStorage.getItem('com.tp');
-  };
-
-  return {
-    isAuth: isAuth,
-    createuser: createuser,
-    loginuser: loginuser
-  };
-
-});

@@ -4,7 +4,7 @@
     <div class="col s12 m5">
       <div class="card-panel teal">
         <h2>Profile</h2>
-        <h7 ng-click="toggleAdd()">Join League</h7>
+        <h7 ng-click="toggleAdd()">Create League</h7>
       </div>
     </div>
   </div>
@@ -52,12 +52,10 @@
           </thead>
 
           <tbody>
-            <tr ng-repeat="league in userLeagues">
+            <tr ng-repeat="league in leagues">
               <td>{{league.name}}</td>
-              <td>{{league.userRank}}</td>
-              <td>%{{league.percentChange}}</td>
-              <td>${{league.totalValue}}</td>
-              <td>%{{league.changeYesterday}}</td>
+              <td>{{league.maxNum}}</td>
+              <td><a ng-click="joinLeague(league.id)">Click to Join</a></td>
             </tr>
           </tbody>
         </table>
@@ -112,12 +110,9 @@
           </thead>
 
           <tbody>
-            <tr ng-repeat="league in leaguesToJoin">
+            <tr ng-repeat="league in leagues">
               <td>{{league.name}}</td>
               <td>{{league.userRank}}</td>
-              <td>%{{league.percentChange}}</td>
-              <td>${{league.totalValue}}</td>
-              <td>%{{league.changeYesterday}}</td>
             </tr>
           </tbody>
         </table>
