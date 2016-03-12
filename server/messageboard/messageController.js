@@ -3,6 +3,7 @@ var Message = require('../../db/models').Message;
 module.exports.addPostToDB = function (req, res){
 
   Message.create({
+    userId: req.body.userId,
     name: req.body.name,
     message: req.body.message
   })
@@ -14,7 +15,7 @@ module.exports.addPostToDB = function (req, res){
     console.error('Error creating message entry: ', err.message);
     res.end();
   })
-}
+};
 
 module.exports.getAllPosts = function(req, res){
   console.log('inside get messages');
