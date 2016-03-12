@@ -7,7 +7,7 @@ app.factory('Auth', function($http, $location){
       data: user
     })
     .then(function(data){
-      return data;
+      return data.data;
     });
   };
 
@@ -18,7 +18,7 @@ app.factory('Auth', function($http, $location){
       data: user
     })
     .then(function(data){
-      return data;
+      return data.data;
     })
   }
 

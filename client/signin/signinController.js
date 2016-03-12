@@ -66,11 +66,9 @@ app
   };
 
   $scope.signup = function(user){
-    console.log('')
     Auth.createuser(user).then(function(data){
       $window.localStorage.setItem('com.tp', data.token);
-      $window.localStorage.setItem('com.tp.user', data.user);
-      console.log(data)
+      $window.localStorage.setItem('com.tp.user', data.userId);
       $scope.toggleSignup();
       $scope.loggedin = true;
       $window.location.href = '/#/dashboard';
@@ -79,9 +77,8 @@ app
 
   $scope.signin = function(user){
     Auth.loginuser(user).then(function(data){
-      console.log(data,'fdiafsjdflajsf;s');
       $window.localStorage.setItem('com.tp', data.token);
-      $window.localStorage.setItem('com.tp.user', data.user);
+      $window.localStorage.setItem('com.tp.user', data.userId);
       $scope.toggleLogin();
       $scope.loggedin = true;
       $window.location.href = '/#/dashboard';

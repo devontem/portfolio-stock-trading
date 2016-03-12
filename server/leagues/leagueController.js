@@ -7,10 +7,11 @@ var User = require('../../db/models').User;
 module.exports.addLeague = function (req, res){
   League.create({
   	name: req.body.name,
-  	maxNum: req.body.num
+  	maxNum: req.body.max,
+    startbalance: req.body.balance 
   })
   .then(function (league) {
-  	res.send({name: league.name, maxNum: league.num})
+  	res.send({name: league.name, maxNum: league.num, startbalance: league.balance})
   })
   .catch(function (err) {
   	console.error('Error creating league: ', err.message);
@@ -19,20 +20,30 @@ module.exports.addLeague = function (req, res){
 }
 
 module.exports.joinLeague = function (req, res){
-  console.log(req.body.userId,'*********');
-  Portfolio.create({
-    leagueId: req.body.leagueId,
-    balance: req.body.balance,
-    UserId: 1
-  })
-  .then(function (league) {
-    console.log("HEY")
-    res.send(league)
-  })
-  .catch(function (err) {
-    console.error('Error creating league: ', err.message);
-    res.end();
-  })
+  var temp = {};
+  User.findOne({ where: {id : req.body.userId }})
+    .then(function(user){
+      console.log("*8****", user.dataValues)
+     temp.username = user.dataValues.username;
+    })
+  League.findOne({ where: {id : req.body.leagueId }})
+    .then(function(league){
+      temp.startbalance = league.dataValues.startbalance;
+      Portfolio.create({
+        leagueId: req.body.leagueId,
+        UserId: req.body.userId,
+        balance: temp.startbalance,
+        username: temp.username
+      })
+      .then(function (league) {
+        console.log("HEY")
+        res.send(league)
+      })
+      .catch(function (err) {
+        console.error('Error creating league: ', err.message);
+        res.end();
+      })
+    })  
 }
 
 module.exports.getAllLeagues = function (req, res) {

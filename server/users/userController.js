@@ -11,11 +11,11 @@ module.exports.newUser = function (req, res){
           email: req.body.email 
         })
         .then(function(user){
-          console.log(user);
               var myToken = jwt.sign( {user: user.id},
-                                     'secret',
+                                      'secret',
                                      { expiresIn: 24 * 60 * 60 });
-              res.send(200, myToken);
+              res.send(200, {'token': myToken,
+                             'userId':    user.id } );
         })
       }else{
         res.status(404).json('Username already exist!');
@@ -83,7 +83,8 @@ module.exports.signIn = function (req, res){
           var myToken = jwt.sign({ user: user.id },
                                 'secret',
                                 { expiresIn: 24 * 60 * 60 });
-          res.send(200, myToken);
+          res.send(200, {'token': myToken,
+                         'userId':    user.id} );
         }else{
           res.status(404).json('Authentication failed. Wrong password.')
         }

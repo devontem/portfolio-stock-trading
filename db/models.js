@@ -39,7 +39,8 @@ User.beforeCreate(function(user, options) {
 
 //Portfolio Model
 var Portfolio = orm.define('Portfolio', {
-	balance: Sequelize.INTEGER
+	balance: Sequelize.INTEGER,
+  username: Sequelize.STRING
 });
 
 
@@ -65,7 +66,8 @@ var Message = orm.define('Message', {
 //League Model
 var League = orm.define('league', {
 	name: Sequelize.STRING,
-  maxNum: Sequelize.INTEGER
+  maxNum: Sequelize.INTEGER,
+  startbalance: Sequelize.INTEGER 
 });
 
 //Joint table for League and user
@@ -82,15 +84,12 @@ Portfolio.belongsTo(League);
 
 //Portfolio to User - One to Many
 User.hasMany(Portfolio);
-Portfolio.belongsTo(User, {foreignKey: 'username'});
+Portfolio.belongsTo(User);
 
 //Transaction to User - One to Many
 
 Portfolio.hasMany(Transaction);
 Transaction.belongsTo(Portfolio);
-
-
-
 
 
 User.sync();
