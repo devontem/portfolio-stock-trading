@@ -32,6 +32,7 @@ angular.module('app.dashboard', [])
   $scope.currentTab = 'user';
   $scope.leagues;
   $scope.league = {};
+  $scope.portfolios = {}
 
   //toggle add form
   $scope.showadd = false;
@@ -58,13 +59,16 @@ angular.module('app.dashboard', [])
   }
 
   $scope.getUserLeagues = function () {
-    // TODO: this will connect to a factory to pull leagues user is in
-    return;
+    var userId = $window.localStorage.getItem('com.tp.user');
+    DashboardFactory.getUserLeagues(userId)
+      .then(function(portfolios){
+        $scope.portfolios = portfolios;
+        console.log($scope.portfolios,'fasfsfsfasf')
+      });
   }
 
   $scope.joinLeague = function (leagueId) {
     var userId = $window.localStorage.getItem('com.tp.user');
-    console.log(userId,'********')
     DashboardFactory.joinLeague(leagueId, userId)
       .then(function(){
         $window.location.href = '/#/league'
@@ -76,10 +80,11 @@ angular.module('app.dashboard', [])
     DashboardFactory.getAvailLeagues()
       .then(function(leagues){
         $scope.leagues = leagues;
-        console.log($scope.leagues)});
+      })
     // TODO: connect to factory to get leagues to join
   }
 
+  $scope.getUserLeagues();
   $scope.getLeaguesToJoin();
   // TODO: Call both of the above functions to get relevant league data for the views on initialization
 }])
