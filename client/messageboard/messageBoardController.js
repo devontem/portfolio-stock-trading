@@ -13,6 +13,8 @@ app.controller('MessageBoardController', function($scope, messageBoardFactory, $
       var posts = posts;
       $scope.posts = posts.data;
       $scope.userPost.message = '';
+
+      $rootScope.$emit('scrollDown');
     });
   }
 
