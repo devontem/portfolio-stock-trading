@@ -101,14 +101,15 @@
             </div>
   </footer>
 
-  <div class="botBar row" ng-controller="footerSearch">
-    <form ng-submit="functionToSearch()">
+  <div class="botBar row" ng-controller="BotBarController">
+    <form>
       <div class="col s1 offset-s1">Search Stock Values</div>
-      <input class="col s2" type="text">
+      <input class="col s2" type="text" ng-model="stockInput" required>
+      <input type="submit" class="waves-effect waves-light btn col s1" ng-click="chooseStock()">
     </form>
-    <div>
-      <span>{{result.blank}}</span>
-    </div>
+    <!-- <div>
+      <span ng-show='hasBeenCalled'>{{stock}}</span>
+    </div> -->
   </div>
 
   <!-- script files -->
@@ -130,6 +131,7 @@
   <script type="text/javascript" src="messageboard/messageBoardController.js"></script>
   <script type="text/javascript" src="services/messageBoardService.js"></script>
   <script type="text/javascript" src="services/authService.js"></script>
+  <script type="text/javascript" src="botBar/botBarController.js"></script>
 
 
 
