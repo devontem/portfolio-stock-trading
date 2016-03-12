@@ -68,7 +68,8 @@ app
   $scope.signup = function(user){
     Auth.createuser(user).then(function(data){
       $window.localStorage.setItem('com.tp', data.token);
-      $window.localStorage.setItem('com.tp.user', data.userId);
+      $window.localStorage.setItem('com.tp.userId', data.userId);
+      $window.localStorage.setItem('com.tp.username', data.username);
       $scope.toggleSignup();
       $scope.loggedin = true;
       $window.location.href = '/#/dashboard';
@@ -78,7 +79,8 @@ app
   $scope.signin = function(user){
     Auth.loginuser(user).then(function(data){
       $window.localStorage.setItem('com.tp', data.token);
-      $window.localStorage.setItem('com.tp.user', data.userId);
+      $window.localStorage.setItem('com.tp.userId', data.userId);
+      $window.localStorage.setItem('com.tp.username', data.username);
       $scope.toggleLogin();
       $scope.loggedin = true;
       $window.location.href = '/#/dashboard';
@@ -88,7 +90,8 @@ app
   $scope.logout = function(user){
     $scope.loggedin = false;
     $window.localStorage.removeItem('com.tp');
-    $window.localStorage.removeItem('com.tp.user');
+    $window.localStorage.removeItem('com.tp.userId');
+    $window.localStorage.removeItem('com.tp.username');
     $window.location.href = '/#/';
   }
 })
