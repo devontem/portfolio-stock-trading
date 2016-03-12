@@ -8,6 +8,7 @@ var User = require('../../db/models').User;
 var Portfolio = require('../../db/models').Portfolio;
 var Transaction = require('../../db/models').Transaction;
 var Room_user = require('../../db/models').Room_user;
+var Message = require('../../db/models').Message;
 var expressJwt = require('express-jwt');
 var jwt = require('jsonwebtoken');
 
@@ -21,6 +22,7 @@ module.exports = function (app, express) {
   var portfolioRouter = express.Router();
   var stockRouter = express.Router();
   var tweetRouter = express.Router();
+  var messageRouter = express.Router();
 
   // Configuring middleware
   app.use(bodyParser.urlencoded({ extend: true }));
@@ -96,6 +98,8 @@ module.exports = function (app, express) {
     Transaction.create({symbol:'aapl', price: 50, buysell: true, shares: 300, PortfolioId:1})
   });
 
+  Message.create({name: 'Sonny', message: 'Hey, what is up!'})
+
   // Connecting Router to route files
   app.use('/api/users', userRouter);
   app.use('/api/leagues', leagueRouter);
@@ -105,6 +109,9 @@ module.exports = function (app, express) {
 
   require('../tweets/tweetRoutes.js')(tweetRouter);
 
+  app.use('/api/messages', messageRouter);
+
+
   require('../stocks/stockRoutes.js')(stockRouter);
 
   require('../users/userRoutes.js')(userRouter);
@@ -112,5 +119,7 @@ module.exports = function (app, express) {
   require('../leagues/leagueRoutes.js')(leagueRouter);
 
   require('../portfolios/portfolioRoutes.js')(portfolioRouter);
+
+  require('../messageboard/messageRoutes.js')(messageRouter);
 
 }

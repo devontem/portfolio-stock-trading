@@ -1,19 +1,31 @@
-app
+var app = angular.module('app');
 
-  .factory('messageBoardFactory', function($http){
+app.factory('messageBoardFactory', function($http){
 
-    var getPosts = function(leagueID){
-      return $http({
-        method: 'GET',
-        url: '/api/leagues/getPosts',
-        data: {leagueId: leagueID}
-      })
-      .then(function(posts){
-        return posts;
-      });
-    };
+    var showPosts = function(posts){
+        return $http({
+          method: 'GET',
+          url: '/api/messages',
+          data: posts
+        })
+        .then(function(posts){
+          return posts;
+        });
+    }
+
+    var submitPost = function(post){
+        return $http({
+          method: 'POST',
+          url: '/api/messages',
+          data: post
+        })
+        .then(function(members){
+          return members;
+        });
+    }
 
     return {
-      getPosts: getPosts
+      showPosts: showPosts,
+      submitPost: submitPost
     };
   })

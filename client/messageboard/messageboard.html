@@ -7,7 +7,7 @@
 
     <tbody ng-repeat="post in posts">
       <tr>
-        <td>{{post.username}} - {{post.message}}</td>
+        <td>{{post.name}} - {{post.message}}</td>
       </tr>
 
     </tbody>
@@ -22,7 +22,7 @@
         <div class="row">
           <div class="input-field col s6">
             <i class="material-icons prefix">account_circle</i>
-            <input id="icon_prefix" type="text" class="validate" ng-model="userPost">
+            <input id="icon_prefix" type="text" class="validate" ng-model="userPost.message">
             <label for="icon_prefix">Message</label>
           </div>
       </form>

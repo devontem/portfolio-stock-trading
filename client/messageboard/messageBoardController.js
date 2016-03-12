@@ -1,38 +1,22 @@
+var app = angular.module('app')
+
 app.controller('MessageBoardController', function($scope, messageBoardFactory){
 
-  $scope.posts = [
-    {
-      username: 'Sonny',
-      message: 'hey hey hey'
-    },
-    {
-      username: 'Jordan',
-      message: 'Not much ...'
-    },
-    {
-      username: 'Jonathon',
-      message: 'Word to Big Bird'
-    }
-  ];
+  $scope.posts;
 
-  $scope.userPost;
+  $scope.userPost = {};
+  $scope.userPost.name = 'Sonny'
 
-  $scope.messageBoardPost = function($userPost){
-    console.log('worked')
-    $scope.posts.push({username: 'Sonny', message: $scope.userPost})
-    $scope.userPost = '';
+  $scope.messageBoardPost = function(){
+    messageBoardFactory.submitPost($scope.userPost);
+    messageBoardFactory.showPosts().then(function(posts){
+      var posts = posts;
+      $scope.posts = posts.data;
+      $scope.userPost.message = '';
+    });
   }
 
   $scope.leagueId;
 
-  $scope.getMessageBoard = function(leagueId){
-    // this will call a factory function to grab http data from server and assign returned data to $scope.members;
-    messageBoardFactory.getPosts(leagueId).then(function(posts){
-      $scope.posts = posts;
-    })
-  };
-
-  // once we have league ID, call to initialize leaderboard
-  //$scope.getLeaderBoard(leagueId);
 
 });
