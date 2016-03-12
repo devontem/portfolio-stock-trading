@@ -59,7 +59,7 @@ angular.module('app.dashboard', [])
   }
 
   $scope.getUserLeagues = function () {
-    var userId = $window.localStorage.getItem('com.tp.user');
+    var userId = $window.localStorage.getItem('com.tp.userId');
     DashboardFactory.getUserLeagues(userId)
       .then(function(portfolios){
         $scope.portfolios = portfolios;
@@ -68,7 +68,7 @@ angular.module('app.dashboard', [])
   }
 
   $scope.joinLeague = function (leagueId) {
-    var userId = $window.localStorage.getItem('com.tp.user');
+    var userId = $window.localStorage.getItem('com.tp.userId');
     DashboardFactory.joinLeague(leagueId, userId)
       .then(function(){
         $window.location.href = '/#/league'
