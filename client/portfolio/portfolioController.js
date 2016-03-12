@@ -52,6 +52,26 @@ angular.module('app.portfolio', [])
 })
 
 .factory('Portfolio', function($http){
+
+	// var getStocksByUserId = function(id){
+	// 	return $http({
+	// 		method: 'GET',
+	// 		url: '/api/stocks/'+id
+	// 	}).then(function(stocks){
+	// 		return stocks;
+	// 	})
+	// }
+
+	var buySell = function(options){
+		return $http({
+			method: 'POST',
+			url: '/api/transactions',
+			data: options
+		}).then(function(data){
+			return data;
+		})
+	}
+
   var getStock = function(stockName){
     return $http({
       method: 'GET',
@@ -63,7 +83,8 @@ angular.module('app.portfolio', [])
   }
 
   return {
-  	getStock: getStock
+  	getStock: getStock,
+  	buySell: buySell
   }
 })
 

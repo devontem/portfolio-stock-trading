@@ -6,6 +6,6 @@ module.exports = function(app){
 
   // app.get('/byPortfolioID', transactionController.getTransactionsByPortfolioId);
 
-  app.get('/getAll', transactionController.getAllTransactions);
+  // app.get('/getAll', transactionController.getAllTransactions);
   
 }
