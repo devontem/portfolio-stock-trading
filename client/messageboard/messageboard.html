@@ -1,8 +1,8 @@
  <!-- TODO: move inline style to css page -->
 <div class="leaderboard-container" style="height: 300px;
-  overflow-x: hidden;">
+  overflow-x: auto;">
 
-  <table>
+  <table id="message-table" style="padding-bottom: 15px; flot:top">
     <thead>
       <caption>MESSAGE BOARD</caption>
     </thead>
@@ -17,7 +17,7 @@
 
 </div>
 
-<div class="leaderboard-container">
+<div class="leaderboard-container" style="margin-top: 10px;">
 
   <div class="row">
       <form class="col s12" ng-submit="messageBoardPost()">

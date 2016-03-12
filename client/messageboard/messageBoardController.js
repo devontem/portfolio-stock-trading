@@ -1,6 +1,6 @@
 var app = angular.module('app')
 
-app.controller('MessageBoardController', function($scope, messageBoardFactory){
+app.controller('MessageBoardController', function($scope, messageBoardFactory, $rootScope){
 
   $scope.posts;
 

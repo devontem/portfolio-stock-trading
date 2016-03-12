@@ -1,5 +1,6 @@
 var app = angular.module('app');
 
+
 app.factory('messageBoardFactory', function($http){
 
     var showPosts = function(posts){
