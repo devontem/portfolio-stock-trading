@@ -102,14 +102,13 @@
   </footer>
 
   <div class="botBar row" ng-controller="BotBarController">
-    <form>
-      <div class="col s1 offset-s1">Search Stock Values</div>
-      <input class="col s2" type="text" ng-model="stockInput" required>
-      <input type="submit" class="waves-effect waves-light btn col s1" ng-click="chooseStock()">
-    </form>
-    <!-- <div>
-      <span ng-show='hasBeenCalled'>{{stock}}</span>
-    </div> -->
+    <span class="col s1 offset-s1">Search Stock Prices</span>
+    <input ng-model="stockInput" class="col s2" type="text" required>
+    <a ng-click="stockSearch()" class="waves-effect waves-light btn col s1"><i class="material-icons">search</i></a>
+    <span ng-show="hasSearched" class="col s1">{{stock.symbol}}</span>
+    <span ng-show="hasSearched" class="col s1">{{stock.Ask | currency}}</span>
+    <!-- TODO: Add relevant fields here -->
+
   </div>
 
   <!-- script files -->
