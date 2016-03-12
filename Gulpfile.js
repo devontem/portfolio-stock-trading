@@ -13,7 +13,7 @@ gulp.task('sass:watch', function () {
 });
 
 gulp.task('lint', function() {
-  return gulp.src('./lib/*.js')
+  return gulp.src('./client/**/*.js')
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
 });
