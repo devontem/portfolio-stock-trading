@@ -15,6 +15,14 @@ app.controller('MessageBoardController', function($scope, messageBoardFactory){
     }
   ];
 
+  $scope.userPost;
+
+  $scope.messageBoardPost = function($userPost){
+    console.log('worked')
+    $scope.posts.push({username: 'Sonny', message: $scope.userPost})
+    $scope.userPost = '';
+  }
+
   $scope.leagueId;
 
   $scope.getMessageBoard = function(leagueId){
