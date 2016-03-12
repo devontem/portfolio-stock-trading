@@ -5,8 +5,8 @@ app.controller('MessageBoardController', function($scope, messageBoardFactory, $
   $scope.posts;
 
   $scope.userPost = {};
-  $scope.userPost.name = $window.localStorage.getItem('com.tp.user');
-  $scope.userPost.userId = $window.localStorage.getItem('com.tp.user');
+  $scope.userPost.name = $window.localStorage.getItem('com.tp.username');
+  $scope.userPost.userId = $window.localStorage.getItem('com.tp.userId');
 
 
   $scope.messageBoardPost = function(){

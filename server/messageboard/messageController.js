@@ -3,6 +3,7 @@ var Message = require('../../db/models').Message;
 module.exports.addPostToDB = function (req, res){
 
   Message.create({
+    userId: req.body.userId,
     name: req.body.name,
     message: req.body.message
   })
