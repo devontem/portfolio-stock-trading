@@ -41,6 +41,9 @@ angular.module('app.dashboard', [])
   }
 
   $scope.addLeague = function (league) {
+    var creatorId = $window.localStorage.getItem('com.tp.user');
+    league['creatorId']= creatorId;
+    console.log(league,'%%league1%%') 
     DashboardFactory.addLeague(league)
       .then(function(){
         $scope.toggleAdd();
