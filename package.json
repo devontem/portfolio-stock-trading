@@ -33,17 +33,14 @@
     "mysql": "^2.10.2",
     "passport": "^0.3.2",
     "pg": "^4.5.1",
-
     "request": "^2.69.0",
     "sequelize": "^3.19.3",
-
-    "sequelize": "^3.19.3",
     "twit": "^2.2.3"
-
   },
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-jshint": "^2.0.0",
+    "gulp-mocha": "^2.2.0",
     "gulp-sass": "^2.2.0",
     "jshint": "^2.9.1"
   }
