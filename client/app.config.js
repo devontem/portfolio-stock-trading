@@ -31,7 +31,7 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
 
 
       .state('league', {
-        url: '/league',
+        url: '/leagues/:leagueId',
         views: {
           /*main view of the entire league template*/
           '': {

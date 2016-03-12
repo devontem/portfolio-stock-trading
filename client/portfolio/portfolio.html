@@ -44,7 +44,7 @@
 
 .stockAmount, .stockAmount:focus{
   border: none!important;
-  height: auto;
+  height: auto!important;
   text-align: center;
 }
 
@@ -129,12 +129,13 @@ th{
 	<div class="myPortfolio">
 		<nav>
 	    <div class="nav-wrapper blue darken-3">
-	      <a class="brand-logo">My Stocks</a>
+	      <a class="brand-logo">My Portfolio</a>
 	      <ul class="right hide-on-med-and-down">
-	        <li><a href="sass.html"><i class="material-icons">search</i></a></li>
-	        <li><a href="badges.html"><i class="material-icons">view_module</i></a></li>
+<!-- 	        <li><a href="sass.html"><i class="material-icons">search</i></a></li>
+	        <li><a href="badges.html"><i class="material-icons">view_module</i></a></li> -->
+	        <li class="larger">Balance: {{ balance | currency }}</li>
 	        <li><a href="collapsible.html"><i class="material-icons">refresh</i></a></li>
-	        <li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li>
+<!-- 	        <li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li> -->
 	      </ul>
 	    </div>
 	  </nav>
@@ -156,7 +157,7 @@ th{
 		      <tr ng-repeat="stock in stocks">
 		        <td><span class="company-symbol">{{stock.symbol}}</span>
 		        <span class="company-name">{{stock.name}}</span></td>
-		        <td>{{stock.qty}}</td>
+		        <td>{{stock.shares}}</td>
 		        <td>{{stock.price | currency}}</td>
 		        <td>{{stock.marketval | currency}}</td>
 		        <td>{{stock.marketprice | currency}}</td>
