@@ -23,20 +23,20 @@ module.exports.joinLeague = function (req, res){
   var temp = {};
   User.findOne({ where: {id : req.body.userId }})
     .then(function(user){
-      console.log("*8****", user.dataValues)
-     temp.username = user.dataValues.username;
+      temp.username = user.dataValues.username;
     })
   League.findOne({ where: {id : req.body.leagueId }})
     .then(function(league){
       temp.startbalance = league.dataValues.startbalance;
+      temp.leaguename = league.dataValues.name;
       Portfolio.create({
         leagueId: req.body.leagueId,
         UserId: req.body.userId,
         balance: temp.startbalance,
-        username: temp.username
+        username: temp.username,
+        leaguename: temp.leaguename
       })
       .then(function (league) {
-        console.log("HEY")
         res.send(league)
       })
       .catch(function (err) {
@@ -44,6 +44,22 @@ module.exports.joinLeague = function (req, res){
         res.end();
       })
     })  
+}
+
+module.exports.userLeagues = function(req, res){
+
+  Portfolio.findAll({ where: { userId: req.body.userId }})
+    .then(function(portfolio){
+      if(!portfolio){
+        console.log('No portfolio found.')
+        res.send();
+      }else{
+        res.json(portfolio);
+      }
+    })
+    .catch(function (err) {
+      console.error('Error getting portfolio: ', err)
+    })
 }
 
 module.exports.getAllLeagues = function (req, res) {

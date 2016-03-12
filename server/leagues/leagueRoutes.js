@@ -13,4 +13,6 @@ module.exports = function(app){
 
   app.post('/joinleague', LeagueController.joinLeague);
 
+  app.post('/userleague', LeagueController.userLeagues)
+
 }

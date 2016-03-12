@@ -25,15 +25,15 @@ app
       })
     }
 
-    var getUserLeagues = function(user){
+    var getUserLeagues = function(userId){
       return $http({
-        method: 'GET',
-        url: '/api/',
-        data: user
+        method: 'POST',
+        url: '/api/leagues/userleague',
+        data: {userId: userId}
       })
-      .then( function (data) {
+      .then( function (portfolios) {
         // TODO: Structure this appropriately once you have the exact route
-        return data;
+        return portfolios.data;
       }
       );
     };

@@ -40,7 +40,8 @@ User.beforeCreate(function(user, options) {
 //Portfolio Model
 var Portfolio = orm.define('Portfolio', {
 	balance: Sequelize.INTEGER,
-  username: Sequelize.STRING
+  username: Sequelize.STRING,
+  leaguename: Sequelize.STRING
 });
 
 

@@ -47,19 +47,15 @@
           <thead>
             <tr>
               <th data-field="name">League Name</th>
-              <th data-field="rank">Your Rank</th>
-              <th data-field="percentChange">% Change</th>
-              <th data-field="totVal">Total Value</th>
-              <th data-field="changeYest">Change Since Yesterday</th>
+              <th data-field="rank">Your Balance</th>
             </tr>
           </thead>
 
+
           <tbody>
-            <tr ng-repeat="league in leagues">
-              <td>{{league.name}}</td>
-              <td>{{league.maxNum}}</td>
-              <td>{{league.startbalance}}</td>
-              <td><a ng-click="joinLeague(league.id)">Click to Join</a></td>
+            <tr ng-repeat="portfolio in portfolios">
+              <td>{{portfolio.leaguename}}</td>
+              <td>{{portfolio.balance}}</td>
             </tr>
           </tbody>
         </table>
@@ -106,18 +102,19 @@
           <thead>
             <tr>
               <th data-field="name">League Name</th>
-              <th data-field="rank">Your Rank</th>
-              <th data-field="percentChange">% Change</th>
-              <th data-field="totVal">Total Value</th>
-              <th data-field="changeYest">Change Since Yesterday</th>
+              <th data-field="rank">Max Users</th>
+              <th data-field="percentChange">Start Balance</th>
+              <th data-field="totVal">Join</th>
             </tr>
           </thead>
+
 
           <tbody>
             <tr ng-repeat="league in leagues">
               <td>{{league.name}}</td>
-              <td>{{league.userRank}}</td>
+              <td>{{league.maxNum}}</td>
               <td>{{league.startbalance}}</td>
+              <td><a ng-click="joinLeague(league.id)">Click to Join</a></td>
             </tr>
           </tbody>
         </table>
