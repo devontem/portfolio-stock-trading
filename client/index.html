@@ -5,22 +5,19 @@
   <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
   <title>Portfol.io</title>
 
-  <!-- Fonts -->
+  <!-- CSS styling -->
+
   <link href='https://fonts.googleapis.com/css?family=Play:400,700' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Hind:400,300,500,600,700' rel='stylesheet' type='text/css'>
-  <!-- Materialize Icons -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-  <!-- Stylesheets  -->
-  <link rel="stylesheet" href="assets/css/materialize.css">
   <link rel="stylesheet" href="assets/css/main.css">
 
   <!-- Angular and jQuery CDNs -->
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
-
 
 
 
@@ -104,10 +101,19 @@
             </div>
   </footer>
 
+  <div class="botBar row" ng-controller="BotBarController">
+    <span class="col s1 offset-s1">Search Stock Prices</span>
+    <input ng-model="stockInput" class="col s2" type="text" required>
+    <a ng-click="stockSearch()" class="waves-effect waves-light btn col s1"><i class="material-icons">search</i></a>
+    <span ng-show="hasSearched" class="col s1">{{stock.symbol}}</span>
+    <span ng-show="hasSearched" class="col s1">{{stock.Ask | currency}}</span>
+    <!-- TODO: Add relevant fields here -->
+
+  </div>
 
   <!-- script files -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
-  <!-- Non-Vendor Files -->
   <script type="text/javascript" src="helpers/widget.js"></script>
   <script type="text/javascript" src="app.config.js"></script>
   <script type="text/javascript" src="account/accountController.js"></script>
@@ -124,6 +130,7 @@
   <script type="text/javascript" src="messageboard/messageBoardController.js"></script>
   <script type="text/javascript" src="services/messageBoardService.js"></script>
   <script type="text/javascript" src="services/authService.js"></script>
+  <script type="text/javascript" src="botBar/botBarController.js"></script>
 
 
 
