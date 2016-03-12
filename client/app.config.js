@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ui.router', 'app.profile', 'app.portfolio']);
+var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio']);
 
   app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
@@ -21,11 +21,11 @@ var app = angular.module('app', ['ui.router', 'app.profile', 'app.portfolio']);
 
       })
 
-      .state('profile', {
-        url: '/profile',
-        controller: 'ProfileController',
-        controllerAs: 'profile',
-        templateUrl: 'profile/profile.html'
+      .state('dashboard', {
+        url: '/dashboard',
+        controller: 'DashboardController',
+        controllerAs: 'dashboard',
+        templateUrl: 'dashboard/dashboard.html'
 
       })
 
