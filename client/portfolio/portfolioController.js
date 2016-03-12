@@ -7,14 +7,14 @@ angular.module('app.portfolio', [])
 .controller('PortfolioController', function($scope, Portfolio){
 	// MAKE A TRADE MODAL
 	$scope.fees = 10;
-	$scope.stock = $scope.stock || goog;
-	$scope.estPrice = $scope.stock.price;
+	$scope.estPrice = 0;
 
 	$scope.chooseStock = function(){
 		var stockName = $scope.stockInput;
 		Portfolio.getStock(stockName).then(function(stock){
 			$scope.stock = stock;
-		})
+			$scope.estPrice = stock.Ask;
+		});
 		$scope.stockInput = "";
 	}
 
@@ -38,7 +38,7 @@ angular.module('app.portfolio', [])
 	}
 
 	$scope.updateAmounts = function(){
-		$scope.estPrice = $scope.stockAmount * $scope.stock.price;
+		$scope.estPrice = $scope.stockAmount * $scope.stock.Ask;
 		$scope.total = $scope.estPrice + $scope.fees;
 	}
 
@@ -52,12 +52,12 @@ angular.module('app.portfolio', [])
 
 .factory('Portfolio', function($http){
   var getStock = function(stockName){
-    $http({
+    return $http({
       method: 'GET',
       url: '/api/stocks/'+stockName
     }).then(function(stock){
-    	console.log(stock)
-    	return data.stock.query;
+    	console.log(stock.data.query.results.quote)
+    	return stock.data.query.results.quote;
     })
   }
 
