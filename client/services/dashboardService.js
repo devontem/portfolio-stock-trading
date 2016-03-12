@@ -18,8 +18,7 @@ app
         method: 'POST',
         url: '/api/leagues/joinleague',
         data: { leagueId: leagueId,
-                userId: userId,
-                balance: 100000 }
+                userId: userId }
       })
       .then( function(data){
         return data;
