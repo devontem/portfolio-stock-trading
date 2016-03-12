@@ -6,7 +6,7 @@ var User = require('../../db/models').User;
 
 module.exports.addLeague = function (req, res){
   var creatorId = req.body.creatorId;
-  console.log(creatorId,'I CREATED THIS')
+  var creatorName = req.body.creatorName;
   League.create({
   	name: req.body.name,
   	maxNum: req.body.max,
@@ -17,14 +17,14 @@ module.exports.addLeague = function (req, res){
         leagueId: league.id,
         UserId: creatorId,
         balance: league.startbalance,
-        username: temp.username,
+        username: creatorName,
         leaguename: league.name
       })
-    console.log(league.name, league.maxNum, league.startbalance,league.id,'returned league')
+      .then( function(res) {
+        console.log('successfully added')
+      })
+    
   	res.send({name: league.name, maxNum: league.num, startbalance: league.balance})
-
-
-
   })
   .catch(function (err) {
   	console.error('Error creating league: ', err.message);
