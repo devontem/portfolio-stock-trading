@@ -4,6 +4,7 @@
     <div class="col s12 m5">
       <div class="card-panel teal">
         <h2>Profile</h2>
+        <h7 ng-click="toggleAdd()">Join League</h7>
       </div>
     </div>
   </div>
@@ -16,6 +17,22 @@
       </ul>
     </div>
   </div>
+
+  <addleague-directive show='showadd' width='350px' height='400px'>
+    <div ng-if="showadd" class="signup">
+      <h4 class="brand-logo"> Create League </h4>
+      <form name="addleagueForm" ng-submit='addLeague(league)'>
+        <br>
+        <label>Name:</label><br>
+        <input type='text' ng-model='league.name' required>
+        <br>
+        <label>Max User #: </label><br>
+        <input type="text" ng-model='league.max' required><br>
+        <br>
+        <button class="waves-effect waves-light btn">Create</button>
+      </form>
+    </div>
+  </addleague-directive>
 
   <div class="row" ng-show="currentTab === 'user'">
     <!-- If user is in leagues, prompt to join -->

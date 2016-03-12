@@ -1,11 +1,10 @@
-
 var League = require('../../db/models').League;
 var config = require('../config/middleware.js');
 var http = require('http-request');
 var Portfolio = require('../../db/models').Portfolio;
+var User = require('../../db/models').User;
 
-module.exports.addLeagueToDB = function (req, res){
-
+module.exports.addLeague = function (req, res){
   League.create({
   	name: req.body.name,
   	maxNum: req.body.num
@@ -18,6 +17,7 @@ module.exports.addLeagueToDB = function (req, res){
   	res.end();
   })
 }
+
 module.exports.getAllLeagues = function (req, res) {
 
   League.findAll({})
@@ -45,14 +45,13 @@ module.exports.getOneLeague = function (req, res) {
 }
 
 module.exports.getUsers = function(req, res){
-  Portfolio.findAll({where: {leagueId:req.body.leagueId}})
+  Portfolio.findAll({where: {leagueId: req.body.leagueId}})
     .then(function(portfolios){
       res.send(portfolios);
     })
     .catch(function (err) {
       console.error('Error getting portfolios: ', err)
     })
-
 }
 
 

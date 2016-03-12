@@ -50,6 +50,7 @@ module.exports = function (app, express) {
   //TEST - create join table
 
 
+
   User.create({name: "tdsafd", email:"fdsf3e4", password:"hi"})
   User.create({name: "tdsaf", email:"fdsf3e", password:"hi"})
 
@@ -68,6 +69,7 @@ module.exports = function (app, express) {
       })
     })
   })
+
 
   // User.create({name: "tdsafd", email:"fdsf3e4", password:"hi"})
   // User.create({name: "tdsaf", email:"fdsf3e", password:"hi"})

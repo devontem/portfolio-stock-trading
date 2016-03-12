@@ -4,9 +4,9 @@ app
 
     var getMembers = function(leagueID){
       return $http({
-        method: 'GET',
-        url: '/api/leagues/getUsers',
-        data: {leagueId: leagueID}
+        method: 'POST',
+        url: '/api/leagues/getusers',
+        data: {leagueId: 1}
       })
       .then(function(members){
         return members;

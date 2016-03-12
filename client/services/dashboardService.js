@@ -2,6 +2,17 @@ app
 
   .factory('DashboardFactory', function($http){
 
+    var addLeague = function(league){
+      return $http({
+        method: 'POST',
+        url: '/api/leagues',
+        data: league
+      })
+      .then( function(data){
+        return data;
+      })
+    }
+
     var getUserLeagues = function(user){
       return $http({
         method: 'GET',
@@ -27,6 +38,7 @@ app
     };
 
     return {
+      addLeague: addLeague,
       getUserLeagues: getUserLeagues,
       getAvailLeagues: getAvailLeagues
     };
