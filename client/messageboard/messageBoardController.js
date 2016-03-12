@@ -1,11 +1,13 @@
 var app = angular.module('app')
 
-app.controller('MessageBoardController', function($scope, messageBoardFactory, $rootScope){
+app.controller('MessageBoardController', function($scope, messageBoardFactory, $rootScope, $window){
 
   $scope.posts;
 
   $scope.userPost = {};
-  $scope.userPost.name = 'Sonny'
+  $scope.userPost.name = $window.localStorage.getItem('com.tp.user');
+  console.log('////////')
+  console.log($scope.userPost.name);
 
   $scope.messageBoardPost = function(){
     messageBoardFactory.submitPost($scope.userPost);
