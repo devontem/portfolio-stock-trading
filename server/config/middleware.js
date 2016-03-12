@@ -10,6 +10,8 @@ var Transaction = require('../../db/models').Transaction;
 var Room_user = require('../../db/models').Room_user;
 var expressJwt = require('express-jwt');
 var jwt = require('jsonwebtoken');
+var Twit = require('twit');
+var moment = require('moment')
 
 
 module.exports = function (app, express) {
@@ -45,6 +47,7 @@ module.exports = function (app, express) {
 
   //TEST - create join table
 
+
   User.create({name: "tdsafd", email:"fdsf3e4", password:"hi"})
   User.create({name: "tdsaf", email:"fdsf3e", password:"hi"})
 
@@ -63,6 +66,54 @@ module.exports = function (app, express) {
       })
     })
   })
+
+  // User.create({name: "tdsafd", email:"fdsf3e4", password:"hi"})
+  // User.create({name: "tdsaf", email:"fdsf3e", password:"hi"})
+
+  // League.create({name: "lobby2", maxNum: 3}).then(function(){
+  //   User.findOne({where: {email:"fdsf3e4"}})
+  //     .then(function(user){
+  //       League.findOne({where: {name: "lobby2"}})
+  //         .then(function(league){
+  //       user.addLeague(league, {symbol: "AAPL"});
+  //       Portfolio.create({balance: 10000, UserId: 1}).then(function(){
+  //         Transaction.create({symbol:'aapl', price: 50, buysell: true, shares: 300, PortfolioId:1})
+  //       });
+  //       Portfolio.create({balance: 10000, UserId: 2}).then(function(){
+  //         Transaction.create({symbol:'aapl', price: 50, buysell: true, shares: 300, PortfolioId:2})
+  //       });
+  //     })
+  //   })
+  // })
+
+
+var T= new Twit({
+    consumer_key: 'wQX96fSNXd5Oyo0mhw0AHto5u'
+  , consumer_secret: 'shbjbyIGPVpopdw5FD3o1EtQNUwbAe5aVkkKg7pziLHPlnBH9x'
+  , app_only_auth: true
+});
+
+var params={ q: '$F', count: 5 }
+app.get('/api/tweets', function(req,res){
+  console.log('here');
+  
+  
+    var messages = [];
+    
+  T.get('search/tweets', params, function(err,data,response){
+    for(var i=0;i<data.statuses.length;i++){
+        var status=data.statuses[i];
+        var tweetDate = status.created_at
+        var date = new Date(Date.parse(tweetDate.replace(/( \+)/, ' UTC$1')));
+        var time = moment(date).fromNow();
+        messages.push({text:status.text,
+                  user: status.user.screen_name,
+                  created_at: time})
+    }
+    res.json(messages)
+  })
+})
+
 
 
 

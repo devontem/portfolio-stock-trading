@@ -27,11 +27,17 @@
     "express-session": "^1.13.0",
     "http-request": "^0.7.0",
     "jsonwebtoken": "^5.7.0",
+    "moment": "^2.12.0",
     "mysql": "^2.10.2",
     "passport": "^0.3.2",
     "pg": "^4.5.1",
+<<<<<<< c18de3440f82db2238d64cfb5099003039dc4495
     "request": "^2.69.0",
     "sequelize": "^3.19.3"
+=======
+    "sequelize": "^3.19.3",
+    "twit": "^2.2.3"
+>>>>>>> (feat) Add tweets
   },
   "devDependencies": {
     "gulp": "^3.9.1",
