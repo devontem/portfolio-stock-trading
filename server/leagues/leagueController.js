@@ -5,12 +5,25 @@ var Portfolio = require('../../db/models').Portfolio;
 var User = require('../../db/models').User;
 
 module.exports.addLeague = function (req, res){
+  var creatorId = req.body.creatorId;
+  var creatorName = req.body.creatorName;
   League.create({
   	name: req.body.name,
   	maxNum: req.body.max,
-    startbalance: req.body.balance 
+    startbalance: req.body.balance,
   })
   .then(function (league) {
+    Portfolio.create({
+        leagueId: league.id,
+        UserId: creatorId,
+        balance: league.startbalance,
+        username: creatorName,
+        leaguename: league.name
+      })
+      .then( function(res) {
+        console.log('successfully added')
+      })
+    
   	res.send({name: league.name, maxNum: league.num, startbalance: league.balance})
   })
   .catch(function (err) {
@@ -91,6 +104,7 @@ module.exports.getOneLeague = function (req, res) {
 module.exports.getUsers = function(req, res){
   Portfolio.findAll({where: {leagueId: req.body.leagueId}})
     .then(function(portfolios){
+
       res.send(portfolios);
     })
     .catch(function (err) {

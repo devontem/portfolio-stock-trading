@@ -58,6 +58,7 @@ var Transaction = orm.define('Transaction', {
 //Message Board Model
 
 var Message = orm.define('Message', {
+  userId: Sequelize.INTEGER,
   name: Sequelize.STRING,
   message: Sequelize.STRING
 })
@@ -67,7 +68,7 @@ var Message = orm.define('Message', {
 var League = orm.define('league', {
 	name: Sequelize.STRING,
   maxNum: Sequelize.INTEGER,
-  startbalance: Sequelize.INTEGER 
+  startbalance: Sequelize.INTEGER
 });
 
 //Joint table for League and user

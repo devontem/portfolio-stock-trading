@@ -1,11 +1,13 @@
 var app = angular.module('app')
 
-app.controller('MessageBoardController', function($scope, messageBoardFactory){
+app.controller('MessageBoardController', function($scope, messageBoardFactory, $rootScope, $window){
 
   $scope.posts;
 
   $scope.userPost = {};
-  $scope.userPost.name = 'Sonny'
+  $scope.userPost.name = $window.localStorage.getItem('com.tp.username');
+  $scope.userPost.userId = $window.localStorage.getItem('com.tp.userId');
+
 
   $scope.messageBoardPost = function(){
     messageBoardFactory.submitPost($scope.userPost);
@@ -13,10 +15,16 @@ app.controller('MessageBoardController', function($scope, messageBoardFactory){
       var posts = posts;
       $scope.posts = posts.data;
       $scope.userPost.message = '';
+      $rootScope.$emit('scrollDown');
     });
   }
 
   $scope.leagueId;
 
+  messageBoardFactory.showPosts().then(function(posts){
+    var posts = posts;
+    $scope.posts = posts.data;
+    $scope.userPost.message = '';
+  });
 
 });

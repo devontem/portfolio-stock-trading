@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "gulp test",
+    "lint": "gulp lint",
+    "sass": "gulp sass"
   },
   "repository": {
     "type": "git",
@@ -38,6 +40,7 @@
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-jshint": "^2.0.0",
+    "gulp-mocha": "^2.2.0",
     "gulp-sass": "^2.2.0",
     "jshint": "^2.9.1"
   }
