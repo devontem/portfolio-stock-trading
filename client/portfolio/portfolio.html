@@ -73,6 +73,7 @@
 
 .stock-data p{
 	margin: 0px;
+	font-size: 0.8em;
 }
 
 .stock-data .sym{
@@ -80,7 +81,7 @@
 }
 
 .stock-data .comp{
-	margin-top: -12px;
+	margin-top: -8px;
 	margin-left: 2px;
 }
 
@@ -188,13 +189,14 @@ th{
 					<a ng-click="chooseStock()" class="waves-effect waves-light btn col s4"><i class="material-icons">search</i></a>
 
 					<section class="stock-data">
-						<section class="col s6">
-							<p class="sym">{{stock.symbol}}</p>
-							<p class="comp">{{stock.name}}</p>
+						<section class="col s5">
+							<p class="sym">{{stock.Symbol}}</p>
+							<p class="comp">{{stock.Name}}</p>
 						</section>
-						<section class="col s6">
-							<p class="price">{{stock.price | currency}}</p>
-							<p class="perc">{{stock.amt}}</p>
+						<section ng-if="stock" class="col s7">
+							<p class="price">Ask: {{stock.Ask | currency}}</p>
+							<p class="perc">Change: {{stock.Change}}</p>
+							<p class="perc">% Change: {{stock.PercentChange}}</p>
 						</section>
 					</section>
 				</article>
