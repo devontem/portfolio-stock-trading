@@ -23,6 +23,7 @@ module.exports = function (app, express) {
   var stockRouter = express.Router();
   var tweetRouter = express.Router();
   var messageRouter = express.Router();
+  var transactionRouter = express.Router();
 
   // Configuring middleware
   app.use(bodyParser.urlencoded({ extend: true }));
@@ -103,6 +104,7 @@ module.exports = function (app, express) {
   app.use('/api/stocks', stockRouter);
   app.use('/api/tweets', tweetRouter);
   app.use('/api/messages', messageRouter);
+  app.use('/api/transactions', transactionRouter);
 
   require('../tweets/tweetRoutes.js')(tweetRouter);
 
@@ -115,5 +117,7 @@ module.exports = function (app, express) {
   require('../portfolios/portfolioRoutes.js')(portfolioRouter);
 
   require('../messageboard/messageRoutes.js')(messageRouter);
+
+  require('../transactions/transactionRoutes.js')(transactionRouter);
 
 }
