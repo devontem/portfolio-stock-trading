@@ -1,0 +1,27 @@
+
+<div class="news-container" style="background-color: white">
+
+  <table class="news-table highlight">
+    <caption>Tweets</caption>
+    <button ng-click="getTweets()">Tweets</button> 
+    <thead>
+      <tr>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td ng-repeat="n in tweets"> {{n.text}} - {{n.user}} time: {{n.time}}</td>
+      </tr>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+
+
+
+
+
+

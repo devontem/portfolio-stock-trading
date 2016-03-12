@@ -12,6 +12,7 @@ var expressJwt = require('express-jwt');
 var jwt = require('jsonwebtoken');
 
 
+
 module.exports = function (app, express) {
 
   // Creating routers
@@ -19,6 +20,7 @@ module.exports = function (app, express) {
   var leagueRouter = express.Router();
   var portfolioRouter = express.Router();
   var stockRouter = express.Router();
+  var tweetRouter = express.Router();
 
   // Configuring middleware
   app.use(bodyParser.urlencoded({ extend: true }));
@@ -45,6 +47,7 @@ module.exports = function (app, express) {
 
   //TEST - create join table
 
+
   User.create({name: "tdsafd", email:"fdsf3e4", password:"hi"})
   User.create({name: "tdsaf", email:"fdsf3e", password:"hi"})
 
@@ -64,6 +67,29 @@ module.exports = function (app, express) {
     })
   })
 
+  // User.create({name: "tdsafd", email:"fdsf3e4", password:"hi"})
+  // User.create({name: "tdsaf", email:"fdsf3e", password:"hi"})
+
+  // League.create({name: "lobby2", maxNum: 3}).then(function(){
+  //   User.findOne({where: {email:"fdsf3e4"}})
+  //     .then(function(user){
+  //       League.findOne({where: {name: "lobby2"}})
+  //         .then(function(league){
+  //       user.addLeague(league, {symbol: "AAPL"});
+  //       Portfolio.create({balance: 10000, UserId: 1}).then(function(){
+  //         Transaction.create({symbol:'aapl', price: 50, buysell: true, shares: 300, PortfolioId:1})
+  //       });
+  //       Portfolio.create({balance: 10000, UserId: 2}).then(function(){
+  //         Transaction.create({symbol:'aapl', price: 50, buysell: true, shares: 300, PortfolioId:2})
+  //       });
+  //     })
+  //   })
+  // })
+
+
+
+
+
 
 
   Portfolio.create({balance: 10000, UserId: 1}).then(function(){
@@ -75,6 +101,9 @@ module.exports = function (app, express) {
   app.use('/api/leagues', leagueRouter);
   app.use('/api/portfolios', portfolioRouter);
   app.use('/api/stocks', stockRouter);
+  app.use('/api/tweets', tweetRouter);
+
+  require('../tweets/tweetRoutes.js')(tweetRouter);
 
   require('../stocks/stockRoutes.js')(stockRouter);
 
