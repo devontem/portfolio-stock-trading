@@ -1,4 +1,4 @@
-app.controller('MessageBoardController', function($scope){
+app.controller('MessageBoardController', function($scope, messageBoardFactory){
 
   $scope.posts = [
     {
