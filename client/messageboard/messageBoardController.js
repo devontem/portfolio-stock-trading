@@ -18,5 +18,10 @@ app.controller('MessageBoardController', function($scope, messageBoardFactory){
 
   $scope.leagueId;
 
+  messageBoardFactory.showPosts().then(function(posts){
+    var posts = posts;
+    $scope.posts = posts.data;
+    $scope.userPost.message = '';
+  });
 
 });
