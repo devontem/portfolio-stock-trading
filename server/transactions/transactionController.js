@@ -37,6 +37,73 @@ module.exports.buySell = function(req, res){
     });
 }
 
+module.exports.getTransactions = function(req, res){
+
+  Portfolio.findOne({ where: {
+    UserId: req.params.userId,
+    leagueId: req.params.leagueId
+  }}).then(function(portfolio){
+
+    Transaction.findAll({ where: {
+      PortfolioId: portfolio.id
+    }}).then(function(transactions){
+
+      // removing duplicates, adding the sum of all trades for same company
+      // var stock = reduceTransactions(transactions);
+
+      // res.send(stocks);
+
+      res.send(transactions)
+    })
+    .catch(function(err){
+      res.send("There was an error: ", err);
+    })
+    
+  })
+  .catch(function(err){
+    res.send("There was an error: ", err);
+  })
+
+}
+
+function reduceTransactions(transactions){
+  // removing duplicates, adding the sum of all trades for same company
+  var storage = {}
+  var finalArray = [];
+
+  transactions.forEach(function(transaction){
+    if (!storage[transaction]){
+      storage[transaction.symbol] = [transaction];
+    } else {
+      storage[transaction.symbol].push(transaction);
+    }
+  });
+
+  for (var key in storage){
+    var temp = {};
+    temp.price = 0;
+    temp.shares = 0;
+    storage[key].forEach(function(transaction){
+
+      // checks if the transaction was bought (filtering sold)
+      if (transaction.buysell){
+        temp.symbol = transaction.symbol;
+        temp.price += transaction.price;
+        temp.shares += transaction.shares;
+      }
+
+    });
+
+    // adds it to the array if the values exist
+    if (temp.symbol) { finalArray.push(temp) }
+
+  }
+
+  return finalArray;
+
+}
+
+
 // //Get all transactions of Portfolio by passing in portfolioID
 // module.exports.getTransactionsByPortfolioId = function(req, res){
 //   var id = parseInt(req.body.id);

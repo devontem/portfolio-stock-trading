@@ -4,7 +4,7 @@ var mystocks = [goog, apple];
 
 angular.module('app.portfolio', [])
 
-.controller('PortfolioController', function($scope, Portfolio){
+.controller('PortfolioController', function($scope, $window, $stateParams, Portfolio){
 	// MAKE A TRADE MODAL
 	$scope.fees = 10;
 	$scope.estPrice = 0;
@@ -16,7 +16,7 @@ angular.module('app.portfolio', [])
 			$scope.stock = stock;
 			$scope.estPrice = stock.Ask;
 		});
-		$scope.stockInput = "";
+		resetFields();
 	}
 
 	// Either buys a stock or sells it depending on selection
@@ -31,11 +31,47 @@ angular.module('app.portfolio', [])
 	}
 
 	function buy(){
-		console.log('buying the stock', $scope.stock);
+		// getting it from the routing params '/leagues/:id'
+		var leagueId = $stateParams.leagueId;
+		var userId = $window.localStorage.getItem('com.tp.userId');
+		var options = {
+			symbol: $scope.stock.symbol,
+			buysell: true,
+			leagueId: leagueId,
+			userId:  userId,
+			shares: $scope.stockAmount,
+			price: $scope.stock.Ask
+		}
+		console.log('temp', options)
+		Portfolio.buySell(options).then(function(data){
+			console.log('Transaction posted: ', data);
+			resetFields();
+		});
 	}
 
 	function sell(){
-		console.log('selling the stock', $scope.stock);
+		var leagueId = $stateParams.leagueId;
+		var userId = $window.localStorage.getItem('com.tp.userId');
+		var options = {
+			symbol: $scope.stock.symbol,
+			buysell: false,
+			leagueId: leagueId,
+			userId:  userId,
+			shares: $scope.stockAmount,
+			price: $scope.stock.Ask
+		}
+		console.log('temp', options)
+		Portfolio.buySell(options).then(function(data){
+			console.log('Transaction posted: ', data);
+			resetFields();
+		});
+	}
+
+	function resetFields(){
+		$scope.stock = undefined;;
+		$scope.stockAmount = '';
+		$scope.stockInput = '';
+		updatePortfolio();
 	}
 
 	$scope.updateAmounts = function(){
@@ -45,22 +81,26 @@ angular.module('app.portfolio', [])
 
 
 	// MY STOCKS MODAL
-	$scope.stocks = mystocks;
+	updatePortfolio();
 
+	function updatePortfolio(){
+		var leagueId = $stateParams.leagueId;
+		var userId = $window.localStorage.getItem('com.tp.userId');
 
+		//updating user balance
+		Portfolio.getPortfolio(leagueId, userId).then(function(portfolio){
+			console.log()
+			$scope.balance = portfolio.balance;
+		});
 
+		//updating users purchased stocks
+		Portfolio.getTransactions(leagueId, userId).then(function(transactions){
+			$scope.stocks = transactions
+		});
+	}
 })
 
 .factory('Portfolio', function($http){
-
-	// var getStocksByUserId = function(id){
-	// 	return $http({
-	// 		method: 'GET',
-	// 		url: '/api/stocks/'+id
-	// 	}).then(function(stocks){
-	// 		return stocks;
-	// 	})
-	// }
 
 	var buySell = function(options){
 		return $http({
@@ -82,9 +122,31 @@ angular.module('app.portfolio', [])
     })
   }
 
+  var getPortfolio = function(leagueId, userId){
+    return $http({
+      method: 'GET',
+      url: '/api/portfolios/'+leagueId+'/'+userId
+    }).then(function(portfolio){
+    	console.log('User Account Info (incl. Balance)', portfolio.data);
+    	return portfolio.data;
+    })
+  }
+
+  var getTransactions = function(leagueId, userId){
+  	return $http({
+      method: 'GET',
+      url: '/api/transactions/'+leagueId+'/'+userId
+    }).then(function(transactions){
+    	console.log('User stocks', transactions)
+    	return transactions.data;
+    })
+  }
+
   return {
   	getStock: getStock,
-  	buySell: buySell
+  	buySell: buySell,
+  	getPortfolio: getPortfolio,
+  	getTransactions: getTransactions
   }
 })
 
