@@ -8,6 +8,7 @@ angular.module('app.portfolio', [])
 	// MAKE A TRADE MODAL
 	$scope.fees = 10;
 	$scope.estPrice = 0;
+	$scope.action = false
 
 	$scope.chooseStock = function(){
 		var stockName = $scope.stockInput;
