@@ -11,12 +11,12 @@ module.exports.newUser = function (req, res){
           email: req.body.email 
         })
         .then(function(user){
-              var myToken = jwt.sign( {user: user.id,
-                                       username: user.username},
+              var myToken = jwt.sign( {user: user.id},
                                       'secret',
                                      { expiresIn: 24 * 60 * 60 });
               res.send(200, {'token': myToken,
-                             'userId':    user.id } );
+                             'userId':    user.id,
+                             'username': user.username } );
         })
       }else{
         res.status(404).json('Username already exist!');
@@ -81,12 +81,12 @@ module.exports.signIn = function (req, res){
         res.json('User not found')
       }else{
         if(user.validPassword(req.body.password)){
-          var myToken = jwt.sign({ user: user.id,
-                                   username: user.username},
+          var myToken = jwt.sign({ user: user.id},
                                 'secret',
                                 { expiresIn: 24 * 60 * 60 });
           res.send(200, {'token': myToken,
-                         'userId':    user.id} );
+                         'userId': user.id,
+                         'username': user.username } );
         }else{
           res.status(404).json('Authentication failed. Wrong password.')
         }
