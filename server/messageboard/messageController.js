@@ -14,7 +14,7 @@ module.exports.addPostToDB = function (req, res){
     console.error('Error creating message entry: ', err.message);
     res.end();
   })
-}
+};
 
 module.exports.getAllPosts = function(req, res){
   console.log('inside get messages');

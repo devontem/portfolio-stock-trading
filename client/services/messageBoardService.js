@@ -1,5 +1,5 @@
 var app = angular.module('app');
-
+// to maintain scrollbar at bottom when new message is posted
 app.directive('scrollDirective', function ($rootScope) {
   return {
     scope: {
@@ -21,7 +21,7 @@ app.directive('scrollDirective', function ($rootScope) {
   }
 })
 
-
+// functions to show message board posts and submit them
 app.factory('messageBoardFactory', function($http){
 
     var showPosts = function(posts){
@@ -33,7 +33,7 @@ app.factory('messageBoardFactory', function($http){
         .then(function(posts){
           return posts;
         });
-    }
+    };
 
     var submitPost = function(post){
         return $http({
@@ -44,10 +44,10 @@ app.factory('messageBoardFactory', function($http){
         .then(function(members){
           return members;
         });
-    }
+    };
 
     return {
       showPosts: showPosts,
-      submitPost: submitPost
+      submitPost: submitPost,
     };
   })

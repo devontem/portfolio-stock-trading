@@ -6,8 +6,8 @@ app.controller('MessageBoardController', function($scope, messageBoardFactory, $
 
   $scope.userPost = {};
   $scope.userPost.name = $window.localStorage.getItem('com.tp.user');
-  console.log('////////')
-  console.log($scope.userPost.name);
+  $scope.userPost.userId = $window.localStorage.getItem('com.tp.user');
+
 
   $scope.messageBoardPost = function(){
     messageBoardFactory.submitPost($scope.userPost);
@@ -15,7 +15,6 @@ app.controller('MessageBoardController', function($scope, messageBoardFactory, $
       var posts = posts;
       $scope.posts = posts.data;
       $scope.userPost.message = '';
-
       $rootScope.$emit('scrollDown');
     });
   }
