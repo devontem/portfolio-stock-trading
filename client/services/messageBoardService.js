@@ -16,3 +16,4 @@ app
     return {
       getPosts: getPosts
     };
+  })
