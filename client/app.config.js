@@ -29,13 +29,6 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio'])
 
       })
 
-      .state('news', {
-        url:'/news',
-        controller: 'NewsController',
-        controllerAs: 'news',
-        templateUrl: 'news/news.html'
-      })
-
 
       .state('league', {
         url: '/league',
@@ -57,13 +50,12 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio'])
             templateUrl: 'leaderboard/leaderboard.html'
           },
           // news/analysis view within league page
-/*          'news@league': {
+          'news@league': {
             controller: 'NewsController',
-            controllerAs: 'news',
             templateUrl: 'news/news.html'
           },
           // message board view within league page
-          'messageboard@league': {
+          /*'messageboard@league': {
             controller: 'MessageBoardController',
             controllerAs: 'messageboard',
             templateUrl: 'messageboard/messageboard.html'

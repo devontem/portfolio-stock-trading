@@ -1,37 +1,27 @@
 
-<!--<div class="news-container">
+<div class="news-container" style="background-color: white">
 
   <table class="news-table highlight">
-    <caption>FINANCIAL NEWS</caption>
+    <caption>Tweets</caption>
+    <button ng-click="getTweets()">Tweets</button> 
     <thead>
       <tr>
-          <th data-field="headlines">Your Headlines</th>
-          
-
       </tr>
     </thead>
 
     <tbody>
       <tr>
-        <td>AAPL good news</td>
-        <
+        <td ng-repeat="n in tweets"> {{n.text}} - {{n.user}} time: {{n.time}}</td>
       </tr>
-      <tr>
-        <td>GILD good news</td>
-        
-      </tr>
-      <tr>
-        <td>FEYE bad news</td>
-        
       </tr>
     </tbody>
   </table>
 
-</div>-->
-
-<div style = "background-color: white">
-<h1> HI </h1>
-<button ng-click="getTweets()"> Tweets </button> 
-<div ng-repeat="n in tweets"> {{n.text}} by {{n.user}} time {{n.time}}</div>
 </div>
+
+
+
+
+
+
 
