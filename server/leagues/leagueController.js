@@ -1,11 +1,10 @@
-
 var League = require('../../db/models').League;
 var config = require('../config/middleware.js');
 var http = require('http-request');
 var Portfolio = require('../../db/models').Portfolio;
+var User = require('../../db/models').User;
 
-module.exports.addLeagueToDB = function (req, res){
-
+module.exports.addLeague = function (req, res){
   League.create({
   	name: req.body.name,
   	maxNum: req.body.num
@@ -18,6 +17,24 @@ module.exports.addLeagueToDB = function (req, res){
   	res.end();
   })
 }
+
+module.exports.joinLeague = function (req, res){
+  console.log(req.body.userId,'*********');
+  Portfolio.create({
+    leagueId: req.body.leagueId,
+    balance: req.body.balance,
+    UserId: 1
+  })
+  .then(function (league) {
+    console.log("HEY")
+    res.send(league)
+  })
+  .catch(function (err) {
+    console.error('Error creating league: ', err.message);
+    res.end();
+  })
+}
+
 module.exports.getAllLeagues = function (req, res) {
 
   League.findAll({})
@@ -26,7 +43,7 @@ module.exports.getAllLeagues = function (req, res) {
   		console.log('No leagues found.');
   		res.end();
   	} else {
-  		res.send({leagues: leagues})
+  		res.json(leagues)
   	}
   })
   .catch(function (err) {
@@ -45,14 +62,13 @@ module.exports.getOneLeague = function (req, res) {
 }
 
 module.exports.getUsers = function(req, res){
-  Portfolio.findAll({where: {leagueId:req.body.leagueId}})
+  Portfolio.findAll({where: {leagueId: req.body.leagueId}})
     .then(function(portfolios){
       res.send(portfolios);
     })
     .catch(function (err) {
       console.error('Error getting portfolios: ', err)
     })
-
 }
 
 

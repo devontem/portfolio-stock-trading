@@ -67,54 +67,32 @@ app
 
   $scope.signup = function(user){
     console.log('')
-    Auth.createuser(user).then(function(token){
-      $window.sessionStorage.token = token;
-      console.log(token)
+    Auth.createuser(user).then(function(data){
+      $window.localStorage.setItem('com.tp', data.token);
+      $window.localStorage.setItem('com.tp.user', data.user);
+      console.log(data)
       $scope.toggleSignup();
       $scope.loggedin = true;
-      $window.location.href = '/#/profile';
+      $window.location.href = '/#/dashboard';
     });
   }
 
   $scope.signin = function(user){
-    Auth.loginuser(user).then(function(token){
-      $window.sessionStorage.token = token;
-      console.log('login***', token)
+    Auth.loginuser(user).then(function(data){
+      console.log(data,'fdiafsjdflajsf;s');
+      $window.localStorage.setItem('com.tp', data.token);
+      $window.localStorage.setItem('com.tp.user', data.user);
       $scope.toggleLogin();
       $scope.loggedin = true;
-      $window.location.href = '/#/profile';
+      $window.location.href = '/#/dashboard';
     });
+  }
+
+  $scope.logout = function(user){
+    $scope.loggedin = false;
+    $window.localStorage.removeItem('com.tp');
+    $window.localStorage.removeItem('com.tp.user');
+    $window.location.href = '/#/';
   }
 })
 
-//factor, move it to a centralize factory later!
-.factory('Auth', function($http, $location){
-
-  var createuser = function(user){
-    return $http({
-      method: 'POST',
-      url: '/api/users',
-      data: user
-    })
-    .then(function(token){
-      return token;
-    });
-  };
-
-  var loginuser = function(user){
-    return $http({
-      method: 'POST',
-      url: '/api/users/signin',
-      data: user
-    })
-    .then(function(token){
-      return token;
-    })
-  }
-
-  return {
-    createuser: createuser,
-    loginuser: loginuser
-  };
-
-});

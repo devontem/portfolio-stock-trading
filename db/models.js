@@ -50,7 +50,7 @@ var Transaction = orm.define('Transaction', {
 	price: Sequelize.STRING,
 
 	buysell: Sequelize.BOOLEAN,
-    shares: Sequelize.INTEGER
+  shares: Sequelize.INTEGER
 
 });
 
@@ -65,7 +65,7 @@ var Message = orm.define('Message', {
 //League Model
 var League = orm.define('league', {
 	name: Sequelize.STRING,
-    maxNum: Sequelize.INTEGER
+  maxNum: Sequelize.INTEGER
 });
 
 //Joint table for League and user
@@ -82,7 +82,7 @@ Portfolio.belongsTo(League);
 
 //Portfolio to User - One to Many
 User.hasMany(Portfolio);
-Portfolio.belongsTo(User);
+Portfolio.belongsTo(User, {foreignKey: 'username'});
 
 //Transaction to User - One to Many
 

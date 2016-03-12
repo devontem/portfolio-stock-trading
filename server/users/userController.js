@@ -2,17 +2,24 @@ var User = require('../../db/models').User;
 var jwt = require('jsonwebtoken');
 
 module.exports.newUser = function (req, res){
-  User.create({ 
-    username: req.body.username, 
-    password: req.body.password, 
-    email: req.body.email 
-  })
-  User.findOne({ username: req.body.username })
+  User.findOne({where:{ username: req.body.username }})
     .then(function (user) {
-      var myToken = jwt.sign(user,
-                             'secret',
-                             { expiresIn: 24 * 60 * 60 });
-      res.status(200).json(myToken);
+      if(!user){
+        User.create({ 
+          username: req.body.username, 
+          password: req.body.password, 
+          email: req.body.email 
+        })
+        .then(function(user){
+          console.log(user);
+              var myToken = jwt.sign( {user: user.id},
+                                     'secret',
+                                     { expiresIn: 24 * 60 * 60 });
+              res.send(200, myToken);
+        })
+      }else{
+        res.status(404).json('Username already exist!');
+      }
     })
     .catch(function (err) {
       res.send('Error creating user: ', err.message);
@@ -20,7 +27,6 @@ module.exports.newUser = function (req, res){
 };
 
 module.exports.getUsers = function(req, res){
-	console.log('inside get users');
   User.findAll().then(function (users) {
     if(!users) {
       res.send('No users found.');
@@ -68,16 +74,16 @@ module.exports.deleteUser= function (req, res) {
 };
 
 module.exports.signIn = function (req, res){
-  User.findOne({ username: req.body.username })
+  User.findOne({where:{ username: req.body.email }})
     .then(function (user) {
       if(!user){
         res.json('User not found')
       }else{
         if(user.validPassword(req.body.password)){
-          var myToken = jwt.sign(user,
+          var myToken = jwt.sign({ user: user.id },
                                 'secret',
                                 { expiresIn: 24 * 60 * 60 });
-          res.status(200).json(myToken);
+          res.send(200, myToken);
         }else{
           res.status(404).json('Authentication failed. Wrong password.')
         }
