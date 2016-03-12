@@ -69,12 +69,13 @@ var League_user = orm.define('League_user', {
 League.belongsToMany(User, { through: 'League_user'});
 User.belongsToMany(League, { through: 'League_user'});
 
+//League to Portfolio - One to Many
+League.hasMany(Portfolio);
+Portfolio.belongsTo(League);
 
 //Portfolio to User - One to Many
 User.hasMany(Portfolio);
 Portfolio.belongsTo(User);
-
-
 
 //Transaction to User - One to Many
 
