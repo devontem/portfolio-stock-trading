@@ -50,49 +50,16 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio'])
             templateUrl: 'leaderboard/leaderboard.html'
           },
           // news/analysis view within league page
+
           'news@league': {
             controller: 'NewsController',
             templateUrl: 'news/news.html'
           },
-          // message board view within league page
-          /*'messageboard@league': {
+
+          'messageboard@league': {
             controller: 'MessageBoardController',
-            controllerAs: 'messageboard',
             templateUrl: 'messageboard/messageboard.html'
-          }*/
+          }
         }
-
       })
-
-      // .state('portfolio', {
-      //   url: '/portfolio',
-      //   controller: 'PortfolioController',
-      //   controllerAs: 'portfolio',
-      //   templateUrl: 'portfolio/portfolio.html'
-
-      // })
-
-      .state('faqs', {
-        url: '/faqs',
-        controller: 'FaqsController',
-        controllerAs: 'faqs',
-        templateUrl: 'faqs/faqs.html'
-
-      })
-
-      .state('account', {
-        url: '/account',
-        controller: 'AccountController',
-        controllerAs: 'account',
-        templateUrl: 'account/account.html'
-
-      })
-
-      // .state('leaderboard', {
-      //   url: '/leaderboard',
-      //   controller: 'LeaderBoardController',
-      //   controllerAs: 'leaderboard',
-      //   templateUrl: 'leaderboard/leaderboard.html'
-      // })
-
   }]);

@@ -54,6 +54,13 @@ var Transaction = orm.define('Transaction', {
 
 });
 
+//Message Board Model
+
+var Message = orm.define('Message', {
+  name: Sequelize.STRING,
+  message: Sequelize.STRING
+})
+
 
 //League Model
 var League = orm.define('league', {
@@ -61,7 +68,7 @@ var League = orm.define('league', {
     maxNum: Sequelize.INTEGER
 });
 
-//Joint table for League and user 
+//Joint table for League and user
 var League_user = orm.define('League_user', {
 })
 
@@ -83,11 +90,15 @@ Portfolio.hasMany(Transaction);
 Transaction.belongsTo(Portfolio);
 
 
+
+
+
 User.sync();
 League.sync();
 Portfolio.sync();
 Transaction.sync();
 League_user.sync();
+Message.sync();
 
 
 exports.League_user = League_user;
@@ -95,5 +106,6 @@ exports.User = User;
 exports.League = League;
 exports.Portfolio = Portfolio;
 exports.Transaction = Transaction;
+exports.Message = Message;
 
 

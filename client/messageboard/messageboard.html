@@ -1,0 +1,32 @@
+<div class="leaderboard-container">
+
+  <table>
+    <thead>
+      <caption>MESSAGE BOARD</caption>
+    </thead>
+
+    <tbody ng-repeat="post in posts">
+      <tr>
+        <td>{{post.name}} - {{post.message}}</td>
+      </tr>
+
+    </tbody>
+  </table>
+
+</div>
+
+<div class="leaderboard-container">
+
+  <div class="row">
+      <form class="col s12" ng-submit="messageBoardPost()">
+        <div class="row">
+          <div class="input-field col s6">
+            <i class="material-icons prefix">account_circle</i>
+            <input id="icon_prefix" type="text" class="validate" ng-model="userPost.message">
+            <label for="icon_prefix">Message</label>
+          </div>
+      </form>
+    </div>
+
+
+</div>
