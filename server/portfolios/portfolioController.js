@@ -58,7 +58,6 @@ function reduceStocks(stocks){
       storage[stock.symbol] = [];
     } 
     storage[stock.symbol].push(stock);
-    console.log('being added to storage->', stock.symbol, stock.shares)
   });
 
   for (var key in storage){

@@ -10,8 +10,7 @@ angular.module('app.portfolio', [])
 	$scope.estPrice = 0;
 	$scope.action = false
 
-	$scope.chooseStock = function(){
-		var stockName = $scope.stockInput;
+	$scope.chooseStock = function(stockName){
 		Portfolio.getStock(stockName).then(function(stock){
 			$scope.stock = stock;
 			$scope.estPrice = stock.Ask;
@@ -67,44 +66,15 @@ angular.module('app.portfolio', [])
 		return false;
 	}
 
-	// function buy(){
-	// 	// getting it from the routing params '/leagues/:id'
-	// 	var leagueId = $stateParams.leagueId;
-	// 	var userId = $window.localStorage.getItem('com.tp.userId');
-	// 	var options = {
-	// 		symbol: $scope.stock.symbol,
-	// 		buysell: true,
-	// 		leagueId: leagueId,
-	// 		userId:  userId,
-	// 		shares: $scope.stockAmount,
-	// 		price: $scope.stock.Ask
-	// 	}
-	// 	console.log('temp', options)
-	// 	Portfolio.buySell(options).then(function(data){
-	// 		console.log('Transaction posted: ', data);
-	// 		resetFields();
-	// 	});
-	// }
+	$scope.sellStock = function(stock){
+    $scope.chooseStock(stock.symbol);
+    $scope.action = true;
 
-	// function sell(){
-	// 	var leagueId = $stateParams.leagueId;
-	// 	var userId = $window.localStorage.getItem('com.tp.userId');
-	// 	var options = {
-	// 		symbol: $scope.stock.symbol,
-	// 		company: $scope.stock.Name,
-	// 		buysell: false,
-	// 		leagueId: leagueId,
-	// 		userId:  userId,
-	// 		shares: $scope.stockAmount,
-	// 		price: $scope.stock.Ask,
-	// 	}
-
-	// 	console.log('temp', options)
-	// 	Portfolio.buySell(options).then(function(data){
-	// 		console.log('Transaction posted: ', data);
-	// 		resetFields();
-	// 	});
-	// }
+		//animation to scroll
+		$('html, body').animate({
+        scrollTop: $(".make-trades").offset().top
+    }, 1500);
+	}
 
 	function resetFields(){
 		$scope.stock = undefined;;
