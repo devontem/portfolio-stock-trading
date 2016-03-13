@@ -13,6 +13,12 @@ module.exports = function(app){
 
   app.post('/joinleague', LeagueController.joinLeague);
 
+  // app.post('/joinleague', function(req,res){ 
+  //                   console.log(req.body,'**********');
+  //                   console.log(req.headers['x-access-token'],'$$$$$$$');
+  //                   console.log(req.headers,'$$$$33333');
+  //                 }, LeagueController.joinLeague);
+
   app.post('/userleague', LeagueController.userLeagues);
 
 }

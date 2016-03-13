@@ -109,8 +109,8 @@
           </thead>
 
           
-          <tbody>
-            <tr ng-repeat="league in leagues | filter:functionname" >
+          <tbody ng-repeat="league in leagues | filter: notjoined ">
+            <tr >
               <td>{{league.name}}</td>
               <td>{{league.maxNum}}</td>
               <td>{{league.startbalance}}</td>
