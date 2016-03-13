@@ -25,9 +25,11 @@ module.exports.getUserStocks = function(req, res){
 
       // console.log('stocks', stocks);
 
-      console.log('reduceStocks', reduceStocks(stocks));
+      // console.log('reduceStocks', reduceStocks(stocks));
 
-      res.send(transactions);
+      var reducedStocks = reduceStocks(stocks);
+      
+      res.send(reducedStocks);
     })
     .catch(function(err){
       res.send("There was an error: ", err);
@@ -58,24 +60,31 @@ function reduceStocks(stocks){
   var storage = {}
   var finalArray = [];
 
-  stocks.forEach(function(transaction){
-    if (!storage[transaction]){
-      storage[transaction.symbol] = [transaction];
-    } else {
-      storage[transaction.symbol].push(transaction);
-    }
+  stocks.forEach(function(stock){
+    if (!storage[stock.symbol]){
+      storage[stock.symbol] = [];
+    } 
+    storage[stock.symbol].push(stock);
+    console.log('being added to storage->', stock.symbol, stock.shares)
   });
 
   for (var key in storage){
+    console.log('length of each', storage[key].length, storage[key][0].symbol)
     if (storage[key].length > 1){
-      var sharesArray = _.pluck(storage[key], 'shares')
-      console.log(sharesArray);
+      // console.log(storage[key].symbol);
+      var totalShares = _.pluck(storage[key], 'shares').reduce(function(prev, curr, currIndex){
+        return prev + curr;
+      });
+      storage[key][0].shares = totalShares;
+      console.log('total shares,', storage[key][0].symbol, storage[key][0].shares);
+      finalArray.push(storage[key][0]);
     } else {
+      console.log('lone soul', storage[key][0].symbol, storage[key].length)
       finalArray.push(storage[key][0]);
     }
   }
 
-  // return finalArray;
+  return finalArray;
 
 }
 
