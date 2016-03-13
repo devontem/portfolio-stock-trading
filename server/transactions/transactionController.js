@@ -11,17 +11,15 @@ module.exports.buySell = function(req, res){
       }
     })
     .then(function(portfolio){
-      transaction.shares = -1 * transaction.shares;
+
+      if (!transaction.buysell) { transaction.shares = -1 * transaction.shares; }
+
       var amount = transaction.price*transaction.shares
 
-      // if true, add the amount to protfolioValue, else substract it
-      if (transaction.buysell){
-        portfolio.portfolioValue += amount;
-        portfolio.balance -= amount;
-      } else {
-        portfolio.portfolioValue -= amount;
-        portfolio.balance += amount;
-      }
+      //amount is either subtracted or added to portfolioValue depending on if sold or bought
+      portfolio.portfolioValue += amount;
+      portfolio.balance -= amount;
+
 
       //Setting the transaction's PortfolioId
       transaction.PortfolioId = portfolio.id;
