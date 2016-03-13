@@ -52,8 +52,11 @@ angular.module('app.dashboard', [])
         $scope.toggleAdd();
         $window.location.href = '/#/league'
       });
-
   }
+
+  // $scope.filter = function () {
+  //   if($scope.portfolios.UserId !== )
+  // }
 
   $scope.showToJoin = function () {
     $scope.currentTab = 'toJoin';
@@ -65,7 +68,7 @@ angular.module('app.dashboard', [])
   }
 
   $scope.getUserLeagues = function () {
-    var userId = $window.localStorage.getItem('com.tp.userId');
+    
     DashboardFactory.getUserLeagues(userId)
       .then(function(portfolios){
         $scope.portfolios = portfolios;
@@ -81,10 +84,13 @@ angular.module('app.dashboard', [])
         // $window.location.href = '/#/leagues/:'+leagueId;
       })
   }
-
+//returns all public leagues
   $scope.getLeaguesToJoin = function () {
+    var userId = $window.localStorage.getItem('com.tp.userId');
     DashboardFactory.getAvailLeagues()
       .then(function(leagues){
+
+        console.log(leagues,'league')
         $scope.leagues = leagues;
       })
     // TODO: connect to factory to get leagues to join

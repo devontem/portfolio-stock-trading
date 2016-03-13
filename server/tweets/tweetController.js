@@ -9,12 +9,13 @@ var moment = require('moment')
 });
 
 var params={ q: '$F', count: 5 }
-  var messages = [];
+  
     
   
 
 module.exports.getTweets = function (req, res){
   T.get('search/tweets', params, function(err,data,response){
+    var messages = [];
     for(var i=0;i<data.statuses.length;i++){
         var status=data.statuses[i];
         var tweetDate = status.created_at

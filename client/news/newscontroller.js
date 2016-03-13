@@ -1,18 +1,15 @@
 app.controller('NewsController', function($scope, News){
 
-
+  
   $scope.tweets = [];
-  $scope.tweets.length = 5;
 
   $scope.getTweets= function(){
-
+  	$scope.tweets = [];
   	News.getNews()
   	.then(function (res){
-
-      for(var i = 0; i < $scope.tweets.length; i++){
-        $scope.tweets[i] = res.data[i];
-        console.log($scope.tweets[i])
-      }
+  		res.data.forEach(function(tweet){
+  			$scope.tweets.push({text : tweet.text, user : tweet.user, time: tweet.created_at})
+  		})
   	})
   }
 })
