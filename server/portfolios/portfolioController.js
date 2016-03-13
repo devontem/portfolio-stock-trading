@@ -14,18 +14,13 @@ module.exports.getUserStocks = function(req, res){
       PortfolioId: portfolio.id
     }}).then(function(transactions){
 
-
+      // minimizes doubles, adds all shares from same company
       var updatedShares = reduceStocks(transactions);
 
+      // returns only the bought shares
       var reducedStocks = _.filter(updatedShares, function(transaction){
         return transaction.buysell && transaction.shares > 0;
       });
-
-      // console.log('stocks', stocks);
-
-      // console.log('reduceStocks', reduceStocks(stocks));
-
-      
 
       res.send(reducedStocks);
     })
@@ -73,32 +68,6 @@ function reduceStocks(stocks){
         return prev + curr;
       });
       storage[key][0].shares = totalShares;
-      finalArray.push(storage[key][0]);
-    } else {
-      finalArray.push(storage[key][0]);
-    }
-  }
-  return finalArray;
-}
-
-function updateShares(stocks){
-  var storage = {}
-  var finalArray = [];
-
-  stocks.forEach(function(stock){
-    if (!storage[stock.symbol]){
-      storage[stock.symbol] = [];
-    } 
-    storage[stock.symbol].push(stock);
-    console.log('being added to storage->', stock.symbol, stock.shares)
-  });
-
-  for (var key in storage){
-    if (storage[key].length > 1){
-      var totalShares = _.pluck(storage[key], 'shares').reduce(function(prev, curr, currIndex){
-        return prev + curr;
-      });
-      storage[key][0].shares = -totalShares;
       finalArray.push(storage[key][0]);
     } else {
       finalArray.push(storage[key][0]);
