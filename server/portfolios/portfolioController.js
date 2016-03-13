@@ -14,12 +14,10 @@ module.exports.getUserStocks = function(req, res){
       PortfolioId: portfolio.id
     }}).then(function(transactions){
 
-      // removing duplicates, adding the sum of all trades for same company
-      // var stock = reduceTransactions(transactions);
 
-      // res.send(stocks);
-      // stocks include 'bought' shares with a share amount > 0
-      var stocks = _.filter(transactions, function(transaction){
+      var updatedShares = reduceStocks(transactions);
+
+      var reducedStocks = _.filter(updatedShares, function(transaction){
         return transaction.buysell && transaction.shares > 0;
       });
 
@@ -27,8 +25,8 @@ module.exports.getUserStocks = function(req, res){
 
       // console.log('reduceStocks', reduceStocks(stocks));
 
-      var reducedStocks = reduceStocks(stocks);
       
+
       res.send(reducedStocks);
     })
     .catch(function(err){
@@ -69,27 +67,47 @@ function reduceStocks(stocks){
   });
 
   for (var key in storage){
-    console.log('length of each', storage[key].length, storage[key][0].symbol)
     if (storage[key].length > 1){
       // console.log(storage[key].symbol);
       var totalShares = _.pluck(storage[key], 'shares').reduce(function(prev, curr, currIndex){
         return prev + curr;
       });
       storage[key][0].shares = totalShares;
-      console.log('total shares,', storage[key][0].symbol, storage[key][0].shares);
       finalArray.push(storage[key][0]);
     } else {
-      console.log('lone soul', storage[key][0].symbol, storage[key].length)
       finalArray.push(storage[key][0]);
     }
   }
-
   return finalArray;
+}
 
+function updateShares(stocks){
+  var storage = {}
+  var finalArray = [];
+
+  stocks.forEach(function(stock){
+    if (!storage[stock.symbol]){
+      storage[stock.symbol] = [];
+    } 
+    storage[stock.symbol].push(stock);
+    console.log('being added to storage->', stock.symbol, stock.shares)
+  });
+
+  for (var key in storage){
+    if (storage[key].length > 1){
+      var totalShares = _.pluck(storage[key], 'shares').reduce(function(prev, curr, currIndex){
+        return prev + curr;
+      });
+      storage[key][0].shares = -totalShares;
+      finalArray.push(storage[key][0]);
+    } else {
+      finalArray.push(storage[key][0]);
+    }
+  }
+  return finalArray;
 }
 
 // module.exports.addPortfolioToDB = function (req,res) {
-  
 //   //var userid = req.body.userid;
 //   var userid = 2
 //   Portfolio.create({

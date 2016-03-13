@@ -11,6 +11,7 @@ module.exports.buySell = function(req, res){
       }
     })
     .then(function(portfolio){
+      transaction.shares = -1 * transaction.shares;
       var amount = transaction.price*transaction.shares
 
       // if true, add the amount to protfolioValue, else substract it
@@ -102,43 +103,6 @@ module.exports.getTransactions = function(req, res){
   .catch(function(err){
     res.send("There was an error: ", err);
   })
-
-}
-
-function reduceTransactions(transactions){
-  // removing duplicates, adding the sum of all trades for same company
-  var storage = {}
-  var finalArray = [];
-
-  transactions.forEach(function(transaction){
-    if (!storage[transaction]){
-      storage[transaction.symbol] = [transaction];
-    } else {
-      storage[transaction.symbol].push(transaction);
-    }
-  });
-
-  for (var key in storage){
-    var temp = {};
-    temp.price = 0;
-    temp.shares = 0;
-    storage[key].forEach(function(transaction){
-
-      // checks if the transaction was bought (filtering sold)
-      if (transaction.buysell){
-        temp.symbol = transaction.symbol;
-        temp.price += transaction.price;
-        temp.shares += transaction.shares;
-      }
-
-    });
-
-    // adds it to the array if the values exist
-    if (temp.symbol) { finalArray.push(temp) }
-
-  }
-
-  return finalArray;
 
 }
 
