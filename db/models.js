@@ -27,8 +27,8 @@ var User = orm.define('User', {
       hashPassword: function() {
       return bcrypt.hashSync(this.password, salt);
     },
-      validPassword: function(pass) {
-      return bcrypt.compareSync(pass, this.password);
+      validPassword: function(inputpass, pass) {
+      return bcrypt.compareSync(inputpass, pass);
     }
   }
 });
