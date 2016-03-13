@@ -66,7 +66,7 @@ angular.module('app.dashboard', [])
   }
 
   $scope.getUserLeagues = function () {
-    
+    var userId = $window.localStorage.getItem('com.tp.userId');
     DashboardFactory.getUserLeagues(userId)
       .then(function(portfolios){
         $scope.portfolios = portfolios;
