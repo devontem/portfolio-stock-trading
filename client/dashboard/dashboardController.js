@@ -46,11 +46,10 @@ angular.module('app.dashboard', [])
     var creatorId = $window.localStorage.getItem('com.tp.user');
     league['creatorId']= creatorId;
     league['creatorName']= creatorName;
-    console.log(league,'%%league1%%') 
     DashboardFactory.addLeague(league)
-      .then(function(){
+      .then(function(league){
         $scope.toggleAdd();
-        $window.location.href = '/#/dashboard'
+        $window.location.href = '/#/leagues/'+league.id.toString();
       });
   }
 
@@ -70,7 +69,6 @@ angular.module('app.dashboard', [])
     DashboardFactory.getUserLeagues(userId)
       .then(function(portfolios){
         $scope.portfolios = portfolios;
-        console.log($scope.portfolios,'fasfsfsfasf')
       });
   }
 
@@ -78,8 +76,7 @@ angular.module('app.dashboard', [])
     var userId = $window.localStorage.getItem('com.tp.userId');
     DashboardFactory.joinLeague(leagueId, userId)
       .then(function(){
-        $window.location.href = '/#/league'
-        // $window.location.href = '/#/leagues/:'+leagueId;
+        $window.location.href = '/#/leagues/'+leagueId.toString()
       })
   }
 //returns all public leagues

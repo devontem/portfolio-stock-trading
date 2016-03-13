@@ -8,8 +8,8 @@ app
         url: '/api/leagues',
         data: league
       })
-      .then( function(data){
-        return data;
+      .then( function(league){
+        return league.data;
       })
     }
 
