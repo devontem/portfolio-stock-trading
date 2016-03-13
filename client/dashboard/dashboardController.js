@@ -91,6 +91,13 @@ angular.module('app.dashboard', [])
     // TODO: connect to factory to get leagues to join
   }
 
+  $scope.notjoined = function(league){
+    for(var i=0; i<$scope.portfolios.length; i++){
+      if(league.id === $scope.portfolios[i].leagueId) return false;
+    }
+    return true;
+  }
+
   $scope.getUserLeagues();
   $scope.getLeaguesToJoin();
   // TODO: Call both of the above functions to get relevant league data for the views on initialization
