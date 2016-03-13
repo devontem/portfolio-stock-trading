@@ -18,7 +18,9 @@ module.exports.addLeague = function (req, res){
         UserId: creatorId,
         balance: league.startbalance,
         username: creatorName,
-        leaguename: league.name
+        leaguename: league.name,
+        portfolioValue: 0,
+        numOfTrades: 0
       })
       .then( function(res) {
         console.log('successfully added')
