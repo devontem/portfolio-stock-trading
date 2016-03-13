@@ -10,6 +10,7 @@ app.controller('NewsController', function($scope, News){
   		res.data.forEach(function(tweet){
   			$scope.tweets.push({text : tweet.text, user : tweet.user, time: tweet.created_at})
   		})
+  		
   	})
   }
 })

@@ -54,9 +54,7 @@ angular.module('app.dashboard', [])
       });
   }
 
-  // $scope.filter = function () {
-  //   if($scope.portfolios.UserId !== )
-  // }
+  
 
   $scope.showToJoin = function () {
     $scope.currentTab = 'toJoin';
