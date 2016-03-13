@@ -21,9 +21,11 @@ module.exports.getTweets = function (req, res){
         var tweetDate = status.created_at
         var date = new Date(Date.parse(tweetDate.replace(/( \+)/, ' UTC$1')));
         var time = moment(date).fromNow();
+        console.log(time,'toime')
         messages.push({text:status.text,
                   user: status.user.screen_name,
                   created_at: time})
+
     }
     console.log(messages,'here');
     res.json(messages)
