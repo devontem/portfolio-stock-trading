@@ -24,7 +24,7 @@ module.exports.addLeague = function (req, res){
         console.log('successfully added')
       })
     
-  	res.send({name: league.name, maxNum: league.num, startbalance: league.balance})
+  	res.send({id: league.id, name: league.name, maxNum: league.num, startbalance: league.balance})
   })
   .catch(function (err) {
   	console.error('Error creating league: ', err.message);

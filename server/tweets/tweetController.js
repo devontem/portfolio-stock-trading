@@ -14,6 +14,7 @@ var params={ q: '$F', count: 5 }
   
 
 module.exports.getTweets = function (req, res){
+    var messages = [];
   T.get('search/tweets', params, function(err,data,response){
     var messages = [];
     for(var i=0;i<data.statuses.length;i++){
@@ -27,6 +28,7 @@ module.exports.getTweets = function (req, res){
                   created_at: time})
 
     }
+    console.log(messages,'****fdaifsjfsf$$')
     console.log(messages,'here');
     res.json(messages)
   })
