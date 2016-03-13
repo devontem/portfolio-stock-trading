@@ -40,6 +40,8 @@ User.beforeCreate(function(user, options) {
 //Portfolio Model
 var Portfolio = orm.define('Portfolio', {
 	balance: Sequelize.INTEGER,
+  portfolioValue: Sequelize.INTEGER,
+  numOfTrades: Sequelize.INTEGER,
   username: Sequelize.STRING,
   leaguename: Sequelize.STRING
 });
@@ -49,7 +51,10 @@ var Portfolio = orm.define('Portfolio', {
 var Transaction = orm.define('Transaction', {
 
 	symbol: Sequelize.STRING,
-	price: Sequelize.STRING,
+  company: Sequelize.STRING,
+	price: Sequelize.INTEGER,
+  marketPrice: Sequelize.INTEGER,
+  return: Sequelize.INTEGER,
 	buysell: Sequelize.BOOLEAN,
   shares: Sequelize.INTEGER
 

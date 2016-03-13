@@ -86,7 +86,8 @@ body {
   margin-bottom: 0;
   padding-bottom: 0;
   background-color: #252c41;
-  color: white; }
+  color: white;
+  z-index: 999; }
   .botBar span {
     display: inline-block; }
   .botBar input {

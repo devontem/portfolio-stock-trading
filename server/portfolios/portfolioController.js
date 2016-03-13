@@ -1,20 +1,53 @@
 var Portfolio = require('../../db/models').Portfolio;
+var Transaction = require('../../db/models').Transaction;
 var config = require('../config/middleware.js');
 
+module.exports.getUserStocks = function(req, res){
 
-  module.exports.getPortfolio = function(req, res){
-    Portfolio.findOne({ where: {
-      UserId: req.params.userId,
-      leagueId: req.params.leagueId
-    }}).then(function(portfolio){
-      console.log('portfolio', portfolio)
-      res.send(portfolio);
+  Portfolio.findOne({ where: {
+    UserId: req.params.userId,
+    leagueId: req.params.leagueId
+  }}).then(function(portfolio){
+
+    Transaction.findAll({ where: {
+      PortfolioId: portfolio.id
+    }}).then(function(transactions){
+
+      // removing duplicates, adding the sum of all trades for same company
+      // var stock = reduceTransactions(transactions);
+
+      // res.send(stocks);
+      // stocks include 'bought' shares with a share amount > 0
+      // _.filter(transactions, function(transaction){
+      //   return transaction.buysell && transaction.shares > 0;
+      // })
+
+      res.send(transactions);
     })
     .catch(function(err){
       res.send("There was an error: ", err);
     })
+    
+  })
+  .catch(function(err){
+    res.send("There was an error: ", err);
+  })
 
-  }
+}
+
+module.exports.getPortfolio = function(req, res){
+  Portfolio.findOne({ where: {
+    UserId: req.params.userId,
+    leagueId: req.params.leagueId
+  }}).then(function(portfolio){
+    
+    res.send(portfolio);
+  })
+  .catch(function(err){
+    res.send("There was an error: ", err);
+  })
+
+}
 
 // module.exports.addPortfolioToDB = function (req,res) {
   

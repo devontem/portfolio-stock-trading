@@ -46,6 +46,8 @@ module.exports.joinLeague = function (req, res){
         leagueId: req.body.leagueId,
         UserId: req.body.userId,
         balance: temp.startbalance,
+        portfolioValue: 0,
+        numOfTrades: 0,
         username: temp.username,
         leaguename: temp.leaguename
       })

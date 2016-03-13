@@ -21,27 +21,26 @@ angular.module('app.portfolio', [])
 
 	// Either buys a stock or sells it depending on selection
 	$scope.performAction = function(){
+		var leagueId = $stateParams.leagueId;
+		var userId = $window.localStorage.getItem('com.tp.userId');
+		var options = {
+			symbol: $scope.stock.symbol,
+			company: $scope.stock.Name,
+			leagueId: leagueId,
+			userId:  userId,
+			shares: $scope.stockAmount,
+			price: $scope.stock.Ask,
+			marketPrice: $scope.stock.Ask
+		}
+
 		if ($scope.action === false){
 			//buying a stock
-			buy()
+			options.buysell = true;
 		} else {
 			//Selling a stock
-			sell()
+			options.buysell = false;
 		}
-	}
 
-	function buy(){
-		// getting it from the routing params '/leagues/:id'
-		var leagueId = $stateParams.leagueId;
-		var userId = $window.localStorage.getItem('com.tp.userId');
-		var options = {
-			symbol: $scope.stock.symbol,
-			buysell: true,
-			leagueId: leagueId,
-			userId:  userId,
-			shares: $scope.stockAmount,
-			price: $scope.stock.Ask
-		}
 		console.log('temp', options)
 		Portfolio.buySell(options).then(function(data){
 			console.log('Transaction posted: ', data);
@@ -49,23 +48,44 @@ angular.module('app.portfolio', [])
 		});
 	}
 
-	function sell(){
-		var leagueId = $stateParams.leagueId;
-		var userId = $window.localStorage.getItem('com.tp.userId');
-		var options = {
-			symbol: $scope.stock.symbol,
-			buysell: false,
-			leagueId: leagueId,
-			userId:  userId,
-			shares: $scope.stockAmount,
-			price: $scope.stock.Ask
-		}
-		console.log('temp', options)
-		Portfolio.buySell(options).then(function(data){
-			console.log('Transaction posted: ', data);
-			resetFields();
-		});
-	}
+	// function buy(){
+	// 	// getting it from the routing params '/leagues/:id'
+	// 	var leagueId = $stateParams.leagueId;
+	// 	var userId = $window.localStorage.getItem('com.tp.userId');
+	// 	var options = {
+	// 		symbol: $scope.stock.symbol,
+	// 		buysell: true,
+	// 		leagueId: leagueId,
+	// 		userId:  userId,
+	// 		shares: $scope.stockAmount,
+	// 		price: $scope.stock.Ask
+	// 	}
+	// 	console.log('temp', options)
+	// 	Portfolio.buySell(options).then(function(data){
+	// 		console.log('Transaction posted: ', data);
+	// 		resetFields();
+	// 	});
+	// }
+
+	// function sell(){
+	// 	var leagueId = $stateParams.leagueId;
+	// 	var userId = $window.localStorage.getItem('com.tp.userId');
+	// 	var options = {
+	// 		symbol: $scope.stock.symbol,
+	// 		company: $scope.stock.Name,
+	// 		buysell: false,
+	// 		leagueId: leagueId,
+	// 		userId:  userId,
+	// 		shares: $scope.stockAmount,
+	// 		price: $scope.stock.Ask,
+	// 	}
+
+	// 	console.log('temp', options)
+	// 	Portfolio.buySell(options).then(function(data){
+	// 		console.log('Transaction posted: ', data);
+	// 		resetFields();
+	// 	});
+	// }
 
 	function resetFields(){
 		$scope.stock = undefined;;
@@ -89,12 +109,12 @@ angular.module('app.portfolio', [])
 
 		//updating user balance
 		Portfolio.getPortfolio(leagueId, userId).then(function(portfolio){
-			console.log()
 			$scope.balance = portfolio.balance;
+			$scope.portfolioValue = portfolio.portfolioValue;
 		});
 
 		//updating users purchased stocks
-		Portfolio.getTransactions(leagueId, userId).then(function(transactions){
+		Portfolio.getUserStocks(leagueId, userId).then(function(transactions){
 			$scope.stocks = transactions
 		});
 	}
@@ -132,12 +152,12 @@ angular.module('app.portfolio', [])
     })
   }
 
-  var getTransactions = function(leagueId, userId){
+  var getUserStocks = function(leagueId, userId){
   	return $http({
       method: 'GET',
-      url: '/api/transactions/'+leagueId+'/'+userId
+      url: '/api/portfolios/stocks/'+leagueId+'/'+userId
     }).then(function(transactions){
-    	console.log('User stocks', transactions)
+    	console.log('User stocks', transactions.data)
     	return transactions.data;
     })
   }
@@ -146,7 +166,7 @@ angular.module('app.portfolio', [])
   	getStock: getStock,
   	buySell: buySell,
   	getPortfolio: getPortfolio,
-  	getTransactions: getTransactions
+  	getUserStocks: getUserStocks
   }
 })
 

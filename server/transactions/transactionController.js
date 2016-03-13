@@ -12,14 +12,24 @@ module.exports.buySell = function(req, res){
     })
     .then(function(portfolio){
       var amount = transaction.price*transaction.shares
-      console.log('amount', amount)
 
-      // if true, add the amount else substract the amount from balance
-      transaction.buysell ? portfolio.balance += amount : portfolio.balance -= amount;
-      console.log('balance', transaction.buysell, portfolio.balance)
+      // if true, add the amount to protfolioValue, else substract it
+      if (transaction.buysell){
+        portfolio.portfolioValue += amount;
+        portfolio.balance -= amount;
+      } else {
+        portfolio.portfolioValue -= amount;
+        portfolio.balance += amount;
+      }
 
       //Setting the transaction's PortfolioId
       transaction.PortfolioId = portfolio.id;
+
+      //Incrementing number of trades
+      portfolio.numOfTrades++;
+
+      //Setting the initial return
+      transaction.return = 0;
 
       // Saving both instances
       transaction.save();
@@ -37,6 +47,40 @@ module.exports.buySell = function(req, res){
     });
 }
 
+// module.exports.getUserPortfolio = function(req, res){
+//   console.log('hey')
+
+//   Portfolio.findOne({ where: {
+//     UserId: req.params.userId,
+//     leagueId: req.params.leagueId
+//   }}).then(function(portfolio){
+
+//     Transaction.findAll({ where: {
+//       PortfolioId: portfolio.id
+//     }}).then(function(transactions){
+
+//       // removing duplicates, adding the sum of all trades for same company
+//       // var stock = reduceTransactions(transactions);
+
+//       // res.send(stocks);
+//       // stocks include 'bought' shares with a share amount > 0
+//       // _.filter(transactions, function(transaction){
+//       //   return transaction.buysell && transaction.shares > 0;
+//       // })
+
+//       res.send(transactions);
+//     })
+//     .catch(function(err){
+//       res.send("There was an error: ", err);
+//     })
+    
+//   })
+//   .catch(function(err){
+//     res.send("There was an error: ", err);
+//   })
+
+// }
+
 module.exports.getTransactions = function(req, res){
 
   Portfolio.findOne({ where: {
@@ -48,12 +92,7 @@ module.exports.getTransactions = function(req, res){
       PortfolioId: portfolio.id
     }}).then(function(transactions){
 
-      // removing duplicates, adding the sum of all trades for same company
-      // var stock = reduceTransactions(transactions);
-
-      // res.send(stocks);
-
-      res.send(transactions)
+      res.send(transactions);
     })
     .catch(function(err){
       res.send("There was an error: ", err);
