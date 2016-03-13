@@ -1,6 +1,7 @@
 var Portfolio = require('../../db/models').Portfolio;
 var Transaction = require('../../db/models').Transaction;
 var config = require('../config/middleware.js');
+var _ = require('underscore');
 
 module.exports.getUserStocks = function(req, res){
 
@@ -18,9 +19,13 @@ module.exports.getUserStocks = function(req, res){
 
       // res.send(stocks);
       // stocks include 'bought' shares with a share amount > 0
-      // _.filter(transactions, function(transaction){
-      //   return transaction.buysell && transaction.shares > 0;
-      // })
+      var stocks = _.filter(transactions, function(transaction){
+        return transaction.buysell && transaction.shares > 0;
+      });
+
+      // console.log('stocks', stocks);
+
+      console.log('reduceStocks', reduceStocks(stocks));
 
       res.send(transactions);
     })
@@ -45,7 +50,32 @@ module.exports.getPortfolio = function(req, res){
   })
   .catch(function(err){
     res.send("There was an error: ", err);
-  })
+  });
+}
+
+function reduceStocks(stocks){
+  // removing duplicates, adding the sum of all trades for same company
+  var storage = {}
+  var finalArray = [];
+
+  stocks.forEach(function(transaction){
+    if (!storage[transaction]){
+      storage[transaction.symbol] = [transaction];
+    } else {
+      storage[transaction.symbol].push(transaction);
+    }
+  });
+
+  for (var key in storage){
+    if (storage[key].length > 1){
+      var sharesArray = _.pluck(storage[key], 'shares')
+      console.log(sharesArray);
+    } else {
+      finalArray.push(storage[key][0]);
+    }
+  }
+
+  // return finalArray;
 
 }
 

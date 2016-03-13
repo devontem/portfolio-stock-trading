@@ -30,22 +30,41 @@ angular.module('app.portfolio', [])
 			userId:  userId,
 			shares: $scope.stockAmount,
 			price: $scope.stock.Ask,
-			marketPrice: $scope.stock.Ask
+			marketPrice: $scope.stock.Ask,
+			buysell: !$scope.action
 		}
 
-		if ($scope.action === false){
-			//buying a stock
-			options.buysell = true;
-		} else {
-			//Selling a stock
-			options.buysell = false;
+		// if selling stock, must own it and enough shares
+		if (!options.buysell && !ableToSell()){
+			return false;
+		} 
+		// ig buying a stock, must have enough money
+		if (options.buysell && $scope.estPrice > $scope.balance){
+			Materialize.toast("Your balance isn't high enough to make this trade", 3000, 'rounded');
+			return false;
 		}
-
-		console.log('temp', options)
+		
 		Portfolio.buySell(options).then(function(data){
 			console.log('Transaction posted: ', data);
+			Materialize.toast('You traded '+options.shares+' shares in '+options.company, 3000, 'rounded');
 			resetFields();
 		});
+	}
+
+	function ableToSell(){
+		for (var i = 0; i < $scope.stocks.length; i++){
+			if ($scope.stocks[i].symbol === $scope.stock.symbol){
+				console.log('they match')
+				if ($scope.stockAmount <= $scope.stocks[i].shares){
+					return true;
+				} else {
+					Materialize.toast('You are selling more shares in this company than you own', 3000, 'rounded');
+					return false;
+				}
+			}
+		};
+		Materialize.toast('You do not own this share to sell', 3000, 'rounded');
+		return false;
 	}
 
 	// function buy(){

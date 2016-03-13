@@ -50,7 +50,7 @@ angular.module('app.dashboard', [])
     DashboardFactory.addLeague(league)
       .then(function(){
         $scope.toggleAdd();
-        $window.location.href = '/#/league'
+        $window.location.href = '/#/dashboard'
       });
 
   }
