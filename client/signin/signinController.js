@@ -78,6 +78,8 @@ app
 
   $scope.signin = function(user){
     Auth.loginuser(user).then(function(data){
+      console.log('$$$$$$$$$')
+      console.log(data);
       $window.localStorage.setItem('com.tp', data.token);
       $window.localStorage.setItem('com.tp.userId', data.userId);
       $window.localStorage.setItem('com.tp.username', data.username);

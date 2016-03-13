@@ -5,6 +5,6 @@ module.exports = function(app){
 
   app.post('/', MessageController.addPostToDB);
 
-  app.get('/', MessageController.getAllPosts);
+  app.post('/leagues', MessageController.getAllPosts);
 
 }
