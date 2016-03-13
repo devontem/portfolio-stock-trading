@@ -10,8 +10,7 @@ angular.module('app.portfolio', [])
 	$scope.estPrice = 0;
 	$scope.action = false
 
-	$scope.chooseStock = function(){
-		var stockName = $scope.stockInput;
+	$scope.chooseStock = function(stockName){
 		Portfolio.getStock(stockName).then(function(stock){
 			$scope.stock = stock;
 			$scope.estPrice = stock.Ask;
@@ -21,50 +20,60 @@ angular.module('app.portfolio', [])
 
 	// Either buys a stock or sells it depending on selection
 	$scope.performAction = function(){
-		if ($scope.action === false){
-			//buying a stock
-			buy()
-		} else {
-			//Selling a stock
-			sell()
-		}
-	}
-
-	function buy(){
-		// getting it from the routing params '/leagues/:id'
 		var leagueId = $stateParams.leagueId;
 		var userId = $window.localStorage.getItem('com.tp.userId');
 		var options = {
 			symbol: $scope.stock.symbol,
-			buysell: true,
+			company: $scope.stock.Name,
 			leagueId: leagueId,
 			userId:  userId,
 			shares: $scope.stockAmount,
-			price: $scope.stock.Ask
+			price: $scope.stock.Ask,
+			marketPrice: $scope.stock.Ask,
+			buysell: !$scope.action
 		}
-		console.log('temp', options)
+
+		// if selling stock, must own it and enough shares
+		if (!options.buysell && !ableToSell()){
+			return false;
+		} 
+		// ig buying a stock, must have enough money
+		if (options.buysell && $scope.estPrice > $scope.balance){
+			Materialize.toast("Your balance isn't high enough to make this trade", 3000, 'rounded');
+			return false;
+		}
+		
 		Portfolio.buySell(options).then(function(data){
 			console.log('Transaction posted: ', data);
+			Materialize.toast('You traded '+options.shares+' shares in '+options.company, 3000, 'rounded');
 			resetFields();
 		});
 	}
 
-	function sell(){
-		var leagueId = $stateParams.leagueId;
-		var userId = $window.localStorage.getItem('com.tp.userId');
-		var options = {
-			symbol: $scope.stock.symbol,
-			buysell: false,
-			leagueId: leagueId,
-			userId:  userId,
-			shares: $scope.stockAmount,
-			price: $scope.stock.Ask
-		}
-		console.log('temp', options)
-		Portfolio.buySell(options).then(function(data){
-			console.log('Transaction posted: ', data);
-			resetFields();
-		});
+	function ableToSell(){
+		for (var i = 0; i < $scope.stocks.length; i++){
+			if ($scope.stocks[i].symbol === $scope.stock.symbol){
+				console.log('they match')
+				if ($scope.stockAmount <= $scope.stocks[i].shares){
+					return true;
+				} else {
+					Materialize.toast('You are selling more shares in this company than you own', 3000, 'rounded');
+					return false;
+				}
+			}
+		};
+		Materialize.toast('You do not own this share to sell', 3000, 'rounded');
+		return false;
+	}
+
+	$scope.sellStock = function(stock){
+    $scope.chooseStock(stock.symbol);
+    $scope.action = true;
+
+		//animation to scroll
+		$('html, body').animate({
+        scrollTop: $(".make-trades").offset().top
+    }, 1500);
 	}
 
 	function resetFields(){
@@ -89,12 +98,12 @@ angular.module('app.portfolio', [])
 
 		//updating user balance
 		Portfolio.getPortfolio(leagueId, userId).then(function(portfolio){
-			console.log()
 			$scope.balance = portfolio.balance;
+			$scope.portfolioValue = portfolio.portfolioValue;
 		});
 
 		//updating users purchased stocks
-		Portfolio.getTransactions(leagueId, userId).then(function(transactions){
+		Portfolio.getUserStocks(leagueId, userId).then(function(transactions){
 			$scope.stocks = transactions
 		});
 	}
@@ -132,12 +141,12 @@ angular.module('app.portfolio', [])
     })
   }
 
-  var getTransactions = function(leagueId, userId){
+  var getUserStocks = function(leagueId, userId){
   	return $http({
       method: 'GET',
-      url: '/api/transactions/'+leagueId+'/'+userId
+      url: '/api/portfolios/stocks/'+leagueId+'/'+userId
     }).then(function(transactions){
-    	console.log('User stocks', transactions)
+    	console.log('User stocks', transactions.data)
     	return transactions.data;
     })
   }
@@ -146,7 +155,7 @@ angular.module('app.portfolio', [])
   	getStock: getStock,
   	buySell: buySell,
   	getPortfolio: getPortfolio,
-  	getTransactions: getTransactions
+  	getUserStocks: getUserStocks
   }
 })
 

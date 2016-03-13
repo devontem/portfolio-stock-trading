@@ -15,7 +15,10 @@
 	margin: 0px auto;
 	text-align:  center;
 	display: block;
-	font-size: 0.8em
+	font-size: 0.8em;
+	overflow: hidden;
+  width: 105px;
+  text-overflow: ellipsis;
 }
 .company-symbol{
 	margin: 0px auto;
@@ -133,8 +136,8 @@ th{
 	      <ul class="right hide-on-med-and-down">
 <!-- 	        <li><a href="sass.html"><i class="material-icons">search</i></a></li>
 	        <li><a href="badges.html"><i class="material-icons">view_module</i></a></li> -->
-	        <li class="larger">Balance: {{ balance | currency }}</li>
-	        <li><a href="collapsible.html"><i class="material-icons">refresh</i></a></li>
+	        <li>Portfolio Value: {{ portfolioValue | currency }}   |   Balance: {{ balance | currency }}</li>
+	        <li><a ng-click="updatePortfolio()"><i class="material-icons">refresh</i></a></li>
 <!-- 	        <li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li> -->
 	      </ul>
 	    </div>
@@ -143,27 +146,23 @@ th{
 			<table>
 				<thead>
 					<tr>
-						<th>COMPANY</th>
+						<th>SYMBOL</th>
 						<th>QTY</th>
-						<th>PRICE<br/>PAID</th>
-						<th>MARKET<br/>PRICE</th>
-						<th>MARKET<br/>VALUE</th>
-						<th>LIFETIME<br/>RETURN</th>
-						<th>P&L</th>
+						<th>PRICE PAID</th>
+						<th>MARKET PRICE</th>
+						<th>RETURN</th>
 						<th>SELL</th>
 					</tr>
 				</thead>
 				<tbody>
 		      <tr ng-repeat="stock in stocks">
 		        <td><span class="company-symbol">{{stock.symbol}}</span>
-		        <span class="company-name">{{stock.name}}</span></td>
+		        <span class="company-name">{{stock.company}}</span></td>
 		        <td>{{stock.shares}}</td>
 		        <td>{{stock.price | currency}}</td>
-		        <td>{{stock.marketval | currency}}</td>
-		        <td>{{stock.marketprice | currency}}</td>
-		        <td>{{stock.lifetime | currency}}</td>
-		        <td>{{stock.pl | currency}}</td>
-		        <td><a class="btn-floating red sell-button"><i class="material-icons">supervisor_account</i></a></td>
+		        <td>{{stock.marketPrice | currency}}</td>
+		        <td>{{stock.return}}%</td>
+		        <td><a ng-click="sellStock(stock)"class="btn-floating red sell-button"><i class="material-icons">supervisor_account</i></a></td>
 		      </tr>
 		    </tbody>
 			</table>
@@ -173,7 +172,7 @@ th{
 
 <!-- TRADING MODAL -->
 <div class="row">
-	<div class="myPortfolio">
+	<div class="myPortfolio make-trades">
 		<nav>
 	    <div class="nav-wrapper blue darken-3">
 	      <a class="brand-logo">Make a Trade</a>
@@ -190,7 +189,7 @@ th{
 				<article class="col s6">
 					<p class="action-title">SEARCH FOR A STOCK</p>
 					<input ng-model="stockInput" class="col s8" type="text" required> 
-					<a ng-click="chooseStock()" class="waves-effect waves-light btn col s4"><i class="material-icons">search</i></a>
+					<a ng-click="chooseStock(stockInput)" class="waves-effect waves-light btn col s4"><i class="material-icons">search</i></a>
 
 					<section class="stock-data">
 						<section class="col s5">

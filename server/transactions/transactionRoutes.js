@@ -4,7 +4,7 @@ module.exports = function(app){
   
   app.post('/', transactionController.buySell);
 
-  app.get('/:leagueId/:userId', transactionController.getTransactions);
+  // app.get('/:leagueId/:userId', transactionController.getUserPortfolio);
 
   // app.get('/byPortfolioID', transactionController.getTransactionsByPortfolioId);
 
