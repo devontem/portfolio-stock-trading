@@ -151,7 +151,6 @@ th{
 						<th>PRICE PAID</th>
 						<th>MARKET PRICE</th>
 						<th>RETURN</th>
-						<th>P&L</th>
 						<th>SELL</th>
 					</tr>
 				</thead>
@@ -163,7 +162,6 @@ th{
 		        <td>{{stock.price | currency}}</td>
 		        <td>{{stock.marketPrice | currency}}</td>
 		        <td>{{stock.return}}%</td>
-		        <td>{{stock.pl | currency}}</td>
 		        <td><a ng-click="sellStock(stock)"class="btn-floating red sell-button"><i class="material-icons">supervisor_account</i></a></td>
 		      </tr>
 		    </tbody>
