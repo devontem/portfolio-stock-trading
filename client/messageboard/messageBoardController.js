@@ -11,7 +11,7 @@ app.controller('MessageBoardController', function($scope, messageBoardFactory, $
   $scope.messageBoardPost = function(){
 
     messageBoardFactory.submitPost($scope.userPost);
-    messageBoardFactory.showPosts().then(function(posts){
+    messageBoardFactory.showPosts($scope.userPost.leagueId).then(function(posts){
       var posts = posts;
       $scope.posts = posts.data;
       console.log(posts);
