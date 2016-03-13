@@ -24,11 +24,12 @@ app.directive('scrollDirective', function ($rootScope) {
 // functions to show message board posts and submit them
 app.factory('messageBoardFactory', function($http){
 
-    var showPosts = function(posts){
+    var showPosts = function(id){
+        console.log('ID *****', id)
         return $http({
-          method: 'GET',
-          url: '/api/messages',
-          data: posts
+          method: 'POST',
+          url: '/api/messages/leagues',
+          data: {id: id}
         })
         .then(function(posts){
           return posts;

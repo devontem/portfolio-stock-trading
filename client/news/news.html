@@ -3,16 +3,18 @@
 
   <table class="news-table highlight">
     <caption>Tweets</caption>
-    <button ng-click="getTweets()">Tweets</button> 
+    <button ng-click="getTweets()">Tweets</button>
     <thead>
       <tr>
       </tr>
     </thead>
 
-    <tbody>
+    <tbody ng-repeat="n in tweets">
       <tr>
-        <td ng-repeat="n in tweets"> {{n.text}} - {{n.user}} time: {{n.time}}</td>
-      </tr>
+      <td>
+      <p>time: {{n.created_at}}</p>
+      <p>{{n.text}} - {{n.user}}</p>
+      </td>
       </tr>
     </tbody>
   </table>

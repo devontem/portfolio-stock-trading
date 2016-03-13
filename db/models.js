@@ -27,8 +27,8 @@ var User = orm.define('User', {
       hashPassword: function() {
       return bcrypt.hashSync(this.password, salt);
     },
-      validPassword: function(pass) {
-      return bcrypt.compareSync(pass, this.password);
+      validPassword: function(inputpass, pass) {
+      return bcrypt.compareSync(inputpass, pass);
     }
   }
 });
@@ -63,7 +63,6 @@ var Transaction = orm.define('Transaction', {
 //Message Board Model
 
 var Message = orm.define('Message', {
-  userId: Sequelize.INTEGER,
   name: Sequelize.STRING,
   message: Sequelize.STRING
 })
@@ -79,6 +78,12 @@ var League = orm.define('league', {
 //Joint table for League and user
 var League_user = orm.define('League_user', {
 })
+
+Message.belongsTo(User);
+User.hasMany(Message);
+
+League.hasMany(Message);
+Message.belongsTo(League);
 
 //League to User - Many to Many
 League.belongsToMany(User, { through: 'League_user'});

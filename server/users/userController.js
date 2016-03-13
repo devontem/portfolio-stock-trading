@@ -5,10 +5,10 @@ module.exports.newUser = function (req, res){
   User.findOne({where:{ username: req.body.username }})
     .then(function (user) {
       if(!user){
-        User.create({ 
-          username: req.body.username, 
-          password: req.body.password, 
-          email: req.body.email 
+        User.create({
+          username: req.body.username,
+          password: req.body.password,
+          email: req.body.email
         })
         .then(function(user){
               var myToken = jwt.sign( {user: user.id},
@@ -80,7 +80,7 @@ module.exports.signIn = function (req, res){
       if(!user){
         res.json('User not found')
       }else{
-        if(user.validPassword(req.body.password)){
+        if(user.validPassword(req.body.password, user.password)){
           var myToken = jwt.sign({ user: user.id},
                                 'secret',
                                 { expiresIn: 24 * 60 * 60 });
