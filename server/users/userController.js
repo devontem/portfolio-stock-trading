@@ -80,7 +80,7 @@ module.exports.signIn = function (req, res){
       if(!user){
         res.json('User not found')
       }else{
-        if(user.validPassword(req.body.password)){
+        if(user.validPassword(req.body.password, user.password)){
           var myToken = jwt.sign({ user: user.id},
                                 'secret',
                                 { expiresIn: 24 * 60 * 60 });
