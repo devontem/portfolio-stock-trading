@@ -9,7 +9,6 @@ module.exports.addPostToDB = function (req, res){
     message: req.body.message
   })
   .then(function (post) {
-    console.log('======', post)
     res.send({leagueId: post.leagueId, name: post.name, message: post.message})
   })
   .catch(function (err) {
@@ -19,8 +18,7 @@ module.exports.addPostToDB = function (req, res){
 };
 
 module.exports.getAllPosts = function(req, res){
-  console.log('inside get messages');
-  Message.findAll().then(function (posts) {
+  Message.findAll({where:{ leagueId: req.body.id }}).then(function (posts) {
     if(!posts) {
       res.send('No posts found.');
     } else {

@@ -6,12 +6,10 @@ app.controller('MessageBoardController', function($scope, messageBoardFactory, $
 
   $scope.userPost = {};
   $scope.userPost.name = $window.localStorage.getItem('com.tp.username');
-  $scope.userPost.userId = $window.localStorage.getItem('com.tp.userId');
   $scope.userPost.leagueId = $stateParams.leagueId;
 
   $scope.messageBoardPost = function(){
-    console.log('userPost')
-    console.log($scope.userPost);
+
     messageBoardFactory.submitPost($scope.userPost);
     messageBoardFactory.showPosts().then(function(posts){
       var posts = posts;
@@ -24,7 +22,7 @@ app.controller('MessageBoardController', function($scope, messageBoardFactory, $
 
   $scope.leagueId;
 
-  messageBoardFactory.showPosts().then(function(posts){
+  messageBoardFactory.showPosts($scope.userPost.leagueId).then(function(posts){
     var posts = posts;
     $scope.posts = posts.data;
     $scope.userPost.message = '';

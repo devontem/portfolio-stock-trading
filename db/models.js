@@ -58,8 +58,6 @@ var Transaction = orm.define('Transaction', {
 //Message Board Model
 
 var Message = orm.define('Message', {
-  // leagueId: Sequelize.INTEGER,
-  // userId: Sequelize.INTEGER,
   name: Sequelize.STRING,
   message: Sequelize.STRING
 })
