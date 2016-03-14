@@ -1,4 +1,4 @@
-app.controller('LeaderBoardController', function($scope, $stateParams, leaderBoardFactory, $location){
+app.controller('LeaderBoardController', function($scope, $stateParams, leaderBoardFactory, $location, $rootScope){
 
   // members will be an object of each member in the league
   // containing name, portfolio value, and other stats
@@ -38,5 +38,7 @@ app.controller('LeaderBoardController', function($scope, $stateParams, leaderBoa
   $scope.getLeaderBoard();
   // once we have league ID, call to initialize leaderboard
   //$scope.getLeaderBoard(leagueId);
-
+  $rootScope.$on("PortfolioUpdate", function(){
+    $scope.getLeaderBoard();
+  })
 });
