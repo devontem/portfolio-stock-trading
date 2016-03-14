@@ -27,10 +27,12 @@
 .news-container {
   background-color: white;
   height: 400px;
-  overflow-x: auto;
+  width: 500px;
+  overflow-x: scroll;
+  .position: relative;
 }
 
-.col s12 m5 {
+.col s12 {
   width: 100px;
   overflow-x: auto;
 }
@@ -40,19 +42,23 @@
   height: 300px;
 }
 
+.tweets {
+  position: absolute; 
+}
+
 </style>
 
 
 <div class="news-container">
 
-  <button ng-click="getTweets()">Tweets</button>
+  <button class= 'tweets' ng-click="getTweets()">Tweets</button>
 
   <div class = 'row'>
-    <div class = 'col s12 m5' ng-repeat="n in tweets">
+    <div class = 'col s12' ng-repeat="n in tweets">
       <div class = 'card-panel teal'>
        <div class = 'white-text' >
 
-        <p>time: {{n.time}}</p>
+        <p>{{n.time}}</p>
         <p>{{n.text}} - {{n.user}}</p>
 
    </div>
