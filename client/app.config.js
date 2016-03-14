@@ -58,6 +58,11 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
           'messageboard@league': {
             controller: 'MessageBoardController',
             templateUrl: 'messageboard/messageboard.html'
+          },
+
+          'preLeague@league': {
+            controller: 'preLeagueController',
+            templateUrl: 'preleague/preleague.html'
           }
         }
       })
