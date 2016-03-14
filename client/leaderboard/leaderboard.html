@@ -6,20 +6,20 @@
     <caption>LEADERBOARD</caption>
     <thead>
       <tr>
+          <th data-field="user">Ranking</th>
           <th data-field="user">Name</th>
-          <th data-field="value">Portfolio</th>
-          <th data-field="percentage">Return</th>
-          <th ng-click="getLeaderBoard()" data-field="trades"># of Trades</th>
+          <th data-field="value">Balance</th>
+          <th data-field="trades"># of Trades</th>
 
       </tr>
     </thead>
 
     <tbody>
-      <tr ng-repeat="member in members | orderBy:'-value'">
-        <td>{{member.username}}</td>
-        <td>{{member.value | currency : symbol : fractionSize}}</td>
-        <td>{{member.return}}</td>
-        <td>{{member.transactions}}</td>
+      <tr ng-repeat="portfolio in portfolios | orderBy:'-balance' track by $index">
+        <td class="tdcenter">{{$index}}</td>
+        <td class="tdcenter">{{portfolio.username}}</td>
+        <td class="tdcenter">{{portfolio.balance | currency : symbol : fractionSize}}</td>
+        <td class="tdcenter">{{portfolio.numOfTrades}}</td>
       </tr>
     </tbody>
   </table>

@@ -95,3 +95,6 @@ body {
     border-radius: 10px;
     width: 20%;
     color: black; }
+
+.tdcenter {
+  text-align: center; }

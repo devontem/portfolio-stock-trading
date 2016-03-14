@@ -1,4 +1,4 @@
-app.controller('LeaderBoardController', function($scope, leaderBoardFactory){
+app.controller('LeaderBoardController', function($scope, $stateParams, leaderBoardFactory, $location){
 
   // members will be an object of each member in the league
   // containing name, portfolio value, and other stats
@@ -24,15 +24,18 @@ app.controller('LeaderBoardController', function($scope, leaderBoardFactory){
     }
   ];
 
-  $scope.leagueId;
+  $scope.leagueId = $stateParams.leagueId;
+  $scope.portfolios;
 
-  $scope.getLeaderBoard = function(leagueId){
+  $scope.getLeaderBoard = function(){
     // this will call a factory function to grab http data from server and assign returned data to $scope.members;
-    leaderBoardFactory.getMembers(leagueId).then(function(members){
-      $scope.members = members;
-    })
+    leaderBoardFactory.getPortfolios($scope.leagueId)
+      .then(function(portfolios){
+        $scope.portfolios = portfolios;
+      })
   };
 
+  $scope.getLeaderBoard();
   // once we have league ID, call to initialize leaderboard
   //$scope.getLeaderBoard(leagueId);
 

@@ -2,19 +2,19 @@ app
 
   .factory('leaderBoardFactory', function($http){
 
-    var getMembers = function(leagueID){
+    var getPortfolios = function(leagueID){
       return $http({
         method: 'POST',
         url: '/api/leagues/getusers',
-        data: {leagueId: 1}
+        data: {leagueId: leagueID}
       })
-      .then(function(members){
-        return members;
+      .then(function(portfolios){
+        return portfolios.data;
       });
     };
 
     return {
-      getMembers: getMembers
+      getPortfolios: getPortfolios
     };
 
   })
