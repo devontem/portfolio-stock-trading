@@ -84,7 +84,7 @@ module.exports.signIn = function (req, res){
           var myToken = jwt.sign({ user: user.id},
                                 'secret',
                                 { expiresIn: 24 * 60 * 60 });
-          res.send(200, {'token': myToken,
+          res.status(200).send({'token': myToken,
                          'userId': user.id,
                          'username': user.username } );
         }else{
