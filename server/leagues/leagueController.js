@@ -12,6 +12,8 @@ module.exports.addLeague = function (req, res){
   	name: req.body.name,
   	maxNum: req.body.max,
     startbalance: req.body.balance,
+    start:req.body.start,
+    end: req.body.end
   })
   .then(function (league) {
     Portfolio.create({

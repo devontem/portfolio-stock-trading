@@ -18,7 +18,7 @@
     </div>
   </div>
 
-  <addleague-directive show='showadd' width='350px' height='450px'>
+  <addleague-directive show='showadd' width='350px' height='650px'>
     <div ng-if="showadd" class="signup">
       <h4 class="brand-logo"> Create League </h4>
       <form name="addleagueForm" ng-submit='addLeague(league)'>
@@ -32,6 +32,8 @@
         <label>Buying Power: </label><br>
         <input type="text" ng-model='league.balance' required>
         <br>
+        <input type="date" class="datepicker" ng-model='league.start'>
+        <input type="date" class="datepicker" ng-model='league.end'>
         <button class="waves-effect waves-light btn">Create</button>
       </form>
     </div>
