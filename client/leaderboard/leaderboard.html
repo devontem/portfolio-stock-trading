@@ -9,7 +9,7 @@
       <tr>
           <th data-field="user">Ranking</th>
           <th data-field="user">Name</th>
-          <th data-field="value">Balance</th>
+          <th data-field="value">Total Value</th>
           <th data-field="trades"># of Trades</th>
 
       </tr>
@@ -19,7 +19,7 @@
       <tr ng-repeat="portfolio in portfolios | orderBy:'-balance' track by $index">
         <td class="tdcenter">{{$index}}</td>
         <td class="tdcenter">{{portfolio.username}}</td>
-        <td class="tdcenter">{{portfolio.balance | currency : symbol : fractionSize}}</td>
+        <td class="tdcenter">{{portfolio.balance + portfolio.portfolioValue  | currency : symbol : fractionSize}}</td>
         <td class="tdcenter">{{portfolio.numOfTrades}}</td>
       </tr>
     </tbody>

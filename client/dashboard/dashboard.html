@@ -47,7 +47,9 @@
           <thead>
             <tr>
               <th data-field="name">League Name</th>
-              <th data-field="rank">Your Balance</th>
+              <th data-field="rank">Cash Balance</th>
+              <th data-field="rank">Stock Value</th>
+              <th data-field="rank">Total Value</th>
             </tr>
           </thead>
 
@@ -56,6 +58,8 @@
             <tr ng-repeat="portfolio in portfolios">
               <td><a ng-href="#/leagues/{{portfolio.leagueId}}">{{portfolio.leaguename}}</a></td>
               <td>{{portfolio.balance}}</td>
+              <td>{{portfolio.portfolioValue}}</td>
+              <td>{{portfolio.balance + portfolio.portfolioValue}}</td>
             </tr>
           </tbody>
         </table>
