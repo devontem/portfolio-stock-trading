@@ -2,6 +2,6 @@ var tweetController = require('./tweetController.js');
 
 module.exports = function(app){
   
-  app.get('/', tweetController.getTweets)
+  app.get('/:leagueId/:userId', tweetController.getTweets)
 
 }

@@ -1,5 +1,7 @@
-
+<!--
 <div class="news-container" style="background-color: white">
+  
+
 
   <table class="news-table highlight">
     <caption>Tweets</caption>
@@ -20,10 +22,40 @@
   </table>
 
 </div>
+-->
+<style type="text/css">
+.news-container {
+  background-color: white;
+  height: 400px;
+  overflow-x: auto;
+}
+
+.col s12 m5 {
+  width: 100px;
+  overflow-x: auto;
+}
+
+.card-panel teal {
+  width: 100px;
+  height: 300px;
+}
+
+</style>
 
 
+<div class="news-container">
 
+  <button ng-click="getTweets()">Tweets</button>
 
+  <div class = 'row'>
+    <div class = 'col s12 m5' ng-repeat="n in tweets">
+      <div class = 'card-panel teal'>
+       <div class = 'white-text' >
 
+        <p>time: {{n.time}}</p>
+        <p>{{n.text}} - {{n.user}}</p>
 
-
+   </div>
+  </div>
+</div>
+</div>
