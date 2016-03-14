@@ -51,10 +51,14 @@ app
 })
 
 //signin signup controller
-.controller('SigninController', function($scope, $window, Auth){
+.controller('SigninController', function($scope, $window, Auth, $rootScope){
   $scope.user = {};
   $scope.loggedin = false;
   $scope.username;
+
+  $rootScope.$on('deleted', function(){
+    $scope.loggedin = false;
+  })
 
   $scope.showsignup = false;
   $scope.toggleSignup = function() {

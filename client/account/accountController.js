@@ -1,4 +1,4 @@
-app.controller('AccountController', function($scope, $window, AccountFactory, $location){
+app.controller('AccountController', function($scope, $window, AccountFactory, $location, $rootScope){
 
   $scope.name = $window.localStorage.getItem('com.tp.username');
   $scope.id = $window.localStorage.getItem('com.tp.userId');
@@ -8,6 +8,8 @@ app.controller('AccountController', function($scope, $window, AccountFactory, $l
   $scope.delete = function(){
     AccountFactory.deleteAccount($scope.id);
     $location.path('/');
+
+    $rootScope.$emit('deleted', {});
   }
 
 })
