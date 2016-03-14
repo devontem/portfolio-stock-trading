@@ -16,7 +16,7 @@
     </thead>
 
     <tbody>
-      <tr ng-repeat="portfolio in portfolios | orderBy:'-balance' track by $index">
+      <tr ng-repeat="portfolio in portfolios | orderBy:'-balance+portfolioValue' track by $index">
         <td class="tdcenter">{{$index}}</td>
         <td class="tdcenter">{{portfolio.username}}</td>
         <td class="tdcenter">{{portfolio.balance + portfolio.portfolioValue  | currency : symbol : fractionSize}}</td>
