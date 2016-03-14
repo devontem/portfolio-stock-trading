@@ -18,7 +18,7 @@ module.exports.buySell = function(req, res){
 
       //amount is either subtracted or added to portfolioValue depending on if sold or bought
       portfolio.portfolioValue += amount;
-      portfolio.balance -= amount;
+      portfolio.balance -= (amount+10);
 
 
       //Setting the transaction's PortfolioId
