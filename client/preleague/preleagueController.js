@@ -11,6 +11,9 @@ app.controller('PreLeagueController', function($scope, $stateParams, preLeagueFa
       })
   }
 
+  $scope.pre = false;
+  $scope.suspended = true;
+
   $scope.getLeagueName();
 
   // this is the start date, time of the league
