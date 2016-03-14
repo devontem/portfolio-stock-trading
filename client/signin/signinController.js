@@ -71,6 +71,7 @@ app
       $window.localStorage.setItem('com.tp', data.token);
       $window.localStorage.setItem('com.tp.userId', data.userId);
       $window.localStorage.setItem('com.tp.username', data.username);
+      $scope.username = $window.localStorage.getItem('com.tp.username');
       $scope.toggleSignup();
       $scope.loggedin = true;
       $window.location.href = '/#/dashboard';
@@ -83,7 +84,7 @@ app
         $window.localStorage.setItem('com.tp', data.token);
         $window.localStorage.setItem('com.tp.userId', data.userId);
         $window.localStorage.setItem('com.tp.username', data.username);
-        $scope.username = $window.localStorage.getItem('com.tp.username')
+        $scope.username = $window.localStorage.getItem('com.tp.username');
         $scope.toggleLogin();
         $scope.loggedin = true;
         $window.location.href = '/#/dashboard';
