@@ -29,6 +29,26 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
 
       })
 
+      .state('status', {
+        url: '/league-status/:leagueId',
+        views: {
+          '': {
+            templateUrl: 'league-status/league-status.html'
+          },
+          'pre': {
+            templateUrl: 'league-status/pre-league.html',
+            controller: 'preLeagueController',
+            controllerAs: 'preLeague'
+          },
+          'post': {
+            templateUrl: 'league-status/post-league.html',
+            controller: 'postLeagueController',
+            controllerAs: 'postLeague'
+          }
+        }
+
+      })
+
 
       .state('league', {
         url: '/leagues/:leagueId',
