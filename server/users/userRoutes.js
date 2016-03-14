@@ -13,5 +13,5 @@ module.exports = function(app){
 
 	app.put('/:id', userController.updateUser);
 
-	app.delete('/:id', userController.deleteUser);
+	app.delete('/id', userController.deleteUser);
 }
