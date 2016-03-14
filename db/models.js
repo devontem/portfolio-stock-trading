@@ -70,6 +70,7 @@ var Message = orm.define('Message', {
 
 //League Model
 var League = orm.define('league', {
+  ownerid: Sequelize.INTEGER,
 	name: Sequelize.STRING,
   maxNum: Sequelize.INTEGER,
   startbalance: Sequelize.INTEGER
