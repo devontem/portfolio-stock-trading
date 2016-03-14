@@ -40,6 +40,7 @@
 .card-panel teal {
   width: 100px;
   height: 300px;
+  border: black
 }
 
 .tweets {
@@ -55,13 +56,12 @@
 
   <div class = 'row'>
     <div class = 'col s12' ng-repeat="n in tweets">
-      <div class = 'card-panel teal'>
-       <div class = 'white-text' >
+      <div class = 'card-panel'>
 
         <p>{{n.time}}</p>
         <p>{{n.text}} - {{n.user}}</p>
 
-   </div>
+  
   </div>
 </div>
 </div>

@@ -18,6 +18,8 @@ var Promise = require('bluebird');
 
 module.exports.getTweets = function (req, res){
   // var tweets = [];
+
+
   var userCurrentStocks = {};
 
   var userId = req.params.userId;
@@ -52,8 +54,9 @@ module.exports.getTweets = function (req, res){
 
     
     var tweets = [];
-    
+    if(search){
     T.get('search/tweets', params, function(err,data,response){
+      console.log(data, 'data11')
       tweets = [];
       for(var i=0;i<data.statuses.length;i++){
         var status=data.statuses[i];
@@ -63,18 +66,35 @@ module.exports.getTweets = function (req, res){
         tweets.push({text:status.text,
                   user: status.user.screen_name,
                   created_at: time})
+    
     }
     console.log(tweets,'tee')
     res.json(tweets)
+          
     })
-
+  }
+    else {
+    var search = '$AAPL OR $GOOG OR $MSFT OR $XOM'
+    var params = { q: search, count: 10 }
+      T.get('search/tweets', params, function(err, data, response){
+        tweets = [];
+        for(var i=0;i<data.statuses.length;i++){
+        var status=data.statuses[i];
+        var tweetDate = status.created_at
+        var date = new Date(Date.parse(tweetDate.replace(/( \+)/, ' UTC$1')));
+        var time = moment(date).fromNow();
+        tweets.push({text:status.text,
+                  user: status.user.screen_name,
+                  created_at: time})
+        console.log(tweets,'moof')
+       }
+       res.json(tweets)
+      })
+    }
     
-    
-    
-    
-
-  })
-  })
+    })
+  
+   })
   
   
 }
