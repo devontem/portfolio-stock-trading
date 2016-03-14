@@ -39,7 +39,7 @@
 
   <div class="row" ng-show="currentTab === 'user'">
     <!-- If user is in leagues, prompt to join -->
-    <div ng-if="userLeagues.length > 0">
+    <div ng-if="portfolios.length > 0">
 
       <div class="teal col s9">
 
@@ -54,7 +54,7 @@
 
           <tbody>
             <tr ng-repeat="portfolio in portfolios">
-              <td>{{portfolio.leaguename}}</td>
+              <td><a ng-href="#/leagues/{{portfolio.leagueId}}">{{portfolio.leaguename}}</a></td>
               <td>{{portfolio.balance}}</td>
             </tr>
           </tbody>
@@ -62,7 +62,7 @@
 
       </div>
         <!-- If the user is not in leagues, prompt them to join one -->
-      <div class="col s12 m6" ng-if="userLeagues.length === 0">
+      <div class="col s12 m6" ng-if="portfolios.length === 0">
         <!-- TODO: Update this to match the color scheme -->
         <div class="card blue-grey darken-1 z-depth-4">
           <div class="card-content white-text">
@@ -79,7 +79,7 @@
 
     </div>
     <!-- If user is in leagues, show those -->
-    <div class="col s12 m6" ng-if="userLeagues.length === 0">
+    <div class="col s12 m6" ng-if="portfolios.length === 0">
       <!-- TODO: Update this to match the color scheme -->
       <div class="card blue-grey darken-1 z-depth-4">
         <div class="card-content white-text">
@@ -95,7 +95,7 @@
     </div>
   </div>
   <div class="row" ng-show="currentTab === 'toJoin'">
-      <div  ng-if="leaguesToJoin.length > 0">
+      <div  ng-if="leagues.length > 0">
         <div class="teal col s9">
 
         <table class="striped">
@@ -114,7 +114,7 @@
               <td>{{league.name}}</td>
               <td>{{league.maxNum}}</td>
               <td>{{league.startbalance}}</td>
-              <td><a ng-click="joinLeague(league.id)">Click to Join</a></td>
+              <td ><a class="curs" ng-click="joinLeague(league.id)">Click to Join</a></td>
             </tr>
           </tbody>
         </table>
@@ -122,7 +122,7 @@
       </div>
       </div>
       <!-- Prompt user to create  league if none exist -->
-      <div class="col s12 m6" ng-if="leaguesToJoin.length === 0">
+      <div class="col s12 m6" ng-if="numtojoin === 0">
         <!-- TODO: Update this to match the color scheme -->
         <div class="card blue-grey darken-1 z-depth-4">
           <div class="card-content white-text">

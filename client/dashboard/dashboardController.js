@@ -26,13 +26,11 @@ angular.module('app.dashboard', [])
 
 .controller('DashboardController', ['$scope', '$window', 'DashboardFactory', function ($scope, $window, DashboardFactory) {
 
-  $scope.userLeagues = [{name:"league1", userRank: 2, percentChange: -1.3, gainLoss: '123.00', totalValue: 14000, changeYesterday: 2.5}, {name:"league2", userRank: 17, percentChange: 15, gainLoss: '2000', totalValue: 9888, changeYesterday: 2.5}, {name:"league3", userRank: 1, percentChange: 2.5, gainLoss: '12.00', totalValue: 9012, changeYesterday: 2.5}];
-  $scope.leaguesToJoin = [{name:"league4", userRank: 2, percentChange: -1.3, gainLoss: '123.00', totalValue: 14000, changeYesterday: 2.5}, {name:"league5", userRank: 17, percentChange: 15, gainLoss: '2000', totalValue: 9888, changeYesterday: 2.5}, {name:"league6", userRank: 1, percentChange: 2.5, gainLoss: '12.00', totalValue: 9012, changeYesterday: 2.5}];
-
   $scope.currentTab = 'user';
   $scope.leagues;
   $scope.league = {};
-  $scope.portfolios = {}
+  $scope.portfolios = {};
+  $scope.numtojoin = 0;
 
   //toggle add form
   $scope.showadd = false;
@@ -84,9 +82,8 @@ angular.module('app.dashboard', [])
     var userId = $window.localStorage.getItem('com.tp.userId');
     DashboardFactory.getAvailLeagues()
       .then(function(leagues){
-
-        console.log(leagues,'league')
         $scope.leagues = leagues;
+        $scope.numtojoin = $scope.leagues.length - $scope.portfolios.length;
       })
     // TODO: connect to factory to get leagues to join
   }

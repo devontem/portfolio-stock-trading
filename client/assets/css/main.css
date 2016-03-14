@@ -98,3 +98,6 @@ body {
 
 .tdcenter {
   text-align: center; }
+
+.curs {
+  cursor: pointer; }

@@ -54,6 +54,7 @@ app
 .controller('SigninController', function($scope, $window, Auth){
   $scope.user = {};
   $scope.loggedin = false;
+  $scope.username;
 
   $scope.showsignup = false;
   $scope.toggleSignup = function() {
@@ -82,6 +83,7 @@ app
         $window.localStorage.setItem('com.tp', data.token);
         $window.localStorage.setItem('com.tp.userId', data.userId);
         $window.localStorage.setItem('com.tp.username', data.username);
+        $scope.username = $window.localStorage.getItem('com.tp.username')
         $scope.toggleLogin();
         $scope.loggedin = true;
         $window.location.href = '/#/dashboard';
