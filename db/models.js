@@ -5,7 +5,7 @@ var Promise = require('bluebird');
 var salt = bcrypt.genSaltSync(10);
 
 //JAWSDB for Heroku deployment
-if (process.env.DEPLOYED === 'true'){
+if (process.env.DEPLOYED === 'TRUE'){
   var orm = new Sequelize(process.env.JAWSDB_URL);
 } else {
   var orm = new Sequelize('Pistonsdb', 'root', '')
