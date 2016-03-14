@@ -29,6 +29,12 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
 
       })
 
+      .state('account', {
+        url: '/account',
+        controller: 'AccountController',
+        templateUrl: 'account/account.html'
+      })
+
       .state('league', {
         url: '/leagues/:leagueId',
         views: {
