@@ -29,7 +29,6 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
 
       })
 
-
       .state('league', {
         url: '/leagues/:leagueId',
         views: {
@@ -59,6 +58,11 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
           'messageboard@league': {
             controller: 'MessageBoardController',
             templateUrl: 'messageboard/messageboard.html'
+          },
+
+          'preleague@league': {
+            controller: 'PreLeagueController',
+            templateUrl: 'preleague/preleague.html'
           }
         }
       })
