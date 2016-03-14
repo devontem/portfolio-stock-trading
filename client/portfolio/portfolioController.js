@@ -4,7 +4,7 @@ var mystocks = [goog, apple];
 
 angular.module('app.portfolio', [])
 
-.controller('PortfolioController', function($scope, $window, $stateParams, Portfolio){
+.controller('PortfolioController', function($scope, $window, $stateParams, Portfolio, $rootScope){
 	// MAKE A TRADE MODAL
 	$scope.fees = 10;
 	$scope.estPrice = 0;
@@ -36,13 +36,13 @@ angular.module('app.portfolio', [])
 		// if selling stock, must own it and enough shares
 		if (!options.buysell && !ableToSell()){
 			return false;
-		} 
+		}
 		// ig buying a stock, must have enough money
 		if (options.buysell && $scope.estPrice > $scope.balance){
 			Materialize.toast("Your balance isn't high enough to make this trade", 3000, 'rounded');
 			return false;
 		}
-		
+
 		Portfolio.buySell(options).then(function(data){
 			console.log('Transaction posted: ', data);
 			Materialize.toast('You traded '+options.shares+' shares in '+options.company, 3000, 'rounded');
@@ -106,6 +106,8 @@ angular.module('app.portfolio', [])
 		Portfolio.getUserStocks(leagueId, userId).then(function(transactions){
 			$scope.stocks = transactions
 		});
+
+    $rootScope.$emit("PortfolioUpdate", {});
 	}
 })
 
