@@ -75,7 +75,7 @@ module.exports.deleteUser= function (req, res) {
 };
 
 module.exports.signIn = function (req, res){
-  User.findOne({where:{ username: req.body.email }})
+  User.findOne({where:{ email: req.body.email }})
     .then(function (user) {
       if(!user){
         res.json('User not found')
