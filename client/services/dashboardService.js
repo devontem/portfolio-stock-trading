@@ -49,11 +49,23 @@ app
       });
     };
 
+    var getLeagueById = function(id){
+      return $http({
+        method: 'GET',
+        url: '/api/leagues/'+id
+      })
+      .then(function(leagues){
+        // TODO: Structure this appropriately once you have the exact route
+        return leagues.data;
+      });
+    }
+
     return {
       addLeague: addLeague,
       getUserLeagues: getUserLeagues,
       getAvailLeagues: getAvailLeagues,
-      joinLeague: joinLeague
+      joinLeague: joinLeague,
+      getLeagueById: getLeagueById
     };
 
   })

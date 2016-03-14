@@ -47,7 +47,7 @@ angular.module('app.dashboard', [])
     DashboardFactory.addLeague(league)
       .then(function(league){
         $scope.toggleAdd();
-        $window.location.href = '/#/leagues/'+league.id.toString();
+        $window.location.href = '/#/leagues/'+league.id
       });
   }
 

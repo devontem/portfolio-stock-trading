@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 'app.botbar']);
+var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 'app.botbar', 'app.leagueResults']);
 
   app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
@@ -59,6 +59,11 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
           'messageboard@league': {
             controller: 'MessageBoardController',
             templateUrl: 'messageboard/messageboard.html'
+          },
+
+          'leagueResults@league': {
+            controller: 'leagueResultsController',
+            templateUrl: 'leagueResults/leagueResults.html'
           }
         }
       })
