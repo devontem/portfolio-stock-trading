@@ -39,6 +39,10 @@ angular.module('app.dashboard', [])
   }
 
   $scope.addLeague = function (league) {
+    var start = moment(league.start)
+    var end = moment(league.end);
+    league.start = start.utc().format();
+    league.end = end.utc().format();
 
     var creatorName = $window.localStorage.getItem('com.tp.username');
     var creatorId = $window.localStorage.getItem('com.tp.userId');
@@ -50,8 +54,6 @@ angular.module('app.dashboard', [])
         $window.location.href = '/#/leagues/'+league.id.toString();
       });
   }
-
-  
 
   $scope.showToJoin = function () {
     $scope.currentTab = 'toJoin';

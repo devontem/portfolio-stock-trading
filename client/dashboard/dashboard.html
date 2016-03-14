@@ -32,8 +32,9 @@
         <label>Buying Power: </label><br>
         <input type="text" ng-model='league.balance' required>
         <br>
+        <input type="date" class="datepicker" ng-model='league.start'>
+        <input type="date" class="datepicker" ng-model='league.end'>
         <button class="waves-effect waves-light btn">Create</button>
-        <input type="date" class="datepicker">
       </form>
     </div>
   </addleague-directive>
