@@ -34,6 +34,7 @@
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><a ng-show="!loggedin" ng-click="toggleLogin()">Login</a></li>
           <li><a ng-show="!loggedin" ng-click="toggleSignup()">Sign Up</a></li>
+          <li ng-show="loggedin">Hello {{username}} !</li>
           <li><a ng-show="loggedin" ng-click="logout()">Log Out</a></li>
         </ul>
       </div>
