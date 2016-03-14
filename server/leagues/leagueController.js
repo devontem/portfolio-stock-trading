@@ -8,6 +8,7 @@ module.exports.addLeague = function (req, res){
   var creatorId = req.body.creatorId;
   var creatorName = req.body.creatorName;
   League.create({
+    ownerid: creatorId,
   	name: req.body.name,
   	maxNum: req.body.max,
     startbalance: req.body.balance,
