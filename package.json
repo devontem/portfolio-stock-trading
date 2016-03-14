@@ -21,7 +21,7 @@
   "homepage": "https://github.com/hrr12-04pistons/2016-01-thesis#readme",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
-    "bluebird": "^3.3.1",
+    "bluebird": "^3.3.4",
     "body-parser": "^1.15.0",
     "cookie-parser": "^1.4.1",
     "express": "^4.13.4",
