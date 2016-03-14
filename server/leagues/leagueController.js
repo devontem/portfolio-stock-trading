@@ -25,7 +25,7 @@ module.exports.addLeague = function (req, res){
       .then( function(res) {
         console.log('successfully added')
       })
-    
+
   	res.send({id: league.id, name: league.name, maxNum: league.num, startbalance: league.balance})
   })
   .catch(function (err) {
@@ -60,7 +60,7 @@ module.exports.joinLeague = function (req, res){
         console.error('Error creating league: ', err.message);
         res.end();
       })
-    })  
+    })
 }
 
 module.exports.userLeagues = function(req, res){
@@ -96,7 +96,8 @@ module.exports.getAllLeagues = function (req, res) {
 }
 
 module.exports.getOneLeague = function (req, res) {
-	League.findById(req.params.id)
+  console.log(req.body + '&&&&&&&&&')
+	League.findById(req.body.id)
 	.then(function (league) {
 		res.send(league)
 	})
