@@ -3,11 +3,11 @@ app
   .factory('AccountFactory', function($http){
 
     var deleteAccount = function(userID){
-
       return $http({
         method: 'DELETE',
         url: 'api/users/',
-        data: {id: userID}
+        data: {id: userID},
+        headers: {"Content-Type": "application/json;charset=utf-8"}
       })
       .then(function(user){
         console.log(user + ', successfully deleted')

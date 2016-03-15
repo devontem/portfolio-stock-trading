@@ -70,8 +70,9 @@ module.exports.updateUser = function (req, res) {
 };
 
 module.exports.deleteUser= function (req, res) {
-  User.findOne({ id: req.params.id })
+  User.findOne({where: { id: req.body.id }})
     .then(function (user) {
+      console.log(user);
       Portfolio.destroy({where: {username: user.username}})
       return user.destroy();
     }).then(function(){
