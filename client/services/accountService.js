@@ -3,8 +3,7 @@ app
   .factory('AccountFactory', function($http){
 
     var deleteAccount = function(userID){
-      console.log('USER ID IS ******** $$$$$$$$$$');
-      console.log(userID)
+
       return $http({
         method: 'DELETE',
         url: 'api/users/',
