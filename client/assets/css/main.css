@@ -255,3 +255,32 @@ footer {
 th {
   font-size: 0.8em;
   text-align: center; }
+
+/* leagueResults page */
+.winner {
+  text-align: center; }
+
+.winnerStats {
+  display: flex; }
+
+.winner .star {
+  font-size: 12em;
+  color: #CDA500; }
+
+.winnerName {
+  margin-top: 0px;
+  font-size: 1.5em; }
+
+.winnerName span {
+  text-transform: uppercase;
+  font-weight: bold; }
+
+.statsHeader {
+  width: 100%;
+  padding: 5px 0px; }
+
+.winnerStats span {
+  font-size: 1.2em;
+  text-transform: uppercase;
+  display: block;
+  padding: 10px 0px; }
