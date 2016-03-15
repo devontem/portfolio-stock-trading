@@ -16,6 +16,13 @@
         <li class="tab col s3 m5"><span ng-click="showUserLeagues()" class="active" href="#test2">Leagues You Are In</span></li>
       </ul>
     </div>
+    <script>
+    function test (){
+      console.log('hi');
+        $('ul.tabs').tabs();
+      };
+      test();
+    </script>
   </div>
 
   <addleague-directive show='showadd' width='350px' height='650px'>
@@ -137,7 +144,5 @@
         </div>
       </div>
     </div>
-    <script>
-    console.log('ran ran ran');
-    </script>
+
 </div>

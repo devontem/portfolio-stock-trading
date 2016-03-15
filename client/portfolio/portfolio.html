@@ -58,7 +58,7 @@
 				<article class="col s6">
 					<p class="action-title">SEARCH FOR A STOCK</p>
 					<input ng-model="stockInput" class="col s8" type="text" required>
-					<a ng-click="chooseStock(stockInput)" class="waves-effect waves-light btn col s4"><i class="material-icons">search</i></a>
+					<a ng-click="chooseStock(stockInput)" class="waves-effect waves-light btn std-btn col s4"><i class="material-icons">search</i></a>
 
 					<section class="stock-data">
 						<section class="col s5">
@@ -113,7 +113,7 @@
 
 				  <div class="divider"></div>
 				  <article>
-						<a ng-click='performAction()' class="waves-effect waves-light btn center trade-button">TRADE FOR A TOTAL OF <span class="larger">{{ total || 0 | currency}}</span></a>
+						<a ng-click='performAction()' class="waves-effect waves-light btn center trade-button std-btn">TRADE FOR A TOTAL OF <span class="larger">{{ total || 0 | currency}}</span></a>
 				  </article>
 
 
