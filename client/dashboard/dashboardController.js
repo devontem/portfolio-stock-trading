@@ -1,5 +1,16 @@
 angular.module('app.dashboard', [])
 
+.directive("formatDate", function(){
+  return {
+   require: 'ngModel',
+    link: function(scope, elem, attr, modelCtrl) {
+      modelCtrl.$formatters.push(function(modelValue){
+        return new Date(modelValue);
+      });
+    }
+  };
+})
+
 .directive('addleagueDirective', function() {
   return {
     restrict: 'E',
@@ -36,13 +47,19 @@ angular.module('app.dashboard', [])
   $scope.showadd = false;
   $scope.toggleAdd = function(){
     $scope.showadd = !$scope.showadd;
-  }
+  };
 
   $scope.addLeague = function (league) {
-    var start = moment(league.start)
-    var end = moment(league.end);
+    var start = moment(league.start).hour(13).minute(30);
+    var end = moment(league.end).utc();
+
+    // Updates start time to match when the stock market opens.
+    console.log('*************', start);
+    end.hours(17);
+
     league.start = start.utc().format();
-    league.end = end.utc().format();
+    league.end = end.format();
+
 
     var creatorName = $window.localStorage.getItem('com.tp.username');
     var creatorId = $window.localStorage.getItem('com.tp.userId');
