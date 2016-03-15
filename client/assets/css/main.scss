@@ -363,7 +363,7 @@ th{
   height: 400px;
   width: 500px;
   overflow-x: scroll;
-  .position: relative;
+	position: relative;
 }
 
 .col s12 {
@@ -379,4 +379,8 @@ th{
 
 .tweets {
   position: absolute;
+}
+
+.myPortfolio {
+	margin-top: 10px;
 }
