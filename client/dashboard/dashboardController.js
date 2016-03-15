@@ -28,11 +28,11 @@ angular.module('app.dashboard', [])
       }
       scope.hideadd = function() {
         scope.show = false;
-      }
+      };
     },
     transclude: true,
     template: "<div class='ng-modal' ng-show='show'><div class='ng-modal-overlay' ng-click='hideadd()'></div><div class='ng-modal-dialog' ng-style='dialogStyle'><div class='ng-modal-dialog-content' ng-transclude></div></div></div>"
-  }
+  };
 })
 
 .controller('DashboardController', ['$scope', '$window', 'DashboardFactory', function ($scope, $window, DashboardFactory) {
@@ -63,18 +63,18 @@ angular.module('app.dashboard', [])
     DashboardFactory.addLeague(league)
       .then(function(league){
         $scope.toggleAdd();
-        $window.location.href = '/#/leagues/'+league.id
+        $window.location.href = '/#/leagues/'+league.id;
       });
-  }
+  };
 
   $scope.showToJoin = function () {
     $scope.currentTab = 'toJoin';
 
-  }
+  };
 
   $scope.showUserLeagues = function () {
     $scope.currentTab = 'user';
-  }
+  };
 
   $scope.getUserLeagues = function () {
     var userId = $window.localStorage.getItem('com.tp.userId');
@@ -82,15 +82,15 @@ angular.module('app.dashboard', [])
       .then(function(portfolios){
         $scope.portfolios = portfolios;
       });
-  }
+  };
 
   $scope.joinLeague = function (leagueId) {
     var userId = $window.localStorage.getItem('com.tp.userId');
     DashboardFactory.joinLeague(leagueId, userId)
       .then(function(){
-        $window.location.href = '/#/leagues/'+leagueId.toString()
-      })
-  }
+        $window.location.href = '/#/leagues/'+leagueId.toString();
+      });
+  };
 //returns all public leagues
   $scope.getLeaguesToJoin = function () {
     var userId = $window.localStorage.getItem('com.tp.userId');
@@ -98,18 +98,17 @@ angular.module('app.dashboard', [])
       .then(function(leagues){
         $scope.leagues = leagues;
         $scope.numtojoin = $scope.leagues.length - $scope.portfolios.length;
-      })
-    // TODO: connect to factory to get leagues to join
-  }
+      });
+  };
 
   $scope.notjoined = function(league){
     for(var i=0; i<$scope.portfolios.length; i++){
       if(league.id === $scope.portfolios[i].leagueId) return false;
     }
     return true;
-  }
+  };
 
   $scope.getUserLeagues();
   $scope.getLeaguesToJoin();
-  // TODO: Call both of the above functions to get relevant league data for the views on initialization
-}])
+
+}]);
