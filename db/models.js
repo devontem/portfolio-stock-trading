@@ -37,6 +37,10 @@ User.beforeCreate(function(user, options) {
   user.password = user.hashPassword();
 });
 
+User.beforeUpdate(function(user, options) {
+  user.password = user.hashPassword();
+});
+
 //Portfolio Model
 var Portfolio = orm.define('Portfolio', {
 	balance: Sequelize.INTEGER,
