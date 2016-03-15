@@ -32,6 +32,7 @@
       <div class="nav-wrapper">
         <a ng-href="{{loggedin ? '/#/dashboard':'#'}}" class="brand-logo">Portfol.io</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li ng-controller="ClockController" ng-bind="time" class="col s2"></li>
           <li><a ng-show="!loggedin" ng-click="toggleLogin()">Login</a></li>
           <li><a ng-show="!loggedin" ng-click="toggleSignup()">Sign Up</a></li>
           <li ng-show="loggedin">Hello {{username}} !</li>
@@ -97,7 +98,7 @@
             </div>
             <div class="footer-copyright">
               <div class="container">
-              © 2014 Copyright Text
+              © 2016 Copyright Text
               <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
               </div>
             </div>
@@ -115,7 +116,6 @@
     <span ng-show="hasSearched" class="col s1">Ask: {{stock.Ask | currency}}</span>
     <span ng-show="hasSearched" class="col s1">Change: {{stock.ChangeinPercent}} </span>
     <span ng-show="hasSearched" class="col s1">Volume:{{stock.Volume}}</span>
-
 
   </div>
 
@@ -147,6 +147,7 @@
   <script type="text/javascript" src="account/accountController.js"></script>
   <script type="text/javascript" src="services/accountService.js"></script>
   <script type="text/javascript" src="services/portfolioService.js"></script>
+  <script type="text/javascript" src="clock/clockController.js"></script>
 
 
 
