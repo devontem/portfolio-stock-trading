@@ -50,14 +50,9 @@ angular.module('app.dashboard', [])
   };
 
   $scope.addLeague = function (league) {
-    var start = moment(league.start).hour(13).minute(30);
-    var end = moment(league.end).utc();
-
-    // Updates start time to match when the stock market opens.
-    console.log('*************', start);
-    end.hours(17);
-
-    league.start = start.utc().format();
+    var start = moment(league.start).utc().hour(13).minute(30);
+    var end = moment(league.end).utc().hour(20);
+    league.start = start.format();
     league.end = end.format();
 
 
