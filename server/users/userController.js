@@ -52,8 +52,8 @@ module.exports.getUserById = function (req, res) {
 };
 
 module.exports.updateUser = function (req, res) {
-  User.findOne({ id: req.body.userId })
-    console.log('BACKEND USER: ', req.params)
+  console.log('BACKEND USER: ', req.params)
+  User.findOne({ id: req.params.id })
     .then(function (user) {
       user.update({
         password: req.body.pass,
