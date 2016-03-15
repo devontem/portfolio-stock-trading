@@ -1,138 +1,9 @@
-<style type="text/css">
-
-
-.portfolio-content{
-	margin-top: 0px;
-	border-radius: 0px;
-	padding-top: 10px;
-}
-
-.sell-button{
-	display: block;
-	margin: 0px auto;
-}
-.company-name{
-	margin: 0px auto;
-	text-align:  center;
-	display: block;
-	font-size: 0.8em;
-	overflow: hidden;
-  width: 105px;
-  text-overflow: ellipsis;
-}
-.company-symbol{
-	margin: 0px auto;
-	text-align:  center;
-	padding-bottom: 0px;
-	display: block;
-	font-weight: bold;
-	text-transform: uppercase;
-	margin-bottom: -5px;
-}
-
-.widget{
-	margin-top: 0px;
-}
-
-.widget-container{
-	margin-top: 0px;
-}
-
-.trade-button{
-	width: 80%;
-	display: block;
-	margin: 0px auto;
-	margin-top: 20px;
-}
-
-.stockAmount, .stockAmount:focus{
-  border: none!important;
-  height: auto!important;
-  text-align: center;
-}
-
-.action-toggle{
-	padding: 10px 0px;
-}
-
-.stock-calculator{
-	margin-top: 20px;
-  margin-bottom: 50px;
-}
-
-/*.stock-calculator section{
-	display: inline-block;
-	margin-right: 5px;
-}*/
-
-.stock-calculator section span{
-	font-size: 0.7em;
-	font-weight: bold;
-	text-align: center;
-  display: block;
-}
-
-.stock-calculator section .chip{
-	font-size: 18px;
-  text-align: center;
-  width: 75px;
-  border: solid 1px #DDDDDD;
-  width: 100%;
-}
-
-.stock-data p{
-	margin: 0px;
-	font-size: 0.8em;
-}
-
-.stock-data .sym{
-	font-size: 30px;
-	text-transform: uppercase;
-}
-
-.stock-data .comp{
-	margin-top: -8px;
-	margin-left: 2px;
-}
-
-.stock-data .price{
-	font-weight: bold;
-	margin-top: 10px;
-	color: green;
-}
-
-.larger{
-	font-size: 1.5em
-}
-.action-title{
-	margin: 5px;
-	text-transform: uppercase;
-	font-size: 0.8em;
-	font-weight: bold;
-}
-
-
-/*.portfolio-search input{
-	display: inline-block;
-	width: 70%;
-}
-.portfolio-search a.btn{
-	display: inline-block;
-	width: 25%;
-}
-*/
-th{
-	font-size: 0.8em;
-	text-align: center;
-}
-
-</style>
 
 <!-- STOCKS MODAL -->
 <div class="row">
 	<div class="myPortfolio">
 		<nav>
-	    <div class="nav-wrapper blue darken-3">
+	    <div class="nav-wrapper">
 	      <a class="brand-logo">My Portfolio</a>
 	      <ul class="right hide-on-med-and-down">
 <!-- 	        <li><a href="sass.html"><i class="material-icons">search</i></a></li>
@@ -175,7 +46,7 @@ th{
 <div class="row">
 	<div class="myPortfolio make-trades">
 		<nav>
-	    <div class="nav-wrapper blue darken-3">
+	    <div class="nav-wrapper">
 	      <a class="brand-logo">Make a Trade</a>
 	      <ul class="right hide-on-med-and-down">
 	        <li><a href="sass.html"><i class="material-icons">search</i></a></li>
@@ -189,7 +60,7 @@ th{
 			<div class="row portfolio-search">
 				<article class="col s6">
 					<p class="action-title">SEARCH FOR A STOCK</p>
-					<input ng-model="stockInput" class="col s8" type="text" required> 
+					<input ng-model="stockInput" class="col s8" type="text" required>
 					<a ng-click="chooseStock(stockInput)" class="waves-effect waves-light btn col s4"><i class="material-icons">search</i></a>
 
 					<section class="stock-data">
@@ -248,7 +119,7 @@ th{
 						<a ng-click='performAction()' class="waves-effect waves-light btn center trade-button">TRADE FOR A TOTAL OF <span class="larger">{{ total || 0 | currency}}</span></a>
 				  </article>
 
-				  	
+
 
 				</article>
 			</div>
