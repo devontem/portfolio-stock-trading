@@ -28,6 +28,13 @@ app.controller('LeagueController', ['$scope', '$stateParams', 'DashboardFactory'
     }
   };
 
+  $scope.checkTradingHours = function () {
+    var tradingStart = moment().utc().hour(13).minute(30);
+    var tradingEnd = moment().utc().hour(20);
+    $scope.isBetweenTradingHours = currentMoment.isBetween(tradingStart, tradingEnd);
+    console.log('**********', $scope.isBetweenTradingHours);
+  };
+
   DashboardFactory.getLeagueById(leagueId)
     .then(function(league){
       $scope.league = league;
@@ -37,6 +44,7 @@ app.controller('LeagueController', ['$scope', '$stateParams', 'DashboardFactory'
       // }
       $scope.checkStart($scope.league);
       $scope.checkEnd($scope.league);
+      $scope.checkTradingHours();
     });
 
 
