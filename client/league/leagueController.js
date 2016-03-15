@@ -2,16 +2,12 @@ app.controller('LeagueController', ['$scope', '$stateParams', 'DashboardFactory'
   //Gets the league
   var leagueId = $stateParams.leagueId;
 
-  $scope.test = function () {
-    console.log('hi ted');
-    DashboardFactory.getLeagueById(leagueId)
+  DashboardFactory.getLeagueById(leagueId)
     .then(function(league){
+      console.log('started');
       $scope.league = league;
       console.log('************************',$scope.league);
-    })
-  };
-
-  $scope.test();
+    });
 
   // initialize a flag indicating that the league has not started yet
   $scope.hasStarted = false;
