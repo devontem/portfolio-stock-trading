@@ -2,24 +2,52 @@ app.controller('LeagueController', ['$scope', '$stateParams', 'DashboardFactory'
   //Gets the league
   var leagueId = $stateParams.leagueId;
 
-  $scope.test = function () {
-    console.log('hi ted');
-    DashboardFactory.getLeagueById(leagueId)
-    .then(function(league){
-      $scope.league = league;
-      console.log('************************',$scope.league);
-    })
-  };
-
-  $scope.test();
-
   // initialize a flag indicating that the league has not started yet
   $scope.hasStarted = false;
+  $scope.hasEnded = false;
   // grab the current moment using moment.js
-  var currentMoment = moment();
+  var currentMoment = moment().utc();
 
-  var checkStart = function () {
-    console.log('************************',$scope.league);
+  $scope.checkStart = function (league) {
+    var start = moment(league.start).utc();
+    if (currentMoment.isBefore(start)) {
+      $scope.hasStarted = false;
+    } else {
+      $scope.hasStarted = true;
+      // TODO: add this to the databse
+    }
   };
-  // checkStart();
+
+  $scope.checkEnd = function (league) {
+    var end = moment(league.end).utc();
+    if (currentMoment.isAfter(end)) {
+      $scope.hasEnded = true;
+    } else {
+      $scope.hasEnded = false;
+      // TODO: add this to the databse
+    }
+  };
+
+  $scope.checkTradingHours = function () {
+    var tradingStart = moment().utc().hour(13).minute(30);
+    var tradingEnd = moment().utc().hour(20);
+    $scope.isBetweenTradingHours = currentMoment.isBetween(tradingStart, tradingEnd);
+    console.log('**********', $scope.isBetweenTradingHours);
+  };
+
+  DashboardFactory.getLeagueById(leagueId)
+    .then(function(league){
+      $scope.league = league;
+      // TODO: make this run conditionally
+      // if (league.hasStarted === false ) {
+      //   run the checkStart
+      // }
+      $scope.checkStart($scope.league);
+      $scope.checkEnd($scope.league);
+      if ($scope.hasStarted || !$scope.hasEnded) {
+        $scope.checkTradingHours();
+      }
+    });
+
+
 }]);

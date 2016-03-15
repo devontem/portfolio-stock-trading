@@ -1,11 +1,10 @@
 
-<div class="league-container row">
-
+<div class="league-container row" ng-cloak>
   <div class="col m7 portfolio-box">
     <!-- Portfolio template injected here -->
-    <div ui-view="preleague"></div>
+    <div ng-if="!hasStarted" ui-view="preleague"></div>
     <div ui-view="portfolio"></div>
-     <div ui-view="leagueResults"></div>
+     <div ng-if="hasEnded" ui-view="leagueResults"></div>
   </div>
 
 
@@ -31,5 +30,3 @@
   </div>
 
 </div>
-
-
