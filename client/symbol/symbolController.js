@@ -1,4 +1,4 @@
-app.controller('SymbolController', function($scope, $http){
+app.controller('SymbolController', function($scope, $http, symbolFactory){
 
   $scope.stockName;
 
@@ -6,15 +6,12 @@ app.controller('SymbolController', function($scope, $http){
 
   $scope.getStock = function(stock){
 
-    console.log('clicked')
-
-    $http.get("http://d.yimg.com/aq/autoc?query="+stock+"&region=US&lang=en-US")
-    .then(function(response){
-      $scope.result = response.data;
-    });
+    symbolFactory.getCompany(stock).then(function(data){
+      $scope.result = data.data.ResultSet.Result;
+      console.log('RESULT!!!!')
+      console.log($scope.result)
+    })
 
   }
-
-    //"http://d.yimg.com/aq/autoc?query=chipotle&region=US&lang=en-US"
 
 })
