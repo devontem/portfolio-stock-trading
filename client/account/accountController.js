@@ -12,4 +12,21 @@ app.controller('AccountController', function($scope, $window, AccountFactory, $l
     $rootScope.$emit('deleted', {});
   }
 
+  $scope.newlogin = {};
+  $scope.newlogin.userId = $scope.id;
+  $scope.change = false;
+
+  $scope.edit = function(){
+    $scope.change = true;
+  }
+
+  $scope.cancel = function(){
+    $scope.change = false;
+  }
+
+  $scope.updateLogin = function(){
+    console.log('clicked')
+    AccountFactory.editLogin($scope.newlogin);
+  }
+
 })

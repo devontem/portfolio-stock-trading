@@ -52,9 +52,14 @@ module.exports.getUserById = function (req, res) {
 };
 
 module.exports.updateUser = function (req, res) {
-  User.findOne({ id: req.params.id })
+  User.findOne({ id: req.body.userId })
+    console.log('BACKEND USER: ', req.params)
     .then(function (user) {
-      user.update(req.body).then(function(){
+      user.update({
+        password: req.body.pass,
+        email: req.body.email
+      })
+      .then(function(){
       	res.json('User updated');
       });
     })
