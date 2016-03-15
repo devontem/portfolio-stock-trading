@@ -8,7 +8,6 @@ angular.module('app.botbar', [])
   $scope.stockSearch = function () {
     var stockName = $scope.stockInput;
     Portfolio.getStock(stockName).then(function(stock){
-      console.log(stock, '$$');
       $scope.stock = stock;
       $scope.hasSearched = true;
     });
