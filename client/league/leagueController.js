@@ -4,6 +4,7 @@ app.controller('LeagueController', ['$scope', '$stateParams', 'DashboardFactory'
 
   // initialize a flag indicating that the league has not started yet
   $scope.hasStarted = false;
+  $scope.hasEnded = false;
   // grab the current moment using moment.js
   var currentMoment = moment().utc();
 
@@ -13,6 +14,17 @@ app.controller('LeagueController', ['$scope', '$stateParams', 'DashboardFactory'
       $scope.hasStarted = false;
     } else {
       $scope.hasStarted = true;
+      // TODO: add this to the databse
+    }
+  };
+
+  $scope.checkEnd = function (league) {
+    var end = moment(league.end).utc();
+    if (currentMoment.isAfter(end)) {
+      $scope.hasEnded = true;
+    } else {
+      $scope.hasEnded = false;
+      // TODO: add this to the databse
     }
   };
 
@@ -24,6 +36,7 @@ app.controller('LeagueController', ['$scope', '$stateParams', 'DashboardFactory'
       //   run the checkStart
       // }
       $scope.checkStart($scope.league);
+      $scope.checkEnd($scope.league);
     });
 
 
