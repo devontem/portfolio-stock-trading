@@ -40,7 +40,8 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
         views: {
           /*main view of the entire league template*/
           '': {
-            templateUrl: 'league/league.html'
+            templateUrl: 'league/league.html',
+            controller: 'LeagueController'
           },
           // portfolio view within the league page
           'portfolio@league': {
