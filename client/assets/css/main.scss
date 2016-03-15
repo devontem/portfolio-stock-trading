@@ -106,9 +106,12 @@ body {
 	padding-bottom: 0;
 	background-color: $primary-color;
 	color: white;
+
 	z-index: 999;
 	span {
 		display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px;
 	}
 	input {
     margin-top: 5px;

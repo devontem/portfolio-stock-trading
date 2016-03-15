@@ -89,7 +89,9 @@ body {
   color: white;
   z-index: 999; }
   .botBar span {
-    display: inline-block; }
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px; }
   .botBar input {
     margin-top: 5px;
     margin-bottom: 5px;
