@@ -14,7 +14,7 @@ app.controller('ClockController', ['$scope', '$interval', function ($scope, $int
     if (minute.length === 1) {
       minute += '0';
     }
-    $scope.time = hour + ' : ' + minute + postfix;
+    $scope.time = hour + ' : ' + minute + ' ' + postfix + ' (EST)';
   };
 
   $interval($scope.getCurrentTime, 1000);
