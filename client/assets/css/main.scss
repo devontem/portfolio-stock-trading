@@ -111,9 +111,12 @@ body {
 		display: inline-block;
 	}
 	input {
+    margin-top: 5px;
+    margin-bottom: 5px;
 		background-color: white;
 		border-radius: 10px;
-		width: 20%;
+    height: 80%;
+		width: 100%;
 		color: black;
 	}
 }
@@ -136,4 +139,10 @@ body {
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
+}
+
+.searchquote{
+  font-size: 30pt;
+  padding-top: 1px;
+  margin-top: 1px;
 }
