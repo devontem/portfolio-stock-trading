@@ -8,17 +8,10 @@ app.controller('SymbolController', function($scope, $http){
 
     console.log('clicked')
 
-    var xhr = new XMLHttpRequest();
-    xhr.open("get", "http://d.yimg.com/aq/autoc?query="+stock+"&region=US&lang=en-US", true);
-    xhr.onload = function(data){  //instead of onreadystatechange
-        $scope.result = data;
-    };
-    xhr.send(null);
-
-    // $http.get("http://d.yimg.com/aq/autoc?query="+stock+"&region=US&lang=en-US&callback=YAHOO.util.ScriptNodeDataSource.callbacks")
-    // .then(function(response){
-    //   $scope.result = response.data;
-    // });
+    $http.get("http://d.yimg.com/aq/autoc?query="+stock+"&region=US&lang=en-US")
+    .then(function(response){
+      $scope.result = response.data;
+    });
 
   }
 
