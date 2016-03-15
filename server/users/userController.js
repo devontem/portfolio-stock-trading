@@ -51,18 +51,39 @@ module.exports.getUserById = function (req, res) {
     });
 };
 
+module.exports.getSingleUser = function (req, res) {
+  User.findOne({where: { id: req.body.id }})
+    .then(function (user) {
+      res.send(user);
+    })
+    .catch(function (err) {
+      res.send(err);
+    });
+};
+
 module.exports.updateUser = function (req, res) {
   var iden = req.params.id;
   User.findOne({ where: { id: iden }})
     .then(function (user) {
-      user.update({
-        id: iden,
-        password: req.body.password,
-        email: req.body.email
-      })
-      .then(function(user){
-      	res.json('User updated');
-      });
+      User.findOne({ where: { email: req.body.email }})
+        .then(function(check){
+          if(check){
+            res.end("Email already taken")
+          }else{
+            if(!user.validPassword(req.body.oldpassword, user.password)){
+              res.end("Wrong old password");
+            }else{
+              user.update({
+                id: iden,
+                password: req.body.password,
+                email: req.body.email
+              })
+              .then(function(user){
+                res.json('User updated');
+              });
+            }
+          }
+        })
     })
     .catch(function (err) {
       res.send("Error updating user: ", err);
@@ -72,7 +93,6 @@ module.exports.updateUser = function (req, res) {
 module.exports.deleteUser= function (req, res) {
   User.findOne({where: { id: req.body.id }})
     .then(function (user) {
-      console.log(user);
       Portfolio.destroy({where: {username: user.username}})
       return user.destroy();
     }).then(function(){

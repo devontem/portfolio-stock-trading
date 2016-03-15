@@ -11,6 +11,8 @@ module.exports = function(app){
 
 	app.get('/users/:id', userController.getUserById);
 
+  app.post('/getuser', userController.getSingleUser);
+
 	app.put('/:id', userController.updateUser);
 
 	app.delete('/', userController.deleteUser);
