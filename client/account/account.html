@@ -10,8 +10,12 @@
       </div>
 
       <div ng-if="change" class="row">
-        <button ng-click="cancel()">Cancel</button>
         <form class="col s6" ng-submit="updateLogin(newlogin)">
+          <div class="row">
+            <div class="col s6">
+              <span> Current Email: {{email}} </span>
+            </div>
+          </div>
           <div class="row">
             <div class="input-field col s6">
               <input ng-model="newlogin.email" id="email" type="email" class="validate">
@@ -20,9 +24,16 @@
           </div>
           <div class="row">
             <div class="input-field col s6">
+              <input ng-model="newlogin.oldpass" id="email" type="password" class="validate">
+              <label for="password">Old Password</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
               <input ng-model="newlogin.pass" id="password" type="password" class="validate">
               <label for="password">New Password</label>
-              <input type="submit" value="Submit">
+              <button type="submit" value="Submit">Submit</button>
+              <button ng-click="cancel()">Cancel</button>
             </div>
           </div>
         </form>

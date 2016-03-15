@@ -10,7 +10,7 @@ app
         headers: {"Content-Type": "application/json;charset=utf-8"}
       })
       .then(function(user){
-        console.log(user + ', successfully deleted')
+        console.log(user + ', successfully deleted');
       });
     };
 
@@ -19,17 +19,30 @@ app
       return $http.put('api/users/'+user.userId, {
           id: user.userId,
           email: user.email,
-          password: user.pass
+          password: user.pass,
+          oldpassword: user.oldpass
         }
       )
       .then(function(user){
-        console.log(user + 'login info successfully edited')
+        return user;
       })
-    }
+    };
+
+    var getSingleUser = function(userID){
+      return $http({
+        method: 'POST',
+        url: 'api/users/getuser',
+        data: {id: userID},
+      })
+      .then(function(user){
+        return user.data;
+      });
+    };
 
     return {
       deleteAccount: deleteAccount,
-      editLogin: editLogin
+      editLogin: editLogin,
+      getSingleUser: getSingleUser
     };
 
   })

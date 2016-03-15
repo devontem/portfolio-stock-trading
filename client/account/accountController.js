@@ -19,7 +19,6 @@ app.controller('AccountController', function($scope, $window, AccountFactory, $l
           swal("Deleted!",
            "Your account has been deleted.",
             "success");
-          console.log('HEY')
           AccountFactory.deleteAccount(userid);
           $location.path('/');
           $rootScope.$emit('deleted', {});
@@ -29,11 +28,17 @@ app.controller('AccountController', function($scope, $window, AccountFactory, $l
           "error");
         }
       });
-    //AccountFactory.deleteAccount($scope.id);
-    //$location.path('/');
 
-    //$rootScope.$emit('deleted', {});
   }
+
+  $scope.getUser = function(){
+    AccountFactory.getSingleUser($scope.id)
+      .then(function(user){
+        $scope.email = user.email;
+      })
+  }
+
+  $scope.getUser();
 
   $scope.newlogin = {};
   $scope.newlogin.userId = $scope.id;
@@ -48,10 +53,18 @@ app.controller('AccountController', function($scope, $window, AccountFactory, $l
   }
 
   $scope.updateLogin = function(){
-    AccountFactory.editLogin($scope.newlogin);
-    $scope.newlogin = {};
-    $scope.cancel();
-    Materialize.toast('Your login has been updated', 2000)
+    AccountFactory.editLogin($scope.newlogin)
+      .then(function(user){
+        if(user.data === "Wrong old password"){
+          Materialize.toast('You entered the wrong old password!', 2000);
+        }else if(user.data === "Email already taken"){
+          Materialize.toast('New Email already taken, please use another Email.', 2000)
+        }else{
+          $scope.newlogin = {};
+          $scope.cancel();
+          Materialize.toast('Your login has been updated', 2000)
+        }
+      });
   }
 
 })
