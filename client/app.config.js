@@ -13,14 +13,6 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
         templateUrl: 'signin/signin.html'
       })
 
-      .state('lobby', {
-        url: '/lobby',
-        controller: 'LobbyController',
-        controllerAs: 'lobby',
-        templateUrl: 'lobby/lobby.html'
-
-      })
-
       .state('dashboard', {
         url: '/dashboard',
         authenticate: true,
@@ -81,7 +73,7 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
       })
 
     $httpProvider.interceptors.push('AttachTokens');
-  
+
   }]);
 
 app.factory('AttachTokens', function($window) {
