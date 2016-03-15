@@ -7,8 +7,8 @@ app.controller('PreLeagueController', function($scope, $stateParams, preLeagueFa
     preLeagueFactory.getName($scope.leagueId)
       .then(function(name){
         $scope.leagueName = name;
-      })
-  }
+      });
+  };
 
   $scope.pre = false;
   $scope.suspended = true;
@@ -19,4 +19,4 @@ app.controller('PreLeagueController', function($scope, $stateParams, preLeagueFa
   $scope.date;
 
 
-})
+});
