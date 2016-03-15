@@ -1,12 +1,12 @@
 /** COLORS **/
 body {
-  background-color: black; }
+  background-color: white; }
 
 .nav-wrapper {
-  background-color: black; }
+  background-color: #252c41; }
 
 .nav-wrapper a:hover {
-  color: green; }
+  color: #f1404b; }
 
 .brand-logo {
   margin-left: 25px; }
@@ -17,11 +17,11 @@ body {
   padding-top: 25px; }
 
 .get-started {
-  background-color: #b3b3b3; }
+  background-color: #4a5882; }
 
 #get-started-slogan {
   text-align: center;
-  color: black; }
+  color: #f1404b; }
 
 #join-button {
   margin-left: 45%; }

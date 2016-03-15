@@ -1,15 +1,15 @@
 @import "_variables";
 
 body {
-	background-color: black;
+	background-color: $background;
 }
 
 .nav-wrapper {
-	background-color: black;
+	background-color: $primary-color;
 }
 
 .nav-wrapper a:hover {
-	color: green;
+	color: $accent-color;
 }
 
 .brand-logo {
@@ -23,12 +23,12 @@ body {
 }
 
 .get-started {
-	background-color: #b3b3b3;
+	background-color: $primary-lightest;
 }
 
 #get-started-slogan {
 	text-align: center;
-	color: black;
+	color: $accent-color;
 }
 
 #join-button {
@@ -157,4 +157,3 @@ body {
 .search-symbol {
   margin-top: 10px;
 }
-
