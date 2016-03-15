@@ -6,7 +6,7 @@ module.exports = {
 
   /* checks token for route handling (when authenticate: true in app.js?) */
   authorize: function(req, res, next) {
-    console.log(req.headers['x-access-token'], ' $$$$$$$ ')
+    // console.log(req.headers['x-access-token'], ' $$$$$$$ ')
     var token = req.body.token || req.headers['x-access-token'];
     if (token) {
       jwt.verify(token, secret, function(err, decoded) {

@@ -32,7 +32,6 @@ app.controller('LeagueController', ['$scope', '$stateParams', 'DashboardFactory'
     var tradingStart = moment().utc().hour(13).minute(30);
     var tradingEnd = moment().utc().hour(20);
     $scope.isBetweenTradingHours = currentMoment.isBetween(tradingStart, tradingEnd);
-    console.log('**********', $scope.isBetweenTradingHours);
   };
 
   DashboardFactory.getLeagueById(leagueId)

@@ -110,7 +110,6 @@ app.factory('AttachTokens', function($window) {
     // and send that token to the server to see if it is a real user or hasn't expired
     // if it's not valid, we then redirect back to signin/signup
     $rootScope.$on('$stateChangeStart', function(evt, next, current) {
-      console.log('hi')
       // if (next.$$state && next.$$state.authenticate && !Auth.isAuth()) {
       if (!Auth.isAuth()) {
         $location.path('/');
