@@ -15,7 +15,6 @@ app.factory('Portfolio', function($http){
       method: 'GET',
       url: '/api/stocks/'+stockName
     }).then(function(stock){
-      //console.log(stock.data.query.results.quote)
       return stock.data.query.results.quote;
     })
   }
