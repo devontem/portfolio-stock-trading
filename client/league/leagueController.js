@@ -44,7 +44,9 @@ app.controller('LeagueController', ['$scope', '$stateParams', 'DashboardFactory'
       // }
       $scope.checkStart($scope.league);
       $scope.checkEnd($scope.league);
-      $scope.checkTradingHours();
+      if ($scope.hasStarted || !$scope.hasEnded) {
+        $scope.checkTradingHours();
+      }
     });
 
 
