@@ -1,7 +1,8 @@
 <div class="row" style="color: white">
    <div class="input-field col s6">
-     <input ng-model="stockName" placeholder="company" id="first_name2" type="text" class="validate" ng-submit="getStock()">
+     <input ng-model="stockName" placeholder="company" id="first_name2" type="text" class="validate" >
      <label class="active" for="first_name2">Stock LookUp</label>
+     <input ng-click="getStock(stockName)" value="Get Symbol">
    </div>
  </div>
 

@@ -2,16 +2,26 @@ app.controller('SymbolController', function($scope, $http){
 
   $scope.stockName;
 
-  $scope.query = [];
+  $scope.result;
 
-  $scope.getStock = function(){
+  $scope.getStock = function(stock){
 
     console.log('clicked')
 
-    var query = "http://d.yimg.com/aq/autoc?query="+$scope.stockName+"&region=US&lang=en-US&callback=YAHOO.util.ScriptNodeDataSource.callbacks"
+    var xhr = new XMLHttpRequest();
+    xhr.open("get", "http://d.yimg.com/aq/autoc?query="+stock+"&region=US&lang=en-US", true);
+    xhr.onload = function(data){  //instead of onreadystatechange
+        $scope.result = data;
+    };
+    xhr.send(null);
 
-    console.log(query);
+    // $http.get("http://d.yimg.com/aq/autoc?query="+stock+"&region=US&lang=en-US&callback=YAHOO.util.ScriptNodeDataSource.callbacks")
+    // .then(function(response){
+    //   $scope.result = response.data;
+    // });
 
   }
+
+    //"http://d.yimg.com/aq/autoc?query=chipotle&region=US&lang=en-US"
 
 })
