@@ -5,8 +5,15 @@ body {
 }
 
 footer {
+  background: linear-gradient(to right, $primary-color, $primary-darker);
 	color: white;
-	background-color: $primary-darker;
+}
+
+a{
+	color: $accent-color;
+	&:hover{
+		color: $accent-lightest;
+	}
 }
 
 .nav-wrapper {

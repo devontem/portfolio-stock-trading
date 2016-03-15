@@ -3,8 +3,13 @@ body {
   background-color: white; }
 
 footer {
-  color: white;
-  background-color: #131621; }
+  background: linear-gradient(to right, #252c41, #131621);
+  color: white; }
+
+a {
+  color: #f1404b; }
+  a:hover {
+    color: #f6878e; }
 
 .nav-wrapper {
   background-color: #252c41; }
