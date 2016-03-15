@@ -6,8 +6,28 @@
       </div>
       <div class="card-action">
         <a ng-click="delete()">Delete Account</a>
-        <a href="#">Edit Login</a>
+        <a ng-click="edit()">Edit Login</a>
       </div>
+
+      <div ng-if="change" class="row">
+        <button ng-click="cancel()">Cancel</button>
+        <form class="col s6" ng-submit="updateLogin(newlogin)">
+          <div class="row">
+            <div class="input-field col s6">
+              <input ng-model="newlogin.email" id="email" type="email" class="validate">
+              <label for="email">New Email</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <input ng-model="newlogin.pass" id="password" type="password" class="validate">
+              <label for="password">New Password</label>
+              <input type="submit" value="Submit">
+            </div>
+          </div>
+        </form>
+      </div>
+
     </div>
   </div>
 </div>

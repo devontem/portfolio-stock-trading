@@ -14,8 +14,22 @@ app
       });
     };
 
+    var editLogin = function(user){
+      console.log(user.userId)
+      return $http.put('api/users/'+user.userId, {
+          id: user.userId,
+          email: user.email,
+          password: user.pass
+        }
+      )
+      .then(function(user){
+        console.log(user + 'login info successfully edited')
+      })
+    }
+
     return {
-      deleteAccount: deleteAccount
+      deleteAccount: deleteAccount,
+      editLogin: editLogin
     };
 
   })

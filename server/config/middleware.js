@@ -11,7 +11,7 @@ var Room_user = require('../../db/models').Room_user;
 var Message = require('../../db/models').Message;
 var expressJwt = require('express-jwt');
 var jwt = require('jsonwebtoken');
-
+var morgan = require('morgan');
 
 
 module.exports = function (app, express) {
@@ -25,6 +25,7 @@ module.exports = function (app, express) {
   var messageRouter = express.Router();
   var transactionRouter = express.Router();
 
+  app.use(morgan('dev'));
   // Configuring middleware
   app.use(bodyParser.urlencoded({ extend: true }));
   app.use(bodyParser.json());
