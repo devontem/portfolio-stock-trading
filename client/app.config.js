@@ -6,6 +6,13 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
 
     $stateProvider
 
+      .state('symbol', {
+        url: '/symbol',
+        controller: 'SymbolController',
+        templateUrl: 'symbol/symbol.html'
+
+      })
+
       .state('signin', {
         url: '/',
         controller: 'SigninController',

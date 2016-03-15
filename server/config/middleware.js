@@ -24,6 +24,7 @@ module.exports = function (app, express) {
   var tweetRouter = express.Router();
   var messageRouter = express.Router();
   var transactionRouter = express.Router();
+  var symbolRouter = express.Router();
 
   app.use(morgan('dev'));
   // Configuring middleware
@@ -106,10 +107,13 @@ module.exports = function (app, express) {
   app.use('/api/tweets', tweetRouter);
   app.use('/api/messages', messageRouter);
   app.use('/api/transactions', transactionRouter);
+  app.use('/api/symbols', symbolRouter);
 
   require('../tweets/tweetRoutes.js')(tweetRouter);
 
   require('../stocks/stockRoutes.js')(stockRouter);
+
+  require('../symbol/symbolRoutes.js')(symbolRouter);
 
   require('../users/userRoutes.js')(userRouter);
 
