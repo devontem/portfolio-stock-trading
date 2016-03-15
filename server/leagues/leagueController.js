@@ -99,8 +99,8 @@ module.exports.getAllLeagues = function (req, res) {
 }
 
 module.exports.getOneLeague = function (req, res) {
-  console.log(req.body + '&&&&&&&&&')
-	League.findById(req.body.id)
+  console.log('req.params', req.params.id)
+	League.findById(req.params.id)
 	.then(function (league) {
 		res.send(league)
 	})

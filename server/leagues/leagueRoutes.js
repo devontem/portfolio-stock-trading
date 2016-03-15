@@ -7,8 +7,8 @@ module.exports = function(app){
 
   app.get('/', LeagueController.getAllLeagues);
 
+  app.get('/:id', LeagueController.getOneLeague);
   app.post('/id', LeagueController.getOneLeague);
-
   app.post('/getusers', LeagueController.getUsers);
 
   app.post('/joinleague', LeagueController.joinLeague);

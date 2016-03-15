@@ -24,7 +24,7 @@ angular.module('app.leagueResults', [])
   // Getting the current league
   DashboardFactory.getLeagueById(leagueId)
   	.then(function(league){
-  		console.log(league);
+  		console.log('calling it here', league);
   		$scope.league = league;
   	});
 
