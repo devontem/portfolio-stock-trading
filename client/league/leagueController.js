@@ -9,19 +9,20 @@ app.controller('LeagueController', ['$scope', '$stateParams', 'DashboardFactory'
 
   $scope.checkStart = function (league) {
     var start = moment(league.start).utc();
-    console.log('&23948723984723987', start);
-    console.log('))))))))))))))', currentMoment);
-    console.log(currentMoment.isValid());
     if (currentMoment.isBefore(start)) {
-      console.log('&&&&&&&&&&&&&&&&&&&');
+      $scope.hasStarted = false;
     } else {
-      console.log('doink');
+      $scope.hasStarted = true;
     }
   };
 
   DashboardFactory.getLeagueById(leagueId)
     .then(function(league){
       $scope.league = league;
+      // TODO: make this run conditionally
+      // if (league.hasStarted === false ) {
+      //   run the checkStart
+      // }
       $scope.checkStart($scope.league);
     });
 
