@@ -157,3 +157,11 @@ body {
 .search-symbol {
   margin-top: 10px;
 }
+
+.clock {
+	padding: 5px;
+	margin: 0px, 15px, 5px, 5px;
+	background-color: $accent-color;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
