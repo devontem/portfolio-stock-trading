@@ -25,7 +25,6 @@ app.directive('scrollDirective', function ($rootScope) {
 app.factory('messageBoardFactory', function($http){
 
     var showPosts = function(id){
-        console.log('ID *****', id)
         return $http({
           method: 'POST',
           url: '/api/messages/leagues',

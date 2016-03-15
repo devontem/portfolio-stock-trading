@@ -1,10 +1,11 @@
 var MessageController = require('./messageController');
+var Auth = require('./../config/auth.js');
 
 module.exports = function(app){
 
 
-  app.post('/', MessageController.addPostToDB);
+  app.post('/', Auth.authorize, MessageController.addPostToDB);
 
-  app.post('/leagues', MessageController.getAllPosts);
+  app.post('/leagues', Auth.authorize, MessageController.getAllPosts);
 
 }

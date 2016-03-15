@@ -1,4 +1,4 @@
-app.factory('Auth', function($http, $location){
+app.factory('Auth', function($http, $location, $window){
 
   var createuser = function(user){
     return $http({
