@@ -24,7 +24,7 @@ angular.module('app.leagueResults', [])
   // Getting the current league
   DashboardFactory.getLeagueById(leagueId)
   	.then(function(league){
-  		console.log('calling it here', league);
+  		//console.log('calling it here', league);
   		$scope.league = league;
   	});
 
@@ -40,7 +40,7 @@ angular.module('app.leagueResults', [])
 					mostStockShares = transaction;
 				}
 			});
-			console.log('transaction most bought', mostStockShares)
+			//console.log('transaction most bought', mostStockShares)
 			$scope.mostShares = mostStockShares;
 		});
 

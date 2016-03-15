@@ -6,7 +6,6 @@ app.controller('PreLeagueController', function($scope, $stateParams, preLeagueFa
   $scope.getLeagueName = function(){
     preLeagueFactory.getName($scope.leagueId)
       .then(function(name){
-        console.log('NAME NAME:', name)
         $scope.leagueName = name;
       })
   }
