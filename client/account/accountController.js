@@ -27,6 +27,9 @@ app.controller('AccountController', function($scope, $window, AccountFactory, $l
   $scope.updateLogin = function(){
     console.log('clicked')
     AccountFactory.editLogin($scope.newlogin);
+    $scope.newlogin = {};
+    $scope.cancel();
+    Materialize.toast('Your login has been updated', 2000)
   }
 
 })
