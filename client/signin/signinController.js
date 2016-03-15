@@ -53,8 +53,19 @@ app
 //signin signup controller
 .controller('SigninController', function($scope, $window, Auth, $rootScope){
   $scope.user = {};
-  $scope.loggedin = false;
+  //$scope.loggedin = false;
   $scope.username;
+
+  $scope.authorize = function(){
+    if(Auth.isAuth()){
+      $scope.loggedin = true;
+      $scope.username = $window.localStorage.getItem('com.tp.username');
+    }else{
+      $scope.loggedin = false;
+    }
+  }
+
+  $scope.authorize();
 
   $rootScope.$on('deleted', function(){
     $scope.loggedin = false;

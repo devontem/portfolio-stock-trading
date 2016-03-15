@@ -1,4 +1,5 @@
 var portfolioController = require('./portfolioController.js');
+var Auth = require('./../config/auth.js');
 
 module.exports = function(app){
   
@@ -9,8 +10,8 @@ module.exports = function(app){
   // app.get('/', portfolioController.getAllPortfolio);
 
   // gets all the stocks in a users portfolio
-  app.get('/stocks/:leagueId/:userId', portfolioController.getUserStocks);
+  app.get('/stocks/:leagueId/:userId', Auth.authorize, portfolioController.getUserStocks);
   
   // gets users portfolio basic info
-  app.get('/:leagueId/:userId', portfolioController.getPortfolio);
+  app.get('/:leagueId/:userId', Auth.authorize, portfolioController.getPortfolio);
 }
