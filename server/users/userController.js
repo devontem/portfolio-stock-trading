@@ -52,10 +52,12 @@ module.exports.getUserById = function (req, res) {
 };
 
 module.exports.updateUser = function (req, res) {
-  console.log('BACKEND USER: ', req.params)
-  User.findOne({ id: req.params.id })
+  var iden = req.params.id;
+  console.log('IDEN', iden)
+  User.findOne({ where: { id: iden }})
     .then(function (user) {
       user.update({
+        id: iden,
         password: req.body.pass,
         email: req.body.email
       })

@@ -15,7 +15,7 @@ app
     };
 
     var editLogin = function(user){
-      console.log('Frontend USER: ', user)
+      console.log(user.userId)
       return $http.put('api/users/'+user.userId, {
           id: user.userId,
           email: user.email,
