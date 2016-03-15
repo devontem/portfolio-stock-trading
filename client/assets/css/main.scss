@@ -4,6 +4,11 @@ body {
 	background-color: $background;
 }
 
+footer {
+	color: white;
+	background-color: $primary-darker;
+}
+
 .nav-wrapper {
 	background-color: $primary-color;
 }
@@ -164,4 +169,16 @@ body {
 	background-color: $accent-color;
 	border-bottom-right-radius: 10px;
 	border-bottom-left-radius: 10px;
+}
+
+.std-btn {
+	background-color: $accent-color;
+	&:hover {
+		background-color: $accent-darkest;
+	}
+}
+
+.footer-color {
+	background-color: $primary-lighter;
+	color: white;
 }
