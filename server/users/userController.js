@@ -1,4 +1,5 @@
 var User = require('../../db/models').User;
+var Portfolio = require('../../db/models').Portfolio;
 var jwt = require('jsonwebtoken');
 
 module.exports.newUser = function (req, res){
@@ -65,6 +66,7 @@ module.exports.updateUser = function (req, res) {
 module.exports.deleteUser= function (req, res) {
   User.findOne({ id: req.params.id })
     .then(function (user) {
+      Portfolio.destroy({where: {username: user.username}})
       return user.destroy();
     }).then(function(){
     	res.json('User has been deleted')
