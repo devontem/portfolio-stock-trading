@@ -7,9 +7,8 @@ app.controller('SymbolController', function($scope, $http, symbolFactory){
   $scope.getStock = function(stock){
 
     symbolFactory.getCompany(stock).then(function(data){
-      $scope.result = data.data.ResultSet.Result;
-      console.log('RESULT!!!!')
-      console.log($scope.result)
+      $scope.result = data.data.ResultSet.Result[0];
+      $scope.stockName = '';
     })
 
   }
