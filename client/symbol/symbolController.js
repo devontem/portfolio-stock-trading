@@ -17,4 +17,8 @@ app.controller('SymbolController', function($scope, $http, symbolFactory){
     $('#modal1').openModal();
   }
 
+  $scope.closeModal = function(){
+    $('#modal1').closeModal();
+  }
+
 })
