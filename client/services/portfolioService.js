@@ -39,11 +39,22 @@ app.factory('Portfolio', function($http){
     })
   }
 
+  var updateUserStocks = function(leagueId, userId){
+    return $http({
+      method: 'PUT',
+      url: '/api/portfolios/stocks/'+leagueId+'/'+userId
+    }).then(function(transactions){
+      //onsole.log('User stocks', transactions.data)
+      return transactions.data;
+    });
+  }
+
   return {
     getStock: getStock,
     buySell: buySell,
     getPortfolio: getPortfolio,
-    getUserStocks: getUserStocks
+    getUserStocks: getUserStocks,
+    updateUserStocks: updateUserStocks
   }
 })
 

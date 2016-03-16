@@ -44,7 +44,7 @@ User.beforeUpdate(function(user, options) {
 //Portfolio Model
 var Portfolio = orm.define('Portfolio', {
 	balance: Sequelize.INTEGER,
-  portfolioValue: Sequelize.INTEGER,
+  portfolioValue: Sequelize.FLOAT,
   numOfTrades: Sequelize.INTEGER,
   username: Sequelize.STRING,
   leaguename: Sequelize.STRING
@@ -56,9 +56,9 @@ var Transaction = orm.define('Transaction', {
 
 	symbol: Sequelize.STRING,
   company: Sequelize.STRING,
-	price: Sequelize.INTEGER,
-  marketPrice: Sequelize.INTEGER,
-  return: Sequelize.INTEGER,
+	price: Sequelize.FLOAT,
+  marketPrice: Sequelize.FLOAT,
+  return: Sequelize.FLOAT,
 	buysell: Sequelize.BOOLEAN,
   shares: Sequelize.INTEGER
 
@@ -77,7 +77,7 @@ var League = orm.define('league', {
   ownerid: Sequelize.INTEGER,
 	name: Sequelize.STRING,
   maxNum: Sequelize.INTEGER,
-  startbalance: Sequelize.INTEGER,
+  startbalance: Sequelize.FLOAT,
   start: Sequelize.STRING,
   end: Sequelize.STRING
 });
