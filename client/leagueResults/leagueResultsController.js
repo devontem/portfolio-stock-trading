@@ -7,7 +7,7 @@ angular.module('app.leagueResults', [])
   // Getting the winner of the league
   leaderBoardFactory.getPortfolios(leagueId)
     .then(function(portfolios){
-
+    	console.log('portfoliossss', portfolios)
 
 			var max = 0, winner;
 			portfolios.forEach(function(portfolio){
@@ -16,7 +16,6 @@ angular.module('app.leagueResults', [])
 					winner = portfolio;
 				}
 			});
-
 
 			$scope.winner = winner;
    	});

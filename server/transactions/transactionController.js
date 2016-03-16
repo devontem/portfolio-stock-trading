@@ -14,7 +14,7 @@ module.exports.buySell = function(req, res){
 
       if (!transaction.buysell) { transaction.shares = -1 * transaction.shares; }
 
-      var amount = transaction.price*transaction.shares
+      var amount = transaction.price*transaction.shares;
 
       //amount is either subtracted or added to portfolioValue depending on if sold or bought
       portfolio.portfolioValue += amount;
