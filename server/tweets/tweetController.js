@@ -74,7 +74,7 @@ module.exports.getTweets = function (req, res){
     })
   }
     else {
-    var search = '$AAPL OR $GOOG OR $MSFT OR $XOM'
+    var search = '$AAPL OR $GOOG OR $MSFT OR $XOM OR $GE OR $WFC OR $JNJ OR $BRKA OR $JPM OR $FB'
     var params = { q: search, count: 10 }
       T.get('search/tweets', params, function(err, data, response){
         tweets = [];
