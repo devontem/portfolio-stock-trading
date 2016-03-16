@@ -1,23 +1,41 @@
-<div class="row">
-  <div class="col m3">
-    <div class="card blue-grey darken-1">
-      <div class="card-content white-text">
-        <span class="card-title">Find Ticker Symbol</span>
-        <div class="row" style="color: white">
-           <div class="input-field">
-             <input ng-model="stockName" placeholder="company" id="first_name2" type="text" class="validate" >
-             <label class="active" for="first_name2">Stock LookUp</label>
-             <a ng-click="getStock(stockName)"class="waves-effect waves-light btn">Find Symbol</a>
-             <div>
-              <br>
-               <p>{{result.name}}</p>
-               <h1>{{result.symbol}}</h1>
-             </div>
-           </div>
-          </div>
+
+<!-- Modal Trigger -->
+<a ng-click="openModal()" class="waves-effect waves-light btn modal-trigger">Find Symbol</a>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <div class="row">
+      <div class="col m8">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text">
+            <span class="card-title">Find Ticker Symbol</span>
+            <div class="row" style="color: white">
+               <div class="input-field">
+                 <input ng-model="stockName" placeholder="company" id="first_name2" type="text" class="validate" >
+                 <label class="active" for="first_name2">Stock LookUp</label>
+                 <a ng-click="getStock(stockName)"class="waves-effect waves-light btn">Find Stock Symbol</a>
+                 <div>
+                  <br>
+                   <p>{{result.name}}</p>
+                   <h1>{{result.symbol}}</h1>
+                 </div>
+               </div>
+              </div>
+            </div>
         </div>
+      </div>
     </div>
+  </div>
+  <div class="modal-footer">
+    <a ng-click="closeModal()" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
   </div>
 </div>
 
+<script>
+ $(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal-trigger').openModal();
+  });
+</script>
 
