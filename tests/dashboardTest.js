@@ -17,7 +17,6 @@ describe('DashboardController', function () {
     // injects the specific controller and necessary dependencies
     // $controllerConstructor('DashboardController', {'$scope': scope, });
 
-    expect(100).toBe(100);
   });
 
 });
