@@ -26,7 +26,7 @@ a {
 
 .splash-page {
   padding-top: 25px;
-  padding-bottom: 25px; }
+  padding-bottom: 50px; }
 
 .get-started {
   background-color: #E34C52;
@@ -353,11 +353,14 @@ th {
   padding: 10px 0px; }
 
 .news-container {
-  background-color: white;
-  height: 400px;
-  /*  width: 500px;*/
-  overflow-x: scroll;
+  background-color: transparent;
   position: relative; }
+  .news-container .getTweets {
+    position: absolute; }
+  .news-container .row {
+    height: 440px;
+    overflow-x: scroll;
+    overflow-x: scroll; }
 
 .twittermessage {
   font-weight: bold; }
@@ -403,10 +406,17 @@ th {
   pointer-events: initial;
   cursor: pointer; }
 
-/*.ng-ui-view{
-	height: 100% !important;
-}*/
+.app-video img {
+  width: 100%;
+  height: 246px; }
+
 .league-wrapper {
   background: #D4D6D8; }
   .league-wrapper .brand-logo {
     font-size: 1.5rem; }
+
+.messageboard-box {
+  margin-bottom: 100px; }
+
+.symbol-button input#first_name2 {
+  margin-left: 60px; }

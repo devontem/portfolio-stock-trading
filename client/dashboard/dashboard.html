@@ -2,12 +2,12 @@
   <div class="container">
     <!-- Initial Card for the Header -->
     <div class="row header">
-      <div class="col s8">
+      <div class="col s12 l8">
         <div class="card-panel z-index-5 center">
           <h2>Dashboard</h2>
         </div>
       </div>
-      <div class="col s4">
+      <div class="col s12 l4">
         <div class="card-panel z-index-5 center">
           <h7>No league? No Problem.</h7>
           <h7 class="btn std-btn" ng-click="toggleAdd()">Create League</h7>
@@ -43,18 +43,18 @@
               <tbody>
                 <tr ng-repeat="portfolio in portfolios">
                   <td><a ng-href="#/leagues/{{portfolio.leagueId}}">{{portfolio.leaguename}}</a></td>
-                  <td>{{portfolio.balance}}</td>
-                  <td>{{portfolio.portfolioValue}}</td>
-                  <td>{{portfolio.balance + portfolio.portfolioValue}}</td>
+                  <td>{{portfolio.balance | currency}}</td>
+                  <td>{{portfolio.portfolioValue | currency}}</td>
+                  <td>{{portfolio.balance + portfolio.portfolioValue | currency}}</td>
                 </tr>
               </tbody>
             </table>
 
           </div>
             <!-- If the user is not in leagues, prompt them to join one -->
-          <div class="col s12 m6" ng-if="portfolios.length === 0">
-            <div class="card blue-grey darken-1 z-depth-4">
-              <div class="card-content white-text">
+          <div class="col s12" ng-if="portfolios.length === 0">
+            <div class="card grey lighten-2 center">
+              <div class="card-content ">
                 <span class="card-title">What?</span>
                 <p>It looks like you haven't joined any leagues yet. :(
                   <br> Don't worry. It's incredibly easy to get started.</p>
@@ -67,9 +67,9 @@
 
         </div>
         <!-- If user is in leagues, show those -->
-        <div class="col s12 m6" ng-if="portfolios.length === 0">
-          <div class="card blue-grey darken-1 z-depth-4">
-            <div class="card-content white-text">
+        <div class="col s12" ng-if="portfolios.length === 0">
+          <div class="card grey lighten-2 center">
+            <div class="card-content">
               <span class="card-title">What?</span>
               <p>It looks like you haven't joined any leagues yet. :(
                 <br> Don't worry. It's incredibly easy to get started.</p>
@@ -99,7 +99,7 @@
                 <tr >
                   <td>{{league.name}}</td>
                   <td>{{league.maxNum}}</td>
-                  <td>{{league.startbalance}}</td>
+                  <td>{{league.startbalance | currency}}</td>
                   <td ><a class="curs" ng-click="joinLeague(league.id)">Click to Join</a></td>
                 </tr>
               </tbody>
