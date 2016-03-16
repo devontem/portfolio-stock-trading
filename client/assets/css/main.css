@@ -140,7 +140,7 @@ a {
 
 .clock {
   padding: 5px;
-  margin: 0px, 15px, 5px, 5px;
+  margin-right: 20px;
   background-color: #f1404b;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px; }
@@ -149,6 +149,10 @@ a {
   background-color: #f1404b; }
   .std-btn:hover {
     background-color: #d5101c; }
+  .std-btn, .std-btn:visited {
+    background-color: #f1404b; }
+  .std-btn, .std-btn:active {
+    background-color: #f1404b; }
 
 .footer-color {
   background-color: #384262;
@@ -289,3 +293,28 @@ th {
   text-transform: uppercase;
   display: block;
   padding: 10px 0px; }
+
+.news-container {
+  background-color: white;
+  height: 400px;
+  width: 500px;
+  overflow-x: scroll;
+  position: relative; }
+
+.col s12 {
+  width: 100px;
+  overflow-x: auto; }
+
+.card-panel teal {
+  width: 100px;
+  height: 300px;
+  border: black; }
+
+.tweets {
+  position: absolute; }
+
+.myPortfolio {
+  margin-top: 10px; }
+
+.bot-search {
+  margin: 10px; }
