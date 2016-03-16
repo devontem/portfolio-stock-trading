@@ -140,7 +140,7 @@ a {
 
 .clock {
   padding: 5px;
-  margin: 0px, 15px, 5px, 5px;
+  margin-right: 20px;
   background-color: #f1404b;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px; }
@@ -315,3 +315,6 @@ th {
 
 .myPortfolio {
   margin-top: 10px; }
+
+.bot-search {
+  margin: 10px; }
