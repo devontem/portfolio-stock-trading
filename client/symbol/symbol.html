@@ -15,11 +15,16 @@
                  <input ng-model="stockName" placeholder="company" id="first_name2" type="text" class="validate" >
                  <label class="active" for="first_name2">Stock LookUp</label>
                  <a ng-click="getStock(stockName)"class="waves-effect waves-light btn">Find Stock Symbol</a>
-                 <div>
-                  <br>
-                   <p>{{result.name}}</p>
-                   <h1>{{result.symbol}}</h1>
-                 </div>
+                 <table>
+                  <tr>
+                    <th>Name</th>
+                    <th>Symbol</th>
+                  </tr>
+                   <tr ng-repeat = 'result in results'>
+                     <td>{{result.name}}</td>
+                     <td>{{result.symbol}}</td>
+                  </tr>
+                 </table>
                </div>
               </div>
             </div>
