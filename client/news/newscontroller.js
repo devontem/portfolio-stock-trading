@@ -22,7 +22,9 @@ app.controller('NewsController', function($scope, $window, $stateParams, News){
 		return $http({
 			method: 'Get',
 			url: '/api/tweets/'+leagueId+'/'+userId
-		})
+		}).then(function(data){
+      console.log('data', data)
+    })
 	}
 	return {
 		getNews: getNews
