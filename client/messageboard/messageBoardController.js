@@ -10,14 +10,17 @@ app.controller('MessageBoardController', function($scope, messageBoardFactory, $
 
   $scope.messageBoardPost = function(){
 
-    messageBoardFactory.submitPost($scope.userPost);
-    messageBoardFactory.showPosts($scope.userPost.leagueId).then(function(posts){
-      var posts = posts;
-      $scope.posts = posts.data;
-      console.log(posts);
-      $scope.userPost.message = '';
-      $rootScope.$emit('scrollDown');
-    });
+    messageBoardFactory.submitPost($scope.userPost).then(function(){
+
+      messageBoardFactory.showPosts($scope.userPost.leagueId).then(function(posts){
+        var posts = posts;
+        $scope.posts = posts.data;
+        console.log(posts);
+        $scope.userPost.message = '';
+        $rootScope.$emit('scrollDown');
+      });
+
+    })
   }
 
   $scope.leagueId;
@@ -25,7 +28,6 @@ app.controller('MessageBoardController', function($scope, messageBoardFactory, $
   messageBoardFactory.showPosts($scope.userPost.leagueId).then(function(posts){
     var posts = posts;
     $scope.posts = posts.data;
-    $scope.userPost.message = '';
   });
 
 });
