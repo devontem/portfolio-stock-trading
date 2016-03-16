@@ -16,7 +16,30 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: ['node_modules/angular/angular.js',
     'node_modules/angular-mocks/angular-mocks.js',
-    'client/tests/*.js'
+    'node_modules/angular-ui-router/release/angular-ui-router.js',
+    'client/app.config.js',
+    'client/account/AccountController.js',
+    'client/leagueResults/leagueResultsController.js',
+    'client/portfolio/portfolioController.js',
+    'client/services/portfolioService.js',
+    'client/dashboard/dashboardController.js',
+    'client/league/leagueController.js',
+    'client/faqs/faqsController.js',
+    'client/signin/signinController.js',
+    'client/leaderboard/leaderBoardController.js',
+    'client/news/newscontroller.js',
+    'client/messageboard/messageBoardController.js',
+    'client/services/messageBoardService.js',
+    'client/services/authService.js',
+    'client/botBar/botBarController.js',
+    'client/preleague/preleagueController.js',
+    'client/services/preLeagueService.js',
+    'client/services/accountService.js',
+    'client/services/portfolioService.js',
+    'client/clock/clockController.js',
+    'client/symbol/symbolController.js',
+    'client/services/symbolService.js',
+    'tests/*.js'
     ],
 
 
@@ -36,6 +59,10 @@ module.exports = function(config) {
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
     reporters: ['progress'],
 
+    plugins : [
+      'karma-chrome-launcher',
+      'karma-jasmine'
+    ],
 
     // web server port
     port: 9876,
