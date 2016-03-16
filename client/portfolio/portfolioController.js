@@ -89,6 +89,7 @@ angular.module('app.portfolio', [])
 		$scope.stock = undefined;;
 		$scope.stockAmount = '';
 		$scope.stockInput = '';
+		$scope.estPrice = '';
 	}
 
 	$scope.updateAmounts = function(){
