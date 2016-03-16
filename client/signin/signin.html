@@ -6,11 +6,29 @@
   </div>
   <br>
   <div id="join-button">
-    <a class="waves-effect waves-light btn std-btn">Start Trading</a>
+    <a ng-show="!loggedin" class="waves-effect waves-light btn std-btn" ng-click="toggleSignup()">Start Trading</a>
   </div>
 
 
 </div>
+
+<signup-directive show='showsignup' width='350px' height='500px'>
+  <div ng-if="showsignup" class="signup">
+    <h1 class="brand-logo"> Sign Up </h1>
+    <form name="signinForm" ng-submit='signup(user)'>
+      <label>User Name </label><br>
+      <input type='text' ng-model='user.username' required>
+      <br>
+      <label>Email </label><br>
+      <input type='text' ng-model='user.email' required>
+      <br>
+      <label>Password </label><br>
+      <input type="password" ng-model='user.password' required><br>
+      <br>
+      <button class="waves-effect waves-light btn std-btn">Sign Up</button>
+    </form>
+  </div>
+</signup-directive>
 
 <div class="splash-page more-info">
 

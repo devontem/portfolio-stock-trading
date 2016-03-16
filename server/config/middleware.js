@@ -36,7 +36,11 @@ module.exports = function (app, express) {
   app.use(passport.session());
   app.use(express.static(__dirname + '/../../client'));
 
-
+  http.get('http://ichart.finance.yahoo.com/table.csv?s=AAPL&a=01&b=01&c=2014&d=01&e=01&f=2015&g=d&ignore=.csv', function(err, res){
+    console.log(res.buffer.toString(),' ######')
+    // res = JSON.parse(res.buffer.toString());
+    // console.log(res, '*********')
+  })
   // test for sample query
 
   // http.get('http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22AAPL%22)&env=store://datatables.org/alltableswithkeys&format=json', function(err, res){
