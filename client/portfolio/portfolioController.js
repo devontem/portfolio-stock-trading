@@ -14,8 +14,14 @@ angular.module('app.portfolio', [])
 
 	$scope.chooseStock = function(stockName){
 		Portfolio.getStock(stockName).then(function(stock){
+			console.log(stock,'STOCKSSS')
+			if(!stock.Ask){
+				Materialize.toast('Please enter a valid symbol!',3000)
+			}
+			else {
 			$scope.stock = stock;
 			$scope.estPrice = stock.Ask;
+		}
 		});
 		resetFields();
 	}
