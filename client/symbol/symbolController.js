@@ -13,4 +13,8 @@ app.controller('SymbolController', function($scope, $http, symbolFactory){
 
   }
 
+  $scope.openModal = function(){
+    $('#modal1').openModal();
+  }
+
 })
