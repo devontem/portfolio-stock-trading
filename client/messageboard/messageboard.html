@@ -1,34 +1,43 @@
  <!-- TODO: move inline style to css page -->
-<div class="leaderboard-container" style="height: 300px;
-  overflow-x: auto;" scroll-directive="posts">
 
-  <table class="bordered" style="padding-bottom: 15px; flot:top">
-    <thead>
-      <caption>MESSAGE BOARD</caption>
-    </thead>
+ <div class="row">
+   <div class="col s12 m12">
+     <div class="card white darken-1">
+       <div class="card-content black-text">
+         <span class="card-title">Message Board</span>
+         <div class="leaderboard-container" style="height: 300px;
+           overflow-x: auto;" scroll-directive="posts">
 
-    <tbody ng-repeat="post in posts">
-      <tr class="posted-messages">
-        <td>{{post.name}} ({{post.createdAt | date:"MM/dd/yyyy '@ h:mma"}}) - {{post.message}}</td>
-      </tr>
+           <table style="padding-bottom: 15px; flot:top">
 
-    </tbody>
-  </table>
+             <tbody ng-repeat="post in posts">
+               <tr class="posted-messages">
+                 <td>{{post.name}} ({{post.createdAt | date:"MM/dd/yyyy '@ h:mma"}}) - {{post.message}}</td>
+               </tr>
 
-</div>
+             </tbody>
+           </table>
 
-<div class="leaderboard-container">
+         </div>
 
-  <div class="row">
-      <form class="col s12" ng-submit="messageBoardPost()">
-        <div class="row">
-          <div class="input-field col s6">
-            <i class="material-icons prefix">account_circle</i>
-            <input id="icon_prefix" type="text" class="validate" ng-model="userPost.message">
-            <label for="icon_prefix">Message</label>
-          </div>
-      </form>
-    </div>
+         <div class="leaderboard-container">
+
+           <div class="row">
+               <form class="col s12" ng-submit="messageBoardPost()">
+                 <div class="row">
+                   <div class="input-field col s6">
+                     <i class="material-icons prefix">account_circle</i>
+                     <input id="icon_prefix" type="text" class="validate" ng-model="userPost.message">
+                     <label for="icon_prefix">Message</label>
+                   </div>
+               </form>
+             </div>
 
 
-</div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+
+
