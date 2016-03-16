@@ -10,7 +10,7 @@ app.controller('ClockController', ['$scope', '$interval', function ($scope, $int
       hour -= 12;
       postfix = 'PM';
     }
-    if(hour <12){
+    if(hour <10){
       hour = '0' + hour;
     }
     var minute = currentTime.minute();
