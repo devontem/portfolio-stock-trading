@@ -1,6 +1,6 @@
 
 <!-- Modal Trigger -->
-<a ng-click="openModal()" class="waves-effect waves-light btn modal-trigger">Modal</a>
+<a ng-click="openModal()" class="waves-effect waves-light btn modal-trigger">Find Symbol</a>
 
 <!-- Modal Structure -->
 <div id="modal1" class="modal">
@@ -14,7 +14,7 @@
                <div class="input-field">
                  <input ng-model="stockName" placeholder="company" id="first_name2" type="text" class="validate" >
                  <label class="active" for="first_name2">Stock LookUp</label>
-                 <a ng-click="getStock(stockName)"class="waves-effect waves-light btn">Find Symbol</a>
+                 <a ng-click="getStock(stockName)"class="waves-effect waves-light btn">Find Stock Symbol</a>
                  <div>
                   <br>
                    <p>{{result.name}}</p>

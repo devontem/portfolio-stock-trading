@@ -3,6 +3,7 @@
   <div class="col m7 portfolio-box">
     <!-- Portfolio template injected here -->
     <div ng-if="!hasStarted" ui-view="preleague"></div>
+    <div ui-view="symbol"></div>
     <div ui-view="portfolio"></div>
      <div ng-if="hasEnded" ui-view="leagueResults"></div>
   </div>

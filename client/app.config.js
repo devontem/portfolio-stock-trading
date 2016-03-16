@@ -6,12 +6,12 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
 
     $stateProvider
 
-      .state('symbol', {
-        url: '/symbol',
-        controller: 'SymbolController',
-        templateUrl: 'symbol/symbol.html'
+      // .state('symbol', {
+      //   url: '/symbol',
+      //   controller: 'SymbolController',
+      //   templateUrl: 'symbol/symbol.html'
 
-      })
+      // })
 
       .state('signin', {
         url: '/',
@@ -74,7 +74,10 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
           'preleague@league': {
             controller: 'PreLeagueController',
             templateUrl: 'preleague/preleague.html'
-
+          },
+          'symbol@league':{
+            controller: 'SymbolController',
+            templateUrl: 'symbol/symbol.html'
           }
         }
       })
