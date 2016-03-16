@@ -8,11 +8,14 @@
   <link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'/>
   <link href='https://fonts.googleapis.com/css?family=Play:400,700' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Hind:400,300,500,600,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href='https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css' rel='stylesheet'>
 
   <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/portfolioStyles.css">
+  <link rel="stylesheet" href="assets/css/homeStyles.css">
 
   <!-- Angular and jQuery CDNs -->
 
@@ -30,6 +33,7 @@
 
     <nav>
       <div class="nav-wrapper">
+        <span class="brand-img"></span>
         <a ng-href="{{loggedin ? '/#/dashboard':'#'}}" class="brand-logo">Portfol.io</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li ng-controller="ClockController" ng-bind="time" class="col s2 clock"></li>
@@ -76,30 +80,30 @@
     </signup-directive>
 
   <!-- Angular view goes here -->
-  <div ui-view></div>
+  <div ui-view class="ng-ui-view"></div>
 
   <footer class="page-footer" ng-show="!loggedin">
             <div class="container">
               <div class="row">
                 <div class="col l6 s12">
-                  <h5>Footer Content</h5>
-                  <p>You can use rows and columns here to organize your footer content.</p>
+                  <h5>Portfol.io</h5>
+                  <p>Play smart. Win Big.</p>
                 </div>
                 <div class="col l4 offset-l2 s12">
                   <h5>Links</h5>
                   <ul>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Sign Up</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Login</a></li>
+<!--                     <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li> -->
                   </ul>
                 </div>
               </div>
             </div>
             <div class="footer-copyright">
               <div class="container">
-              © 2016 Copyright Text
-              <a class="right" href="#!">More Links</a>
+              © 2016 Copyright
+<!--               <a class="right" href="#!">More Links</a> -->
               </div>
             </div>
   </footer>

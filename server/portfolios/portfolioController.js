@@ -14,7 +14,6 @@ module.exports.getUserStocks = function(req, res){
     Transaction.findAll({ where: {
       PortfolioId: portfolio.id
     }}).then(function(transactions){
-      // console.log('ttraans', transactions)
 
       // minimizes doubles, adds all shares from same company
       var updatedShares = reduceStocks(transactions);
@@ -67,8 +66,7 @@ module.exports.updateUserStocks = function(req, res){
       // querying user stocks
       request(query, function(err, stocks){
         stocks.body = JSON.parse(stocks.body);
-        // stocks.body.query = undefined;
-        // console.log('result', !stocks.body.query)
+
         // Too many queries instantaneously cause API to fail, sends error emit to client
         if (!stocks.body.query){ res.send({error:true}); return 0; }
 
@@ -76,13 +74,11 @@ module.exports.updateUserStocks = function(req, res){
           transactions[0].marketPrice = stocks.body.query.results.quote.Ask;
           transactions[0].return = ( (transactions[0].marketPrice - transactions[0].price ) / transactions[0].price) * 100;
           portfolio.portfolioValue += parseFloat(transactions[0].marketPrice) * transactions[0].shares;
-          console.log('new price->', stocks.body.query.results.quote.Ask, 'oldPrice->', transactions[0].price)
+          
           transactions[0].save();
 
         } else {
           var updatedStocks = stocks.body.query.results.quote;
-          index = 0;
-          // console.log(updatedStocks)
           for (var i = 0; i < updatedStocks.length; i++){
             for (var j = 0; j < transactions.length; j++){
               if (updatedStocks[i].symbol === transactions[j].symbol){
@@ -98,7 +94,7 @@ module.exports.updateUserStocks = function(req, res){
         }
 
         portfolio.save();
-        // console.log('TRANSACTIONS - >', transactions)
+
        res.send({error:false});
       });
     })
@@ -138,11 +134,8 @@ function reduceStocks(stocks){
     storage[stock.symbol].push(stock);
   });
 
-  // console.log('storage---->', storage)
-
   for (var key in storage){
     if (storage[key].length > 1){
-      // console.log(storage[key].symbol);
       var totalShares = _.pluck(storage[key], 'shares').reduce(function(prev, curr, currIndex){
         return prev + curr;
       });
@@ -150,7 +143,7 @@ function reduceStocks(stocks){
         return prev + curr;
       });
 
-      // assigning the total shares / avgPrive to the first object in the array since all other properties are identical
+      // assigning the total shares / avgPrice to the first object in the array since all other properties are identical
       storage[key][0].shares = totalShares;
       storage[key][0].price = avgPrice / storage[key].length;
       finalArray.push(storage[key][0]);

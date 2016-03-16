@@ -1,28 +1,39 @@
 <!-- <h1 style="background-color: white">LEADERBOARD</h1> -->
 
 <div class="leaderboard-container">
+  <div class="myPortfolio">
+    <nav>
+      <div class="nav-wrapper">
+        <a class="brand-logo">Leaderboard</a>
+        <ul class="right hide-on-med-and-down">
+<!--          <li><a href="sass.html"><i class="material-icons">search</i></a></li>
+          <li><a href="badges.html"><i class="material-icons">view_module</i></a></li> -->
+          <!-- <li>Portfolio Value: {{ portfolioValue | currency }}   |   Balance: {{ balance | currency }}</li> -->
+          <li><a ng-click="getLeaderBoard()"><i class="material-icons">refresh</i></a></li>
+<!--          <li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li> -->
+        </ul>
+      </div>
+    </nav>
+     <div class="card-panel portfolio-content">
+      <table>
+        <thead>
+        <tr>
+            <th data-field="user">Ranking</th>
+            <th data-field="user">Name</th>
+            <th data-field="value">Total Value</th>
+            <th data-field="trades"># of Trades</th>
 
-  <table class="leaderboard-table highlight">
-    <caption>LEADERBOARD</caption>
-    <button ng-click="getLeaderBoard()">Refresh</button>
-    <thead>
-      <tr>
-          <th data-field="user">Ranking</th>
-          <th data-field="user">Name</th>
-          <th data-field="value">Total Value</th>
-          <th data-field="trades"># of Trades</th>
-
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr ng-repeat="portfolio in portfolios | orderBy:'-balance+portfolioValue' track by $index">
-        <td class="tdcenter">{{$index + 1}}</td>
-        <td class="tdcenter">{{portfolio.username}}</td>
-        <td class="tdcenter">{{portfolio.balance + portfolio.portfolioValue  | currency : symbol : fractionSize}}</td>
-        <td class="tdcenter">{{portfolio.numOfTrades}}</td>
-      </tr>
-    </tbody>
-  </table>
-
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="portfolio in portfolios | orderBy:'-balance+portfolioValue' track by $index">
+          <td class="tdcenter">{{$index + 1}}</td>
+          <td class="tdcenter">{{portfolio.username}}</td>
+          <td class="tdcenter">{{portfolio.balance + portfolio.portfolioValue  | currency : symbol : fractionSize}}</td>
+          <td class="tdcenter">{{portfolio.numOfTrades}}</td>
+        </tr>
+      </tbody>
+      </table>
+    </div>
+  </div>
 </div>

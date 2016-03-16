@@ -1,7 +1,18 @@
 @import "_variables";
 
+$header: #313A43;
+$bg-color: #E34C52;
+$font: #2C3D50;
+
+html{
+	height: 100%;
+}
+
 body {
 	background-color: $background;
+	font-family: 'Montserrat', sans-serif;
+	height: 100%;
+	background: #D4D6D8;
 }
 
 footer {
@@ -11,13 +22,11 @@ footer {
 
 a{
 	color: $accent-color;
-	&:hover{
-		color: $accent-lightest;
-	}
+
 }
 
 .nav-wrapper {
-	background-color: $primary-color;
+	background-color: $header
 }
 
 .nav-wrapper a:hover {
@@ -25,42 +34,83 @@ a{
 }
 
 .brand-logo {
-	margin-left: 25px;
+	margin-left: 10px;
 }
 
 .splash-page {
-	height: 350px;
-	border-bottom: 1px solid black;
 	padding-top: 25px;
+	padding-bottom: 50px;
 }
 
 .get-started {
-	background-color: $primary-lightest;
+	background-color: $bg-color;
+	color: white;
+	height: 90vh;
+	min-height: 500px;
+	background-image: url('../img/team.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: bottom;
 }
 
 #get-started-slogan {
 	text-align: center;
-	color: $primary-color;
+	margin-bottom: 40px;
 }
 
 #join-button {
-	margin-left: 45%;
-}
-
-.btn {
-  width: 180px;
+	display: block;
+  margin: 0px auto;
+  text-align: center;
 }
 
 .more-info {
 	background-image: url("../img/stock-market.jpeg");
 	text-align: center;
+	background: #ECC132;
 	color: white;
+
+	.title{
+		color: #F6E7B3;
+	}
+	.card-panel{
+		background: #F6E7B3;
+		padding: 20px;
+		font-size: 1.2em;
+		color: $font;
+	}
+}
+
+footer.page-footer{
+	margin-top: 0px;
+}
+
+.brand-img{
+    background-size: contain;
+    background-image: url("../img/money.png");
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    margin-top: 6px;
+    margin-left: 25px;
 }
 
 .team-info {
-	background-color: $primary-color;
+	background-color: #F39C12;
 	text-align: center;
 	color: black;
+
+	.title{
+		color: #FBE4C0;
+		margin-bottom: 50px;
+	}
+	.card-content {
+		padding: 10px;
+    min-height: 90px;
+		background: #FBE4C0;
+		color: $font;
+	}
 }
 
 .league-container {
@@ -170,7 +220,7 @@ a{
   margin-top: 10px;
 }
 
-.clock {
+/*.clock {
 	padding: 5px;
 	margin-right: auto;
 	margin-left: auto;
@@ -183,6 +233,22 @@ a{
 	font-family: 'Orbitron', sans-serif;
 	font-size: 20px; 
 	overflow: hidden;
+}*/
+
+.clock{
+    text-align: center;
+    background: rgba(255, 255, 255, 0.08);
+    border-bottom-left-radius: 17px;
+    border-bottom-right-radius: 17px;
+    padding: 0px 10px;
+    min-width: 460px;
+    margin: 0px 15px;
+    height: 50px;
+
+    &::before{
+    	content: "NEW YORK STOCK EXCHANGE TIME: ";
+    	color: #D49B9E;
+    }
 }
 
 .std-btn {
@@ -366,11 +432,18 @@ th{
 }
 
 .news-container {
-  background-color: white;
-  height: 400px;
-  width: 500px;
-  overflow-x: scroll;
+  background-color: transparent;
 	position: relative;
+
+	.getTweets{
+		position: absolute;
+	}
+
+	.row{
+		height: 440px;
+		overflow-x: scroll;
+		overflow-x: scroll;
+	}
 }
 
 .twittermessage {
@@ -403,3 +476,55 @@ th{
 .bot-search {
 	margin: 10px;
 }
+
+.dashboard-wrapper{
+	background: #D4D6D8;
+	height: 100%;
+
+	.header{
+		h2{
+			margin: 10px;
+		}
+		h7{
+			margin: 10px;
+		}
+		.card-panel{
+			padding: 10px;
+			min-height: 100px;
+		}
+	}
+
+	.tables{
+		margin-bottom: 50px;
+	}
+}
+
+.tab-highlight{
+	background: rgba(238, 110, 115, 0.38);
+}
+
+.clickable{
+	pointer-events: initial;
+	cursor: pointer;
+}
+
+.app-video img{
+	width: 100%;
+	height: 246px;
+}
+
+.league-wrapper{
+	background: #D4D6D8;
+
+	.brand-logo{
+		    font-size: 1.5rem;
+	}
+}
+
+.messageboard-box{
+	margin-bottom: 100px;
+}
+
+.symbol-button input#first_name2 {
+    margin-left: 60px;
+   }

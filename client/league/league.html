@@ -1,33 +1,29 @@
+<div class="league-wrapper">
+  <div class="league-container row" ng-cloak>
 
-<div class="league-container row" ng-cloak>
-  <div class="col m7 portfolio-box">
-    <!-- Portfolio template injected here -->
-    <div ng-if="!hasStarted" ui-view="preleague"></div>
-    <div ui-view="symbol"></div>
-    <div ui-view="portfolio"></div>
-     <div ng-if="hasEnded" ui-view="leagueResults"></div>
+
+      <div class="col s12 m12 l7 portfolio-box">
+        <!-- Portfolio template injected here -->
+        <div ng-if="!hasStarted" ui-view="preleague"></div>
+        <!-- <div ui-view="symbol"></div> -->
+        <div ui-view="portfolio"></div>
+         <div ng-if="hasEnded" ui-view="leagueResults"></div>
+      </div>
+
+      <div class="col s12 m12 l5 leaderboard-box">
+        <!-- Leaderboard template injected here -->
+        <div ui-view="leaderboard"></div>
+      </div>
+
+      <div class="col s12 m12 l5 news-box">
+        <!-- News template injected here -->
+        <div ui-view="news"></div>
+      </div>
+
+      <div class="col s12 messageboard-box card">
+        <!-- Message template injected here -->
+        <div ui-view="messageboard"></div>
+      </div>
+
   </div>
-
-
-  <div class="col m5 leaderboard-box">
-    <!-- Leaderboard template injected here -->
-    <div ui-view="leaderboard"></div>
-  </div>
-
-
-</div>
-
-<div class="league-container row">
-
-  <div class="col m7 news-box">
-    <!-- News template injected here -->
-    <div ui-view="news"></div>
-  </div>
-
-
-  <div class="col m5 messageboard-box">
-    <!-- Message template injected here -->
-    <div ui-view="messageboard"></div>
-  </div>
-
 </div>
