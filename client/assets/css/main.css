@@ -140,10 +140,17 @@ a {
 
 .clock {
   padding: 5px;
-  margin-right: 20px;
-  background-color: #f1404b;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #252c41;
   border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px; }
+  border-bottom-left-radius: 10px;
+  height: 64px;
+  width: 200px;
+  text-align: center;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 20px;
+  overflow: hidden; }
 
 .std-btn {
   background-color: #f1404b; }

@@ -10,11 +10,20 @@ app.controller('ClockController', ['$scope', '$interval', function ($scope, $int
       hour -= 12;
       postfix = 'PM';
     }
-    var minute = currentTime.minute();
-    if (minute.length === 1) {
-      minute += '0';
+    if(hour <12){
+      hour = '0' + hour;
     }
-    $scope.time = hour + ' : ' + minute + ' ' + postfix + ' (EST)';
+    var minute = currentTime.minute();
+    if (minute < 10) {
+      minute = '0' + minute;
+    }
+
+    var second = currentTime.second();
+    if(second< 10){
+      second = '0' + second;
+    }
+
+    $scope.time = hour + ' : ' + minute + ' : ' + second + ' ' + postfix + ' EST ';
   };
 
   $interval($scope.getCurrentTime, 1000);

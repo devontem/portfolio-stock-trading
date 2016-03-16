@@ -172,10 +172,17 @@ a{
 
 .clock {
 	padding: 5px;
-	margin-right: 20px;
-	background-color: $accent-color;
+	margin-right: auto;
+	margin-left: auto;
+	background-color: $primary-color;
 	border-bottom-right-radius: 10px;
 	border-bottom-left-radius: 10px;
+	height: 64px;
+	width: 200px;
+	text-align: center;
+	font-family: 'Orbitron', sans-serif;
+	font-size: 20px; 
+	overflow: hidden;
 }
 
 .std-btn {
