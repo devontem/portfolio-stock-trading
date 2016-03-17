@@ -35,7 +35,7 @@ angular.module('app.dashboard', [])
   };
 })
 
-.controller('DashboardController', ['$scope', '$window', 'DashboardFactory', function ($scope, $window, DashboardFactory) {
+.controller('DashboardController', ['$scope', '$window', 'DashboardFactory', 'leaderBoardFactory', function ($scope, $window, DashboardFactory, leaderBoardFactory) {
 
   $scope.currentTab = 'user';
   $scope.leagues;
@@ -43,6 +43,7 @@ angular.module('app.dashboard', [])
   $scope.portfolios = {};
   $scope.numtojoin = 0;
   $scope.league.isPrivate = "false";
+
 
   $scope.pickstart = function(){
     var start = $('#startdate').pickadate({
@@ -155,12 +156,22 @@ angular.module('app.dashboard', [])
     var userId = $window.localStorage.getItem('com.tp.userId');
     DashboardFactory.getAvailLeagues()
       .then(function(leagues){
-        console.log('LEAGUES !!!!! &&&& *********')
-        console.log(leagues);
         $scope.leagues = leagues;
         $scope.numtojoin = $scope.leagues.length - $scope.portfolios.length;
       });
   };
+
+  console.log('SCOPE DOT LEAGUES')
+  console.log($scope.leagues)
+
+  $scope.usersJoined;
+
+  $scope.getUsersJoined = function(){
+    leaderBoardFactory.getPortfolios($scope.leagueId)
+      .then(function(portfolios){
+        $scope.usersJoined = portfolios.length;
+      })
+  }
 
   $scope.notjoined = function(league){
     for(var i=0; i<$scope.portfolios.length; i++){
@@ -174,18 +185,18 @@ angular.module('app.dashboard', [])
   }
 
   $scope.joinPrivate = function(){
-    swal({title: "Join a Private League",  
-          text: "If you don't know the league code, ask the league owner.",   
-          type: "input",   
-          showCancelButton: true,   
-          closeOnConfirm: false,   
-          animation: "slide-from-top",   
+    swal({title: "Join a Private League",
+          text: "If you don't know the league code, ask the league owner.",
+          type: "input",
+          showCancelButton: true,
+          closeOnConfirm: false,
+          animation: "slide-from-top",
           inputPlaceholder: ""
-        }, function(inputValue){   
-          if (inputValue === false) return false;      
-          if (inputValue === "") {     
-            swal.showInputError("You need to write something!");     
-            return false   
+        }, function(inputValue){
+          if (inputValue === false) return false;
+          if (inputValue === "") {
+            swal.showInputError("You need to write something!");
+            return false
           }
 
           var found = false;
@@ -203,7 +214,7 @@ angular.module('app.dashboard', [])
             }
           }
           if (!found){
-            swal.showInputError("Invalid Code."); 
+            swal.showInputError("Invalid Code.");
             return false;
           }
         });
