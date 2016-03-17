@@ -2,6 +2,7 @@ app.controller('AccountController', function($scope, $window, AccountFactory, $l
 
   $scope.name = $window.localStorage.getItem('com.tp.username');
   $scope.id = $window.localStorage.getItem('com.tp.userId');
+  $scope.active = 'accountInfo';
 
   $scope.delete = function(){
     var userid = $scope.id;
@@ -34,6 +35,7 @@ app.controller('AccountController', function($scope, $window, AccountFactory, $l
   $scope.getUser = function(){
     AccountFactory.getSingleUser($scope.id)
       .then(function(user){
+        $scope.user = user;
         $scope.email = user.email;
       })
   }
@@ -45,7 +47,11 @@ app.controller('AccountController', function($scope, $window, AccountFactory, $l
   $scope.change = false;
 
   $scope.edit = function(){
-    $scope.change = true;
+    $scope.active = 'editLogin';
+    console.log($scope.active);
+  }
+  $scope.showAccount = function(){
+    $scope.active = 'accountInfo';
   }
 
   $scope.cancel = function(){
