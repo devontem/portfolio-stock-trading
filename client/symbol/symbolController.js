@@ -1,10 +1,10 @@
-app.controller('SymbolController', function($scope, $http, symbolFactory){
+app.controller('SymbolController', function($scope, $http, symbolFactory, Portfolio, $rootScope){
 
   $scope.stockName;
 
   $scope.results=[]
   $scope.getStock = function(stock){
-   $scope.results=[]; 
+   $scope.results=[];
    var filter =[];
    var symbol;
     symbolFactory.getCompany(stock).then(function(data){
@@ -33,6 +33,13 @@ app.controller('SymbolController', function($scope, $http, symbolFactory){
 
   $scope.closeModal = function(){
     $('#modal1').closeModal();
+  }
+
+
+  $scope.populate = function(symbol){
+    console.log('STOCK SYMBOL: ', symbol)
+    $rootScope.$emit('symbolRetrieved', symbol);
+    $scope.closeModal();
   }
 
 })

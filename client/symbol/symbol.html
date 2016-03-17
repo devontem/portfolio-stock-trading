@@ -6,23 +6,19 @@
 <div id="modal1" class="modal">
   <div class="modal-content">
     <div class="row">
-      <div class="col m8">
+      <div class="col m10">
         <div class="card blue-grey darken-1">
           <div class="card-content white-text">
             <span class="card-title">Find Ticker Symbol</span>
             <div class="row" style="color: white">
                <div class="input-field">
-                 <input ng-model="stockName" placeholder="company" id="first_name2" type="text" class="validate" >
+                 <input ng-model="stockName" placeholder="type in company here" id="first_name2" type="text" class="validate" >
                  <label class="active" for="first_name2">Stock LookUp</label>
                  <a ng-click="getStock(stockName)"class="waves-effect waves-light btn">Find Stock Symbol</a>
                  <table>
-                  <tr>
-                    <th>Name</th>
-                    <th>Symbol</th>
-                  </tr>
                    <tr ng-repeat = 'result in results'>
                      <td>{{result.name}}</td>
-                     <td>{{result.symbol}}</td>
+                     <td><a ng-click="populate(result.symbol)"><h3>{{result.symbol}}</h3></a></td>
                   </tr>
                  </table>
                </div>
@@ -32,9 +28,9 @@
       </div>
     </div>
   </div>
-  <div class="modal-footer">
+<!--   <div class="modal-footer">
     <a ng-click="closeModal()" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
-  </div>
+  </div> -->
 </div>
 
 <script>
