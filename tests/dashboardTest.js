@@ -7,26 +7,42 @@ describe('DashboardController', function () {
   // loads the app into the test
   beforeEach(module('app'));
 
-  beforeEach(inject(function ($controller, $rootScope) {
+  beforeEach(inject(function ($controller, _$rootScope_, $q) {
     $controllerConstructor = $controller;
-    scope = $rootScope.$new();
-    console.log(scope.Scope,'sope')
-    mockLeaguesData = sinon.stub({getAvailLeagues: function () {}})//creates object that looks like this
+    $rootScope = _$rootScope_;
+    DashboardFactory = {
+      getAvailLeagues: function () {}
+    };
+
+    var deferred = $q.defer();
+    deferred.resolve('somevalue');
+
+    spyOn(DashboardFactory, 'getAvailLeagues').and.returnValue(deferred.promise);
   }));
 
+  it('should return all leagues available to join', function () {
+    var result;
 
-  it('should show all leagues available for the user to join', function () {
-    
-    var mockLeagues = {};
-    mockLeaguesData.getAvailLeagues.returns(mockLeagues);
-    // injects the specific controller and necessary dependencies
-    // $controllerConstructor('DashboardController', {'$scope': scope, });
-    //var email =''; .calledwith(email)
-    $controllerConstructor('DashboardController', 
-      {'$scope': scope, 'DashboardFactory': mockLeaguesData})
+    DashboardFactory.getAvailLeagues().then(function (leagues) {
+      console.log(leagues);
+      result = leagues;
+    });
 
-    expect(scope.leagues).toBe(mockLeagues)
+    // $rootScope.apply();
 
+    expect(result).toBe('somevalue');
   });
+
+
+  // it('should allow a user to add a league', function () {
+  //
+  //   var
+  //
+  //   // injects the specific controller and necessary dependencies
+  //   $controllerConstructor('DashboardController', {'$scope': scope, 'DashboardFactory': mockLeagueData });
+  //
+  //   expect($scope.addLeague).toBe()
+  //
+  // });
 
 });
