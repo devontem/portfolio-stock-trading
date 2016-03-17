@@ -38,4 +38,24 @@ describe("server", function() {
     });
   });
 
+  describe("POST /api/users", function () {
+    it("should return that a token is not provided", function (done) {
+      // just assume that if it contains an <input> tag its index.html
+      request
+        .post('/api/users/')
+        .send({username: 'john', email: 'john', password: 'john'})
+        .expect(200, done)
+    });
+  });
+
+  describe("POST /api/users/signin", function () {
+    it("should return that a token is not provided", function (done) {
+      // just assume that if it contains an <input> tag its index.html
+      request
+        .post('/api/users/signin')
+        .send({ email: 'john', password: 'john'})
+        .expect(200, done)
+    });
+  });
+
 });
