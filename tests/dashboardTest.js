@@ -42,6 +42,13 @@ describe('DashboardController', function () {
     expect($scope.currentTab).toBe('toJoin');
   });
 
+  it('invoking $scope.showUserLeagues should change the $scope.currentTab to "user"', function() {
+    createController();
+    $scope.showToJoin();
+    $scope.showUserLeagues();
+    expect($scope.currentTab).toBe('user');
+  });
+
 
   // it('should have a getLinks method on the $scope', function () {
   //   createController();
