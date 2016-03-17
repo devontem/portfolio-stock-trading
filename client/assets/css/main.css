@@ -200,7 +200,6 @@ footer.page-footer {
   margin: 0px 15px;
   height: 50px; }
   .clock::before {
-    content: "NEW YORK STOCK EXCHANGE TIME: ";
     color: #D49B9E; }
 
 .std-btn {

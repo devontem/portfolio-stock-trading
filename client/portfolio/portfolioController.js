@@ -12,6 +12,10 @@ angular.module('app.portfolio', [])
 	$scope.estPrice = 0;
 	$scope.action = false
 
+	$rootScope.$on('symbolRetrieved', function(event, data){
+		return $scope.chooseStock(data);
+	})
+
 	$scope.chooseStock = function(stockName){
 		Portfolio.getStock(stockName).then(function(stock){
 			console.log(stock,'STOCKSSS')
