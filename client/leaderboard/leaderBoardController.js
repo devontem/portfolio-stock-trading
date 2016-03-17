@@ -26,12 +26,17 @@ app.controller('LeaderBoardController', function($scope, $stateParams, leaderBoa
 
   $scope.leagueId = $stateParams.leagueId;
   $scope.portfolios;
+  $scope.leagueName;
 
   $scope.getLeaderBoard = function(){
     // this will call a factory function to grab http data from server and assign returned data to $scope.members;
     leaderBoardFactory.getPortfolios($scope.leagueId)
       .then(function(portfolios){
+        console.log('PORTFOLIO$$$$$', portfolios[0])
         $scope.portfolios = portfolios;
+        $scope.leagueName = portfolios[0].leaguename;
+
+
       })
   };
 
