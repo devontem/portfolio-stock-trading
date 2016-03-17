@@ -41,10 +41,8 @@ describe("server", function() {
   var userid;
   var token;
 
-
   describe("POST /api/users", function () {
     it("should create user", function (done) {
-      // just assume that if it contains an <input> tag its index.html
       request
         .post('/api/users/')
         .send({username: 'john', email: 'john', password: 'john'})
@@ -54,7 +52,6 @@ describe("server", function() {
 
   describe("POST /api/users/signin", function () {
     it("should sign in user", function (done) {
-      // just assume that if it contains an <input> tag its index.html
       request
         .post('/api/users/signin')
         .send({ email: 'john', password: 'john'})
@@ -68,9 +65,25 @@ describe("server", function() {
     });
   });
 
+  describe("POST", function(){
+    it("should create a new leageue", function(done){
+      request
+        .post('/api/leagues')
+        .send({
+            token: token,
+            creatorId: 1936,
+            name: 'Mocha Testing',
+            max: 100,
+            balance: 200,
+            start: null,
+            end: null
+        })
+        .expect(200, done);
+    })
+  })
+
   describe("POST /api/users/delete", function () {
     it("should delete user", function (done) {
-      // just assume that if it contains an <input> tag its index.html
       request
         .delete('/api/users')
         .send({id: userid})
@@ -78,22 +91,6 @@ describe("server", function() {
     });
   });
 
-  describe("POST", function(){
-    it("should create a new leageue", function(done){
-      request
-        .post('/api/leagues')
-        .send({
-            token: token,
-            ownerid: 1976,
-            name: 'Mocha Testing',
-            maxNum: 100,
-            startbalance: 200,
-            start: null,
-            end: null
-        })
-        .expect(200, done);
-    })
-  })
 
 });
 
