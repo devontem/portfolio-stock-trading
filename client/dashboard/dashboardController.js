@@ -62,7 +62,7 @@ angular.module('app.dashboard', [])
             picker.close();
         } else {
             picker.open();
-        }                        
+        }
         event.stopPropagation();
     });
   }
@@ -85,7 +85,7 @@ angular.module('app.dashboard', [])
             pickers.close();
         } else {
             pickers.open();
-        }                        
+        }
         event.stopPropagation();
     });
   }
@@ -155,6 +155,8 @@ angular.module('app.dashboard', [])
     var userId = $window.localStorage.getItem('com.tp.userId');
     DashboardFactory.getAvailLeagues()
       .then(function(leagues){
+        console.log('LEAGUES !!!!! &&&& *********')
+        console.log(leagues);
         $scope.leagues = leagues;
         $scope.numtojoin = $scope.leagues.length - $scope.portfolios.length;
       });
