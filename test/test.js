@@ -22,8 +22,19 @@ describe("server", function() {
       // just assume that if it contains an <input> tag its index.html
       request
         .get('/api/users')
-        // .expect('Content-Type', 'application/json; charset=utf-8')
+        .set('Accept', 'text/plain')
+        .expect('Content-Type', 'application/json; charset=utf-8')
         .expect(200, done)
+    });
+  });
+
+  describe("GET /api/leagues", function () {
+    it("should return that a token is not provided", function (done) {
+      // just assume that if it contains an <input> tag its index.html
+      request
+        .get('/api/leagues')
+        .expect('Token not provided')
+        .expect(403, done)
     });
   });
 
