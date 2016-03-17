@@ -86,7 +86,7 @@ module.exports.getTweets = function (req, res){
         tweets.push({text:status.text,
                   user: status.user.screen_name,
                   created_at: time})
-        console.log(tweets,'moof')
+        
        }
        res.json(tweets)
       })
