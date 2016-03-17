@@ -420,22 +420,22 @@ th {
 .symbol-button input#first_name2 {
   margin-left: 60px; }
 
-.preleague-container nav {
+.account-container nav {
   height: 50px;
   line-height: 50px; }
 
-.preleague-container .account-menu {
+.account-container .account-menu {
   margin-top: 40px; }
 
-.preleague-container .nav-wrapper {
+.account-container .nav-wrapper {
   background: #444; }
 
-.preleague-container form {
+.account-container form {
   border: 1px solid #e0e0e0;
   padding: 20px 30px; }
 
-.preleague-container .buttons {
+.account-container .buttons {
   margin-top: 20px; }
 
-.preleague-container .myPortfolio {
+.account-container .myPortfolio {
   margin-bottom: 120px; }
