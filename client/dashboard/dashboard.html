@@ -24,7 +24,7 @@
       <div class="col s12">
         <ul class="tabs">
           <li class="tab col s3 m5 clickable" ng-class="currentTab === 'user' ? 'tab-highlight' : ''" ng-click="showUserLeagues()"><span  class="active" href="#test2">Leagues You Are In</span></li>
-          <li ng-class="currentTab === 'toJoin' ? 'tab-highlight' : ''" class="tab col s3 m5 clickable" ng-click="showToJoin()"><span  href="#test1">Leagues To Join</span></li>
+          <li ng-class="currentTab === 'toJoin' ? 'tab-highlight' : ''" class="tab col s3 m5 clickable" ng-click="showToJoin()"><span  href="#test1">Available Leagues To Join</span></li>
         </ul>
         <div class="divider"></div>
       </div>
@@ -93,8 +93,9 @@
               <thead>
                 <tr>
                   <th data-field="name">League Name</th>
-                  <th data-field="rank">Max Users</th>
+                  <th data-field="rank">Spots Left</th>
                   <th data-field="percentChange">Start Balance</th>
+                  <th data-field="leagueLength">Duration</th>
                   <th data-field="totVal">Join</th>
                 </tr>
               </thead>
@@ -105,6 +106,7 @@
                   <td>{{league.name}}</td>
                   <td>{{league.maxNum}}</td>
                   <td>{{league.startbalance | currency}}</td>
+                  <td>Weekly</td>
                   <td ><a class="curs" ng-click="joinLeague(league.id)">Click to Join</a></td>
                 </tr>
               </tbody>
