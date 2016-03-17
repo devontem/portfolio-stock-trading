@@ -22,7 +22,7 @@ module.exports = function(config) {
     'client/account/AccountController.js',
     'client/leagueResults/leagueResultsController.js',
     'client/portfolio/portfolioController.js',
-    'client/services/portfolioService.js',
+    'client/services/dashboardService.js',
     'client/dashboard/dashboardController.js',
     'client/league/leagueController.js',
     'client/faqs/faqsController.js',

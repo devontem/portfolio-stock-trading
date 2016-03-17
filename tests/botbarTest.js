@@ -1,34 +1,36 @@
-describe('DashboardController', function () {
-  var $scope, $rootScope, createController, DashboardFactory, $httpBackend;
+describe('BotBarController', function () {
+  var $scope, $rootScope, createController, Portfolio, $httpBackend;
 
-  var $controllerConstructor;
-  var scope;
-  var mockLeaguesData;
-
-  // loads the app into the test
+  // using angular mocks, we can inject the injector
+  // to retrieve our dependencies
   beforeEach(module('app'));
   beforeEach(inject(function($injector) {
 
     // mock out our dependencies
     $rootScope = $injector.get('$rootScope');
     $httpBackend = $injector.get('$httpBackend');
-    DashboardFactory = $injector.get('DashboardFactory');
+    Portfolio = $injector.get('Portfolio');
     $scope = $rootScope.$new();
 
     var $controller = $injector.get('$controller');
 
     createController = function () {
-      return $controller('DashboardController', {
+      return $controller('BotBarController', {
         $scope: $scope,
-        DashboardFactory: DashboardFactory
+        Portfolio: Portfolio
       });
     };
+    createController();
   }));
 
-  it('should have a current tab property on the $scope', function() {
-    createController();
-    expect($scope.currentTab).toBe('user');
+  it('should have a hasSearched property on the $scope', function() {
+    expect($scope.hasSearched).toBe(false);
   });
+
+  it('should have a hasSearched property on the $scope', function() {
+    expect($scope.hasSearched).toBe(false);
+  });
+
 
 
   // it('should have a getLinks method on the $scope', function () {
