@@ -6,10 +6,15 @@ angular.module('app.botbar', [])
   $scope.hasSearched = false;
 
   $scope.stockSearch = function () {
-    var stockName = $scope.stockInput;
+    var stockName = $scope.stockInput.toUpperCase();
     Portfolio.getStock(stockName).then(function(stock){
-      $scope.stock = stock;
-      $scope.hasSearched = true;
+      if(!stock.Ask){
+        Materialize.toast('Please enter valid symbol!', 3000);
+      }
+      else{
+        $scope.stock = stock;
+        $scope.hasSearched = true;
+    }
     });
     $scope.stockInput = "";
   };

@@ -17,6 +17,7 @@ module.exports = function(config) {
     files: ['node_modules/angular/angular.js',
     'node_modules/angular-mocks/angular-mocks.js',
     'node_modules/angular-ui-router/release/angular-ui-router.js',
+    'node_modules/sinon/pkg/sinon-1.7.3.js',
     'client/app.config.js',
     'client/account/AccountController.js',
     'client/leagueResults/leagueResultsController.js',
