@@ -70,17 +70,19 @@ module.exports.updateUser = function (req, res) {
           if(check){
             res.end("Email already taken")
           }else{
-            if(!user.validPassword(req.body.oldpassword, user.password)){
-              res.end("Wrong old password");
-            }else{
-              user.update({
-                id: iden,
-                password: req.body.password,
-                email: req.body.email
-              })
-              .then(function(user){
-                res.json('User updated');
-              });
+            if(user){
+              if(!user.validPassword(req.body.oldpassword, user.password)){
+                res.end("Wrong old password");
+              }else{
+                user.update({
+                  id: iden,
+                  password: req.body.password,
+                  email: req.body.email
+                })
+                .then(function(user){
+                  res.json('User updated');
+                });
+              }
             }
           }
         })
