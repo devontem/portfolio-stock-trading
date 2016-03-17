@@ -1,6 +1,6 @@
 
-describe('DashboardController', function () {
-  var $scope, $rootScope, createController, DashboardFactory, $httpBackend;
+// describe('DashboardController', function () {
+//   var $scope, $rootScope, createController, DashboardFactory, $httpBackend;
 
 
 
