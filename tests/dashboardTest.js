@@ -1,4 +1,5 @@
 describe('DashboardController', function () {
+  var $scope, $rootScope, createController, DashboardFactory, $httpBackend;
 
   var $controllerConstructor;
   var scope;
@@ -6,43 +7,38 @@ describe('DashboardController', function () {
 
   // loads the app into the test
   beforeEach(module('app'));
+  beforeEach(inject(function($injector) {
 
-  beforeEach(inject(function ($controller, _$rootScope_, $q) {
-    $controllerConstructor = $controller;
-    $rootScope = _$rootScope_;
-    DashboardFactory = {
-      getAvailLeagues: function () {}
+    // mock out our dependencies
+    $rootScope = $injector.get('$rootScope');
+    $httpBackend = $injector.get('$httpBackend');
+    DashboardFactory = $injector.get('DashboardFactory');
+    $scope = $rootScope.$new();
+
+    var $controller = $injector.get('$controller');
+
+    createController = function () {
+      return $controller('DashboardController', {
+        $scope: $scope,
+        DashboardFactory: DashboardFactory
+      });
     };
-
-    var deferred = $q.defer();
-    deferred.resolve('somevalue');
-
-    spyOn(DashboardFactory, 'getAvailLeagues').and.returnValue(deferred.promise);
   }));
 
-  it('should return all leagues available to join', function () {
-    var result;
-
-    DashboardFactory.getAvailLeagues().then(function (leagues) {
-      console.log(leagues);
-      result = leagues;
-    });
-
-    // $rootScope.apply();
-
-    expect(result).toBe('somevalue');
+  it('should have a current tab property on the $scope', function() {
+    createController();
+    expect($scope.currentTab).toBe('user');
   });
-
-
-  // it('should allow a user to add a league', function () {
   //
-  //   var
-  //
-  //   // injects the specific controller and necessary dependencies
-  //   $controllerConstructor('DashboardController', {'$scope': scope, 'DashboardFactory': mockLeagueData });
-  //
-  //   expect($scope.addLeague).toBe()
-  //
+  // it('should have a getLinks method on the $scope', function () {
+  //   createController();
+  //   expect($scope.getLinks).to.be.a('function');
   // });
-
+  // it('should call getLinks() when controller is loaded', function () {
+  //   var mockLinks = [{},{},{}];
+  //   $httpBackend.expectGET("/api/links").respond(mockLinks);
+  //   createController();
+  //   $httpBackend.flush();
+  //   expect($scope.data.links).to.eql(mockLinks);
+  // });
 });
