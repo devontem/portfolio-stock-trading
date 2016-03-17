@@ -79,6 +79,16 @@ describe("server", function() {
   });
 
   describe("POST", function(){
+    before(function(done){
+      League.sync({force: true})
+        .success(function(){
+          done(null);
+        })
+        .error(function(error){
+          done(error);
+        })
+    })
+
     it("should create a new leageue", function(done){
       request
         .post('/api/leagues')
