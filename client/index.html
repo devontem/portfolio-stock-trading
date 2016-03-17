@@ -39,7 +39,7 @@
           <li ng-controller="ClockController" ng-bind="time" class="col s2 clock"></li>
           <li><a ng-show="!loggedin" ng-click="toggleLogin()">Login</a></li>
           <li><a ng-show="!loggedin" ng-click="toggleSignup()">Sign Up</a></li>
-          <li ng-show="loggedin">Hello {{username}} !</li>
+          <li ng-show="loggedin"><span>Hello, {{username}}</span></li>
           <li><a href="#/account" ng-show="loggedin">Account</a></li>
           <li><a ng-show="loggedin" ng-click="logout()">Log Out</a></li>
         </ul>

@@ -196,7 +196,7 @@ footer.page-footer {
   border-bottom-left-radius: 17px;
   border-bottom-right-radius: 17px;
   padding: 0px 10px;
-  min-width: 460px;
+  min-width: 310px;
   margin: 0px 15px;
   height: 50px; }
   .clock::before {
@@ -212,7 +212,7 @@ footer.page-footer {
     background-color: #f1404b; }
 
 .footer-color {
-  background-color: #384262;
+  background-color: #313A43;
   color: white; }
 
 .portfolio-content {
@@ -420,3 +420,23 @@ th {
 
 .symbol-button input#first_name2 {
   margin-left: 60px; }
+
+.account-container nav {
+  height: 50px;
+  line-height: 50px; }
+
+.account-container .account-menu {
+  margin-top: 40px; }
+
+.account-container .nav-wrapper {
+  background: #444; }
+
+.account-container form {
+  border: 1px solid #e0e0e0;
+  padding: 20px 30px; }
+
+.account-container .buttons {
+  margin-top: 20px; }
+
+.account-container .myPortfolio {
+  margin-bottom: 120px; }

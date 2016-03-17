@@ -241,7 +241,7 @@ footer.page-footer{
     border-bottom-left-radius: 17px;
     border-bottom-right-radius: 17px;
     padding: 0px 10px;
-    min-width: 460px;
+    min-width: 310px;
     margin: 0px 15px;
     height: 50px;
 
@@ -264,7 +264,7 @@ footer.page-footer{
 }
 
 .footer-color {
-	background-color: $primary-lighter;
+	background-color: $header;
 	color: white;
 }
 
@@ -526,5 +526,29 @@ th{
 }
 
 .symbol-button input#first_name2 {
-    margin-left: 60px;
-   }
+  margin-left: 60px;
+ }
+
+.account-container{
+
+	nav{
+		height: 50px;
+    line-height: 50px;
+	}
+	.account-menu{
+		margin-top: 40px;
+	}
+	.nav-wrapper{
+		background: #444;
+	}
+	form{
+		border: 1px solid #e0e0e0;
+    padding: 20px 30px;
+	}
+	.buttons{
+		margin-top: 20px;
+	}
+	.myPortfolio{
+		margin-bottom: 120px;
+	}
+}
