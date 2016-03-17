@@ -25,9 +25,15 @@ app.controller('MessageBoardController', function($scope, messageBoardFactory, $
 
   $scope.leagueId;
 
-  messageBoardFactory.showPosts($scope.userPost.leagueId).then(function(posts){
+
+  var showPosts = function(){
+    messageBoardFactory.showPosts($scope.userPost.leagueId).then(function(posts){
     var posts = posts;
     $scope.posts = posts.data;
   });
+  }
+
+  showPosts();
+  $window.setInterval(showPosts, 1000);
 
 });
