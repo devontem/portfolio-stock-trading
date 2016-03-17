@@ -77,7 +77,7 @@ var League = orm.define('league', {
   ownerid: Sequelize.INTEGER,
 	name: Sequelize.STRING,
   maxNum: Sequelize.INTEGER,
-  joined: Sequelize.INTEGER,
+  joined: {type: Sequelize.INTEGER, autoIncrement:true},
   startbalance: Sequelize.FLOAT,
   start: Sequelize.STRING,
   end: Sequelize.STRING,
