@@ -36,6 +36,8 @@
     "pg": "^4.5.1",
     "request": "^2.69.0",
     "sequelize": "^3.19.3",
+    "should": "^8.2.2",
+    "supertest": "^1.2.0",
     "twit": "^2.2.3",
     "underscore": "^1.8.3"
   },
