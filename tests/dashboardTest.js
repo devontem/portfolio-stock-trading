@@ -49,6 +49,14 @@ describe('DashboardController', function () {
     expect($scope.currentTab).toBe('user');
   });
 
+  it('invoking $scope.toggleAdd should change the $scope.showAdd value', function() {
+    createController();
+    $scope.toggleAdd();
+    expect($scope.showadd).toBe(true);
+    $scope.toggleAdd();
+    expect($scope.showadd).toBe(false);
+  });
+
 
   // it('should have a getLinks method on the $scope', function () {
   //   createController();
