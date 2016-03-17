@@ -188,7 +188,7 @@ footer.page-footer {
 	width: 200px;
 	text-align: center;
 	font-family: 'Orbitron', sans-serif;
-	font-size: 20px; 
+	font-size: 20px;
 	overflow: hidden;
 }*/
 .clock {
@@ -363,7 +363,8 @@ th {
     overflow-x: scroll; }
 
 .twittermessage {
-  font-weight: bold; }
+  font-weight: 600;
+  color: #008080; }
 
 .twitteruser {
   font-size: 10px; }
