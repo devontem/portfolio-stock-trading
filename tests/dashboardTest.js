@@ -30,6 +30,18 @@ describe('DashboardController', function () {
     expect($scope.currentTab).toBe('user');
   });
 
+  it('should have a showToJoin method on the $scope', function() {
+    createController();
+    expect($scope.showToJoin).toBeDefined('user');
+    expect(typeof $scope.showToJoin).toBe('function');
+  });
+
+  it('invoking $scope.showToJoin should change the $scope.currentTab to "toJoin"', function() {
+    createController();
+    $scope.showToJoin();
+    expect($scope.currentTab).toBe('toJoin');
+  });
+
 
   // it('should have a getLinks method on the $scope', function () {
   //   createController();
