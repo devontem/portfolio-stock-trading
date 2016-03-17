@@ -197,7 +197,13 @@ footer.page-footer {
   border-bottom-left-radius: 17px;
   border-bottom-right-radius: 17px;
   padding: 0px 10px;
+<<<<<<< HEAD
   min-width: 310px;
+||||||| merged common ancestors
+  min-width: 460px;
+=======
+  min-width: 360px;
+>>>>>>> materialized datepicker
   margin: 0px 15px;
   height: 50px; }
   .clock::before {
