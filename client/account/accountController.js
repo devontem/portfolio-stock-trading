@@ -55,7 +55,7 @@ app.controller('AccountController', function($scope, $window, AccountFactory, $l
   }
 
   $scope.cancel = function(){
-    $scope.change = false;
+    $scope.newlogin = {};
   }
 
   $scope.updateLogin = function(){
