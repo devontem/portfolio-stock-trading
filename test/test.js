@@ -38,8 +38,11 @@ describe("server", function() {
     });
   });
 
+  var userid;
+  var token;
+
   describe("POST /api/users", function () {
-    it("should return that a token is not provided", function (done) {
+    it("should create user", function (done) {
       // just assume that if it contains an <input> tag its index.html
       request
         .post('/api/users/')
@@ -49,11 +52,27 @@ describe("server", function() {
   });
 
   describe("POST /api/users/signin", function () {
-    it("should return that a token is not provided", function (done) {
+    it("should sign in user", function (done) {
       // just assume that if it contains an <input> tag its index.html
       request
         .post('/api/users/signin')
         .send({ email: 'john', password: 'john'})
+        .expect(200)
+        .end(function(err, res){
+          if((err)) return done(err);
+          userid = res.body.userId;
+          token = res.body.token;
+          done();
+        })
+    });
+  });
+
+  describe("POST /api/users/delete", function () {
+    it("should delete user", function (done) {
+      // just assume that if it contains an <input> tag its index.html
+      request
+        .delete('/api/users')
+        .send({id: userid})
         .expect(200, done)
     });
   });
