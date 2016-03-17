@@ -7,6 +7,8 @@ var server = require("../server/server.js")
 
 var request = supertest.agent(server);
 
+// Testing for GET requests to API and Index.htl
+
 describe("server", function() {
   describe("GET /", function () {
     it("should return the content of index.html", function (done) {
@@ -19,7 +21,6 @@ describe("server", function() {
 
   describe("GET /api/users", function () {
     it("should return the content of api/users", function (done) {
-      // just assume that if it contains an <input> tag its index.html
       request
         .get('/api/users')
         .set('Accept', 'text/plain')
@@ -30,7 +31,6 @@ describe("server", function() {
 
   describe("GET /api/leagues", function () {
     it("should return that a token is not provided", function (done) {
-      // just assume that if it contains an <input> tag its index.html
       request
         .get('/api/leagues')
         .expect('Token not provided')
@@ -40,6 +40,7 @@ describe("server", function() {
 
   var userid;
   var token;
+
 
   describe("POST /api/users", function () {
     it("should create user", function (done) {
@@ -77,4 +78,22 @@ describe("server", function() {
     });
   });
 
+  describe("POST", function(){
+    it("should create a new leageue", function(done){
+      request
+        .post('/api/leagues')
+        .send({
+            ownerid: 1976,
+            name: 'Mocha Testing',
+            maxNum: 100,
+            startbalance: 200,
+            start: null,
+            end: null
+        })
+        .expect(200, done);
+    })
+  })
+
 });
+
+
