@@ -1,7 +1,3 @@
-var goog = {qty: 5, symbol: 'GOOG', name: 'Google Inc.', price: 4.50, amt: '0.45%', marketval: 4.25, marketprice: 4.25, lifetime: 100, pl: 5}
-var apple = {qty: 5, symbol: 'APPL', name: 'Apple Inc.', price: 4.50, amt: '0.45%', marketval: 4.25, marketprice: 4.25, lifetime: 100, pl: 5}
-var mystocks = [goog, apple];
-
 angular.module('app.portfolio', [])
 
 .controller('PortfolioController', function($scope, $window, $stateParams, Portfolio, $rootScope){
