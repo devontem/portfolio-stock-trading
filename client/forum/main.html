@@ -14,10 +14,10 @@
         </thead>
 
         <tbody>
-          <tr>
-            <td><a href="#" style="color: orange">Google or Facebook?</a></td>
-            <td>Teddy Ruxpin</td>
-            <td>September 8, 2015</td>
+          <tr ng-repeat="topic in allTopics">
+            <td><a href="#" style="color: orange">{{topic.title}}</a></td>
+            <td>{{topic.creatorName}}</td>
+            <td>{{topic.createdAt | date:"longDate"}}</td>
             <td>3 hours ago</td>
           </tr>
         </tbody>

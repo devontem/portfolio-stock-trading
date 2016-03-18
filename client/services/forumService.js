@@ -13,10 +13,21 @@ app.factory('forumFactory', ['$http', function($http){
     });
   };
 
+  var showAllTopics = function(){
+    return $http({
+      method: 'GET',
+      url: '/api/forum',
+    })
+    .then(function(topics){
+      return topics;
+    });
+  }
+
 
 
   return {
-    addNewTopic: addNewTopic
+    addNewTopic: addNewTopic,
+    showAllTopics: showAllTopics
   };
 
 

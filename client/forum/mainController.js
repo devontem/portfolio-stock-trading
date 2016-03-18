@@ -6,6 +6,8 @@ app.controller('MainForumController', ['$scope', '$window', 'forumFactory', func
   $scope.topic.username = $window.localStorage.getItem('com.tp.username');
   $scope.topic.userId = $window.localStorage.getItem('com.tp.userId');
 
+  $scope.allTopics;
+
   $scope.openModal = function(){
     $('#createForumPost').openModal();
   }
@@ -20,5 +22,13 @@ app.controller('MainForumController', ['$scope', '$window', 'forumFactory', func
       $('#createForumPost').closeModal();
     })
   }
+
+  $scope.showAllTopics = function(){
+    forumFactory.showAllTopics().then(function(data){
+      $scope.allTopics = data.data;
+    })
+  }
+
+  $scope.showAllTopics();
 
 }])

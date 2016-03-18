@@ -6,5 +6,5 @@ module.exports = function(app){
 
   app.post('/', Auth.authorize, ForumController.addTopic);
 
-  app.post('/topics', Auth.authorize, ForumController.getAllTopics);
+  app.get('/', Auth.authorize, ForumController.getAllTopics);
 }
