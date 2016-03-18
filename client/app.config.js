@@ -25,7 +25,7 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
 
       .state('dashboard', {
         url: '/dashboard',
-        // authenticate: true,
+        authenticate: true,
         views: {
           '': {
             controller: 'DashboardController',
