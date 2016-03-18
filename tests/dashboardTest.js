@@ -30,16 +30,31 @@ describe('DashboardController', function () {
     expect($scope.currentTab).toBe('user');
   });
 
+  it('should have a showToJoin method on the $scope', function() {
+    createController();
+    expect($scope.showToJoin).toBeDefined('user');
+    expect(typeof $scope.showToJoin).toBe('function');
+  });
 
-  // it('should have a getLinks method on the $scope', function () {
-  //   createController();
-  //   expect($scope.getLinks).to.be.a('function');
-  // });
-  // it('should call getLinks() when controller is loaded', function () {
-  //   var mockLinks = [{},{},{}];
-  //   $httpBackend.expectGET("/api/links").respond(mockLinks);
-  //   createController();
-  //   $httpBackend.flush();
-  //   expect($scope.data.links).to.eql(mockLinks);
-  // });
+  it('invoking $scope.showToJoin should change the $scope.currentTab to "toJoin"', function() {
+    createController();
+    $scope.showToJoin();
+    expect($scope.currentTab).toBe('toJoin');
+  });
+
+  it('invoking $scope.showUserLeagues should change the $scope.currentTab to "user"', function() {
+    createController();
+    $scope.showToJoin();
+    $scope.showUserLeagues();
+    expect($scope.currentTab).toBe('user');
+  });
+
+  it('invoking $scope.toggleAdd should change the $scope.showAdd value', function() {
+    createController();
+    $scope.toggleAdd();
+    expect($scope.showadd).toBe(true);
+    $scope.toggleAdd();
+    expect($scope.showadd).toBe(false);
+  });
+
 });
