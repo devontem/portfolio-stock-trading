@@ -4,6 +4,7 @@ app.controller('MainForumController', ['$scope', '$window', function($scope, $wi
 
   $scope.topic = {};
   $scope.topic.username = $window.localStorage.getItem('com.tp.username');
+  $scope.topic.userId = $window.localStorage.getItem('com.tp.userId');
 
   $scope.openModal = function(){
     $('#createForumPost').openModal();
