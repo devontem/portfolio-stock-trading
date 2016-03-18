@@ -4,9 +4,9 @@ app.factory('forumFactory', ['$http', function($http){
 
   var addNewTopic = function(topic){
     return $http({
-      method: 'GET',
+      method: 'POST',
       url: '/api/forum',
-      // data: topic
+      data: topic
     })
     .then(function(err, res){
       if(err){console.log(err);}
