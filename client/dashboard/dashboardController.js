@@ -191,6 +191,12 @@ angular.module('app.dashboard', [])
     return !league.private;
   }
 
+  $scope.notfull = function(league){
+    if(league.maxNum - league.usersJoined > 0){
+      return true;
+    }
+  }
+
   $scope.joinPrivate = function(){
     swal({title: "Join a Private League",
           text: "If you don't know the league code, ask the league owner.",
