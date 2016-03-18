@@ -96,6 +96,7 @@
                   <th data-field="rank">Spots Left</th>
                   <th data-field="percentChange">Start Balance</th>
                   <th data-field="leagueLength">Duration</th>
+                  <th data-field-"startDate">Starts</th>
                   <th data-field="totVal">Join</th>
                 </tr>
               </thead>
@@ -107,6 +108,7 @@
                   <td>{{league.maxNum - league.usersJoined}} of {{league.maxNum}}</td>
                   <td>{{league.startbalance | currency}}</td>
                   <td>Weekly</td>
+                  <td>{{league.start | date:'fullDate'}}</td>
                   <td ><a class="curs" ng-click="joinLeague(league.id)">Click to Join</a></td>
                 </tr>
               </tbody>
