@@ -25,10 +25,20 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
 
       .state('dashboard', {
         url: '/dashboard',
-        authenticate: true,
-        controller: 'DashboardController',
-        controllerAs: 'dashboard',
-        templateUrl: 'dashboard/dashboard.html'
+        // authenticate: true,
+        views: {
+          '': {
+            controller: 'DashboardController',
+            controllerAs: 'dashboard',
+            templateUrl: 'dashboard/dashboard.html'
+          },
+          'badge@dashboard': {
+            controller: 'BadgeController',
+            controllerAs: 'badge',
+            templateUrl: 'badges/badge.html'
+          },
+        }
+
 
       })
 
