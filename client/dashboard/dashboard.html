@@ -47,7 +47,7 @@
 
 
               <tbody>
-                <tr ng-repeat="portfolio in portfolios">
+                <tr ng-repeat="portfolio in portfolios | orderBy:sortEnd:sortReverse">
                   <td><a ng-href="#/leagues/{{portfolio.leagueId}}">{{portfolio.leaguename}}</a></td>
                   <td>{{portfolio.balance | currency}}</td>
                   <td>{{portfolio.portfolioValue | currency}}</td>
@@ -104,7 +104,7 @@
               </thead>
 
 
-              <tbody ng-repeat="league in leagues | filter: notjoined | filter: notprivate | filter: notfull | filter: notstarted | orderBy:sortDate:sortReverse">
+              <tbody ng-repeat="league in leagues | filter: notjoined | filter: notprivate | filter: notfull | filter: notstarted | orderBy:sortStart:sortReverse">
                 <tr >
                   <td>{{league.name}}</td>
                   <td>{{league.maxNum - league.usersJoined}} of {{league.maxNum}}</td>

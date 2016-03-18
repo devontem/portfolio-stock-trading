@@ -44,7 +44,8 @@ angular.module('app.dashboard', [])
   $scope.numtojoin = 0;
   $scope.league.isPrivate = "false";
 
-  $scope.sortDate = 'start';
+  $scope.sortStart = 'start';
+  $scope.sortEnd = 'endDate';
   $scope.sortReverse = false;
 
 
