@@ -163,23 +163,19 @@ angular.module('app.dashboard', [])
 
         $scope.numtojoin = $scope.leagues.length - $scope.portfolios.length;
 
-        console.log('SCOPE.DOT.LEAGUES: ', $scope.leagues)
 
+        // to grab # of portfolios per league to know # of users joined
         for(var i = 0; i < $scope.leagues.length; i++){
 
           (function(index){
             $scope.leagues[index].usersJoined = 0;
             leaderBoardFactory.getPortfolios($scope.leagues[index].id)
               .then(function(portfolio){
-
-                console.log('PORTFOLIO: ', portfolio.length)
-                console.log('THIS IS I: ', index)
                 $scope.leagues[index].usersJoined = portfolio.length;
               })
           })(i)
         }
 
-        console.log('SCOPE.DOT.LEAGUES AFTER: ', $scope.leagues)
       });
   };
 
