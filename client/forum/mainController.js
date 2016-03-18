@@ -13,6 +13,11 @@ app.controller('MainForumController', ['$scope', '$window', 'forumFactory', func
   $scope.createTopic = function(topic){
     forumFactory.addNewTopic(topic).then(function(err, res){
       if(err){console.log(err)}
+    }).then(function(){
+      $scope.topic.title = '';
+      $scope.topic.description = '';
+
+      $('#createForumPost').closeModal();
     })
   }
 
