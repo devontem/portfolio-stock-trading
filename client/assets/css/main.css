@@ -93,6 +93,9 @@ footer.page-footer {
 .leaderboard-container {
   background-color: white; }
 
+.secretCode {
+  margin: 0px 6px !important; }
+
 .ng-modal {
   max-height: 90%; }
 
