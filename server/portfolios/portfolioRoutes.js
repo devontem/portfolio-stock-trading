@@ -11,8 +11,8 @@ module.exports = function(app){
 
   // gets all the stocks in a users portfolio
 
-  app.get('/stocks/:leagueId/:userId', portfolioController.getUserStocks);
-  app.put('/stocks/:leagueId/:userId', portfolioController.updateUserStocks);
+  app.get('/stocks/:leagueId/:userId', Auth.authorize, portfolioController.getUserStocks);
+  app.put('/stocks/:leagueId/:userId', Auth.authorize, portfolioController.updateUserStocks);
   
   // gets users portfolio basic info
   app.get('/:leagueId/:userId', Auth.authorize, portfolioController.getPortfolio);
