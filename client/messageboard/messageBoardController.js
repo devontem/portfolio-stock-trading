@@ -34,6 +34,6 @@ app.controller('MessageBoardController', function($scope, messageBoardFactory, $
   }
 
   showPosts();
-  $window.setInterval(showPosts, 1000);
+  // $window.setInterval(showPosts, 1000);
 
 });

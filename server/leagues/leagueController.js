@@ -7,13 +7,21 @@ var User = require('../../db/models').User;
 module.exports.addLeague = function (req, res){
   var creatorId = req.body.creatorId;
   var creatorName = req.body.creatorName;
+  var randomCode = null;
+
+  // assigns a random secret code for private rooms
+  if (req.body.private) { randomCode = makeCode(); };
+  console.log('PRIVATE CODE', randomCode)
+
   League.create({
     ownerid: creatorId,
   	name: req.body.name,
   	maxNum: req.body.max,
     startbalance: req.body.balance,
     start:req.body.start,
-    end: req.body.end
+    end: req.body.end,
+    private: req.body.private,
+    code: randomCode
   })
   .then(function (league) {
     Portfolio.create({
@@ -29,7 +37,7 @@ module.exports.addLeague = function (req, res){
         console.log('successfully added')
       })
 
-  	res.send({id: league.id, name: league.name, maxNum: league.num, startbalance: league.balance})
+  	res.send({id: league.id, name: league.name, private: league.private, code: league.code, maxNum: league.num, startbalance: league.balance})
   })
   .catch(function (err) {
   	console.error('Error creating league: ', err.message);
@@ -120,7 +128,12 @@ module.exports.getUsers = function(req, res){
 }
 
 
-
-
+function makeCode(){
+  var text = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  for(var i=0; i < 8; i++ )
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+  return text;
+}
 
 

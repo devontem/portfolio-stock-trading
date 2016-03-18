@@ -42,6 +42,7 @@ angular.module('app.dashboard', [])
   $scope.league = {};
   $scope.portfolios = {};
   $scope.numtojoin = 0;
+  $scope.league.isPrivate = "false";
 
   $scope.pickstart = function(){
     var start = $('#startdate').pickadate({
@@ -106,9 +107,21 @@ angular.module('app.dashboard', [])
     var creatorId = $window.localStorage.getItem('com.tp.userId');
     league['creatorId']= creatorId;
     league['creatorName']= creatorName;
+
+    league.private = JSON.parse(league.isPrivate);
     DashboardFactory.addLeague(league)
       .then(function(league){
         $scope.toggleAdd();
+        console.log('league info new$$', league)
+        if (league.private === true){
+          console.log('it is private')
+          swal({
+            title: "Private League Password",
+            text: "<p style='font-size: 1.2em'>Send this code to friends and have them enter it in the dashboard. <br /> <br /><div style='font-size: 1.6em' class='chip'><b>"+league.code+"</b></div>",
+            html: true
+          });
+        }
+
         $window.location.href = '/#/leagues/'+league.id;
       });
   };
@@ -153,6 +166,46 @@ angular.module('app.dashboard', [])
     }
     return true;
   };
+
+  $scope.notprivate = function(league){
+    return !league.private;
+  }
+
+  $scope.joinPrivate = function(){
+    swal({title: "Join a Private League",  
+          text: "If you don't know the league code, ask the league owner.",   
+          type: "input",   
+          showCancelButton: true,   
+          closeOnConfirm: false,   
+          animation: "slide-from-top",   
+          inputPlaceholder: ""
+        }, function(inputValue){   
+          if (inputValue === false) return false;      
+          if (inputValue === "") {     
+            swal.showInputError("You need to write something!");     
+            return false   
+          }
+
+          var found = false;
+          for (var i = 0; i < $scope.leagues.length; i++){
+            if ($scope.leagues[i].private && $scope.leagues[i].code === inputValue){
+              found = true;
+              if ($scope.notjoined($scope.leagues[i])){
+                swal("Nice!", "Joining the league: "+ $scope.leagues[i].name);
+                $scope.joinLeague($scope.leagues[i].id);
+              } else {
+                swal.showInputError("You are already in this league!");
+                return false;
+              }
+              break;
+            }
+          }
+          if (!found){
+            swal.showInputError("Invalid Code."); 
+            return false;
+          }
+        });
+  }
 
   $scope.getUserLeagues();
   $scope.getLeaguesToJoin();
