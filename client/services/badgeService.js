@@ -1,6 +1,6 @@
 app
   .factory('BadgeFactory', ['$http', function ($http) {
-    var addLeague = function(userId){
+    var getBadges = function(userId){
       return $http({
         method: 'GET',
         url: '/api/badges',
@@ -9,5 +9,9 @@ app
       .then(function(badges){
         return badges.data;
       });
+    };
+
+    return {
+      getBadges: getBadges
     };
   }]);
