@@ -53,6 +53,7 @@ var Portfolio = orm.define('Portfolio', {
 // Forum & Topics Model
 var Forum = orm.define('Forum', {
   title: Sequelize.STRING,
+  description: Sequelize.STRING,
   creatorName: Sequelize.STRING,
   creatorId: Sequelize.INTEGER
 })
@@ -135,6 +136,7 @@ Transaction.sync();
 League_user.sync();
 Message.sync();
 Forum.sync();
+Topic.sync();
 
 
 exports.League_user = League_user;
@@ -144,5 +146,6 @@ exports.Portfolio = Portfolio;
 exports.Transaction = Transaction;
 exports.Message = Message;
 exports.Forum = Forum;
+exports.Topic = Topic;
 
 
