@@ -19,7 +19,23 @@ describe("server", function() {
     });
   });
 
-  describe("GET /api/users", function () {
+  describe("GET /dashboard", function () {
+    it("should NOT return the content of dashboard.html when not logged in", function (done) {
+      request
+        .get('/dashboard')
+        .expect(303, done);
+    });
+  });
+
+  describe("GET /leagues", function () {
+    it("should NOT return the content of leagues.html when not logged in", function (done) {
+      request
+        .get('/api/leagues')
+        .expect(403, done);
+    });
+  });
+
+  describe("GET /api/users without logged in", function () {
     it("should return the content of api/users", function (done) {
       request
         .get('/api/users')
@@ -29,10 +45,19 @@ describe("server", function() {
     });
   });
 
-  describe("GET /api/leagues", function () {
+  describe("GET /api/leagues without logged in", function () {
     it("should return that a token is not provided", function (done) {
       request
         .get('/api/leagues')
+        .expect('Token not provided')
+        .expect(403, done)
+    });
+  });
+
+  describe("GET /api/portfolios without logged in", function () {
+    it("should return that a token is not provided", function (done) {
+      request
+        .get('/api/portfolios/1/1')
         .expect('Token not provided')
         .expect(403, done)
     });
@@ -76,11 +101,14 @@ describe("server", function() {
             max: 100,
             balance: 200,
             start: null,
-            end: null
+            end: null,
+            private: true,
+            code: '123'
         })
         .expect(200, done);
     })
   })
+
 
   describe("POST /api/users/delete", function () {
     it("should delete user", function (done) {

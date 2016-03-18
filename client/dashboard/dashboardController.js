@@ -191,7 +191,6 @@ angular.module('app.dashboard', [])
               })
           })(i)
         }
-
       });
   };
 
