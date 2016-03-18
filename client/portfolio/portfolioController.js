@@ -17,6 +17,13 @@ angular.module('app.portfolio', [])
 		return $scope.chooseStock(data);
 	});
 
+	 $scope.resetFields = function (){
+		$scope.stock = undefined;
+		$scope.stockAmount = '';
+		$scope.stockInput = '';
+		$scope.estPrice = '';
+	};
+
 	$scope.chooseStock = function(stockName){
 		Portfolio.getStock(stockName).then(function(stock){
 			if(!stock.Ask){
@@ -27,7 +34,7 @@ angular.module('app.portfolio', [])
 			$scope.estPrice = stock.Ask;
 		}
 		});
-		resetFields();
+		$scope.resetFields();
 	};
 
 	// Either buys a stock or sells it depending on selection
@@ -58,7 +65,7 @@ angular.module('app.portfolio', [])
 		Portfolio.buySell(options).then(function(data){
 			console.log('Transaction posted: ', data);
 			Materialize.toast('You traded '+options.shares+' shares in '+options.company, 3000, 'rounded');
-			resetFields();
+			$scope.resetFields();
 			updatePortfolio();
 		});
 	};
@@ -87,13 +94,6 @@ angular.module('app.portfolio', [])
         scrollTop: $(".make-trades").offset().top
     }, 1500);
 	};
-
-	function resetFields(){
-		$scope.stock = undefined;
-		$scope.stockAmount = '';
-		$scope.stockInput = '';
-		$scope.estPrice = '';
-	}
 
 	$scope.updateAmounts = function(){
 		$scope.estPrice = $scope.stockAmount * $scope.stock.Ask;
