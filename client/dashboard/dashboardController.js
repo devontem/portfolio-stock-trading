@@ -44,6 +44,10 @@ angular.module('app.dashboard', [])
   $scope.numtojoin = 0;
   $scope.league.isPrivate = "false";
 
+  $scope.sortStart = 'start';
+  $scope.sortEnd = 'endDate';
+  $scope.sortReverse = false;
+
 
   $scope.pickstart = function(){
     var start = $('#startdate').pickadate({
@@ -141,7 +145,19 @@ angular.module('app.dashboard', [])
     DashboardFactory.getUserLeagues(userId)
       .then(function(portfolios){
         $scope.portfolios = portfolios;
-      });
+
+        for(var i = 0; i < $scope.portfolios.length; i++){
+
+          (function(index){
+            $scope.portfolios[index].endDate = '';
+            DashboardFactory.getLeagueById($scope.portfolios[index].id)
+              .then(function(league){
+                $scope.portfolios[index].endDate = league.end;
+              })
+          })(i)
+        }
+
+      })
   };
 
   $scope.joinLeague = function (leagueId) {
@@ -160,7 +176,7 @@ angular.module('app.dashboard', [])
     DashboardFactory.getAvailLeagues()
       .then(function(leagues){
         $scope.leagues = leagues;
-
+        console.log($scope.leagues)
         $scope.numtojoin = $scope.leagues.length - $scope.portfolios.length;
 
 
@@ -193,6 +209,16 @@ angular.module('app.dashboard', [])
 
   $scope.notfull = function(league){
     if(league.maxNum - league.usersJoined > 0){
+      return true;
+    }
+  }
+
+  $scope.notstarted = function(league){
+    var now = new Date();
+    var convertedNow = moment.utc(now).format();
+    var start = league.start;
+
+    if(convertedNow <= start){
       return true;
     }
   }

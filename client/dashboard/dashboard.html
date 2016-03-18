@@ -41,16 +41,18 @@
                   <th data-field="rank">Cash Balance</th>
                   <th data-field="rank">Stock Value</th>
                   <th data-field="rank">Total Value</th>
+                  <td data-field="endDate">League Ends<th>
                 </tr>
               </thead>
 
 
               <tbody>
-                <tr ng-repeat="portfolio in portfolios">
+                <tr ng-repeat="portfolio in portfolios | orderBy:sortEnd:sortReverse">
                   <td><a ng-href="#/leagues/{{portfolio.leagueId}}">{{portfolio.leaguename}}</a></td>
                   <td>{{portfolio.balance | currency}}</td>
                   <td>{{portfolio.portfolioValue | currency}}</td>
                   <td>{{portfolio.balance + portfolio.portfolioValue | currency}}</td>
+                  <td>{{portfolio.endDate | date:'fullDate'}}</td>
                 </tr>
               </tbody>
             </table>
@@ -96,17 +98,19 @@
                   <th data-field="rank">Spots Left</th>
                   <th data-field="percentChange">Start Balance</th>
                   <th data-field="leagueLength">Duration</th>
+                  <th data-field="startDate">Starts</th>
                   <th data-field="totVal">Join</th>
                 </tr>
               </thead>
 
 
-              <tbody ng-repeat="league in leagues | filter: notjoined | filter: notprivate | filter: notfull">
+              <tbody ng-repeat="league in leagues | filter: notjoined | filter: notprivate | filter: notfull | filter: notstarted | orderBy:sortStart:sortReverse">
                 <tr >
                   <td>{{league.name}}</td>
                   <td>{{league.maxNum - league.usersJoined}} of {{league.maxNum}}</td>
                   <td>{{league.startbalance | currency}}</td>
                   <td>Weekly</td>
+                  <td>{{league.start | date:'fullDate'}}</td>
                   <td ><a class="curs" ng-click="joinLeague(league.id)">Click to Join</a></td>
                 </tr>
               </tbody>
