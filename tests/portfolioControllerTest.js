@@ -32,7 +32,7 @@ describe('PortfolioController', function () {
 
   it('should have a function called resetFields which clears the stock, stockAmount, stockInput, and estPrice $scope properties', function () {
     createController();
-    resetFields();
+    $scope.resetFields();
     expect($scope.stock).toBe(undefined);
     expect($scope.stockAmount).toBe('');
     expect($scope.stockInput).toBe('');
