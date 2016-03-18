@@ -114,7 +114,6 @@ module.exports.getPortfolio = function(req, res){
     UserId: req.params.userId,
     leagueId: req.params.leagueId
   }}).then(function(portfolio){
-    
     res.send(portfolio);
   })
   .catch(function(err){

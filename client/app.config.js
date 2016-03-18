@@ -15,6 +15,7 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
 
       .state('signin', {
         url: '/',
+        authenticate: true,
         controller: 'SigninController',
         controllerAs: 'signin',
         templateUrl: 'signin/signin.html'
@@ -31,12 +32,14 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
 
       .state('account', {
         url: '/account',
+        authenticate: true,
         controller: 'AccountController',
         templateUrl: 'account/account.html'
       })
 
       .state('league', {
         url: '/leagues/:leagueId',
+        authenticate: true,
         views: {
           /*main view of the entire league template*/
           '': {
