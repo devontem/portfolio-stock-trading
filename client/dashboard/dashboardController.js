@@ -35,7 +35,7 @@ angular.module('app.dashboard', [])
   };
 })
 
-.controller('DashboardController', ['$scope', '$window', 'DashboardFactory', function ($scope, $window, DashboardFactory) {
+.controller('DashboardController', ['$scope', '$window', 'DashboardFactory', 'leaderBoardFactory', function ($scope, $window, DashboardFactory, leaderBoardFactory) {
 
   $scope.currentTab = 'user';
   $scope.leagues;
@@ -43,6 +43,7 @@ angular.module('app.dashboard', [])
   $scope.portfolios = {};
   $scope.numtojoin = 0;
   $scope.league.isPrivate = "false";
+
 
   $scope.pickstart = function(){
     var start = $('#startdate').pickadate({
@@ -62,7 +63,7 @@ angular.module('app.dashboard', [])
             picker.close();
         } else {
             picker.open();
-        }                        
+        }
         event.stopPropagation();
     });
   }
@@ -85,7 +86,7 @@ angular.module('app.dashboard', [])
             pickers.close();
         } else {
             pickers.open();
-        }                        
+        }
         event.stopPropagation();
     });
   }
@@ -151,14 +152,33 @@ angular.module('app.dashboard', [])
       });
   };
 //returns all public leagues
+//
+
+
   $scope.getLeaguesToJoin = function () {
     var userId = $window.localStorage.getItem('com.tp.userId');
     DashboardFactory.getAvailLeagues()
       .then(function(leagues){
         $scope.leagues = leagues;
+
         $scope.numtojoin = $scope.leagues.length - $scope.portfolios.length;
+
+
+        // to grab # of portfolios per league to know # of users joined
+        for(var i = 0; i < $scope.leagues.length; i++){
+
+          (function(index){
+            $scope.leagues[index].usersJoined = 0;
+            leaderBoardFactory.getPortfolios($scope.leagues[index].id)
+              .then(function(portfolio){
+                $scope.leagues[index].usersJoined = portfolio.length;
+              })
+          })(i)
+        }
+
       });
   };
+
 
   $scope.notjoined = function(league){
     for(var i=0; i<$scope.portfolios.length; i++){
@@ -172,18 +192,18 @@ angular.module('app.dashboard', [])
   }
 
   $scope.joinPrivate = function(){
-    swal({title: "Join a Private League",  
-          text: "If you don't know the league code, ask the league owner.",   
-          type: "input",   
-          showCancelButton: true,   
-          closeOnConfirm: false,   
-          animation: "slide-from-top",   
+    swal({title: "Join a Private League",
+          text: "If you don't know the league code, ask the league owner.",
+          type: "input",
+          showCancelButton: true,
+          closeOnConfirm: false,
+          animation: "slide-from-top",
           inputPlaceholder: ""
-        }, function(inputValue){   
-          if (inputValue === false) return false;      
-          if (inputValue === "") {     
-            swal.showInputError("You need to write something!");     
-            return false   
+        }, function(inputValue){
+          if (inputValue === false) return false;
+          if (inputValue === "") {
+            swal.showInputError("You need to write something!");
+            return false
           }
 
           var found = false;
@@ -201,7 +221,7 @@ angular.module('app.dashboard', [])
             }
           }
           if (!found){
-            swal.showInputError("Invalid Code."); 
+            swal.showInputError("Invalid Code.");
             return false;
           }
         });
