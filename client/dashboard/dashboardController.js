@@ -140,8 +140,21 @@ angular.module('app.dashboard', [])
     var userId = $window.localStorage.getItem('com.tp.userId');
     DashboardFactory.getUserLeagues(userId)
       .then(function(portfolios){
+        console.log('PORTFOLIOS!!!!!', portfolios)
         $scope.portfolios = portfolios;
-      });
+
+        for(var i = 0; i < $scope.portfolios.length; i++){
+
+          (function(index){
+            $scope.portfolios[index].endDate = '';
+            DashboardFactory.getLeagueById($scope.portfolios[index].id)
+              .then(function(league){
+                $scope.portfolios[index].endDate = league.end;
+              })
+          })(i)
+        }
+
+      })
   };
 
   $scope.joinLeague = function (leagueId) {
@@ -201,10 +214,8 @@ angular.module('app.dashboard', [])
     var now = new Date();
     var convertedNow = moment.utc(now).format();
     var start = league.start;
-    console.log('NOW:', convertedNow)
-    console.log('START:', start)
+
     if(convertedNow <= start){
-      console.log('TRUE NOW IS BEFORE START')
       return true;
     }
   }

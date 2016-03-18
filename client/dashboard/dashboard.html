@@ -41,6 +41,7 @@
                   <th data-field="rank">Cash Balance</th>
                   <th data-field="rank">Stock Value</th>
                   <th data-field="rank">Total Value</th>
+                  <td data-field="endDate">League Ends<th>
                 </tr>
               </thead>
 
@@ -51,6 +52,7 @@
                   <td>{{portfolio.balance | currency}}</td>
                   <td>{{portfolio.portfolioValue | currency}}</td>
                   <td>{{portfolio.balance + portfolio.portfolioValue | currency}}</td>
+                  <td>{{portfolio.endDate | date:'fullDate'}}</td>
                 </tr>
               </tbody>
             </table>
