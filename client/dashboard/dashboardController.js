@@ -44,6 +44,9 @@ angular.module('app.dashboard', [])
   $scope.numtojoin = 0;
   $scope.league.isPrivate = "false";
 
+  $scope.sortDate = 'start';
+  $scope.sortReverse = false;
+
 
   $scope.pickstart = function(){
     var start = $('#startdate').pickadate({
@@ -140,7 +143,6 @@ angular.module('app.dashboard', [])
     var userId = $window.localStorage.getItem('com.tp.userId');
     DashboardFactory.getUserLeagues(userId)
       .then(function(portfolios){
-        console.log('PORTFOLIOS!!!!!', portfolios)
         $scope.portfolios = portfolios;
 
         for(var i = 0; i < $scope.portfolios.length; i++){

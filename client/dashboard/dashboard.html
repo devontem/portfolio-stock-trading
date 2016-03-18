@@ -98,13 +98,13 @@
                   <th data-field="rank">Spots Left</th>
                   <th data-field="percentChange">Start Balance</th>
                   <th data-field="leagueLength">Duration</th>
-                  <th data-field-"startDate">Starts</th>
+                  <th data-field="startDate">Starts</th>
                   <th data-field="totVal">Join</th>
                 </tr>
               </thead>
 
 
-              <tbody ng-repeat="league in leagues | filter: notjoined | filter: notprivate | filter: notfull | filter: notstarted">
+              <tbody ng-repeat="league in leagues | filter: notjoined | filter: notprivate | filter: notfull | filter: notstarted | orderBy:sortDate:sortReverse">
                 <tr >
                   <td>{{league.name}}</td>
                   <td>{{league.maxNum - league.usersJoined}} of {{league.maxNum}}</td>
