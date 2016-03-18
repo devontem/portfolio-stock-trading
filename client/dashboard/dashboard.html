@@ -150,9 +150,9 @@
           <input type="text" ng-change="ll()" ng-model='league.balance' required>
           <br>
           <label>Start: </label><br>
-          <input type="date" id="startdate" ng-model='league.start' ng-click="pickstart()">
+          <input type="date" id="startdate" ng-model='league.start' ng-click="pickstart()" format-date>
           <label>End Date: </label><br>
-          <input type="date" id="enddate" ng-model='league.end' ng-click="pickend()">
+          <input type="date" id="enddate" ng-model='league.end' ng-click="pickend()" format-date>
           <span>
             <input name="isPrivate" ng-model="league.isPrivate" value="false" type="radio" id="test1" />
             <label for="test1">Public League</label>
