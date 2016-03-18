@@ -35,7 +35,7 @@ app.controller('LeaderBoardController', function($scope, $window, $stateParams, 
         var userId = $window.localStorage.getItem('com.tp.userId');
         var joined = false;
         for(var i=0; i<portfolios.length; i++){
-          if(portfolios[i].UserId === userId) joined = true;
+          if(portfolios[i].UserId === Number(userId)) joined = true;
         }
         if(!joined) {
           $window.location.href = '/#/dashboard';
