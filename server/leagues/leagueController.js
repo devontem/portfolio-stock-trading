@@ -119,7 +119,7 @@ module.exports.getOneLeague = function (req, res) {
 module.exports.getUsers = function(req, res){
   Portfolio.findAll({where: {leagueId: req.body.leagueId}})
     .then(function(portfolios){
-
+    if(!portfolios) res.redirect("/#/dashboard");
       res.send(portfolios);
     })
     .catch(function (err) {
