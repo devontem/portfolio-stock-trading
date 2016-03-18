@@ -1,12 +1,6 @@
 var Forum = require('../../db/models').Forum;
 
-title: Sequelize.STRING,
-description: Sequelize.STRING,
-creatorName: Sequelize.STRING,
-creatorId: Sequelize.INTEGER
-
 module.exports.addTopic = function (req, res){
-
   Forum.create({
     title: req.body.title,
     description: req.body.description,

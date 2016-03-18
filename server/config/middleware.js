@@ -10,7 +10,7 @@ var Transaction = require('../../db/models').Transaction;
 var Room_user = require('../../db/models').Room_user;
 var Message = require('../../db/models').Message;
 var Forum = require('../../db/models').Forum;
-var Topic = require('../../db/models').Topic
+var Topic = require('../../db/models').Topic;
 var expressJwt = require('express-jwt');
 var jwt = require('jsonwebtoken');
 var morgan = require('morgan');
@@ -72,6 +72,6 @@ module.exports = function (app, express) {
 
   require('../transactions/transactionRoutes.js')(transactionRouter);
 
-  require('../forum/forumRoutes.js', forumRouter);
+  require('../forum/forumRoutes.js')(forumRouter);
 
 }

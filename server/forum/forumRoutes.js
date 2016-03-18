@@ -4,7 +4,7 @@ var Auth = require('./../config/auth.js');
 module.exports = function(app){
 
 
-  app.post('/', Auth.authorize, ForumController.addTopic);
+  app.get('/', function(){console.log('IS THIS WORKING???')}, Auth.authorize, ForumController.addTopic);
 
-  app.post('/', Auth.authorize, ForumController.getAllTopics);
+  app.post('/topics', Auth.authorize, ForumController.getAllTopics);
 }
