@@ -30,6 +30,13 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
 
       })
 
+      .state('forum', {
+        url: '/forum',
+        authenticate: true,
+        controller: 'MainForumController',
+        templateUrl: 'forum/main.html'
+      })
+
       .state('account', {
         url: '/account',
         authenticate: true,
