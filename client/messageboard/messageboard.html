@@ -12,7 +12,10 @@
 
              <tbody ng-repeat="post in posts">
                <tr class="posted-messages">
-                 <td>{{post.name}} ({{post.createdAt | date:"MM/dd/yyyy '@ h:mma"}}) - {{post.message}}</td>
+                 <td>
+                 <span style="font-size: 19px; font-weight: 700; padding-right: 5px; padding-left: 10px; color: #666666;">{{post.name}}</span><span style="font-style: italic; font-size: 12px; color:#b0b0b0;">{{post.createdAt | date:"MM/dd/yyyy '@ h:mma"}}</span>
+                 <p style="padding-left: 35px"> - {{post.message}}</p>
+                 </td>
                </tr>
 
              </tbody>
