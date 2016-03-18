@@ -9,8 +9,13 @@
       </div>
       <div class="col s12 l4">
         <div class="card-panel z-index-5 center">
-          <h7>No league? No Problem.</h7>
-          <h7 class="btn std-btn" ng-click="toggleAdd()">Create League</h7>
+          <section>
+            <h7 class="btn std-btn" ng-click="toggleAdd()">Create League</h7>
+          </section>
+          <div class="divider"></div>
+          <section>
+            <h7 class="btn std-btn" ng-click="joinPrivate()">Join Private League</h7>
+          </section>
         </div>
       </div>
     </div>
@@ -95,7 +100,7 @@
               </thead>
 
 
-              <tbody ng-repeat="league in leagues | filter: notjoined ">
+              <tbody ng-repeat="league in leagues | filter: notjoined | filter: notprivate">
                 <tr >
                   <td>{{league.name}}</td>
                   <td>{{league.maxNum}}</td>
@@ -108,15 +113,16 @@
           </div>
           </div>
           <!-- Prompt user to create  league if none exist -->
-          <div class="col s12 m6" ng-if="numtojoin === 0">
-            <div class="card blue-grey darken-1 z-depth-4">
-              <div class="card-content white-text">
-                <span class="card-title">Uh oh!</span>
-                <p>It looks like there are no currently available public leagues. If you would like to make, be our guest.
-              </div>
-              <div class="card-action">
-                <!-- TODO: Set up the correct route -->
-                <a href="#">Create a League</a>
+          <div class="col s12" ng-if="numtojoin === 0">
+            <div class="col s12" ng-if="portfolios.length === 0">
+              <div class="card grey lighten-2 center">
+                <div class="card-content">
+                  <span class="card-title">Uh Oh!</span>
+                  <p>It looks like there are no currently available public leagues. If you would like to make, be our guest.</p>
+                </div>
+                <div class="card-action">
+                  <a href="#">Create a League</a>
+                </div>
               </div>
             </div>
           </div>
@@ -135,13 +141,21 @@
           <input type="text" ng-model='league.max' required>
           <br>
           <label>Buying Power: </label><br>
-          <input type="text" ng-model='league.balance' required>
+          <input type="text" ng-change="ll()" ng-model='league.balance' required>
           <br>
           <label>Start: </label><br>
           <input type="date" id="startdate" ng-model='league.start' ng-click="pickstart()">
           <label>End Date: </label><br>
           <input type="date" id="enddate" ng-model='league.end' ng-click="pickend()">
-          <button class="waves-effect waves-light btn std-btn">Create</button>
+          <span>
+            <input name="isPrivate" ng-model="league.isPrivate" value="false" type="radio" id="test1" />
+            <label for="test1">Public League</label>
+          </span>
+          <span>
+            <input name="isPrivate" ng-model="league.isPrivate" value="true" type="radio" id="test2" />
+            <label for="test2">Private League</label>
+          </span>
+          <button class="waves-effect waves-light btn std-btn center">Create</button>
         </form>
       </div>
       </addleague-directive>

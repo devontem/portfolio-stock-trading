@@ -79,7 +79,9 @@ var League = orm.define('league', {
   maxNum: Sequelize.INTEGER,
   startbalance: Sequelize.FLOAT,
   start: Sequelize.STRING,
-  end: Sequelize.STRING
+  end: Sequelize.STRING,
+  private: Sequelize.BOOLEAN,
+  code: Sequelize.STRING
 });
 
 //Joint table for League and user

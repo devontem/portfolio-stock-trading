@@ -59,7 +59,6 @@ app.controller('AccountController', function($scope, $window, AccountFactory, $l
   }
 
   $scope.updateLogin = function(){
-    console.log('hielfd')
     AccountFactory.editLogin($scope.newlogin)
       .then(function(user){
         if(user.data === "Wrong old password"){

@@ -45,7 +45,7 @@ a{
 .get-started {
 	background-color: $bg-color;
 	color: white;
-	height: calc(100vh - 64px)
+	height: calc(100vh - 64px);
 	min-height: 500px;
 	background-image: url('../img/team.png');
 	background-size: contain;
@@ -484,14 +484,14 @@ th{
 
 	.header{
 		h2{
-			margin: 10px;
+			margin: 30px 0px;
 		}
 		h7{
 			margin: 10px;
 		}
 		.card-panel{
 			padding: 10px;
-			min-height: 100px;
+			min-height: 145px;
 		}
 	}
 
