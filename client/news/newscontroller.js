@@ -16,7 +16,7 @@ app.controller('NewsController', function($scope, $window, $stateParams, News){
       
     })
   }
-  $scope.getTweets();
+  //$scope.getTweets();
 })
 .factory('News', function($http) {
   var getNews = function(userId, leagueId) {

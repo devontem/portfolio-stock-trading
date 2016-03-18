@@ -63,7 +63,7 @@ module.exports = function(config) {
     plugins : [
       'karma-chrome-launcher',
       'karma-jasmine',
-        'karma-spec-reporter'
+      'karma-spec-reporter'
     ],
 
     // web server port
