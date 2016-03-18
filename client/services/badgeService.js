@@ -1,13 +1,15 @@
 app
   .factory('BadgeFactory', ['$http', function ($http) {
-    var getBadges = function(userId){
+    var getBadges = function(){
+      // pass in user id
       return $http({
         method: 'GET',
         url: '/api/badges',
-        data: userId
+        // data: userId
       })
       .then(function(badges){
-        return badges.data;
+        console.log('******',badges);
+        return badges;
       });
     };
 
