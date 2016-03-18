@@ -13,6 +13,7 @@ module.exports.getBadges = function(req, res){
   // .catch(function(err){
   //   res.send("There was an error: ", err);
   // });
+  console.log('(((((((((((())))))))))))', req.body.userId);
   res.send('badge route works');
 
 };
