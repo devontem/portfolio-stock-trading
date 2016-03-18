@@ -7,7 +7,8 @@ angular.module('app.portfolio', [])
 .controller('PortfolioController', function($scope, $window, $stateParams, Portfolio, $rootScope){
 	// MAKE A TRADE MODAL
 	$scope.leagueId = $stateParams.leagueId;
-	$scope.userId = $window.localStorage.getItem('com.tp.userId');
+	$scope.userId;
+	$window.localStorage.getItem('com.tp.userId');
 	$scope.fees = 10;
 	$scope.estPrice = 0;
 	$scope.action = false;
