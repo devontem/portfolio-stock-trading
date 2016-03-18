@@ -101,7 +101,7 @@
               </thead>
 
 
-              <tbody ng-repeat="league in leagues | filter: notjoined | filter: notprivate | filter: notfull">
+              <tbody ng-repeat="league in leagues | filter: notjoined | filter: notprivate | filter: notfull | filter: notstarted">
                 <tr >
                   <td>{{league.name}}</td>
                   <td>{{league.maxNum - league.usersJoined}} of {{league.maxNum}}</td>

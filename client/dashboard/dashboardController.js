@@ -160,7 +160,7 @@ angular.module('app.dashboard', [])
     DashboardFactory.getAvailLeagues()
       .then(function(leagues){
         $scope.leagues = leagues;
-
+        console.log($scope.leagues)
         $scope.numtojoin = $scope.leagues.length - $scope.portfolios.length;
 
 
@@ -193,6 +193,18 @@ angular.module('app.dashboard', [])
 
   $scope.notfull = function(league){
     if(league.maxNum - league.usersJoined > 0){
+      return true;
+    }
+  }
+
+  $scope.notstarted = function(league){
+    var now = new Date();
+    var convertedNow = moment.utc(now).format();
+    var start = league.start;
+    console.log('NOW:', convertedNow)
+    console.log('START:', start)
+    if(convertedNow <= start){
+      console.log('TRUE NOW IS BEFORE START')
       return true;
     }
   }
