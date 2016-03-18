@@ -60,12 +60,24 @@ app
       });
     }
 
+    var getPortfolios = function(leagueID){
+      return $http({
+        method: 'POST',
+        url: '/api/leagues/getusers',
+        data: {leagueId: leagueID}
+      })
+      .then(function(portfolios){
+        return portfolios.data;
+      });
+    };
+
     return {
       addLeague: addLeague,
       getUserLeagues: getUserLeagues,
       getAvailLeagues: getAvailLeagues,
       joinLeague: joinLeague,
-      getLeagueById: getLeagueById
+      getLeagueById: getLeagueById,
+      getPortfolios: getPortfolios
     };
 
   })
