@@ -20,6 +20,7 @@ app.controller('MainForumController', ['$scope', '$window', 'forumFactory', func
       $scope.topic.description = '';
 
       $('#createForumPost').closeModal();
+      $scope.showAllTopics();
     })
   }
 
