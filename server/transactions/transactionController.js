@@ -44,7 +44,7 @@ module.exports.buySell = function(req, res){
   .catch(function(err){
       res.send('Error: ', err);
     });
-}
+};
 
 // module.exports.getUserPortfolio = function(req, res){
 //   console.log('hey')
@@ -102,7 +102,7 @@ module.exports.getTransactions = function(req, res){
     res.send("There was an error: ", err);
   })
 
-}
+};
 
 
 // //Get all transactions of Portfolio by passing in portfolioID
