@@ -38,7 +38,7 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
       })
 
       .state('topic', {
-        url: '/topic',
+        url: '/topics/:topicId',
         authenticate: true,
         controller: 'TopicController',
         templateUrl: 'topic/topic.html'
