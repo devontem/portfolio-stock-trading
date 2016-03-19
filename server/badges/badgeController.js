@@ -8,7 +8,19 @@ module.exports.getBadges = function(req, res){
   var id = req.body.userId;
   Badge_user.findAll({UserId: id}).then(function(badges){
     if(badges){
-      res.json(badges);
+      var badgeList = [];
+      for (var i = 0; i < badges.length; i++) {
+        badgeList.push(badges[i].dataValues.BadgeId);
+      }
+      console.log('*******', badgeList);
+      Badge.findAll({where: {id: badgeList}}).then(function(badgeDescription){
+        console.log(badgeDescription);
+        res.json(badgeDescription);
+      })
+      .catch(function (err) {
+        console.log('Error querying the badges databaes:', err);
+        res.end();
+      });
     }else{
       console.log('No badges currently found!');
       res.end();
