@@ -47,6 +47,34 @@ module.exports.postBadge = function(req, res){
 
 };
 
+//fethes badges the user has not earned yet
+module.exports.possibleBadges = function (req, res) {
+  var id = req.body.userId;
+  Badge_user.findAll({UserId: id}).then(function(badges){
+    if(badges){
+      var badgeList = [];
+      for (var i = 0; i < badges.length; i++) {
+        badgeList.push(badges[i].dataValues.BadgeId);
+      }
+      console.log('*******', badgeList);
+      Badge.findAll({where: {id: {$not: badgeList}}}).then(function(badgeDescription){
+        res.json(badgeDescription);
+      })
+      .catch(function (err) {
+        console.log('Error querying the badges databaes:', err);
+        res.end();
+      });
+    }else{
+      console.log('No badges currently found!');
+      res.end();
+    }
+  })
+  .catch(function(err){
+    console.error('Error getting badges ', err);
+    res.end();
+  });
+};
+
 var badgeMaker = function(){
 
   Badge.create({
