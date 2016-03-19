@@ -72,6 +72,11 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
             templateUrl: 'news/news.html'
           },
 
+          'recentTransactions@league': {
+            controller: 'recentTransactionsController',
+            templateUrl: 'recentTransactions/recentTransactions.html'
+          },
+
           'messageboard@league': {
             controller: 'MessageBoardController',
             templateUrl: 'messageboard/messageboard.html'

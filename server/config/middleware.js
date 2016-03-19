@@ -29,6 +29,7 @@ module.exports = function (app, express) {
   var symbolRouter = express.Router();
   var forumRouter = express.Router();
   var router = express.Router();
+  var leagueTransactionsRouter = express.Router();
 
   app.use(morgan('dev'));
   // Configuring middleware
@@ -54,7 +55,11 @@ module.exports = function (app, express) {
   app.use('/api/messages', messageRouter);
   app.use('/api/transactions', transactionRouter);
   app.use('/api/symbols', symbolRouter);
+
   app.use('/api/forum', forumRouter);
+
+  app.use('/api/recentTransactions', leagueTransactionsRouter);
+
 
   require('../tweets/tweetRoutes.js')(tweetRouter);
 
@@ -72,6 +77,10 @@ module.exports = function (app, express) {
 
   require('../transactions/transactionRoutes.js')(transactionRouter);
 
+
   require('../forum/forumRoutes.js')(forumRouter);
+
+  
+  require('../leagueTransactions/leagueTransactionsRoutes.js')(leagueTransactionsRouter);
 
 }
