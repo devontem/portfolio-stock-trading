@@ -1,9 +1,35 @@
 var app = angular.module('app')
 
+
+.filter('reverse', function() {
+  return function(items) {
+    return items.slice().reverse();
+  };
+})
+
+.filter('negative', function () {
+   return function (items) {
+    console.log(typeof(items),'()()(')
+    if(items <1){
+      return Math.abs(items); 
+    }
+    else{
+      return Math.abs(items);
+    }
+   }
+})
+
+
+
+
+//<td>{{transaction.portfolioid}} sold/bought {{transaction.buysell}} shares of {{transaction.symbol}} on {{transaction.time }} </td>
+
+
 .controller('recentTransactionsController', function ($scope, transactionFactory, $stateParams, leaderBoardFactory) {
 
   var leagueId = $stateParams.leagueId;
   
+  //$scope bool 
   $scope.portfolios =[]
   $scope.transactions = [];
   $scope.usernames = {};

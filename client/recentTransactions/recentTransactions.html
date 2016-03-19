@@ -12,11 +12,10 @@
 
            <table style="padding-bottom: 15px; flot:top">
 
-             <tbody ng-repeat="transaction in transactions">
+             <tbody ng-repeat="transaction in transactions | reverse">
                <tr class="recentTransactions">
-                 <td>{{transaction.portfolioid}} sold/bought {{transaction.buysell}} shares of {{transaction.symbol}} on {{transaction.time}}</td>
+                 <td>{{transaction.portfolioid}} <span ng-show="transaction.buysell>0">bought</span><span ng-show="transaction.buysell<0">sold</span> {{transaction.buysell | negative}} <span ng-show='transaction.buysell===1 || transaction.buysell === -1'>share</span> <span ng-show='transaction.buysell > 1 || transaction.buysell < -1'>shares</span> of {{transaction.symbol}} on {{transaction.time }} </td>
                </tr>
-
              </tbody>
            </table>
          </div>
