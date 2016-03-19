@@ -1,0 +1,49 @@
+<div class="row" style="width: 900px;">
+  <div class="col s12 m12" style="overflow-x: auto;">
+    <div class="card-panel white">
+      <p>DESCRIPTION PLACEHOLDER</p>
+      <a ng-click="reply()" class="waves-effect waves-light btn modal-trigger">REPLY</a>
+      <hr>
+      <!-- drop down form to reply -->
+      <div class="row" ng-if="replyClicked">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">mode_edit</i>
+              <textarea id="textarea1" class="materialize-textarea"></textarea>
+              <label for="textarea1">Reply here</label>
+            </div>
+          </div>
+          <button class="btn waves-effect waves-light" type="submit" name="action" ng-click="createTopic(topic)">Submit
+              <i class="material-icons right">send</i>
+          </button>
+          <button class="btn waves-effect waves-light" type="submit" name="action" ng-click="createTopic(topic)">Cancel
+              <i class="material-icons right">send</i>
+          </button>
+        </form>
+      </div>
+
+
+
+      <div style="height: 350px; overflow-x: auto;">
+      <table class="highlight centered" id="createTopicScroll">
+        <tbody>
+          <tr ng-repeat="topic in allTopics | orderBy:sortLatest:sortReverse">
+            <td>
+              <div class="row">
+                <div class="col s12 m5">
+                  <div class="card-panel teal">
+                    <span class="white-text">I am a very simple card. I am good at containing small bits of information.
+                    I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+</div>
