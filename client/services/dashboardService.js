@@ -19,7 +19,7 @@ app
         url: '/api/leagues/joinleague',
         data: { leagueId: leagueId,
                 userId: userId }
-      });
+      })
       .then( function(data){
         return data;
       });
