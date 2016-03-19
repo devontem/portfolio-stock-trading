@@ -82,6 +82,7 @@ app
   };
 
   $scope.signup = function(user){
+    console.log('user being signed up', user)
     Auth.createuser(user).then(function(data){
       $window.localStorage.setItem('com.tp', data.token);
       $window.localStorage.setItem('com.tp.userId', data.userId);
