@@ -14,8 +14,10 @@ app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$w
   }
 
   // functionality to generate a reply and post
+  //
+  $scope.allReplies;
   $scope.topicReply = {};
-  $scope.topicReply.topicId = $stateParams.topicId;
+  $scope.topicReply.topicId = 100; /*$stateParams.topicId;*/
   $scope.topicReply.userName = $window.localStorage.getItem('com.tp.username');
   $scope.topicReply.userId = $window.localStorage.getItem('com.tp.userId');
   $scope.topicReply.message = '';
@@ -31,5 +33,12 @@ app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$w
     })
   }
 
+  $scope.getAllReplies = function(){
+    topicFactory.showAllReplies().then(function(data){
+      $scope.allReplies = data.data;
+    })
+  }
+
+  $scope.getAllReplies();
 
 }])
