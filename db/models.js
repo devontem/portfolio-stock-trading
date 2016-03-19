@@ -21,6 +21,7 @@ var User = orm.define('User', {
     badgeJoined: Sequelize.BOOLEAN,
     badgeWonLeague: Sequelize.BOOLEAN,
     badgeNumberOfLogins: Sequelize.INTEGER,
+    badgeLastLogin: Sequelize.DATE,
 
     email: {
     	type: Sequelize.STRING,

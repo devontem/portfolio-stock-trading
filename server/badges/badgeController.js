@@ -36,7 +36,6 @@ module.exports.getBadges = function(req, res){
 module.exports.postBadge = function(req, res){
   var id = req.body.userId;
   var badge = req.body.badge;
-  console.log('****************', badge, id);
   User.findOne({id: id}).then(function (user) {
     console.log(badge);
     user.addBadge(badge);
