@@ -10,8 +10,8 @@ app
       })
       .then( function(league){
         return league.data;
-      })
-    }
+      });
+    };
 
     var joinLeague = function(leagueId, userId){
       return $http({
@@ -19,11 +19,11 @@ app
         url: '/api/leagues/joinleague',
         data: { leagueId: leagueId,
                 userId: userId }
-      })
+      });
       .then( function(data){
         return data;
-      })
-    }
+      });
+    };
 
     var getUserLeagues = function(userId){
       return $http({
