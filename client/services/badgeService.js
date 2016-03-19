@@ -11,7 +11,7 @@ app
       });
     };
 
-    var postBadge = function(badge, userId){
+    var postBadge = function(userId, badge){
       return $http({
         method: 'POST',
         url: '/api/badges',

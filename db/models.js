@@ -166,7 +166,7 @@ Order.belongsTo(Portfolio);
 // Topic to Forum - One to Many
 
 Forum.hasMany(Topic);
-Topic.belongsTo(Forum)
+Topic.belongsTo(Forum);
 
 User.sync();
 League.sync();

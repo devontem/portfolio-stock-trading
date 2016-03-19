@@ -1,5 +1,6 @@
-var Badge_User = require('../../db/models').Badge_user;
+var Badge_user = require('../../db/models').Badge_user;
 var Badge = require('../../db/models').Badge;
+var User = require('../../db/models').User;
 var config = require('../config/middleware.js');
 var request = require('request');
 
@@ -17,21 +18,21 @@ module.exports.getBadges = function(req, res){
 //     console.error('Error getting badges ', err);
 //     res.end();
 //   });
+
 };
 
 module.exports.postBadge = function(req, res){
-
-  // Badge.findAll({ where: {
-  //   UserId: req.params.userId
-  // }}).then(function(badges){
-  //
-  //     res.send(reducedStocks);
-  // })
-  // .catch(function(err){
-  //   res.send("There was an error: ", err);
-  // });
-  console.log('****************', req.body.badge, req.body.userId);
-  res.send('post badge route works');
+  var id = req.body.userId;
+  var badge = req.body.badge;
+  console.log('****************', badge, id);
+  User.findOne({id: id}).then(function (user) {
+    console.log(badge);
+    user.addBadge(badge);
+  }).then(function(badges){
+    res.send(badges);
+  }).catch(function(err){
+      res.send("Error posting the badge: ", err);
+  });
 
 };
 

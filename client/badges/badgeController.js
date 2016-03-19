@@ -9,8 +9,8 @@ app.controller('BadgeController', ['$scope', 'BadgeFactory', '$window', function
     BadgeFactory.postBadge(userId, badge);
   };
 
-  $scope.postBadge(1, 'test badge');
-  $scope.postBadge(1, 'test badge number 2');
-  $scope.postBadge(1, 'test badge number 3');
+  $scope.postBadge(1, 2);
+  $scope.postBadge(1, 3);
+  $scope.postBadge(1, 4);
 
 }]);

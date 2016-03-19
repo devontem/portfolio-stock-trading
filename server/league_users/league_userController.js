@@ -33,5 +33,5 @@ module.exports.getAllLeagues = function(req, res){
   .catch(function(err){
     console.error('Error getting leagues ', err);
     res.end();
-  })
-}
+  });
+};
