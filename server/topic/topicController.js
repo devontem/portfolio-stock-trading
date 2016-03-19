@@ -17,7 +17,7 @@ module.exports.addReply = function (req, res){
 };
 
 module.exports.getAllReplies = function(req, res){
-  console.log('ANYTHING????', req.params)
+
   Topic.findAll({ where: {topicId: req.params.id}})
   .then(function (replies) {
     if(!replies) {

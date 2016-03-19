@@ -1,6 +1,6 @@
 var app = angular.module('app')
 
-app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$window', function($scope, topicFactory, $stateParams, $window){
+app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$window', 'forumFactory', function($scope, topicFactory, $stateParams, $window, forumFactory){
 
   // functionality to show and hide reply form field
   $scope.replyClicked = false;
@@ -22,16 +22,13 @@ app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$w
   $scope.topicReply.userId = $window.localStorage.getItem('com.tp.userId');
   $scope.topicReply.message = '';
 
-  $scope.getTopic = function(){
-
-  }
+  $scope.topicInfo;
 
   $scope.submitReply = function(reply){
     topicFactory.addNewReply(reply).then(function(err, res){
       if(err){console.log(err)}
     })
     .then(function(){
-      //add function here to show all replies
       $scope.topicReply.message = '';
       $scope.cancelReply();
       $scope.getAllReplies();
@@ -44,6 +41,14 @@ app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$w
     })
   }
 
+  $scope.getOneTopic = function(){
+    forumFactory.getOneTopic($scope.topicReply.topicId).then(function(data){
+      $scope.topicInfo = data.data[0];
+      console.log('WHAT IS DATA???', $scope.topicInfo)
+    })
+  }
+
+  $scope.getOneTopic();
   $scope.getAllReplies();
 
 }])
