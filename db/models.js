@@ -126,5 +126,6 @@ exports.League = League;
 exports.Portfolio = Portfolio;
 exports.Transaction = Transaction;
 exports.Message = Message;
+exports.orm = orm;
 
 

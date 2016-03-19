@@ -9,6 +9,12 @@ module.exports = function(app){
 
   app.get('/:id', Auth.authorize, LeagueController.getOneLeague);
 
+  app.put('/:id', Auth.authorize, LeagueController.editOneLeague);
+
+  app.delete('/:id', LeagueController.deleteLeagueById);
+
+  app.get('/owner/:userId', LeagueController.getLeagueByOwnerId);
+
   app.post('/getusers', Auth.authorize, LeagueController.getUsers);
 
   app.post('/joinleague', Auth.authorize, LeagueController.joinLeague);

@@ -3,6 +3,7 @@ app.controller('AccountController', function($scope, $window, AccountFactory, $l
   $scope.name = $window.localStorage.getItem('com.tp.username');
   $scope.id = $window.localStorage.getItem('com.tp.userId');
   $scope.active = 'accountInfo';
+  $scope.editMode = false;
 
   $scope.delete = function(){
     var userid = $scope.id;
@@ -29,8 +30,16 @@ app.controller('AccountController', function($scope, $window, AccountFactory, $l
           "error");
         }
       });
-
   }
+
+  $scope.getLeaguesByOwnerId = function(){
+    AccountFactory.getLeaguesByOwnerId($scope.id).then(function(data){
+      $scope.leagues = data
+      console.log(data)
+    });
+  }
+
+  $scope.getLeaguesByOwnerId();
 
   $scope.getUser = function(){
     AccountFactory.getSingleUser($scope.id)
@@ -46,16 +55,55 @@ app.controller('AccountController', function($scope, $window, AccountFactory, $l
   $scope.newlogin.userId = $scope.id;
   $scope.change = false;
 
-  $scope.edit = function(){
+  $scope.editLogin = function(){
     $scope.active = 'editLogin';
-    console.log($scope.active);
+    resetEditMode()
+  }
+  $scope.editLeagues = function(){
+    $scope.active = 'editLeagues';
+    resetEditMode();
   }
   $scope.showAccount = function(){
     $scope.active = 'accountInfo';
+    resetEditMode()
   }
-
   $scope.cancel = function(){
     $scope.newlogin = {};
+  }
+
+  $scope.toggleEditMode = function(){
+    if ($scope.editMode){
+      resetEditMode();
+    } else {
+      $scope.editMode = true;
+    }
+  }
+
+  function resetEditMode(){
+    $scope.editMode = false;
+    $scope.currentLeague = {};
+  }
+
+  $scope.selectLeague = function(league){
+    $scope.toggleEditMode();
+    $scope.currentLeague = league;
+  }
+
+  $scope.editLeague = function(){
+    var league = $scope.currentLeague;
+
+    var start = moment(league.start).utc().hour(13).minute(30);
+    var end = moment(league.end).utc().hour(20);
+    league.start = start.format();
+    league.end = end.format();
+
+    console.log('league being sent', league);
+
+    AccountFactory.editOneLeague(league.id, league).then(function(league){
+      console.log('factory callback', league);
+
+      swal('League Updated!', 'Everyone wants to play but nobody wants to organize the game. Good job!');
+    });
   }
 
   $scope.updateLogin = function(){
@@ -73,4 +121,22 @@ app.controller('AccountController', function($scope, $window, AccountFactory, $l
       });
   }
 
-})
+  $scope.deleteLeague = function(){
+    swal({title: "Are you sure?",   
+          text: "All associated portfolios and transactions will also be removed",   
+          type: "warning",   
+          showCancelButton: true,   
+          confirmButtonColor: "#DD6B55",   
+          confirmButtonText: "Yes, delete it!",   
+          closeOnConfirm: false }, 
+          function(){   
+            swal("Deleted!", "Your league has been deleted!", "success");
+            AccountFactory.deleteLeagueById($scope.currentLeague.id)
+              .then(function(data){
+                $scope.getLeaguesByOwnerId();
+                $scope.toggleEditMode();
+              });
+          });
+  }
+
+});
