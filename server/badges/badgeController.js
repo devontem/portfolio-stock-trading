@@ -6,18 +6,18 @@ var request = require('request');
 
 module.exports.getBadges = function(req, res){
   var id = req.body.userId;
-//   Badge_user.findAll({ where: {leagueId === userId }}).then(function(badges){
-//     if(badges){
-//       res.json(badges);
-//     }else{
-//       console.log('No badges currently found!');
-//       res.end();
-//     }
-//   })
-//   .catch(function(err){
-//     console.error('Error getting badges ', err);
-//     res.end();
-//   });
+  Badge_user.findAll({UserId: id}).then(function(badges){
+    if(badges){
+      res.json(badges);
+    }else{
+      console.log('No badges currently found!');
+      res.end();
+    }
+  })
+  .catch(function(err){
+    console.error('Error getting badges ', err);
+    res.end();
+  });
 
 };
 
