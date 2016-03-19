@@ -49,16 +49,44 @@ module.exports.postBadge = function(req, res){
 
 var badgeMaker = function(){
   Badge.create({
-    name: 'Joined',
-    text: 'Badge for signing up with Portfol.io'
+    name: 'Welcome',
+    text: 'The first million starts with the first dollar. You earned this badge for signing up with Portfol.io'
   });
   Badge.create({
-    name: 'Won First League',
-    text: 'Congrats on Conquering Your First League'
+    name: "The Winner's Circle",
+    text: 'Congrats! You won your first league. Now for hundred more!'
   });
   Badge.create({
-    name: 'Logged in Three Days in a Row',
+    name: '3X',
     text: 'You Logged in for Three Consecutive Days. Woot!'
+  });
+  Badge.create({
+    name: '5X',
+    text: 'You Logged in for Five Consecutive Days. Woot!'
+  });
+  Badge.create({
+    name: 'Week 1',
+    text: 'You Logged in every day for one week. Keep up the great work bigshot!'
+  });
+  Badge.create({
+    name: 'Shhh!',
+    text: 'You joined your first private league!'
+  });
+  Badge.create({
+    name: 'Beginner Broker!',
+    text: 'You joined your first public league! Enjoy'
+  });
+  Badge.create({
+    name: '100K',
+    text: 'You earned your first $100,000!'
+  });
+  Badge.create({
+    name: '1 Mil',
+    text: 'You earned your first million!'
+  });
+  Badge.create({
+    name: '5 Mil',
+    text: 'Five Million Earned?!?!?! Time to start looking into retirement'
   });
 };
 
