@@ -17,8 +17,8 @@ module.exports.addReply = function (req, res){
 };
 
 module.exports.getAllReplies = function(req, res){
-  // Topic.findAll({ where: {topicId: req.body.topicId}})
-  Topic.findAll()
+  console.log('ANYTHING????', req.params)
+  Topic.findAll({ where: {topicId: req.params.id}})
   .then(function (replies) {
     if(!replies) {
       res.send('No replies found.');

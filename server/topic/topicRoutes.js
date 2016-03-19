@@ -6,5 +6,5 @@ module.exports = function(app){
 
   app.post('/', Auth.authorize, TopicController.addReply);
 
-  app.get('/', Auth.authorize, TopicController.getAllReplies);
+  app.get('/:id', Auth.authorize, TopicController.getAllReplies);
 }

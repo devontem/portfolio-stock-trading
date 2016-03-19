@@ -17,10 +17,14 @@ app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$w
   //
   $scope.allReplies;
   $scope.topicReply = {};
-  $scope.topicReply.topicId = 100; /*$stateParams.topicId;*/
+  $scope.topicReply.topicId = $stateParams.topicId;
   $scope.topicReply.userName = $window.localStorage.getItem('com.tp.username');
   $scope.topicReply.userId = $window.localStorage.getItem('com.tp.userId');
   $scope.topicReply.message = '';
+
+  $scope.getTopic = function(){
+
+  }
 
   $scope.submitReply = function(reply){
     topicFactory.addNewReply(reply).then(function(err, res){
@@ -35,7 +39,7 @@ app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$w
   }
 
   $scope.getAllReplies = function(){
-    topicFactory.showAllReplies().then(function(data){
+    topicFactory.showAllReplies($scope.topicReply.topicId).then(function(data){
       $scope.allReplies = data.data;
     })
   }

@@ -7,7 +7,7 @@ app.controller('MainForumController', ['$scope', '$window', 'forumFactory', '$ro
   $scope.topic = {};
   $scope.topic.username = $window.localStorage.getItem('com.tp.username');
   $scope.topic.userId = $window.localStorage.getItem('com.tp.userId');
-
+  $scope.topicId;
   $scope.allTopics;
 
   $scope.openModal = function(){
@@ -20,7 +20,6 @@ app.controller('MainForumController', ['$scope', '$window', 'forumFactory', '$ro
     }).then(function(){
       $scope.topic.title = '';
       $scope.topic.description = '';
-
       $('#createForumPost').closeModal();
       $scope.showAllTopics();
       $scope.goToTop();

@@ -15,11 +15,10 @@ app.factory('topicFactory', ['$http', function($http){
   };
 
   // add topicId back as an argument
-  var showAllReplies = function(){
+  var showAllReplies = function(topicId){
     return $http({
       method: 'GET',
-      url: '/api/topics/'
-      // url: '/api/topic/'+topicId
+      url: '/api/topics/'+topicId
     })
     .then(function(replies){
       return replies;
