@@ -48,6 +48,11 @@ module.exports.postBadge = function(req, res){
 };
 
 var badgeMaker = function(){
+
+  Badge.create({
+    name: 'Seeded',
+    text: 'Badge which seeds the database. Is not a real bad. Used as a flag to test seeding'
+  });
   Badge.create({
     name: 'Welcome',
     text: 'The first million starts with the first dollar. You earned this badge for signing up with Portfol.io'
@@ -90,4 +95,12 @@ var badgeMaker = function(){
   });
 };
 
-badgeMaker();
+//Tests if the badges have been seeded
+//if not, adds badges
+Badge.findById(1).then(function(badge){
+  if (badge) {
+    console.log('badges already seeded');
+  } else if (badge === null) {
+    badgeMaker();
+  }
+});
