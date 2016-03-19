@@ -14,6 +14,7 @@ var Forum = require('../../db/models').Forum;
 var Topic = require('../../db/models').Topic;
 
 var Badge = require('../../db/models').Badge;
+var Badge_user = require('../../db/models').Badge_user;
 var expressJwt = require('express-jwt');
 var jwt = require('jsonwebtoken');
 var morgan = require('morgan');

@@ -3,7 +3,14 @@ app.controller('BadgeController', ['$scope', 'BadgeFactory', '$window', function
   $scope.badges = ['Sign In', 'Joined First League', 'Won First League', 'Made Your First Mil'];
   $scope.getBadges = function () {
     BadgeFactory.getBadges(userId);
-    BadgeFactory.postBadge(userId, 25);
   };
-  $scope.getBadges();
+  // $scope.getBadges();
+  $scope.postBadge = function (userId, badge) {
+    BadgeFactory.postBadge(userId, badge);
+  };
+
+  $scope.postBadge(1, 'test badge');
+  $scope.postBadge(1, 'test badge number 2');
+  $scope.postBadge(1, 'test badge number 3');
+
 }]);
