@@ -1,6 +1,6 @@
 var app = angular.module('app')
 
-app.controller('MainForumController', ['$scope', '$window', 'forumFactory', '$rootScope', function($scope, $window, forumFactory, $rootScope){
+app.controller('MainForumController', ['$scope', '$window', 'forumFactory', '$rootScope', '$location', '$anchorScroll', function($scope, $window, forumFactory, $rootScope, $location, $anchorScroll){
 
   $scope.sortLatest = 'createdAt';
   $scope.sortReverse = true;
@@ -23,7 +23,7 @@ app.controller('MainForumController', ['$scope', '$window', 'forumFactory', '$ro
 
       $('#createForumPost').closeModal();
       $scope.showAllTopics();
-      angular.element("#createTopicScroll")[0].scrollTop=0;
+      $scope.goToTop();
     })
   }
 
@@ -31,6 +31,11 @@ app.controller('MainForumController', ['$scope', '$window', 'forumFactory', '$ro
     forumFactory.showAllTopics().then(function(data){
       $scope.allTopics = data.data;
     })
+  }
+
+  $scope.goToTop = function(){
+    $location.hash('top');
+    $anchorScroll();
   }
 
   $scope.showAllTopics();

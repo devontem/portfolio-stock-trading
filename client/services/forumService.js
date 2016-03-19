@@ -2,27 +2,6 @@ var app = angular.module('app');
 
 var app = angular.module('app');
 
-app.directive('scrollUpDirective', function ($rootScope) {
-  return {
-    scope: {
-      scrollDirective: '='
-    },
-    link: function (scope, element) {
-      scope.$watchCollection('scrollUpDirective', function (newValue) {
-        if (newValue) {
-          $(element)[0].scrollTop = 0;
-        }
-      });
-
-      $rootScope.$on('scrollUp', function() {
-        setTimeout(function() {
-          $(element)[0].scrollTop = 0;
-        }, 0);
-      });
-    }
-  }
-})
-
 app.factory('forumFactory', ['$http', function($http){
 
   var addNewTopic = function(topic){
