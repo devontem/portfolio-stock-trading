@@ -21,7 +21,8 @@ var User = orm.define('User', {
     	type: Sequelize.STRING,
     	unique:true
     },
-    password: Sequelize.STRING
+    password: Sequelize.STRING,
+    image: Sequelize.TEXT
   }, {
     instanceMethods: {
       hashPassword: function() {

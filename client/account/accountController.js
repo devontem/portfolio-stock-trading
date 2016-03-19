@@ -46,6 +46,7 @@ app.controller('AccountController', function($scope, $window, AccountFactory, $l
       .then(function(user){
         $scope.user = user;
         $scope.email = user.email;
+        $scope.image = user.image;
       })
   }
 
@@ -121,6 +122,7 @@ app.controller('AccountController', function($scope, $window, AccountFactory, $l
       });
   }
 
+
   $scope.deleteLeague = function(){
     swal({title: "Are you sure?",   
           text: "All associated portfolios and transactions will also be removed",   
@@ -139,4 +141,25 @@ app.controller('AccountController', function($scope, $window, AccountFactory, $l
           });
   }
 
-});
+
+
+  $scope.upload = function (file) {
+    var r = new FileReader();
+    r.onload = function(){
+      AccountFactory.profileImage({
+        image: r.result,
+        userId: $scope.id
+      })
+        .then(function (resp) {
+            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+        }, function (resp) {
+            console.log('Error status: ' + resp.status);
+        }, function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        });
+    };
+    r.readAsDataURL(file);
+    $scope.file = file;
+  };
+
