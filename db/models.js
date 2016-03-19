@@ -62,14 +62,14 @@ var Forum = orm.define('Forum', {
   description: Sequelize.STRING,
   creatorName: Sequelize.STRING,
   creatorId: Sequelize.INTEGER
-})
+});
 
 var Topic = orm.define('Topic', {
   topicId: Sequelize.INTEGER,
   message: Sequelize.TEXT,
   userName: Sequelize.STRING,
   userId: Sequelize.STRING
-})
+});
 
 
 //Transaction Model
