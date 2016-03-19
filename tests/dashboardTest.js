@@ -1,18 +1,24 @@
-describe('DashboardController', function () {
-  var $scope, $rootScope, createController, DashboardFactory, $httpBackend;
 
-  var $controllerConstructor;
-  var scope;
-  var mockLeaguesData;
+// describe('DashboardController', function () {
+//   var $scope, $rootScope, createController, DashboardFactory, $httpBackend;
 
-  // loads the app into the test
+
+
+/*describe('DashboardFactory', function () {
+  var $scope, $rootScope, createController, DashboardFactory, $httpBackend, $q;
+  // using angular mocks, we can inject the injector
+  // to retrieve our dependencies
   beforeEach(module('app'));
   beforeEach(inject(function($injector) {
+
+
+
 
     // mock out our dependencies
     $rootScope = $injector.get('$rootScope');
     $httpBackend = $injector.get('$httpBackend');
     DashboardFactory = $injector.get('DashboardFactory');
+
     $scope = $rootScope.$new();
 
     var $controller = $injector.get('$controller');
@@ -56,5 +62,6 @@ describe('DashboardController', function () {
     $scope.toggleAdd();
     expect($scope.showadd).toBe(false);
   });
+
 
 });

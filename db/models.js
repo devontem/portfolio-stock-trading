@@ -50,6 +50,19 @@ var Portfolio = orm.define('Portfolio', {
   leaguename: Sequelize.STRING
 });
 
+// Forum & Topics Model
+var Forum = orm.define('Forum', {
+  title: Sequelize.STRING,
+  description: Sequelize.STRING,
+  creatorName: Sequelize.STRING,
+  creatorId: Sequelize.INTEGER
+})
+
+var Topic = orm.define('Topic', {
+  message: Sequelize.STRING,
+  userName: Sequelize.STRING,
+  userId: Sequelize.STRING
+})
 
 //Transaction Model
 var Transaction = orm.define('Transaction', {
@@ -111,6 +124,10 @@ Portfolio.belongsTo(User);
 Portfolio.hasMany(Transaction);
 Transaction.belongsTo(Portfolio);
 
+// Topic to Forum - One to Many
+
+Forum.hasMany(Topic);
+Topic.belongsTo(Forum)
 
 User.sync();
 League.sync();
@@ -118,6 +135,8 @@ Portfolio.sync();
 Transaction.sync();
 League_user.sync();
 Message.sync();
+Forum.sync();
+Topic.sync();
 
 
 exports.League_user = League_user;
@@ -127,5 +146,7 @@ exports.Portfolio = Portfolio;
 exports.Transaction = Transaction;
 exports.Message = Message;
 exports.orm = orm;
+exports.Forum = Forum;
+exports.Topic = Topic;
 
 

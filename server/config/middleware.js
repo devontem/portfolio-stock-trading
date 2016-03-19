@@ -9,6 +9,8 @@ var Portfolio = require('../../db/models').Portfolio;
 var Transaction = require('../../db/models').Transaction;
 var Room_user = require('../../db/models').Room_user;
 var Message = require('../../db/models').Message;
+var Forum = require('../../db/models').Forum;
+var Topic = require('../../db/models').Topic;
 var expressJwt = require('express-jwt');
 var jwt = require('jsonwebtoken');
 var morgan = require('morgan');
@@ -25,7 +27,9 @@ module.exports = function (app, express) {
   var messageRouter = express.Router();
   var transactionRouter = express.Router();
   var symbolRouter = express.Router();
+  var forumRouter = express.Router();
   var router = express.Router();
+  var leagueTransactionsRouter = express.Router();
 
   app.use(morgan('dev'));
   // Configuring middleware
@@ -40,7 +44,7 @@ module.exports = function (app, express) {
   // http.get('http://ichart.finance.yahoo.com/table.csv?s=AAPL&a=01&b=01&c=2014&d=01&e=01&f=2015&g=d&ignore=.csv', function(err, res){
   //   console.log(res.buffer.toString(),' ######')
   // })
- 
+
 
   // Connecting Router to route files
   app.use('/api/users', userRouter);
@@ -51,6 +55,11 @@ module.exports = function (app, express) {
   app.use('/api/messages', messageRouter);
   app.use('/api/transactions', transactionRouter);
   app.use('/api/symbols', symbolRouter);
+
+  app.use('/api/forum', forumRouter);
+
+  app.use('/api/recentTransactions', leagueTransactionsRouter);
+
 
   require('../tweets/tweetRoutes.js')(tweetRouter);
 
@@ -67,5 +76,11 @@ module.exports = function (app, express) {
   require('../messageboard/messageRoutes.js')(messageRouter);
 
   require('../transactions/transactionRoutes.js')(transactionRouter);
+
+
+  require('../forum/forumRoutes.js')(forumRouter);
+
+  
+  require('../leagueTransactions/leagueTransactionsRoutes.js')(leagueTransactionsRouter);
 
 }

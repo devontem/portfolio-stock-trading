@@ -30,6 +30,13 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
 
       })
 
+      .state('forum', {
+        url: '/forum',
+        authenticate: true,
+        controller: 'MainForumController',
+        templateUrl: 'forum/main.html'
+      })
+
       .state('account', {
         url: '/account',
         authenticate: true,
@@ -63,6 +70,11 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
           'news@league': {
             controller: 'NewsController',
             templateUrl: 'news/news.html'
+          },
+
+          'recentTransactions@league': {
+            controller: 'recentTransactionsController',
+            templateUrl: 'recentTransactions/recentTransactions.html'
           },
 
           'messageboard@league': {

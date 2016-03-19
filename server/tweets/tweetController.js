@@ -29,7 +29,6 @@ module.exports.getTweets = function (req, res){
     UserId: userId,
     leagueId: leagueId
   }}).then(function(portfolio){
-
     Transaction.findAll({ where: {
       PortfolioId: portfolio.id
     }}).then(function(transactions){
@@ -38,25 +37,18 @@ module.exports.getTweets = function (req, res){
             var shareNum = transaction.shares;
             userCurrentStocks[sym] = shareNum;
           })
-        
       var search = ''
         for(var key in userCurrentStocks){
           if(userCurrentStocks[key] > 0){
             search += ('$' + key + ' OR ');
           }
-          
         }
-        console.log(search, 'mofo');
         search = search.slice(0,-3);
-        console.log(search, 'final')
     var params = { q: search, count: 10 }
-    
-
-    
     var tweets = [];
     if(search){
     T.get('search/tweets', params, function(err,data,response){
-      console.log(data, 'data11')
+      
       tweets = [];
       for(var i=0;i<data.statuses.length;i++){
         var status=data.statuses[i];
@@ -68,7 +60,7 @@ module.exports.getTweets = function (req, res){
                   created_at: time})
     
     }
-    console.log(tweets,'tee')
+    
     res.json(tweets)
           
     })
