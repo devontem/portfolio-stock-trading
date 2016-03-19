@@ -57,7 +57,7 @@ module.exports.possibleBadges = function (req, res) {
         badgeList.push(badges[i].dataValues.BadgeId);
       }
       console.log('*******', badgeList);
-      Badge.findAll({where: {id: {$not: badgeList}}}).then(function(badgeDescription){
+      Badge.findAll({where: {id: {$not:  badgeList, $gt: 1}}}).then(function(badgeDescription){
         res.json(badgeDescription);
       })
       .catch(function (err) {

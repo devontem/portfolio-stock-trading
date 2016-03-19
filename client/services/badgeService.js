@@ -10,6 +10,16 @@ app
         return badges;
       });
     };
+    var getPossibleBadges = function(userId){
+      return $http({
+        method: 'POST',
+        url: '/api/badges/possibleBadges',
+        data: {userId: userId}
+      })
+      .then(function(badges){
+        return badges;
+      });
+    };
 
     var postBadge = function(userId, badge){
       return $http({
@@ -24,6 +34,7 @@ app
 
     return {
       getBadges: getBadges,
+      getPossibleBadges: getPossibleBadges,
       postBadge: postBadge
     };
   }]);
