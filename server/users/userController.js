@@ -128,6 +128,20 @@ module.exports.signIn = function (req, res){
     });
 };
 
+module.exports.profileImage = function(req, res){
+  User.findOne({where:{ id: req.body.userId }})
+    .then(function(user){
+      if(user){
+        user.update({ image : req.body.image })
+      }else{
+        res.status(404).json('No user found!')
+      }
+    })
+    .catch(function (err) {
+      res.send('Error finding user: ', err.message);
+    });
+}
+
 module.exports.signOut = function (req, res){
 
 };

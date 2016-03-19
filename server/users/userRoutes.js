@@ -15,5 +15,7 @@ module.exports = function(app){
 
 	app.put('/:id', userController.updateUser);
 
+  app.post('/profileimage', userController.profileImage);
+
 	app.delete('/', userController.deleteUser);
 }

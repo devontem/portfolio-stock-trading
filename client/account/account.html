@@ -28,7 +28,20 @@
             <ul class="collection">
               <li class="collection-item">Username: {{user.username}}</li>
               <li class="collection-item">Email: {{user.email}}</li>
+
               <li class="collection-item">Leagues Created: {{leagues.length}}</li>
+
+              <li class="collection-item"><p>Profile Photo:</p>
+                <span id="uploadbox">
+                  <img ng-show="!file" src="{{image}}">
+                  <img ng-show="file" ngf-thumbnail="file" width="200px">
+                </span>
+                <br>
+                <br>
+                <div ng-claok  ng-show="!image"><md-button class="btn waves-effect waves-light" ngf-select="upload($file)">Upload Profile Photo</md-button></div>
+                <div ng-claok ng-show="image"><md-button class="btn waves-effect waves-light" ngf-select="upload($file)">Upload New Profile Photo</md-button></div>
+              </li>
+
             </ul>
           </div>
           <div ng-if="active === 'editLogin'">

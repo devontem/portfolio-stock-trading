@@ -39,6 +39,7 @@ app
       });
     };
 
+
     var getLeaguesByOwnerId = function(id){
       return $http({
         method: 'GET',
@@ -71,13 +72,27 @@ app
       });
     }
 
+    var profileImage = function(data){
+      console.log(data);
+      return $http({
+        method: 'POST',
+        url: 'api/users/profileimage',
+        data: data,
+      })
+      .then(function(user){
+        return user.data;
+      });
+    }
+
     return {
       deleteAccount: deleteAccount,
       editLogin: editLogin,
       getSingleUser: getSingleUser,
       getLeaguesByOwnerId: getLeaguesByOwnerId,
       editOneLeague: editOneLeague,
-      deleteLeagueById: deleteLeagueById
+      deleteLeagueById: deleteLeagueById,
+      getSingleUser: getSingleUser,
+      profileImage: profileImage
     };
 
   })
