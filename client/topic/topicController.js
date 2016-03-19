@@ -8,4 +8,8 @@ app.controller('TopicController', ['$scope', function($scope){
     $scope.replyClicked = true;
   }
 
+  $scope.cancelReply = function(){
+    $scope.replyClicked = false;
+  }
+
 }])
