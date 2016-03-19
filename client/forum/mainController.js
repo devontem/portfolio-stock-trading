@@ -1,7 +1,9 @@
 var app = angular.module('app')
 
-app.controller('MainForumController', ['$scope', '$window', 'forumFactory', function($scope, $window, forumFactory){
+app.controller('MainForumController', ['$scope', '$window', 'forumFactory', '$rootScope', '$location', '$anchorScroll', function($scope, $window, forumFactory, $rootScope, $location, $anchorScroll){
 
+  $scope.sortLatest = 'createdAt';
+  $scope.sortReverse = true;
   $scope.topic = {};
   $scope.topic.username = $window.localStorage.getItem('com.tp.username');
   $scope.topic.userId = $window.localStorage.getItem('com.tp.userId');
@@ -21,6 +23,7 @@ app.controller('MainForumController', ['$scope', '$window', 'forumFactory', func
 
       $('#createForumPost').closeModal();
       $scope.showAllTopics();
+      $scope.goToTop();
     })
   }
 
@@ -28,6 +31,11 @@ app.controller('MainForumController', ['$scope', '$window', 'forumFactory', func
     forumFactory.showAllTopics().then(function(data){
       $scope.allTopics = data.data;
     })
+  }
+
+  $scope.goToTop = function(){
+    $location.hash('top');
+    $anchorScroll();
   }
 
   $scope.showAllTopics();

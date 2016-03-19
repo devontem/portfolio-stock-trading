@@ -1,5 +1,7 @@
 var app = angular.module('app');
 
+var app = angular.module('app');
+
 app.factory('forumFactory', ['$http', function($http){
 
   var addNewTopic = function(topic){
