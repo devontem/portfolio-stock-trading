@@ -30,6 +30,7 @@ app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$w
       //add function here to show all replies
       $scope.topicReply.message = '';
       $scope.cancelReply();
+      $scope.getAllReplies();
     })
   }
 
