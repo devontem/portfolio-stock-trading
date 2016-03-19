@@ -1,10 +1,16 @@
 app.controller('BadgeController', ['$scope', 'BadgeFactory', '$window', function($scope, BadgeFactory, $window){
   var userId = $window.localStorage.getItem('com.tp.userId');
-  $scope.badges = ['Sign In', 'Joined First League', 'Won First League', 'Made Your First Mil'];
+  $scope.badges = [];
+
   $scope.getBadges = function () {
     BadgeFactory.getBadges(userId).then(
       function (res) {
-        console.log('******', res);
+        res.data.forEach(function (badge) {
+          var badgeFormatted = {};
+          badgeFormatted.name = badge.name;
+          badgeFormatted.text = badge.text;
+          $scope.badges.push(badgeFormatted);
+        });
       }
     );
   };
