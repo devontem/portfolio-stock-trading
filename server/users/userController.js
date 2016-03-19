@@ -9,7 +9,9 @@ module.exports.newUser = function (req, res){
         User.create({
           username: req.body.username,
           password: req.body.password,
-          email: req.body.email
+          email: req.body.email,
+          badgeJoined: true,
+          badgeWonLeague: false,
         })
         .then(function(user){
               var myToken = jwt.sign( {user: user.id},
@@ -18,7 +20,7 @@ module.exports.newUser = function (req, res){
               res.send(200, {'token': myToken,
                              'userId':    user.id,
                              'username': user.username } );
-        })
+        });
       }else{
         res.status(404).json('Username already exist!');
       }
@@ -68,7 +70,7 @@ module.exports.updateUser = function (req, res) {
       User.findOne({ where: { email: req.body.email }})
         .then(function(check){
           if(check){
-            res.end("Email already taken")
+            res.end("Email already taken");
           }else{
             if(user){
               if(!user.validPassword(req.body.oldpassword, user.password)){
@@ -85,7 +87,7 @@ module.exports.updateUser = function (req, res) {
               }
             }
           }
-        })
+        });
     })
     .catch(function (err) {
       res.send("Error updating user: ", err);
@@ -95,10 +97,10 @@ module.exports.updateUser = function (req, res) {
 module.exports.deleteUser= function (req, res) {
   User.findOne({where: { id: req.body.id }})
     .then(function (user) {
-      Portfolio.destroy({where: {username: user.username}})
+      Portfolio.destroy({where: {username: user.username}});
       return user.destroy();
     }).then(function(){
-    	res.json('User has been deleted')
+    	res.json('User has been deleted');
     })
     .catch(function (err) {
       res.send(err);
@@ -109,7 +111,7 @@ module.exports.signIn = function (req, res){
   User.findOne({where:{ email: req.body.email }})
     .then(function (user) {
       if(!user){
-        res.json('User not found')
+        res.json('User not found');
       }else{
         if(user.validPassword(req.body.password, user.password)){
           var myToken = jwt.sign({ user: user.id},
@@ -119,7 +121,7 @@ module.exports.signIn = function (req, res){
                          'userId': user.id,
                          'username': user.username } );
         }else{
-          res.status(404).json('Authentication failed. Wrong password.')
+          res.status(404).json('Authentication failed. Wrong password.');
         }
       }
     })
@@ -140,4 +142,8 @@ module.exports.profileImage = function(req, res){
     .catch(function (err) {
       res.send('Error finding user: ', err.message);
     });
+}
+
+module.exports.signOut = function (req, res){
+
 };
