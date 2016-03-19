@@ -39,10 +39,45 @@ app
       });
     };
 
+    var getLeaguesByOwnerId = function(id){
+      return $http({
+        method: 'GET',
+        url: '/api/leagues/owner/'+id
+      })
+      .then(function(leagues){
+        // TODO: Structure this appropriately once you have the exact route
+        return leagues.data;
+      });
+    }
+
+    var editOneLeague = function(id, data){
+      return $http({
+        method: 'PUT',
+        url: '/api/leagues/'+id,
+        data: data
+      })
+      .then(function(league){
+
+      });
+    }
+
+    var deleteLeagueById = function(id, data){
+      return $http({
+        method: 'DELETE',
+        url: '/api/leagues/'+id
+      })
+      .then(function(data){
+        console.log(data);
+      });
+    }
+
     return {
       deleteAccount: deleteAccount,
       editLogin: editLogin,
-      getSingleUser: getSingleUser
+      getSingleUser: getSingleUser,
+      getLeaguesByOwnerId: getLeaguesByOwnerId,
+      editOneLeague: editOneLeague,
+      deleteLeagueById: deleteLeagueById
     };
 
   })

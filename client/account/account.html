@@ -12,12 +12,13 @@
         </ul>
       </div>
     </nav>
-     <div class="card-panel portfolio-content">
+    <div class="card-panel portfolio-content">
       <div class="row">
         <div class="account-menu col s12 l4 center">
-          <div class="collection">
+          <div class="collection clickable">
             <a ng-class="active === 'accountInfo' ? 'active' : ''" class="collection-item" ng-click="showAccount()">Account Information</a>
-            <a ng-class="active === 'editLogin' ? 'active' : ''" class="collection-item" ng-click="edit()">Edit Login</a>
+            <a ng-class="active === 'editLogin' ? 'active' : ''" class="collection-item" ng-click="editLogin()">Edit Login</a>
+            <a ng-class="active === 'editLeagues' ? 'active' : ''" class="collection-item" ng-click="editLeagues()">Manage Leagues</a>
             <a class="collection-item red-text" ng-click="delete()">DELETE ACCOUNT</a>
           </div>
         </div>
@@ -27,6 +28,7 @@
             <ul class="collection">
               <li class="collection-item">Username: {{user.username}}</li>
               <li class="collection-item">Email: {{user.email}}</li>
+              <li class="collection-item">Leagues Created: {{leagues.length}}</li>
             </ul>
           </div>
           <div ng-if="active === 'editLogin'">
@@ -47,7 +49,57 @@
               </div>
             </form>
           </div>
+          <div ng-if="active === 'editLeagues'">
+            <h5 class="center">Manage Leagues</h5>
+            <!-- league selection -->
+            <ul ng-if="!editMode"class="collection">
+              <li ng-repeat="league in leagues" class="collection-item avatar">
+                <img src="../assets/img/money.png" alt="" class="circle">
+                <span class="title">{{ league.name}} <span class="red-text" ng-if="league.private">(PRIVATE) - code: {{ league.code }}</span></span>
+                <p>Max Users: {{ league.maxNum }}</span><br>
+                   Starting Balance: {{ league.startbalance }}
+                </p>
+                <a ng-click="selectLeague(league)" class="secondary-content clickable"><span class="teal-text">EDIT</span></a>
+              </li>
+            </ul>
+
+            <form ng-if="editMode">
+              <button ng-click="toggleEditMode()" class="waves-effect waves-light btn std-btn center teal"><i class="material-icons">fast_rewind</i><span class="material-icons-span">BACK</span></button>
+              <br>
+              <label>Name:</label><br>
+              <input type='text' ng-model='currentLeague.name' required>
+              <br>
+              <label>Max User #: </label><br>
+              <input type="text" ng-model='currentLeague.maxNum' required>
+              <br>
+              <label>Buying Power: </label><br>
+              <input type="text" ng-change="ll()" ng-model='currentLeague.startbalance' required>
+              <br>
+              <label>Start: </label><br>
+              <input type="date" id="startdate" ng-model='currentLeague.start' ng-click="pickstart()" format-date>
+              <label>End Date: </label><br>
+              <input type="date" id="enddate" ng-model='currentLeague.end' ng-click="pickend()" format-date>
+              <span>
+                <input name="isPrivate" ng-model="currentLeague.private" ng-value="false" type="radio" id="test1" />
+                <label for="test1">Public League</label>
+              </span>
+              <span>
+                <input name="isPrivate" ng-model="currentLeague.private" ng-value="true" type="radio" id="test2" />
+                <label for="test2">Private League</label>
+              </span>
+              <div ng-if="currentLeague.private">
+                <input id="rehash" type="checkbox" ng-model="currentLeague.rehash" />
+                <label for="rehash">Rehash Code</label>
+              </div>
+              <br />
+              <div class="submit-container">
+                <button ng-click='editLeague()' type="submit "class="waves-effect waves-light btn std-btn center">Update League</button>
+                <button ng-click='deleteLeague()' class="waves-effect waves-light btn std-btn center">Delete League</button>
+              </div>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
   </div>
 </div>

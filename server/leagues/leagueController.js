@@ -2,7 +2,9 @@ var League = require('../../db/models').League;
 var config = require('../config/middleware.js');
 var http = require('http-request');
 var Portfolio = require('../../db/models').Portfolio;
+var Transaction = require('../../db/models').Transaction;
 var User = require('../../db/models').User;
+var orm = require('../../db/models').orm
 
 module.exports.addLeague = function (req, res){
   var creatorId = req.body.creatorId;
@@ -116,6 +118,31 @@ module.exports.getOneLeague = function (req, res) {
 	})
 }
 
+module.exports.editOneLeague = function (req, res) {
+  League.findById(req.params.id)
+  .then(function (league) {
+
+    // if public league becomes private or if user wants new code, rehash it
+    if (req.body.private && !league.private || req.body.rehash){
+      league.code = makeCode();
+    }
+
+    league.name = req.body.name || league.name;
+    league.startbalance = req.body.startbalance || league.startbalance;
+    league.private = req.body.private || league.private;
+    league.maxNum = req.body.maxNum || league.maxNum;
+    league.start = req.body.start || start;
+    league.end = req.body.end || league.end;
+
+    league.save();
+
+    res.send(league);
+  })
+  .catch(function (err) {
+    console.error('Error getting league: ', err)
+  })
+}
+
 module.exports.getUsers = function(req, res){
   Portfolio.findAll({where: {leagueId: req.body.leagueId}})
     .then(function(portfolios){
@@ -127,6 +154,67 @@ module.exports.getUsers = function(req, res){
     })
 }
 
+module.exports.getLeagueByOwnerId = function(req, res){
+  var userId = req.params.userId;
+
+  League.findAll({
+    where: {
+      ownerid: userId
+    }
+  }).then(function(leagues){
+    res.send(leagues);
+  })
+  .catch(function (err) {
+      console.error('Error getting leagues: ', err)
+    })
+}
+
+module.exports.deleteLeagueById = function(req, res){
+  var leagueId;
+  var leagueName;
+
+  League.findById(req.params.id)
+  .then(function (league) {
+    leagueId = league.id;
+    leagueName = league.leaguename;
+
+    // league.destroy();
+
+      Portfolio.findAll({
+        where: {
+          leagueId: leagueId
+        }
+      }).then(function(portfolios){
+
+        // Forming query statement to remove all transactions from the database
+        var query = 'DELETE FROM `Transactions` WHERE `PortfolioId` = '+portfolios[0].id+" ";
+        var orConditions = "";
+        for(var i = 1; i < portfolios.length;i++){
+          orConditions+='OR `PortfolioId` = '+portfolios[i].id
+        }
+        finalQuery = query + orConditions +';'
+
+        // deleting all transactions
+        orm.query(finalQuery).then(function(transactions){
+          console.log("Transactions from "+leagueName+" removed");
+
+          //deleting all portfolios associated league
+          orm.query('DELETE FROM `Portfolios` where `leagueId`= '+leagueId).then(function(transactions){
+            console.log("Portfolio's from "+leagueName+" removed.");
+
+            //deleting league
+            orm.query('DELETE FROM `Leagues` WHERE `id`= '+leagueId).then(function(transactions){
+              console.log("Portfolio's from "+leagueName+" removed.");
+              res.send('League and all assocated data removed.');
+            });
+          });
+        })
+    });
+  })
+  .catch(function(err){
+    console.log('deleteLeagueById function error: ', err);
+  })
+}
 
 function makeCode(){
   var text = "";
@@ -137,3 +225,24 @@ function makeCode(){
 }
 
 
+//   League.destroy({
+//     where: {
+//       subject: 'programming'
+//     },
+//     truncate: true /* this will ignore where and truncate the table instead */
+
+//   });
+
+
+      //   Transaction.findAll({
+      //     where: {
+      //       PortfolioId: portfolio.id
+      //     }
+      //   }).then(function(transactions){
+      //     refTransactions = transactions;
+      //     res.send(transactions);
+      //   })
+      // });
+
+
+    // });

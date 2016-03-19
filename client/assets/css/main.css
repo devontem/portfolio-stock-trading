@@ -401,7 +401,7 @@ th {
     padding: 10px;
     min-height: 145px; }
   .dashboard-wrapper .tables {
-    margin-bottom: 50px; }
+    margin-bottom: 160px; }
 
 .tab-highlight {
   background: rgba(238, 110, 115, 0.38); }
@@ -438,9 +438,16 @@ th {
 .account-container form {
   border: 1px solid #e0e0e0;
   padding: 20px 30px; }
+  .account-container form button {
+    margin: 20px 0px; }
+  .account-container form .submit-container {
+    text-align: center; }
 
 .account-container .buttons {
   margin-top: 20px; }
 
 .account-container .myPortfolio {
   margin-bottom: 120px; }
+
+.account-container .material-icons-span {
+  vertical-align: top; }

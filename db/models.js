@@ -145,6 +145,7 @@ exports.League = League;
 exports.Portfolio = Portfolio;
 exports.Transaction = Transaction;
 exports.Message = Message;
+exports.orm = orm;
 exports.Forum = Forum;
 exports.Topic = Topic;
 

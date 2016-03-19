@@ -498,7 +498,7 @@ th{
 	}
 
 	.tables{
-		margin-bottom: 50px;
+		margin-bottom: 160px;
 	}
 }
 
@@ -547,12 +547,23 @@ th{
 	form{
 		border: 1px solid #e0e0e0;
     padding: 20px 30px;
+
+    button{
+    	margin: 20px 0px;
+    }
+    .submit-container{
+    	text-align: center;
+    }
 	}
 	.buttons{
 		margin-top: 20px;
 	}
 	.myPortfolio{
 		margin-bottom: 120px;
+	}
+
+	.material-icons-span{
+		vertical-align: top;
 	}
 }
 
