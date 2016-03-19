@@ -451,3 +451,20 @@ th {
 
 .account-container .material-icons-span {
   vertical-align: top; }
+
+.profile-container .info-box {
+  border: 1px solid #eee;
+  margin: 10px 0px; }
+
+.profile-container .profile-content {
+  margin-bottom: 150px; }
+
+.profile-container .info-box-header p {
+  margin: 0px;
+  text-align: center;
+  padding: 10px 10px; }
+
+.profile-container .display-pic {
+  margin-top: 30px; }
+  .profile-container .display-pic img {
+    width: 100%; }
