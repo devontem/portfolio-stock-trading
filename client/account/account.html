@@ -38,7 +38,8 @@
                 </span>
                 <br>
                 <br>
-                <div ng-claok><md-button class="btn waves-effect waves-light" ngf-select="upload($file)">Upload Profile Photo</md-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                <div ng-claok  ng-show="!image"><md-button class="btn waves-effect waves-light" ngf-select="upload($file)">Upload Profile Photo</md-button></div>
+                <div ng-claok ng-show="image"><md-button class="btn waves-effect waves-light" ngf-select="upload($file)">Upload New Profile Photo</md-button></div>
               </li>
 
             </ul>

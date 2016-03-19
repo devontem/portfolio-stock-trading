@@ -34,8 +34,7 @@ app.controller('AccountController', function($scope, $window, AccountFactory, $l
 
   $scope.getLeaguesByOwnerId = function(){
     AccountFactory.getLeaguesByOwnerId($scope.id).then(function(data){
-      $scope.leagues = data
-      console.log(data)
+      $scope.leagues = data;
     });
   }
 
@@ -139,7 +138,7 @@ app.controller('AccountController', function($scope, $window, AccountFactory, $l
                 $scope.toggleEditMode();
               });
           });
-  }
+  };
 
 
 
@@ -163,3 +162,4 @@ app.controller('AccountController', function($scope, $window, AccountFactory, $l
     $scope.file = file;
   };
 
+});

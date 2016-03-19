@@ -90,8 +90,7 @@ app
       getSingleUser: getSingleUser,
       getLeaguesByOwnerId: getLeaguesByOwnerId,
       editOneLeague: editOneLeague,
-      deleteLeagueById: deleteLeagueById
-      getSingleUser: getSingleUser
+      deleteLeagueById: deleteLeagueById,
       getSingleUser: getSingleUser,
       profileImage: profileImage
     };
