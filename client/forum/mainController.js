@@ -1,7 +1,9 @@
 var app = angular.module('app')
 
-app.controller('MainForumController', ['$scope', '$window', 'forumFactory', function($scope, $window, forumFactory){
+app.controller('MainForumController', ['$scope', '$window', 'forumFactory', '$rootScope', function($scope, $window, forumFactory, $rootScope){
 
+  $scope.sortLatest = 'createdAt';
+  $scope.sortReverse = true;
   $scope.topic = {};
   $scope.topic.username = $window.localStorage.getItem('com.tp.username');
   $scope.topic.userId = $window.localStorage.getItem('com.tp.userId');
@@ -21,6 +23,7 @@ app.controller('MainForumController', ['$scope', '$window', 'forumFactory', func
 
       $('#createForumPost').closeModal();
       $scope.showAllTopics();
+      angular.element("#createTopicScroll")[0].scrollTop=0;
     })
   }
 

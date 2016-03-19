@@ -4,7 +4,7 @@
       <h3>Forum</h3>
       <a ng-click="openModal()" class="waves-effect waves-light btn modal-trigger">Create New Topic</a>
       <div style="height: 350px; overflow-x: auto;">
-      <table class="highlight centered">
+      <table class="highlight centered" id="createTopicScroll">
         <thead>
           <tr>
               <th data-field="Topic">Topic</th>
@@ -15,7 +15,7 @@
         </thead>
 
         <tbody>
-          <tr ng-repeat="topic in allTopics">
+          <tr ng-repeat="topic in allTopics | orderBy:sortLatest:sortReverse">
             <td><a href="#" style="color: orange">{{topic.title}}</a></td>
             <td>{{topic.creatorName}}</td>
             <td>{{topic.createdAt | date:"longDate"}}</td>
@@ -64,5 +64,7 @@
 
     $('.modal-trigger').openModal();
   });
+  angular.element("#createTopicScroll")[0].scrollTop=0;
+
 </script>
 
