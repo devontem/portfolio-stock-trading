@@ -12,6 +12,8 @@ var Room_user = require('../../db/models').Room_user;
 var Message = require('../../db/models').Message;
 var Forum = require('../../db/models').Forum;
 var Topic = require('../../db/models').Topic;
+
+var Badge = require('../../db/models').Badge;
 var expressJwt = require('express-jwt');
 var jwt = require('jsonwebtoken');
 var morgan = require('morgan');
@@ -33,6 +35,7 @@ module.exports = function (app, express) {
   var topicRouter = express.Router();
   var router = express.Router();
   var leagueTransactionsRouter = express.Router();
+  var badgeRouter = express.Router();
 
   app.use(morgan('dev'));
   // Configuring middleware
@@ -60,6 +63,7 @@ module.exports = function (app, express) {
   app.use('/api/transactions', transactionRouter);
   app.use('/api/symbols', symbolRouter);
   app.use('/api/topics', topicRouter);
+  app.use('/api/badges', badgeRouter);
   app.use('/api/forum', forumRouter);
   app.use('/api/recentTransactions', leagueTransactionsRouter);
 
@@ -80,12 +84,12 @@ module.exports = function (app, express) {
 
   require('../transactions/transactionRoutes.js')(transactionRouter);
 
-
   require('../forum/forumRoutes.js')(forumRouter);
 
   require('../topic/topicRoutes.js')(topicRouter);
 
-
   require('../leagueTransactions/leagueTransactionsRoutes.js')(leagueTransactionsRouter);
 
-}
+  require('../badges/badgeRoutes.js')(badgeRouter);
+
+};
