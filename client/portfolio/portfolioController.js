@@ -19,6 +19,7 @@ angular.module('app.portfolio', [])
 		$scope.stockInput = '';
 		$scope.estPrice = '';
 		$scope.singlePrice = '';
+		$scope.total = '';
 	};
 
 	$scope.chooseStock = function(stockName){
@@ -142,7 +143,6 @@ angular.module('app.portfolio', [])
               transaction.percentage = Math.round((transaction.marketPrice*transaction.shares)/$scope.portfolioValue*100)
             })
 			$scope.stocks = transactions;
-			console.log($scope.stocks, 'stocksss')
 		});
 
 

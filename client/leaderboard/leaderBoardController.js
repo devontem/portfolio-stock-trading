@@ -40,7 +40,6 @@ app.controller('LeaderBoardController', function($scope, $window, $stateParams, 
         $scope.portfolios = portfolios;
         $scope.leagueName = portfolios[0].leaguename;
         $scope.code = portfolios[0].code;
-        console.log(joined);
         if(!joined) {
           $window.location.href = '/#/dashboard';
           Materialize.toast('You are not in the league.',1000);
@@ -50,7 +49,6 @@ app.controller('LeaderBoardController', function($scope, $window, $stateParams, 
 
   $scope.getLeagueById = function(){
     DashboardFactory.getLeagueById($scope.leagueId).then(function(data){
-      console.log('setting scope', data.code);
       $scope.secretCode = data.code;
     })
   }
