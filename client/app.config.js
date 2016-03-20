@@ -69,6 +69,11 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
             templateUrl: 'league/league.html',
             controller: 'LeagueController'
           },
+
+          'order@league': {
+            controller: 'orderStatusController',
+            templateUrl: 'orderStatus/orderStatus.html'
+          },
           // portfolio view within the league page
           'portfolio@league': {
             controller: 'PortfolioController',

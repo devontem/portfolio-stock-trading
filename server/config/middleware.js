@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var http = require('http-request');
 var League = require('../../db/models').League;
 var User = require('../../db/models').User;
+var Order = require('../../db/models').Order;
 var Portfolio = require('../../db/models').Portfolio;
 var Transaction = require('../../db/models').Transaction;
 var Room_user = require('../../db/models').Room_user;
@@ -14,6 +15,7 @@ var Topic = require('../../db/models').Topic;
 var expressJwt = require('express-jwt');
 var jwt = require('jsonwebtoken');
 var morgan = require('morgan');
+var limitOrder = require('./limitOrder').limitOrder;
 
 
 module.exports = function (app, express) {
@@ -42,10 +44,11 @@ module.exports = function (app, express) {
   app.use(passport.session());
   app.use(express.static(__dirname + '/../../client'));
 
+  limitOrder();
+
   // http.get('http://ichart.finance.yahoo.com/table.csv?s=AAPL&a=01&b=01&c=2014&d=01&e=01&f=2015&g=d&ignore=.csv', function(err, res){
   //   console.log(res.buffer.toString(),' ######')
   // })
-
 
   // Connecting Router to route files
   app.use('/api/users', userRouter);

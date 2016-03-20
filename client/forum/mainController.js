@@ -12,7 +12,7 @@ app.controller('MainForumController', ['$scope', '$window', 'forumFactory', '$ro
   $scope.openModal = function(){
     $('#createForumPost').openModal();
   }
-
+  
   $scope.createTopic = function(topic){
     forumFactory.addNewTopic(topic).then(function(err, res){
       if(err){console.log(err)}

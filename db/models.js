@@ -80,6 +80,18 @@ var Transaction = orm.define('Transaction', {
 
 });
 
+//Order Model
+var Order = orm.define('Order', {
+
+  symbol: Sequelize.STRING,
+  company: Sequelize.STRING,
+  price: Sequelize.FLOAT,
+  buysell: Sequelize.BOOLEAN,
+  shares: Sequelize.INTEGER,
+  executed: Sequelize.BOOLEAN
+
+});
+
 //Message Board Model
 
 var Message = orm.define('Message', {
@@ -127,6 +139,11 @@ Portfolio.belongsTo(User);
 Portfolio.hasMany(Transaction);
 Transaction.belongsTo(Portfolio);
 
+//Transaction to portfolio - One to Many
+
+Portfolio.hasMany(Order);
+Order.belongsTo(Portfolio);
+
 // Topic to Forum - One to Many
 
 Forum.hasMany(Topic);
@@ -140,6 +157,7 @@ League_user.sync();
 Message.sync();
 Forum.sync();
 Topic.sync();
+Order.sync();
 
 
 exports.League_user = League_user;
@@ -151,5 +169,6 @@ exports.Message = Message;
 exports.orm = orm;
 exports.Forum = Forum;
 exports.Topic = Topic;
+exports.Order = Order;
 
 

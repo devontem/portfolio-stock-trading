@@ -1,0 +1,38 @@
+   <div class="col s12 m12">
+     <div class="">
+       <div class="card-content black-text">
+         <span class="card-title">Recent transactions</span>
+         <button class= 'btn std-btn getTweets' ng-click="getOrders()">Get transactions</button>
+         <div class="leaderboard-container" style="height: 300px;
+           overflow-x: auto;" scroll-directive="posts">
+
+
+           <table style="padding-bottom: 15px; flot:top">
+
+             <table>
+              <thead>
+                <td>Symbol</td>
+                <td>Company</td>
+                <td>Action</td>
+                <td>Quantity</td>
+                <td>Price</td>
+                <td>Total Cost</td>
+                <td>Order Status</td>
+              </thead>
+              <tbody>
+               <tr ng-repeat="order in orders">
+                <td style="text-transform: uppercase">{{ order.symbol }}</td>
+                <td>{{ order.company }}</td>
+                <td ng-show="order.buysell">Buy</td>
+                <td ng-show="!order.buysell">Sell</td>
+                <td>{{ order.shares }}</td>
+                <td>{{ order.price | currency }}</td>
+                <td>{{ (order.price * order.shares) + 10 | currency}} </td>
+                <td ng-show="order.executed">Executed</td>
+                <td ng-show="!order.executed">Open</td>
+               </tr>
+             </tbody>
+           </table>
+         </div>
+     </div>
+   </div>

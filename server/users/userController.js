@@ -140,8 +140,4 @@ module.exports.profileImage = function(req, res){
     .catch(function (err) {
       res.send('Error finding user: ', err.message);
     });
-}
-
-module.exports.signOut = function (req, res){
-
 };

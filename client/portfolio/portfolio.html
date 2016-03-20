@@ -94,19 +94,25 @@
 				  <div class="divider"></div>
 
 				  <div class="row stock-calculator">
-					  <section class="col s4">
+					  <section class="col s3">
 					  	<span>NUMBER OF STOCKS: </span>
 						  <div class="chip">
 						    <input class="stockAmount" ng-change="updateAmounts()" ng-model="stockAmount" required>
 						  </div>
 					  </section>
-					  <section class="col s4">
-					  	<span><b>x</b> Est. Price </span>
+				    <section class="col s3">
+				    	<span><b>x</b> Price </span>
+				  	  <div class="chip">
+				  	    <input class="stockAmount" ng-change="updateAmounts()" ng-model="singlePrice" required>
+				  	  </div>
+				    </section>
+					  <section class="col s3">
+					  	<span><b>=</b> Est. Price </span>
 						  <div class="chip">
 						    {{estPrice | currency}}
 						  </div>
 					  </section>
-					  <section class="col s4">
+					  <section class="col s3">
 					  	<span><b>+</b> FEES </span>
 						  <div class="chip">
 						    {{ fees | currency}}
