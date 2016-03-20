@@ -3,7 +3,6 @@ var app = angular.module('app');
 app.factory('topicFactory', ['$http', function($http){
 
   var addNewReply = function(userReply){
-    console.log('$$$$$$$$', userReply)
     return $http({
       method: 'POST',
       url: '/api/topics',

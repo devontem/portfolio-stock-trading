@@ -1,13 +1,12 @@
 var app = angular.module('app')
 
-app.controller('MainForumController', ['$scope', '$window', 'forumFactory', '$rootScope', '$location', '$anchorScroll', function($scope, $window, forumFactory, $rootScope, $location, $anchorScroll){
+app.controller('MainForumController', ['$scope', '$window', 'forumFactory', '$rootScope', '$location', '$anchorScroll','topicFactory', function($scope, $window, forumFactory, $rootScope, $location, $anchorScroll, topicFactory){
 
   $scope.sortLatest = 'createdAt';
   $scope.sortReverse = true;
   $scope.topic = {};
   $scope.topic.username = $window.localStorage.getItem('com.tp.username');
   $scope.topic.userId = $window.localStorage.getItem('com.tp.userId');
-  $scope.topicId;
   $scope.allTopics;
 
   $scope.openModal = function(){
@@ -29,8 +28,23 @@ app.controller('MainForumController', ['$scope', '$window', 'forumFactory', '$ro
   $scope.showAllTopics = function(){
     forumFactory.showAllTopics().then(function(data){
       $scope.allTopics = data.data;
+
+      for(var i = 0; i < $scope.allTopics.length; i++){
+
+        (function(index){
+          $scope.allTopics[index].replies = 0;
+          topicFactory.showAllReplies($scope.allTopics[index].id)
+            .then(function(replies){
+              console.log('#ofREPLIES: ', replies)
+              $scope.allTopics[index].replies = replies.data.length;
+
+            })
+        })(i)
+      }
+
     })
   }
+
 
   $scope.goToTop = function(){
     $location.hash('top');

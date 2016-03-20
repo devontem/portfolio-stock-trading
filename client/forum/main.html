@@ -10,7 +10,7 @@
               <th data-field="Topic">Topic</th>
               <th data-field="Started By">Created By</th>
               <th data-field="Date Started">Created On</th>
-              <th data-field="Most Recent">Last Post</th>
+              <th data-field="Replies">Replies</th>
           </tr>
         </thead>
 
@@ -19,7 +19,7 @@
             <td><a href="#/topics/{{topic.id}}" style="color: orange">{{topic.title}}</a></td>
             <td>{{topic.creatorName}}</td>
             <td>{{topic.createdAt | date:"longDate"}}</td>
-            <td>3 hours ago</td>
+            <td>{{topic.replies}}</td>
           </tr>
         </tbody>
       </table>
