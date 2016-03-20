@@ -44,8 +44,11 @@ app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$w
   $scope.getOneTopic = function(){
     forumFactory.getOneTopic($scope.topicReply.topicId).then(function(data){
       $scope.topicInfo = data.data[0];
-      console.log('WHAT IS DATA???', $scope.topicInfo)
     })
+  }
+
+  $scope.momentJS = function(time){
+    return moment(time).fromNow();
   }
 
   $scope.getOneTopic();

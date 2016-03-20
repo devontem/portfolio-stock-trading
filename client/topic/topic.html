@@ -1,6 +1,6 @@
 <ul class="pagination">
   <li class="disabled"><a href="#!"><i class="material-icons"></i></a></li>
-  <li class="active"><a href="#/forum">Back to Dashboard</a></li>
+  <li class="active"><a href="#/forum">Back to Forum</a></li>
   <li class="waves-effect"><a href="#!"><i class="material-icons"></i></a></li>
 </ul>
 
@@ -49,7 +49,7 @@
                     </span>
                     <p style="text-align: right;">
                       - {{reply.userName}} |
-                      <span style="font-size: 10px; font-style: italic;">{{reply.createdAt | date:'short'}}</span>
+                      <span style="font-size: 10px; font-style: italic;">{{momentJS(reply.createdAt)}}</span>
                     </p>
                   </div>
                 </div>
