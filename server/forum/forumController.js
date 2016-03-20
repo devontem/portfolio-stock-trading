@@ -16,6 +16,20 @@ module.exports.addTopic = function (req, res){
   })
 };
 
+module.exports.getOneTopic = function(req, res){
+  console.log('WHAT IS IT????', req.body)
+  Forum.findAll({where: {id: req.body.id}}).then(function (topic) {
+    if(!topic) {
+      res.send('No topics found.');
+    } else {
+      res.send(topic);
+    }
+  })
+  .catch(function(err) {
+    res.send('Error getting topic:', err);
+  });
+};
+
 module.exports.getAllTopics = function(req, res){
   Forum.findAll().then(function (topics) {
     if(!topics) {

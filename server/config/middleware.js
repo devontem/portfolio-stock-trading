@@ -28,6 +28,7 @@ module.exports = function (app, express) {
   var transactionRouter = express.Router();
   var symbolRouter = express.Router();
   var forumRouter = express.Router();
+  var topicRouter = express.Router();
   var router = express.Router();
   var leagueTransactionsRouter = express.Router();
 
@@ -55,9 +56,8 @@ module.exports = function (app, express) {
   app.use('/api/messages', messageRouter);
   app.use('/api/transactions', transactionRouter);
   app.use('/api/symbols', symbolRouter);
-
+  app.use('/api/topics', topicRouter);
   app.use('/api/forum', forumRouter);
-
   app.use('/api/recentTransactions', leagueTransactionsRouter);
 
 
@@ -80,7 +80,9 @@ module.exports = function (app, express) {
 
   require('../forum/forumRoutes.js')(forumRouter);
 
-  
+  require('../topic/topicRoutes.js')(topicRouter);
+
+
   require('../leagueTransactions/leagueTransactionsRoutes.js')(leagueTransactionsRouter);
 
 }

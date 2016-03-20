@@ -37,6 +37,13 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
         templateUrl: 'forum/main.html'
       })
 
+      .state('topic', {
+        url: '/topics/:topicId',
+        authenticate: true,
+        controller: 'TopicController',
+        templateUrl: 'topic/topic.html'
+      })
+
       .state('account', {
         url: '/account',
         authenticate: true,

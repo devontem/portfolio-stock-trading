@@ -25,11 +25,20 @@ app.factory('forumFactory', ['$http', function($http){
     });
   }
 
+  var getOneTopic = function(id){
+    console.log('SERVICE: ', id)
+    return $http({
+      method: 'POST',
+      url: '/api/forum/topic',
+      data: {id: id}
+    })
+  }
 
 
   return {
     addNewTopic: addNewTopic,
-    showAllTopics: showAllTopics
+    showAllTopics: showAllTopics,
+    getOneTopic: getOneTopic
   };
 
 

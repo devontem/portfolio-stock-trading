@@ -60,10 +60,12 @@ var Forum = orm.define('Forum', {
 })
 
 var Topic = orm.define('Topic', {
+  topicId: Sequelize.INTEGER,
   message: Sequelize.STRING,
   userName: Sequelize.STRING,
   userId: Sequelize.STRING
 })
+
 
 //Transaction Model
 var Transaction = orm.define('Transaction', {
