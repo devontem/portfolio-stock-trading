@@ -10,6 +10,16 @@ app.factory('Portfolio', function($http){
     })
   }
 
+  var limitOrder = function(options){
+    return $http({
+      method: 'POST',
+      url: '/api/transactions/limitorder',
+      data: options
+    }).then(function(data){
+      return data;
+    })
+  }
+
   var getStock = function(stockName){
     return $http({
       method: 'GET',
@@ -54,7 +64,8 @@ app.factory('Portfolio', function($http){
     buySell: buySell,
     getPortfolio: getPortfolio,
     getUserStocks: getUserStocks,
-    updateUserStocks: updateUserStocks
+    updateUserStocks: updateUserStocks,
+    limitOrder: limitOrder
   }
 })
 

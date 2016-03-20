@@ -1,8 +1,10 @@
 var Transaction = require('../../db/models').Transaction;
 var Portfolio = require('../../db/models').Portfolio;
+var Order = require('../../db/models').Order;
 
 // make a transaction
 module.exports.buySell = function(req, res){
+
   Transaction.create(req.body).then(function(transaction){
 
     Portfolio.findOne({ where: {
@@ -44,6 +46,61 @@ module.exports.buySell = function(req, res){
   .catch(function(err){
       res.send('Error: ', err);
     });
+};
+
+//make a limit order
+module.exports.limitOrder = function(req, res){
+  Order.create(req.body).then(function(order){
+
+    Portfolio.findOne({ where: {
+        UserId: req.body.userId,
+        leagueId: req.body.leagueId
+      }
+    })
+    .then(function(portfolio){
+
+      //Setting the transaction's PortfolioId
+      order.PortfolioId = portfolio.id;
+
+      // Saving both instances
+      order.save();
+      portfolio.save();
+
+      res.send(transaction);
+    })
+    .catch(function(err){
+      res.send('Error: ', err);
+    });
+
+  })
+  .catch(function(err){
+      res.send('Error: ', err);
+    });
+};
+
+//make a limit order
+module.exports.getOrders = function(req, res){
+  console.log("HEY")
+  Portfolio.findOne({ where: {
+                      userId: req.body.userId,
+                      leagueId: req.body.leagueId
+                    }})
+    .then(function(portfolio){
+      Order.findAll({ where: { portfolioId: portfolio.id }})
+        .then(function(orders){
+          if(!orders){
+            res.send('No orders found!');
+          }else{
+            res.send(orders);
+          }
+        })
+        .catch(function(err){
+          res.send('Error: ', err);
+        });
+    })
+    .catch(function(err){
+        res.send('Error: ', err);
+      });
 };
 
 // module.exports.getUserPortfolio = function(req, res){

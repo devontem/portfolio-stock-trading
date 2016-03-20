@@ -3,21 +3,22 @@ angular.module('app.portfolio', [])
 .controller('PortfolioController', function($scope, $window, $stateParams, Portfolio, $rootScope){
 	// MAKE A TRADE MODAL
 	$scope.leagueId = $stateParams.leagueId;
-	$scope.userId;
-	$window.localStorage.getItem('com.tp.userId');
+	$scope.userId = $window.localStorage.getItem('com.tp.userId');
 	$scope.fees = 10;
 	$scope.estPrice = 0;
 	$scope.action = false;
+	$scope.singlePrice = 0;
 
 	$rootScope.$on('symbolRetrieved', function(event, data){
 		return $scope.chooseStock(data);
 	});
 
-	 $scope.resetFields = function (){
+	$scope.resetFields = function (){
 		$scope.stock = undefined;
 		$scope.stockAmount = '';
 		$scope.stockInput = '';
 		$scope.estPrice = '';
+		$scope.singlePrice = '';
 	};
 
 	$scope.chooseStock = function(stockName){
@@ -28,6 +29,7 @@ angular.module('app.portfolio', [])
 			else {
 			$scope.stock = stock;
 			$scope.estPrice = stock.Ask;
+			$scope.singlePrice = stock.Ask;
 		}
 		});
 		$scope.resetFields();
@@ -47,23 +49,30 @@ angular.module('app.portfolio', [])
 			marketPrice: $scope.stock.Ask,
 			buysell: !$scope.action
 		};
-
 		// if selling stock, must own it and enough shares
 		if (!options.buysell && !ableToSell()){
 			return false;
-		}
-		// ig buying a stock, must have enough money
-		if (options.buysell && $scope.estPrice > $scope.balance){
+		} else if (options.buysell && $scope.total > $scope.balance){
 			Materialize.toast("Your balance isn't high enough to make this trade", 3000, 'rounded');
 			return false;
-		}
-
-		Portfolio.buySell(options).then(function(data){
-			console.log('Transaction posted: ', data);
-			Materialize.toast('You traded '+options.shares+' shares in '+options.company, 3000, 'rounded');
+		} else if (options.buysell && Number($scope.singlePrice) < Number($scope.stock.Ask)){
+			options.price = $scope.singlePrice;
+			options.executed = false;;
+			Portfolio.limitOrder(options).then(function(data){
+			})
+			Materialize.toast("Your limit order has been placed", 3000, 'rounded');
 			$scope.resetFields();
-			updatePortfolio();
-		});
+			return false;
+		} else {
+			options.executed = true;
+			Portfolio.limitOrder(options).then(function(data){
+			})
+			Portfolio.buySell(options).then(function(data){
+				Materialize.toast('You traded '+options.shares+' shares in '+options.company, 3000, 'rounded');
+				$scope.resetFields();
+				updatePortfolio();
+			});
+		}
 	};
 
 	function ableToSell(){
@@ -92,7 +101,7 @@ angular.module('app.portfolio', [])
 	};
 
 	$scope.updateAmounts = function(){
-		$scope.estPrice = $scope.stockAmount * $scope.stock.Ask;
+		$scope.estPrice = $scope.stockAmount * $scope.singlePrice;
 		$scope.total = $scope.estPrice + $scope.fees;
 	};
 
