@@ -21,13 +21,15 @@ $scope.data1 = {
 	$scope.config1 = {
 		labels: true,
 		click: function(d) {
-			Materialize.toast('im alive', 3000)
+			$scope.getBalance();
+			Materialize.toast('Assets Updated!', 1000)
 		},
 		title: "Asset Allocation",
 		legend: {
 			display: true,
 			position: 'right'
 		},
+		colors: ['#6baed6','#9ecae1'],
 		innerRadius: 0
 	};
 
@@ -39,8 +41,8 @@ $scope.getBalance = function (){
 			$scope.balance = portfolio.balance;
 			$scope.portfolioValue = portfolio.portfolioValue;
 			$scope.total = $scope.balance + $scope.portfolioValue;
-			console.log($scope.balance, $scope.portfolioValue,$scope.total,'balance')
-			
+			$scope.data1.data[0].y[0]=(Math.round($scope.balance/$scope.total*100))
+			$scope.data1.data[1].y[0]=(Math.round($scope.portfolioValue/$scope.total*100))
 		});
  
 }

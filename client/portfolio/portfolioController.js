@@ -113,7 +113,7 @@ angular.module('app.portfolio', [])
 	// MY STOCKS MODAL
 	updatePortfolio();
 	// $scope.updateMarketPrice();
-
+    
 	function updatePortfolio(){
 		var leagueId = $stateParams.leagueId;
 		var userId = $window.localStorage.getItem('com.tp.userId');
@@ -128,6 +128,12 @@ angular.module('app.portfolio', [])
 		//updating users purchased stocks
 		Portfolio.getUserStocks(leagueId, userId).then(function(transactions){
 			$scope.stocks = transactions;
+            transactions.forEach(function(transaction){
+              console.log(Math.round((transaction.marketPrice*transaction.shares)/$scope.portfolioValue*100),'&&&')
+              transaction.percentage = Math.round((transaction.marketPrice*transaction.shares)/$scope.portfolioValue*100)
+            })
+			$scope.stocks = transactions;
+			console.log($scope.stocks, 'stocksss')
 		});
 
 
