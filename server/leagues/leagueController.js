@@ -127,6 +127,13 @@ module.exports.editOneLeague = function (req, res) {
       league.code = makeCode();
     }
 
+    // update every user's portfolio 'leaguename' if changed
+    if (req.body.name !== league.name){
+      orm.query("UPDATE `Portfolios` SET `leaguename`= '"+req.body.name+"' WHERE `leagueId`="+req.params.id+";").then(function(){
+        console.log('Portfolio Names Updated')
+      })
+    }
+
     league.name = req.body.name || league.name;
     league.startbalance = req.body.startbalance || league.startbalance;
     league.private = req.body.private || league.private;
@@ -135,7 +142,6 @@ module.exports.editOneLeague = function (req, res) {
     league.end = req.body.end || league.end;
 
     league.save();
-
     res.send(league);
   })
   .catch(function (err) {

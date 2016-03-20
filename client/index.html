@@ -35,10 +35,11 @@
         <span class="brand-img"></span>
         <a ng-href="{{loggedin ? '/#/dashboard':'#'}}" class="brand-logo">Portfol.io</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li ng-controller="ClockController" ng-bind="time" class="col s2 clock"></li>
+          <li ng-controller="ClockController" ng-bind="time" class="col s2 clock teal-text text-lighten-4"></li>
           <li><a ng-show="!loggedin" ng-click="toggleLogin()">Login</a></li>
           <li><a ng-show="!loggedin" ng-click="toggleSignup()">Sign Up</a></li>
-          <li ng-show="loggedin"><span>Hello, {{username}}</span></li>
+          <li ng-show="loggedin"><span class="red-text text-lighten-2">Welcome, {{username[0].toUpperCase()+username.slice(1)}}!</span></li>
+          <li><a href="#/dashboard" ng-show="loggedin">Dashboard</a></li>
           <li><a href="#/account" ng-show="loggedin">Account</a></li>
           <li><a ng-show="loggedin" ng-click="logout()">Log Out</a></li>
         </ul>
@@ -153,6 +154,7 @@
   <script type="text/javascript" src="services/accountService.js"></script>
   <script type="text/javascript" src="services/portfolioService.js"></script>
   <script type="text/javascript" src="recentTransactions/recentTransactionsController.js"></script>
+   <script type="text/javascript" src="profile/ProfileController.js"></script>
 
   <script type="text/javascript" src="clock/clockController.js"></script>
 

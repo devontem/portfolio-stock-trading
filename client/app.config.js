@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 'app.botbar', 'app.leagueResults', 'ngFileUpload']);
+var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 'app.botbar', 'app.leagueResults', 'ngFileUpload', 'app.profile']);
 
   app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
@@ -42,6 +42,13 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
         authenticate: true,
         controller: 'AccountController',
         templateUrl: 'account/account.html'
+      })
+
+      .state('profiles', {
+        url: '/profiles/:userId',
+        authenticate: false,
+        controller: 'ProfileController',
+        templateUrl: 'profile/profile.html'
       })
 
       .state('league', {

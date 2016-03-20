@@ -24,7 +24,7 @@ module.exports.newUser = function (req, res){
       }
     })
     .catch(function (err) {
-      res.send('Error creating user: ', err.message);
+      res.send('Error creating user: ', err);
     });
 };
 

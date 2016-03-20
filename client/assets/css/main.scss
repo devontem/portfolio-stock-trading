@@ -567,3 +567,29 @@ th{
 	}
 }
 
+.profile-container{
+
+	.info-box{
+		border: 1px solid #eee;
+		margin: 10px 0px;
+	}
+
+	.profile-content{
+		margin-bottom: 150px;
+	}
+
+	.info-box-header{
+		p {
+			margin: 0px;
+			text-align: center;
+			padding: 10px 10px;
+		}
+	}
+
+	.display-pic{
+		margin-top: 30px;
+		img{
+			width: 100%;
+		}
+	}
+}

@@ -150,8 +150,10 @@ app.controller('AccountController', function($scope, $window, AccountFactory, $l
         userId: $scope.id
       })
         .then(function (resp) {
+            Materialize.toast('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data, 5000)
             console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
         }, function (resp) {
+            Materialize.toast('Error status: ' + resp.status, 5000)
             console.log('Error status: ' + resp.status);
         }, function (evt) {
             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);

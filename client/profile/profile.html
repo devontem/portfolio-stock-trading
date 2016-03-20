@@ -1,0 +1,118 @@
+<div class="profile-container container">
+  <div class="myPortfolio">
+    <div class="card-panel profile-content">
+      <div class="row">
+        <div class="profile-menu col s12 l4 center">
+        	<div class="display-pic">
+        		<img ng-src="{{image}}" />
+        	</div>
+          <div class="collection clickable">
+            <a ng-class="active === 'accountInfo' ? 'active' : ''" class="collection-item" ng-click="showAccount()">Add Friend</a>
+            <a ng-class="active === 'editLogin' ? 'active' : ''" class="collection-item" ng-click="editLogin()">Send Message</a>
+            <a ng-class="active === 'editLeagues' ? 'active' : ''" class="collection-item" ng-click="editLeagues()">Send League Invite</a>
+            <a class="collection-item red-text" ng-click="delete()">REPORT USER</a>
+          </div>
+        </div>
+        <div class="col s12 l8">
+        	<h2 class="center">{{user.username}}'s Profile</h2>
+        	<section class="info-box">
+						<div class="info-box-header  teal lighten-3">
+							<p>Leagues Playing In</p>
+						</div>
+						<div>
+							 <table ng-if="portfolios.length" class="centered center">
+							 	<thead>
+				          <tr>
+				              <th data-field="id">League Name</th>
+				              <th data-field="name">Starting Balance</th>
+				              <th data-field="price">Portfolio Value</th>
+				              <th data-field="price"># of Trades</th>
+				          </tr>
+				        </thead>
+
+				        <tbody>
+				          <tr ng-repeat="portfolio in portfolios">
+				            <td>{{portfolio.leaguename}}</td>
+				            <td>{{portfolio.balance}}</td>
+				            <td>{{portfolio.portfolioValue}}</td>
+				            <td>{{portfolio.numOfTrades}}</td>
+				          </tr>
+				        </tbody>
+				      </table>
+				      <p class="center" ng-if="!portfolios.length">
+				      	{{user.username}} isn't playing in any leagues right now.
+				      </p>
+						</div>
+					</section>
+					<section class="info-box">
+						<div class="info-box-header green lighten-3">
+							<p>Leagues Created</p>
+						</div>
+						<div>
+							 <table ng-if="leagues.length" class="centered">
+							 	<thead>
+				          <tr>
+				              <th data-field="id">League Name</th>
+				              <th data-field="name">Starting Balance</th>
+				              <th data-field="price">Max. Players</th>
+				              <th data-field="price">Start</th>
+				              <th data-field="price">Type</th>
+				          </tr>
+				        </thead>
+
+				        <tbody>
+				          <tr ng-repeat="league in leagues">
+				            <td>{{league.name}}</td>
+				            <td>{{league.startbalance}}</td>
+				            <td>{{league.maxNum}}</td>
+				            <td>{{league.end}}</td>
+				            <td ng-class="league.private? 'red-text' : 'green-text'">{{league.private ? 'PRIVATE' : 'PUBLIC'}}</td>
+				          </tr>
+				        </tbody>
+				      </table>
+				      <p class="center" ng-if="!leagues.length">
+				      	{{user.username}} hasn't created any leagues yet.
+				      </p>
+						</div>
+					</section>
+					<section class="info-box">
+						<div class="info-box-header orange lighten-3">
+							<p>Leagues Won</p>
+						</div>
+						<div>
+							 <table ng-if="leaguesWon.length" class="centered">
+					        <thead>
+					          <tr>
+					              <th data-field="id">Name</th>
+					              <th data-field="name">Item Name</th>
+					              <th data-field="price">Item Price</th>
+					          </tr>
+					        </thead>
+
+					        <tbody>
+					          <tr>
+					            <td>Alvin</td>
+					            <td>Eclair</td>
+					            <td>$0.87</td>
+					          </tr>
+					          <tr>
+					            <td>Alan</td>
+					            <td>Jellybean</td>
+					            <td>$3.76</td>
+					          </tr>
+					          <tr>
+					            <td>Jonathan</td>
+					            <td>Lollipop</td>
+					            <td>$7.00</td>
+					          </tr>
+					        </tbody>
+				      </table>
+				      <p class="center" ng-if="!leaguesWon.length">
+				      	{{user.username}} hasn't won any leagues yet. :(
+				      </p>
+						</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
