@@ -59,7 +59,7 @@ module.exports = function (app, express) {
           var ask = res.buffer.toString().split('\n');
           for(var i=0; i<orders.length; i++){
             //if set price is greater than current price, process trade
-            if(15 < orders[i].dataValues.price){
+            if(Number(ask[i][1].split(',')[1]) < orders[i].dataValues.price){
               Order.destroy({ where: {id: orders[i].id }})
               var trade = {
                  symbol: orders[i].dataValues.symbol,

@@ -17,15 +17,19 @@
                 <td>Quantity</td>
                 <td>Price</td>
                 <td>Total Cost</td>
+                <td>Order Status</td>
               </thead>
               <tbody>
                <tr ng-repeat="order in orders">
                 <td style="text-transform: uppercase">{{ order.symbol }}</td>
                 <td>{{ order.company }}</td>
-                <td>{{ order.buysell }}</td>
+                <td ng-show="order.buysell">Buy</td>
+                <td ng-show="!order.buysell">Sell</td>
                 <td>{{ order.shares }}</td>
                 <td>{{ order.price | currency }}</td>
                 <td>{{ (order.price * order.shares) + 10 | currency}} </td>
+                <td ng-show="order.executed">Executed</td>
+                <td ng-show="!order.executed">Open</td>
                </tr>
              </tbody>
            </table>
