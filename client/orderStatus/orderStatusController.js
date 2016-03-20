@@ -14,4 +14,12 @@ app.controller('orderStatusController', ['$scope', '$window', '$stateParams', 'o
       })
   }
 
+  $scope.openModal = function(){
+    $('#modal2').openModal();
+  }
+
+  $scope.closeModal = function(){
+    $('#modal2').closeModal();
+  }
+
 }]);

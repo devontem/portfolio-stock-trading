@@ -1,8 +1,57 @@
+   
+   <!-- Modal Trigger -->
+   <a ng-click="openModal(); getOrders()" class="waves-effect waves-light btn modal-trigger">Order Status</a>
+
+   <!-- Modal Structure -->
+   <div id="modal2" class="modal">
+     <div class="modal-content">
+       <div class="row">
+         <div class="col m12">
+           <div class="card blue-grey darken-1">
+             <div class="card-content white-text">
+               <span class="card-title">Order Status</span>
+               <div class="row" style="color: white">
+
+               <table style="padding-bottom: 15px; flot:top">
+
+                 <table>
+                  <thead>
+                    <td>Symbol</td>
+                    <td>Company</td>
+                    <td>Action</td>
+                    <td>Quantity</td>
+                    <td>Price</td>
+                    <td>Total Cost</td>
+                    <td>Order Status</td>
+                  </thead>
+                  <tbody>
+                   <tr ng-repeat="order in orders">
+                    <td style="text-transform: uppercase">{{ order.symbol }}</td>
+                    <td>{{ order.company }}</td>
+                    <td ng-show="order.buysell">Buy</td>
+                    <td ng-show="!order.buysell">Sell</td>
+                    <td>{{ order.shares }}</td>
+                    <td>{{ order.price | currency }}</td>
+                    <td>{{ (order.price * order.shares) + 10 | currency}} </td>
+                    <td ng-show="order.executed">Executed</td>
+                    <td ng-show="!order.executed">Open</td>
+                   </tr>
+                 </tbody>
+               </table>
+
+                 </div>
+               </div>
+           </div>
+         </div>
+       </div>
+     </div>
+
+<!-- 
    <div class="col s12 m12">
      <div class="">
        <div class="card-content black-text">
-         <span class="card-title">Recent transactions</span>
-         <button class= 'btn std-btn getTweets' ng-click="getOrders()">Get transactions</button>
+         <span class="card-title">Order Status</span>
+         <button class= 'btn std-btn getTweets' ng-click="getOrders()">Order Status</button>
          <div class="leaderboard-container" style="height: 300px;
            overflow-x: auto;" scroll-directive="posts">
 
@@ -35,4 +84,4 @@
            </table>
          </div>
      </div>
-   </div>
+   </div> -->
