@@ -7,12 +7,8 @@ var moment = require('moment')
 
 module.exports.getLeagueTransactionsfromDB = function (req,res) {
 
-  console.log(req.body.data,'&&&&()((*)')
   	var portfolioid = req.body.data;
-  var leagueTransactions = [];
-  
-
-  	
+    var leagueTransactions = [];
       Transaction.findAll({ where: {
       $or: req.body.data
         }}).then(function(transactions){
@@ -21,15 +17,5 @@ module.exports.getLeagueTransactionsfromDB = function (req,res) {
         		leagueTransactions.push({'symbol':transaction.symbol.toUpperCase(), 'portfolioid' : transaction.PortfolioId, 'buysell': transaction.shares, 'time': moment(transaction.createdAt).calendar()})
         	})
         	res.json(leagueTransactions);
-
     })
-
-    
-            
-  	
-  	 
- 
-
-            
-  
 }

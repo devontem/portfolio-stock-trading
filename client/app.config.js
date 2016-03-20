@@ -1,4 +1,6 @@
-var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 'app.botbar', 'app.leagueResults', 'ngFileUpload', 'app.profile']);
+
+var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 'app.botbar', 'app.leagueResults', 'ngFileUpload', 'app.profile', 'angularCharts']);
+
 
   app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
@@ -107,6 +109,10 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
           'symbol@league':{
             controller: 'SymbolController',
             templateUrl: 'symbol/symbol.html'
+          },
+          'chart@league':{
+            controller: 'PortfolioChartController',
+            templateUrl: 'portfolioChart/portfolioChart.html'
           }
         }
       })
