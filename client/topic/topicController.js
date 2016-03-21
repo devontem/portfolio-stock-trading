@@ -1,4 +1,4 @@
-var app = angular.module('app')
+var app = angular.module('app');
 
 app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$window', 'forumFactory', '$location', '$anchorScroll', function($scope, topicFactory, $stateParams, $window, forumFactory, $location, $anchorScroll){
 
@@ -7,11 +7,11 @@ app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$w
 
   $scope.reply = function(){
     $scope.replyClicked = true;
-  }
+  };
 
   $scope.cancelReply = function(){
     $scope.replyClicked = false;
-  }
+  };
 
   // functionality to generate a reply and post
 
@@ -32,35 +32,35 @@ app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$w
       $scope.topicReply.message = '';
       $scope.cancelReply();
       $scope.getAllReplies();
-    })
-  }
+    });
+  };
 
   $scope.getAllReplies = function(){
     topicFactory.showAllReplies($scope.topicReply.topicId).then(function(data){
       $scope.allReplies = data.data;
-    })
-  }
+    });
+  };
 
   $scope.getOneTopic = function(){
     forumFactory.getOneTopic($scope.topicReply.topicId).then(function(data){
       $scope.topicInfo = data.data[0];
-    })
-  }
+    });
+  };
 
   $scope.momentJS = function(time){
     return moment(time).fromNow();
-  }
+  };
 
   $scope.lastPost = function(){
     $location.hash('last');
-  }
+  };
 
   $scope.toTop = function(){
     $location.hash('top');
-  }
+  };
 
   $scope.getOneTopic();
   $scope.getAllReplies();
   $anchorScroll();
 
-}])
+}]);

@@ -7,8 +7,6 @@ angular.module('app.leagueResults', [])
   // Getting the winner of the league
   leaderBoardFactory.getPortfolios(leagueId)
     .then(function(portfolios){
-    	console.log('portfoliossss', portfolios)
-
 			var max = 0, winner;
 			portfolios.forEach(function(portfolio){
 				if (portfolio.balance + portfolio.portfolioValue > max){
@@ -23,7 +21,6 @@ angular.module('app.leagueResults', [])
   // Getting the current league
   DashboardFactory.getLeagueById(leagueId)
   	.then(function(league){
-  		//console.log('calling it here', league);
   		$scope.league = league;
   	});
 
@@ -39,7 +36,6 @@ angular.module('app.leagueResults', [])
 					mostStockShares = transaction;
 				}
 			});
-			//console.log('transaction most bought', mostStockShares)
 			$scope.mostShares = mostStockShares;
 		});
 

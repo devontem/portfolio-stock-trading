@@ -1,4 +1,4 @@
-app.controller('LeaderBoardController', function($scope, $window, $stateParams, DashboardFactory, leaderBoardFactory, $location, $rootScope){
+app.controller('LeaderBoardController', ['$scope', '$window', '$stateParams', 'DashboardFactory', 'leaderBoardFactory', '$location', '$rootScope' ,function($scope, $window, $stateParams, DashboardFactory, leaderBoardFactory, $location, $rootScope){
 
   // members will be an object of each member in the league
   // containing name, portfolio value, and other stats
@@ -43,15 +43,15 @@ app.controller('LeaderBoardController', function($scope, $window, $stateParams, 
         if(!joined) {
           $window.location.href = '/#/dashboard';
           Materialize.toast('You are not in the league.',1000);
-        } 
-      })
+        }
+      });
   };
 
   $scope.getLeagueById = function(){
     DashboardFactory.getLeagueById($scope.leagueId).then(function(data){
       $scope.secretCode = data.code;
-    })
-  }
+    });
+  };
 
   $scope.getLeagueById();
   $scope.getLeaderBoard();
@@ -59,5 +59,5 @@ app.controller('LeaderBoardController', function($scope, $window, $stateParams, 
   //$scope.getLeaderBoard(leagueId);
   $rootScope.$on("PortfolioUpdate", function(){
     $scope.getLeaderBoard();
-  })
-});
+  });
+}]);

@@ -18,11 +18,11 @@ app
       }
       scope.hidesignup = function() {
         scope.show = false;
-      }
+      };
     },
     transclude: true,
     template: "<div class='ng-modal' ng-show='show'><div class='ng-modal-overlay' ng-click='hidesignup()'></div><div class='ng-modal-dialog' ng-style='dialogStyle'><div class='ng-modal-dialog-content' ng-transclude></div></div></div>"
-  }
+  };
 })
 
 //modal for login
@@ -43,15 +43,15 @@ app
       }
       scope.hidelogin = function() {
         scope.show = false;
-      }
+      };
     },
     transclude: true,
     template: "<div class='ng-modal' ng-show='show'><div class='ng-modal-overlay' ng-click='hidelogin()'></div><div class='ng-modal-dialog' ng-style='dialogStyle'><div class='ng-modal-dialog-content' ng-transclude></div></div></div>"
-  }
+  };
 })
 
 //signin signup controller
-.controller('SigninController', function($scope, $window, Auth, $rootScope){
+.controller('SigninController', ['$scope', '$window', 'Auth', '$rootScope', function($scope, $window, Auth, $rootScope){
   $scope.user = {};
   //$scope.loggedin = false;
   $scope.username;
@@ -63,13 +63,13 @@ app
     }else{
       $scope.loggedin = false;
     }
-  }
+  };
 
   $scope.authorize();
 
   $rootScope.$on('deleted', function(){
     $scope.loggedin = false;
-  })
+  });
 
   $scope.showsignup = false;
   $scope.toggleSignup = function() {
@@ -82,7 +82,6 @@ app
   };
 
   $scope.signup = function(user){
-    console.log('user being signed up', user)
     Auth.createuser(user).then(function(data){
       $window.localStorage.setItem('com.tp', data.token);
       $window.localStorage.setItem('com.tp.userId', data.userId);
@@ -92,7 +91,7 @@ app
       $scope.loggedin = true;
       $window.location.href = '/#/dashboard';
     });
-  }
+  };
 
   $scope.signin = function(user){
     Auth.loginuser(user).then(function(data){
@@ -108,7 +107,7 @@ app
         $window.location.href = '/#/';
       }
     });
-  }
+  };
 
   $scope.logout = function(user){
     $scope.loggedin = false;
@@ -116,6 +115,5 @@ app
     $window.localStorage.removeItem('com.tp.userId');
     $window.localStorage.removeItem('com.tp.username');
     $window.location.href = '/#/';
-  }
-})
-
+  };
+}]);

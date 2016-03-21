@@ -11,8 +11,8 @@ app.controller('MainForumController', ['$scope', '$window', 'forumFactory', '$ro
 
   $scope.openModal = function(){
     $('#createForumPost').openModal();
-  }
-  
+  };
+
   $scope.createTopic = function(topic){
     forumFactory.addNewTopic(topic).then(function(err, res){
       if(err){console.log(err)}
@@ -22,8 +22,8 @@ app.controller('MainForumController', ['$scope', '$window', 'forumFactory', '$ro
       $('#createForumPost').closeModal();
       $scope.showAllTopics();
       $scope.goToTop();
-    })
-  }
+    });
+  };
 
   $scope.showAllTopics = function(){
     forumFactory.showAllTopics().then(function(data){
@@ -35,22 +35,22 @@ app.controller('MainForumController', ['$scope', '$window', 'forumFactory', '$ro
           $scope.allTopics[index].replies = 0;
           topicFactory.showAllReplies($scope.allTopics[index].id)
             .then(function(replies){
-              console.log('#ofREPLIES: ', replies)
+              console.log('#ofREPLIES: ', replies);
               $scope.allTopics[index].replies = replies.data.length;
 
-            })
+            });
         })(i)
       }
 
-    })
-  }
+    });
+  };
 
 
   $scope.goToTop = function(){
     $location.hash('top');
     $anchorScroll();
-  }
+  };
 
   $scope.showAllTopics();
 
-}])
+}]);

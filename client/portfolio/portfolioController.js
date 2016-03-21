@@ -1,6 +1,6 @@
 angular.module('app.portfolio', [])
 
-.controller('PortfolioController', function($scope, $window, $stateParams, Portfolio, $rootScope){
+.controller('PortfolioController', ['$scope', '$window', '$stateParams', 'Portfolio', '$rootScope', function($scope, $window, $stateParams, Portfolio, $rootScope){
 	// MAKE A TRADE MODAL
 	$scope.leagueId = $stateParams.leagueId;
 	$scope.userId = $window.localStorage.getItem('com.tp.userId');
@@ -58,16 +58,16 @@ angular.module('app.portfolio', [])
 			return false;
 		} else if (options.buysell && Number($scope.singlePrice) < Number($scope.stock.Ask)){
 			options.price = $scope.singlePrice;
-			options.executed = false;;
+			options.executed = false;
 			Portfolio.limitOrder(options).then(function(data){
-			})
+			});
 			Materialize.toast("Your limit order has been placed", 3000, 'rounded');
 			$scope.resetFields();
 			return false;
 		} else {
 			options.executed = true;
 			Portfolio.limitOrder(options).then(function(data){
-			})
+			});
 			Portfolio.buySell(options).then(function(data){
 				Materialize.toast('You traded '+options.shares+' shares in '+options.company, 3000, 'rounded');
 				$scope.resetFields();
@@ -123,7 +123,7 @@ angular.module('app.portfolio', [])
 	// MY STOCKS MODAL
 	updatePortfolio();
 	// $scope.updateMarketPrice();
-    
+
 	function updatePortfolio(){
 		var leagueId = $stateParams.leagueId;
 		var userId = $window.localStorage.getItem('com.tp.userId');
@@ -139,9 +139,9 @@ angular.module('app.portfolio', [])
 		Portfolio.getUserStocks(leagueId, userId).then(function(transactions){
 			$scope.stocks = transactions;
             transactions.forEach(function(transaction){
-              console.log(Math.round((transaction.marketPrice*transaction.shares)/$scope.portfolioValue*100),'&&&')
-              transaction.percentage = Math.round((transaction.marketPrice*transaction.shares)/$scope.portfolioValue*100)
-            })
+              console.log(Math.round((transaction.marketPrice*transaction.shares)/$scope.portfolioValue*100),'&&&');
+              transaction.percentage = Math.round((transaction.marketPrice*transaction.shares)/$scope.portfolioValue*100);
+            });
 			$scope.stocks = transactions;
 		});
 
@@ -149,4 +149,4 @@ angular.module('app.portfolio', [])
 
     $rootScope.$emit("PortfolioUpdate", {});
 	}
-});
+}]);
