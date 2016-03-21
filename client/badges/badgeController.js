@@ -10,6 +10,7 @@ app.controller('BadgeController', ['$scope', 'BadgeFactory', '$window', function
           var badgeFormatted = {};
           badgeFormatted.name = badge.name;
           badgeFormatted.text = badge.text;
+          badgeFormatted.icon = badge.icon;
           $scope.badges.push(badgeFormatted);
         });
       }
@@ -24,6 +25,7 @@ app.controller('BadgeController', ['$scope', 'BadgeFactory', '$window', function
           var badgeFormatted = {};
           badgeFormatted.name = badge.name;
           badgeFormatted.text = badge.text;
+          badgeFormatted.icon = badge.icon;
           $scope.possibleBadges.push(badgeFormatted);
         });
       }
