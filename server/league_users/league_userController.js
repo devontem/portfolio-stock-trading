@@ -8,7 +8,7 @@ module.exports.getAllUsers = function(req, res){
   League_user.findAll({ where: {leagueId === id }}).then(function(users){
     if(users){
       res.json(users);
-    }else{ 
+    }else{
       console.log('No user found!');
       res.end();
     }
@@ -16,8 +16,8 @@ module.exports.getAllUsers = function(req, res){
   .catch(function(err){
     console.error('Error getting users ', err);
     res.end();
-  })
-}
+  });
+};
 
 //get all leagues for certain user
 module.exports.getAllLeagues = function(req, res){
@@ -33,5 +33,5 @@ module.exports.getAllLeagues = function(req, res){
   .catch(function(err){
     console.error('Error getting leagues ', err);
     res.end();
-  })
-}
+  });
+};

@@ -70,12 +70,12 @@ angular.module('app.dashboard', [])
         }
         event.stopPropagation();
     });
-  }
+  };
 
   $scope.pickend = function(){
     var end = $('#enddate').pickadate({
       onSet: function (context) {
-        $scope.league.end = new Date(context.select)
+        $scope.league.end = new Date(context.select);
       },
       onClose: function() {
           $('#enddate').focus();
@@ -93,7 +93,7 @@ angular.module('app.dashboard', [])
         }
         event.stopPropagation();
     });
-  }
+  };
 
   //toggle add form
   $scope.showadd = false;
@@ -110,16 +110,14 @@ angular.module('app.dashboard', [])
 
     var creatorName = $window.localStorage.getItem('com.tp.username');
     var creatorId = $window.localStorage.getItem('com.tp.userId');
-    league['creatorId']= creatorId;
-    league['creatorName']= creatorName;
+    league.creatorId = creatorId;
+    league.creatorName = creatorName;
 
     league.private = JSON.parse(league.isPrivate);
     DashboardFactory.addLeague(league)
       .then(function(league){
         $scope.toggleAdd();
-        console.log('league info new$$', league)
         if (league.private === true){
-          console.log('it is private')
           swal({
             title: "Private League Password",
             text: "<p style='font-size: 1.2em'>Send this code to friends and have them enter it in the dashboard. <br /> <br /><div style='font-size: 1.6em' class='chip'><b>"+league.code+"</b></div>",
@@ -204,7 +202,7 @@ angular.module('app.dashboard', [])
 
   $scope.notprivate = function(league){
     return !league.private;
-  }
+  };
 
   $scope.notfull = function(league){
     if(league.maxNum - league.usersJoined > 0){
@@ -234,7 +232,7 @@ angular.module('app.dashboard', [])
           if (inputValue === false) return false;
           if (inputValue === "") {
             swal.showInputError("You need to write something!");
-            return false
+            return false;
           }
 
           var found = false;
@@ -256,7 +254,7 @@ angular.module('app.dashboard', [])
             return false;
           }
         });
-  }
+  };
 
   $scope.getUserLeagues();
   $scope.getLeaguesToJoin();

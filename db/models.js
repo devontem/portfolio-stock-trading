@@ -8,7 +8,7 @@ var salt = bcrypt.genSaltSync(10);
 if (process.env.DEPLOYED === 'TRUE'){
   var orm = new Sequelize(process.env.JAWSDB_URL);
 } else {
-  var orm = new Sequelize('Pistonsdb', 'root', '')
+  var orm = new Sequelize('Pistonsdb', 'root', '');
 }
 
 //User Model
@@ -17,6 +17,12 @@ var User = orm.define('User', {
 		type: Sequelize.STRING,
 		unique: true
     },
+    // Badge related behavior
+    badgeJoined: Sequelize.BOOLEAN,
+    badgeWonLeague: Sequelize.BOOLEAN,
+    badgeNumberOfLogins: Sequelize.INTEGER,
+    badgeLastLogin: Sequelize.DATE,
+
     email: {
     	type: Sequelize.STRING,
     	unique:true
@@ -57,14 +63,14 @@ var Forum = orm.define('Forum', {
   description: Sequelize.STRING,
   creatorName: Sequelize.STRING,
   creatorId: Sequelize.INTEGER
-})
+});
 
 var Topic = orm.define('Topic', {
   topicId: Sequelize.INTEGER,
   message: Sequelize.TEXT,
   userName: Sequelize.STRING,
   userId: Sequelize.STRING
-})
+});
 
 
 //Transaction Model
@@ -97,7 +103,7 @@ var Order = orm.define('Order', {
 var Message = orm.define('Message', {
   name: Sequelize.STRING,
   message: Sequelize.STRING
-})
+});
 
 
 //League Model
@@ -112,9 +118,24 @@ var League = orm.define('league', {
   code: Sequelize.STRING
 });
 
-//Joint table for League and user
+// Badges
+var Badge = orm.define('Badge', {
+  name: {type: Sequelize.STRING, unique: true},
+  text: Sequelize.STRING,
+  icon: Sequelize.STRING
+});
+
+//Join table for League and user
 var League_user = orm.define('League_user', {
-})
+});
+
+// Join table for badge and user
+var Badge_user = orm.define('Badge_user', {
+});
+
+//Badge to User - Many to Many
+User.belongsToMany(Badge, {through: 'Badge_user'});
+Badge.belongsToMany(User, {through: 'Badge_user'});
 
 Message.belongsTo(User);
 User.hasMany(Message);
@@ -147,20 +168,22 @@ Order.belongsTo(Portfolio);
 // Topic to Forum - One to Many
 
 Forum.hasMany(Topic);
-Topic.belongsTo(Forum)
+Topic.belongsTo(Forum);
 
 User.sync();
 League.sync();
 Portfolio.sync();
 Transaction.sync();
 League_user.sync();
+Badge_user.sync();
 Message.sync();
 Forum.sync();
 Topic.sync();
 Order.sync();
-
+Badge.sync();
 
 exports.League_user = League_user;
+exports.Badge_user = Badge_user;
 exports.User = User;
 exports.League = League;
 exports.Portfolio = Portfolio;
@@ -170,5 +193,4 @@ exports.orm = orm;
 exports.Forum = Forum;
 exports.Topic = Topic;
 exports.Order = Order;
-
-
+exports.Badge = Badge;
