@@ -5,14 +5,15 @@
 </ul>
 
 
-<div class="row" style="width: 100%;">
+<div class="row" style="width: 100%;" id="top">
   <div class="col s12 m12" style="overflow-x: auto;">
     <div class="card-panel white">
       <!-- INSERT TOPIC DESCRIPTION HERE -->
-      <h3>{{topicInfo.title}}</h3>
-      <h5>{{topicInfo.description}}</h5>
+      <h5>{{topicInfo.title}}</h5>
+      <p style="font-size: 16px">{{topicInfo.description}}</p>
       <p style="text-align: right; font-size: 18px">-{{topicInfo.creatorName}}, <span style="font-style: italic; font-size: 14px">{{topicInfo.createdAt | date:"longDate"}}</span></p>
       <a ng-click="reply()" class="waves-effect waves-light btn modal-trigger">REPLY</a>
+      <a style="float: right;" ng-click="lastPost()" class="waves-effect waves-light">Go to Latest Reply</a>
       <hr>
       <!-- drop down form to reply -->
       <div class="row" ng-if="replyClicked">
@@ -59,6 +60,7 @@
           </tr>
         </tbody>
       </table>
+      <div id="last"><a style="float: right; padding-bottom: 10px" ng-click="toTop()" class="waves-effect waves-light">Back to Top</a></div>
       </div>
     </div>
   </div>
