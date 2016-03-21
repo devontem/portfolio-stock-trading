@@ -51,12 +51,8 @@ app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$w
     return moment(time).fromNow();
   };
 
-  $scope.lastPost = function(){
-    $location.hash('last');
-  };
-
-  $scope.toTop = function(){
-    $location.hash('top');
+  $scope.scrollTo = function(div){
+    $location.hash('loc-'+div);
   };
 
   $scope.getOneTopic();
