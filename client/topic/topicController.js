@@ -14,7 +14,10 @@ app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$w
   }
 
   // functionality to generate a reply and post
-  //
+
+  $scope.test = 'I am an <code>HTML</code>string with ' +
+     '<a href="#">links!</a> and other <em>stuff</em>'
+
   $scope.allReplies;
   $scope.topicReply = {};
   $scope.topicReply.topicId = $stateParams.topicId;

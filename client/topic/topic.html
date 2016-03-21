@@ -4,7 +4,8 @@
   <li class="waves-effect"><a href="#!"><i class="material-icons"></i></a></li>
 </ul>
 
-<div class="row" style="width: 900px;">
+
+<div class="row" style="width: 100%;">
   <div class="col s12 m12" style="overflow-x: auto;">
     <div class="card-panel white">
       <!-- INSERT TOPIC DESCRIPTION HERE -->
@@ -45,7 +46,7 @@
                 <div class="col s12 m10">
                   <div class="card-panel white">
                     <span class="black-text">
-                      {{reply.message}}
+                      <pre ng-bind-html="reply.message"></pre>
                     </span>
                     <p style="text-align: right;">
                       - {{reply.userName}} |
@@ -62,3 +63,4 @@
     </div>
   </div>
 </div>
+
