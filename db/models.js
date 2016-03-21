@@ -102,8 +102,7 @@ var Order = orm.define('Order', {
 
 var Message = orm.define('Message', {
   name: Sequelize.STRING,
-  message: Sequelize.STRING,
-  icon: Sequelize.STRING
+  message: Sequelize.STRING
 });
 
 
@@ -123,7 +122,7 @@ var League = orm.define('league', {
 var Badge = orm.define('Badge', {
   name: {type: Sequelize.STRING, unique: true},
   text: Sequelize.STRING,
-
+  icon: Sequelize.STRING
 });
 
 //Join table for League and user
