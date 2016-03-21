@@ -1,7 +1,7 @@
 angular.module('app.botbar', [])
 
 // TODO: likely change portofolio factory name to be more precise
-.controller('BotBarController',['$scope', 'Portfolio', function($scope, Portfolio, $interval){
+.controller('BotBarController',['$scope', 'Portfolio', '$interval', function($scope, Portfolio, $interval){
   // Initializes variable if the user has not searched yet
   $scope.hasSearched = false;
 
