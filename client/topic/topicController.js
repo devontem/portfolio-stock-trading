@@ -1,6 +1,6 @@
 var app = angular.module('app')
 
-app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$window', 'forumFactory', function($scope, topicFactory, $stateParams, $window, forumFactory){
+app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$window', 'forumFactory', '$location', '$anchorScroll', function($scope, topicFactory, $stateParams, $window, forumFactory, $location, $anchorScroll){
 
   // functionality to show and hide reply form field
   $scope.replyClicked = false;
@@ -14,7 +14,7 @@ app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$w
   }
 
   // functionality to generate a reply and post
-  //
+
   $scope.allReplies;
   $scope.topicReply = {};
   $scope.topicReply.topicId = $stateParams.topicId;
@@ -51,7 +51,16 @@ app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$w
     return moment(time).fromNow();
   }
 
+  $scope.lastPost = function(){
+    $location.hash('last');
+  }
+
+  $scope.toTop = function(){
+    $location.hash('top');
+  }
+
   $scope.getOneTopic();
   $scope.getAllReplies();
+  $anchorScroll();
 
 }])
