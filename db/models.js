@@ -61,7 +61,7 @@ var Forum = orm.define('Forum', {
 
 var Topic = orm.define('Topic', {
   topicId: Sequelize.INTEGER,
-  message: Sequelize.STRING,
+  message: Sequelize.TEXT,
   userName: Sequelize.STRING,
   userId: Sequelize.STRING
 })
