@@ -1,4 +1,4 @@
-app.controller('AccountController', function($scope, $window, AccountFactory, $location, $rootScope){
+app.controller('AccountController', ['$scope', '$window', 'AccountFactory', '$location', '$rootScope', function($scope, $window, AccountFactory, $location, $rootScope){
 
   $scope.name = $window.localStorage.getItem('com.tp.username');
   $scope.id = $window.localStorage.getItem('com.tp.userId');
@@ -30,13 +30,13 @@ app.controller('AccountController', function($scope, $window, AccountFactory, $l
           "error");
         }
       });
-  }
+  };
 
   $scope.getLeaguesByOwnerId = function(){
     AccountFactory.getLeaguesByOwnerId($scope.id).then(function(data){
       $scope.leagues = data;
     });
-  }
+  };
 
   $scope.getLeaguesByOwnerId();
 
@@ -46,8 +46,8 @@ app.controller('AccountController', function($scope, $window, AccountFactory, $l
         $scope.user = user;
         $scope.email = user.email;
         $scope.image = user.image;
-      })
-  }
+      });
+  };
 
   $scope.getUser();
 
@@ -57,19 +57,19 @@ app.controller('AccountController', function($scope, $window, AccountFactory, $l
 
   $scope.editLogin = function(){
     $scope.active = 'editLogin';
-    resetEditMode()
-  }
+    resetEditMode();
+  };
   $scope.editLeagues = function(){
     $scope.active = 'editLeagues';
     resetEditMode();
-  }
+  };
   $scope.showAccount = function(){
     $scope.active = 'accountInfo';
-    resetEditMode()
-  }
+    resetEditMode();
+  };
   $scope.cancel = function(){
     $scope.newlogin = {};
-  }
+  };
 
   $scope.toggleEditMode = function(){
     if ($scope.editMode){
@@ -77,7 +77,7 @@ app.controller('AccountController', function($scope, $window, AccountFactory, $l
     } else {
       $scope.editMode = true;
     }
-  }
+  };
 
   function resetEditMode(){
     $scope.editMode = false;
@@ -87,7 +87,7 @@ app.controller('AccountController', function($scope, $window, AccountFactory, $l
   $scope.selectLeague = function(league){
     $scope.toggleEditMode();
     $scope.currentLeague = league;
-  }
+  };
 
   $scope.editLeague = function(){
     var league = $scope.currentLeague;
@@ -104,7 +104,7 @@ app.controller('AccountController', function($scope, $window, AccountFactory, $l
 
       swal('League Updated!', 'Everyone wants to play but nobody wants to organize the game. Good job!');
     });
-  }
+  };
 
   $scope.updateLogin = function(){
     AccountFactory.editLogin($scope.newlogin)
@@ -112,25 +112,25 @@ app.controller('AccountController', function($scope, $window, AccountFactory, $l
         if(user.data === "Wrong old password"){
           Materialize.toast('You entered the wrong old password!', 2000);
         }else if(user.data === "Email already taken"){
-          Materialize.toast('New Email already taken, please use another Email.', 2000)
+          Materialize.toast('New Email already taken, please use another Email.', 2000);
         }else{
           $scope.newlogin = {};
           $scope.cancel();
-          Materialize.toast('Your login has been updated', 2000)
+          Materialize.toast('Your login has been updated', 2000);
         }
       });
-  }
+  };
 
 
   $scope.deleteLeague = function(){
-    swal({title: "Are you sure?",   
-          text: "All associated portfolios and transactions will also be removed",   
-          type: "warning",   
-          showCancelButton: true,   
-          confirmButtonColor: "#DD6B55",   
-          confirmButtonText: "Yes, delete it!",   
-          closeOnConfirm: false }, 
-          function(){   
+    swal({title: "Are you sure?",
+          text: "All associated portfolios and transactions will also be removed",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Yes, delete it!",
+          closeOnConfirm: false },
+          function(){
             swal("Deleted!", "Your league has been deleted!", "success");
             AccountFactory.deleteLeagueById($scope.currentLeague.id)
               .then(function(data){
@@ -150,10 +150,10 @@ app.controller('AccountController', function($scope, $window, AccountFactory, $l
         userId: $scope.id
       })
         .then(function (resp) {
-            Materialize.toast('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data, 5000)
+            Materialize.toast('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data, 5000);
             console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
         }, function (resp) {
-            Materialize.toast('Error status: ' + resp.status, 5000)
+            Materialize.toast('Error status: ' + resp.status, 5000);
             console.log('Error status: ' + resp.status);
         }, function (evt) {
             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
@@ -164,4 +164,4 @@ app.controller('AccountController', function($scope, $window, AccountFactory, $l
     $scope.file = file;
   };
 
-});
+}]);
