@@ -1,3 +1,3 @@
-app.controller('BadgeControllererts', ['$scope', function($scope){
-  console.log('hi');
+app.controller('BadgeController', ['$scope', function($scope){
+  $scope.test = 100;
 }]);
