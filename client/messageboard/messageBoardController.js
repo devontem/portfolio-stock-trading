@@ -1,4 +1,4 @@
-var app = angular.module('app')
+var app = angular.module('app');
 
 app.controller('MessageBoardController', function($scope, messageBoardFactory, $rootScope, $window, $stateParams){
 
@@ -20,8 +20,8 @@ app.controller('MessageBoardController', function($scope, messageBoardFactory, $
         $rootScope.$emit('scrollDown');
       });
 
-    })
-  }
+    });
+  };
 
   $scope.leagueId;
 
@@ -31,7 +31,7 @@ app.controller('MessageBoardController', function($scope, messageBoardFactory, $
     var posts = posts;
     $scope.posts = posts.data;
   });
-  }
+};
 
   showPosts();
   // $window.setInterval(showPosts, 1000);
