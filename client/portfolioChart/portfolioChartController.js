@@ -1,8 +1,4 @@
-
-
-
-app.controller('PortfolioChartController', function($scope, Portfolio,$stateParams,$window){
-
+app.controller('PortfolioChartController', ['$scope', 'Portfolio', '$stateParams', '$window', function($scope, Portfolio,$stateParams,$window){
 
 $scope.data1 = {
 		series: ['yo', 'yo1'],
@@ -22,7 +18,7 @@ $scope.data1 = {
 		labels: true,
 		click: function(d) {
 			$scope.getBalance();
-			Materialize.toast('Assets Updated!', 1000)
+			Materialize.toast('Assets Updated!', 1000);
 		},
 		title: "Asset Allocation",
 		legend: {
@@ -41,13 +37,11 @@ $scope.getBalance = function (){
 			$scope.balance = portfolio.balance;
 			$scope.portfolioValue = portfolio.portfolioValue;
 			$scope.total = $scope.balance + $scope.portfolioValue;
-			$scope.data1.data[0].y[0]=(Math.round($scope.balance/$scope.total*100))
-			$scope.data1.data[1].y[0]=(Math.round($scope.portfolioValue/$scope.total*100))
+			$scope.data1.data[0].y[0]=(Math.round($scope.balance/$scope.total*100));
+			$scope.data1.data[1].y[0]=(Math.round($scope.portfolioValue/$scope.total*100));
 		});
- 
-}
+
+};
 $scope.getBalance();
 
-
- 
-});
+}]);
