@@ -3,7 +3,7 @@
     <div class="card-panel white">
       <h3>Forum</h3>
       <a ng-click="openModal()" class="waves-effect waves-light btn modal-trigger">Create New Topic</a>
-      <div style="height: 500px; overflow-x: auto;">
+      <div style="overflow-x: auto;">
       <table class="highlight centered" id="createTopicScroll">
         <thead id="top">
           <tr>
@@ -31,10 +31,10 @@
 
 
 <!-- Modal Structure -->
-<div id="createForumPost" class="modal" style="width: 700px>
+<div id="createForumPost" class="modal" style="width: 100%>
   <div class="modal-content">
-    <div class="col s12 m12" style="width: 700px;margin-left: auto; margin-right: auto;">
-        <div class="card-panel white">
+    <div class="col s12 m12" style="width: 100%;margin-left: auto; margin-right: auto;">
+        <div style="padding: 15px;">
           <span class="card-title"><h3>Create a Topic</h3></span>
           <div class="row">
             <form class="col s12">
