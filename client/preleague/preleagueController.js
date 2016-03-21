@@ -1,4 +1,4 @@
-app.controller('PreLeagueController', function($scope, $stateParams, preLeagueFactory){
+app.controller('PreLeagueController', ['$scope', '$stateParams', 'preLeagueFactory', function($scope, $stateParams, preLeagueFactory){
 
   $scope.leagueId = $stateParams.leagueId;
   $scope.leagueName;
@@ -19,4 +19,4 @@ app.controller('PreLeagueController', function($scope, $stateParams, preLeagueFa
   $scope.date;
 
 
-});
+}]);
