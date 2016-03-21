@@ -97,7 +97,7 @@ var Order = orm.define('Order', {
 var Message = orm.define('Message', {
   name: Sequelize.STRING,
   message: Sequelize.STRING
-})
+});
 
 
 //League Model
@@ -112,9 +112,19 @@ var League = orm.define('league', {
   code: Sequelize.STRING
 });
 
+// Badges
+var Badge = orm.define('Badge', {
+  name: Sequelize.STRING,
+  text: Sequelize.STRING
+});
+
 //Joint table for League and user
 var League_user = orm.define('League_user', {
-})
+});
+
+//Badge to User - Many to Many
+User.belongsToMany(Badge, {through: 'Badge_user'});
+Badge.belongsToMany(User, {through: 'Badge_user'});
 
 Message.belongsTo(User);
 User.hasMany(Message);
@@ -158,7 +168,7 @@ Message.sync();
 Forum.sync();
 Topic.sync();
 Order.sync();
-
+Badge.sync();
 
 exports.League_user = League_user;
 exports.User = User;
@@ -170,5 +180,4 @@ exports.orm = orm;
 exports.Forum = Forum;
 exports.Topic = Topic;
 exports.Order = Order;
-
-
+exports.Badge = Badge;
