@@ -83,43 +83,53 @@ var badgeMaker = function(){
   });
   Badge.create({
     name: 'Welcome',
-    text: 'The first million starts with the first dollar. You earned this badge for signing up with Portfol.io'
+    text: 'The first million starts with the first dollar. You earned this badge for signing up with Portfol.io',
+    icon: 'fiber_new'
   });
   Badge.create({
     name: "The Winner's Circle",
-    text: 'Congrats! You won your first league. Now for hundred more!'
+    text: 'Congrats! You won your first league. Now for hundred more!',
+    icon: 'fiber_new'
   });
   Badge.create({
     name: '3X',
-    text: 'You Logged in for Three Consecutive Days. Woot!'
+    text: 'You Logged in for Three Consecutive Days. Woot!',
+    icon: 'fiber_new'
   });
   Badge.create({
     name: '5X',
-    text: 'You Logged in for Five Consecutive Days. Woot!'
+    text: 'You Logged in for Five Consecutive Days. Woot!',
+    icon: 'fiber_new'
   });
   Badge.create({
     name: 'Week 1',
-    text: 'You Logged in every day for one week. Keep up the great work bigshot!'
+    text: 'You Logged in every day for one week. Keep up the great work bigshot!',
+    icon: 'fiber_new'
   });
   Badge.create({
     name: 'Shhh!',
-    text: 'You joined your first private league!'
+    text: 'You joined your first private league!',
+    icon: 'fiber_new'
   });
   Badge.create({
     name: 'Beginner Broker!',
-    text: 'You joined your first public league! Enjoy'
+    text: 'You joined your first public league! Enjoy',
+    icon: 'fiber_new'
   });
   Badge.create({
     name: '100K',
-    text: 'You earned your first $100,000!'
+    text: 'You earned your first $100,000!',
+    icon: 'fiber_new'
   });
   Badge.create({
     name: '1 Mil',
-    text: 'You earned your first million!'
+    text: 'You earned your first million!',
+    icon: 'fiber_new'
   });
   Badge.create({
     name: '5 Mil',
-    text: 'Five Million Earned?!?!?! Time to start looking into retirement'
+    text: 'Five Million Earned?!?!?! Time to start looking into retirement',
+    icon: 'fiber_new'
   });
 };
 
