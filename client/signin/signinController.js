@@ -144,5 +144,5 @@ app
     });
   }
 
-  setInterval(getOpenAndUnreadMessages, 3000);
+  // setInterval(getOpenAndUnreadMessages, 3000);
 }]);

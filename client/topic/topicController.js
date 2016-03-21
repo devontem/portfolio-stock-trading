@@ -71,6 +71,11 @@ app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$w
   $anchorScroll();
 
 
+  // $scope.hasPosts = function(){
+  //   return $scope.allReplies.length > 3;
+  // }
+
+
   $scope.usersPost = function(user){
     if(user === $window.localStorage.getItem('com.tp.userId')){
       return true;

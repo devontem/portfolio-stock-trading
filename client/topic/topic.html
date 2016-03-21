@@ -52,9 +52,9 @@
                       - {{reply.userName}} |
                       <span style="font-size: 10px; font-style: italic;">{{momentJS(reply.createdAt)}}</span>
                     </p>
+
                     <p ng-if="usersPost(reply.userId)" style="text-align: right;" >
                       <a ng-click="deleteReply(reply.id)">DELETE</a>
-                    </p>
                   </div>
                 </div>
               </div>
