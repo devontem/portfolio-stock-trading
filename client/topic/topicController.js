@@ -63,4 +63,8 @@ app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$w
   $scope.getAllReplies();
   $anchorScroll();
 
+  $scope.hasPosts = function(){
+    return $scope.allReplies.length > 3;
+  }
+
 }]);
