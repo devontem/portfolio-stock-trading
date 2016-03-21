@@ -13,13 +13,15 @@ var Message = require('../../db/models').Message;
 var Forum = require('../../db/models').Forum;
 var Topic = require('../../db/models').Topic;
 var Watchlist = require('../../db/models').Watchlist;
-
+var moment = require('moment');
 var Badge = require('../../db/models').Badge;
 var Badge_user = require('../../db/models').Badge_user;
 var expressJwt = require('express-jwt');
 var jwt = require('jsonwebtoken');
 var morgan = require('morgan');
 var limitOrder = require('./limitOrder').limitOrder;
+var limitOrder = require('./limitOrder').limitOrder;
+var dayOrder = require('./limitOrder').dayOrder;
 
 
 module.exports = function (app, express) {

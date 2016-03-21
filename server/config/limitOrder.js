@@ -2,6 +2,7 @@ var Order = require('../../db/models').Order;
 var Portfolio = require('../../db/models').Portfolio;
 var Transaction = require('../../db/models').Transaction;
 var http = require('http-request');
+var moment = require('moment');
 
 module.exports.limitOrder = function(){
   setInterval(function(){
@@ -25,7 +26,8 @@ module.exports.limitOrder = function(){
                  price: orders[i].dataValues.price,
                  marketPrice: orders[i].dataValues.price,
                  buysell: orders[i].dataValues.buysell,
-                 executed: true
+                 executed: true,
+                 dayorder: orders[i].dataValues.dayorder
               }
               placeTrade(trade);
               placeOrder(trade);
@@ -71,11 +73,23 @@ function placeTrade (trade){
 
     })
     .catch(function(err){
-      console.log("ERRORERROR")
+      console.log("Error")
     });
 
   })
   .catch(function(err){
-      console.log("ERRORERROR")
+      console.log("Error")
   });
+}
+
+module.exports.dayOrder = function(){
+  setInterval(function(){
+    var now = moment().utc().format("HH:mm:ss");
+    if(now == '00:00:00'){
+      Order.destroy({ where: { dayorder: true }})
+        .catch(function(err){
+            console.log("ERRORERROR")
+        });
+    };
+  }, 1000)
 }
