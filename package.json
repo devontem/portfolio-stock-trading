@@ -25,6 +25,7 @@
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.3.4",
     "body-parser": "^1.15.0",
+    "bower": "^1.7.7",
     "chai": "^3.5.0",
     "cookie-parser": "^1.4.1",
     "d3": "^3.5.16",
