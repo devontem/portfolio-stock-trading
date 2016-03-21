@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/server.js",
-    "test": "gulp test",
+    "test": "mocha test",
     "lint": "gulp lint",
     "sass": "gulp sass",
     "postinstall": "./node_modules/bower/bin/bower install"
