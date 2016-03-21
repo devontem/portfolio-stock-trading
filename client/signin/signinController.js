@@ -51,7 +51,7 @@ app
 })
 
 //signin signup controller
-.controller('SigninController', ['$scope', '$window', 'Auth', '$rootScope' function($scope, $window, Auth, $rootScope){
+.controller('SigninController', ['$scope', '$window', 'Auth', '$rootScope', function($scope, $window, Auth, $rootScope){
   $scope.user = {};
   //$scope.loggedin = false;
   $scope.username;
