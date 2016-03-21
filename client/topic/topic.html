@@ -52,9 +52,8 @@
                       - {{reply.userName}} |
                       <span style="font-size: 10px; font-style: italic;">{{momentJS(reply.createdAt)}}</span>
                     </p>
-                    <p ng-if="userReply(reply.userId)">
-                      <button>Edit</button>
-                      <button>Delete</button>
+                    <p>
+                      <a ng-click="deleteReply(reply.id)" class="waves-effect waves-light btn">Delete</a>
                     </p>
                   </div>
                 </div>

@@ -16,6 +16,18 @@ module.exports.addReply = function (req, res){
   })
 };
 
+module.exports.deleteOneReply= function (req, res) {
+  Topic.findOne({where: { id: req.body.id }})
+    .then(function (reply) {
+      return reply.destroy();
+    }).then(function(){
+      res.json('Reply has been deleted');
+    })
+    .catch(function (err) {
+      res.send(err);
+    });
+};
+
 module.exports.getAllReplies = function(req, res){
 
   Topic.findAll({ where: {topicId: req.params.id}})

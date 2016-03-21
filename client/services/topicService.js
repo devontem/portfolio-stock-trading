@@ -24,11 +24,24 @@ app.factory('topicFactory', ['$http', function($http){
     });
   }
 
+  var deleteReply = function(replyId){
+    return $http({
+      method: 'DELETE',
+      url: 'api/topics',
+      data: {id: replyId},
+      headers: {"Content-Type": "application/json;charset=utf-8"}
+    })
+    .then(function(reply){
+      console.log(reply + ', this was deleted');
+    })
+  }
+
 
 
   return {
     addNewReply: addNewReply,
-    showAllReplies: showAllReplies
+    showAllReplies: showAllReplies,
+    deleteReply: deleteReply
   };
 
 }])
