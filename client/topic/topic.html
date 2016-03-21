@@ -52,6 +52,10 @@
                       - {{reply.userName}} |
                       <span style="font-size: 10px; font-style: italic;">{{momentJS(reply.createdAt)}}</span>
                     </p>
+                    <p ng-if="userReply(reply.userId)">
+                      <button>Edit</button>
+                      <button>Delete</button>
+                    </p>
                   </div>
                 </div>
               </div>
@@ -67,14 +71,13 @@
               <textarea id="textarea1" class="materialize-textarea" ng-model="topicReply.message">
 
               </textarea>
-              <label for="textarea1">Reply here</label>
+              <label for="textarea1">Enter message here</label>
             </div>
           </div>
           <button class="btn waves-effect waves-light" type="submit" name="action" ng-click="submitReply(topicReply)">Submit Reply
               <i class="material-icons right">send</i>
           </button>
-          <button class="btn waves-effect waves-light" type="submit" name="action" ng-click="cancelReply()">Cancel
-              <i class="material-icons right">send</i>
+          <button class="btn waves-effect waves-light" type="submit" name="action" ng-click="cancelReply()">Clear
           </button>
         </form>
       </div>

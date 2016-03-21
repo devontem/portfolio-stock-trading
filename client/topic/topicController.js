@@ -10,11 +10,11 @@ app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$w
   };
 
   $scope.cancelReply = function(){
-    $scope.replyClicked = false;
+    $scope.topicReply.message = '';
   };
 
   // functionality to generate a reply and post
-
+  $scope.user = $window.localStorage.getItem('com.tp.userId');
   $scope.allReplies;
   $scope.topicReply = {};
   $scope.topicReply.topicId = $stateParams.topicId;
@@ -61,6 +61,14 @@ app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$w
 
   $scope.hasPosts = function(){
     return $scope.allReplies.length > 3;
+  }
+
+  $scope.userReply = function(user){
+    if($scope.user === user){
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }]);
