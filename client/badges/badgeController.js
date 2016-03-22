@@ -3,9 +3,9 @@ app.controller('BadgeController', ['$scope', 'BadgeFactory', '$window', function
   $scope.badges = [];
   $scope.possibleBadges = [];
 
-  $scope.tooltip = function () {
-    $(document).ready(function(){
-      $('.tooltipped').tooltip({delay: 50});
+  $scope.tooltipper = function () {
+    $(document).ready(function(arg){
+      $(arg).tooltip({delay: 50});
     });
   };
 
@@ -18,8 +18,10 @@ app.controller('BadgeController', ['$scope', 'BadgeFactory', '$window', function
           badgeFormatted.text = badge.text;
           badgeFormatted.icon = badge.icon;
           $scope.badges.push(badgeFormatted);
-        });
-        // $scope.tooltip();
+        })
+        // .then(function () {
+        //   $scope.tooltipper('tooltipped');
+        // });
       }
     );
   };
@@ -34,9 +36,11 @@ app.controller('BadgeController', ['$scope', 'BadgeFactory', '$window', function
           badgeFormatted.icon = badge.icon;
           $scope.possibleBadges.push(badgeFormatted);
         });
-        $scope.tooltip();
       }
-    );
+    )
+    // .then(function () {
+    //   $scope.tooltipper('tooltipped2');
+    // });
   };
 
 
@@ -50,6 +54,6 @@ app.controller('BadgeController', ['$scope', 'BadgeFactory', '$window', function
 
   // loads all badges that the user has earned so far
   $scope.getBadges();
-  // loads all badges that hte user has not earned
+  // loads all badges that the user has not earned
   $scope.getPossibleBadges();
 }]);
