@@ -8,7 +8,7 @@
         	</div>
           <div class="collection clickable">
             <a ng-class="active === 'accountInfo' ? 'active' : ''" class="collection-item" ng-click="showAccount()">Add Friend</a>
-            <a ng-class="active === 'editLogin' ? 'active' : ''" class="collection-item" ng-click="editLogin()">Send Message</a>
+            <a ng-class="active === 'editLogin' ? 'active' : ''" class="collection-item" ng-click="sendMessage()">Send Message</a>
             <a ng-class="active === 'editLeagues' ? 'active' : ''" class="collection-item" ng-click="editLeagues()">Send League Invite</a>
             <a class="collection-item red-text" ng-click="delete()">REPORT USER</a>
           </div>
@@ -65,7 +65,7 @@
 				            <td>{{league.name}}</td>
 				            <td>{{league.startbalance}}</td>
 				            <td>{{league.maxNum}}</td>
-				            <td>{{league.end}}</td>
+				            <td>{{league.start | date:'longDate'}}</td>
 				            <td ng-class="league.private? 'red-text' : 'green-text'">{{league.private ? 'PRIVATE' : 'PUBLIC'}}</td>
 				          </tr>
 				        </tbody>

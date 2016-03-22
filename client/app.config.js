@@ -56,6 +56,13 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
         templateUrl: 'forum/main.html'
       })
 
+      .state('messages', {
+        url: '/messages',
+        authenticate: true,
+        controller: 'MessagesController',
+        templateUrl: 'messages/messages.html'
+      })
+
       .state('topic', {
         url: '/topics/:topicId',
         authenticate: true,

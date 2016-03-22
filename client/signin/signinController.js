@@ -52,7 +52,8 @@ app
 
 //signin signup controller
 .controller('SigninController', ['$scope', '$window', 'Auth', '$rootScope', function($scope, $window, Auth, $rootScope){
-  $scope.user = {};
+  $scope.user = null;
+  $scope.id;
   //$scope.loggedin = false;
   $scope.username;
 
@@ -87,6 +88,7 @@ app
       $window.localStorage.setItem('com.tp.userId', data.userId);
       $window.localStorage.setItem('com.tp.username', data.username);
       $scope.username = $window.localStorage.getItem('com.tp.username');
+      $scope.id = $window.localStorage.getItem('com.tp.userId');
       $scope.toggleSignup();
       $scope.loggedin = true;
       $window.location.href = '/#/dashboard';
@@ -100,6 +102,7 @@ app
         $window.localStorage.setItem('com.tp.userId', data.userId);
         $window.localStorage.setItem('com.tp.username', data.username);
         $scope.username = $window.localStorage.getItem('com.tp.username');
+        $scope.id = $window.localStorage.getItem('com.tp.userId');
         $scope.toggleLogin();
         $scope.loggedin = true;
         $window.location.href = '/#/dashboard';
