@@ -4,7 +4,9 @@ var http = require('http-request');
 var Portfolio = require('../../db/models').Portfolio;
 var Transaction = require('../../db/models').Transaction;
 var User = require('../../db/models').User;
-var orm = require('../../db/models').orm
+var orm = require('../../db/models').orm;
+var schedule = require('node-schedule');
+
 
 module.exports.addLeague = function (req, res){
   var creatorId = req.body.creatorId;
@@ -13,7 +15,6 @@ module.exports.addLeague = function (req, res){
 
   // assigns a random secret code for private rooms
   if (req.body.private) { randomCode = makeCode(); };
-  console.log('PRIVATE CODE', randomCode)
 
   League.create({
     ownerid: creatorId,
@@ -36,23 +37,23 @@ module.exports.addLeague = function (req, res){
         numOfTrades: 0
       })
       .then( function(res) {
-        console.log('successfully added')
-      })
+        console.log('successfully added');
+      });
 
-  	res.send({id: league.id, name: league.name, private: league.private, code: league.code, maxNum: league.num, startbalance: league.balance})
+  	res.send({id: league.id, name: league.name, private: league.private, code: league.code, maxNum: league.num, startbalance: league.balance});
   })
   .catch(function (err) {
   	console.error('Error creating league: ', err.message);
   	res.end();
-  })
-}
+  });
+};
 
 module.exports.joinLeague = function (req, res){
   var temp = {};
   User.findOne({ where: {id : req.body.userId }})
     .then(function(user){
       temp.username = user.dataValues.username;
-    })
+    });
   League.findOne({ where: {id : req.body.leagueId }})
     .then(function(league){
       temp.startbalance = league.dataValues.startbalance;
@@ -67,30 +68,30 @@ module.exports.joinLeague = function (req, res){
         leaguename: temp.leaguename
       })
       .then(function (league) {
-        res.send(league)
+        res.send(league);
       })
       .catch(function (err) {
         console.error('Error creating league: ', err.message);
         res.end();
-      })
-    })
-}
+      });
+    });
+};
 
 module.exports.userLeagues = function(req, res){
 
   Portfolio.findAll({ where: { userId: req.body.userId }})
     .then(function(portfolio){
       if(!portfolio){
-        console.log('No portfolio found.')
         res.send();
       }else{
         res.json(portfolio);
       }
     })
     .catch(function (err) {
-      console.error('Error getting portfolio: ', err)
-    })
-}
+      console.error('Error getting portfolio: ', err);
+      return;
+    });
+};
 
 module.exports.getAllLeagues = function (req, res) {
 
@@ -100,23 +101,25 @@ module.exports.getAllLeagues = function (req, res) {
   		console.log('No leagues found.');
   		res.end();
   	} else {
-  		res.json(leagues)
+  		res.json(leagues);
   	}
   })
   .catch(function (err) {
-  	console.error('Error getting leagues: ', err)
-  })
-}
+  	console.error('Error getting leagues: ', err);
+    return;
+  });
+};
 
 module.exports.getOneLeague = function (req, res) {
 	League.findById(req.params.id)
 	.then(function (league) {
-		res.send(league)
+		res.send(league);
 	})
 	.catch(function (err) {
-		console.error('Error getting league: ', err)
-	})
-}
+		console.error('Error getting league: ', err);
+    return;
+	});
+};
 
 module.exports.editOneLeague = function (req, res) {
   League.findById(req.params.id)
@@ -130,8 +133,9 @@ module.exports.editOneLeague = function (req, res) {
     // update every user's portfolio 'leaguename' if changed
     if (req.body.name !== league.name){
       orm.query("UPDATE `Portfolios` SET `leaguename`= '"+req.body.name+"' WHERE `leagueId`="+req.params.id+";").then(function(){
-        console.log('Portfolio Names Updated')
-      })
+        console.log('Portfolio Names Updated');
+        return;
+      });
     }
 
     league.name = req.body.name || league.name;
@@ -145,9 +149,10 @@ module.exports.editOneLeague = function (req, res) {
     res.send(league);
   })
   .catch(function (err) {
-    console.error('Error getting league: ', err)
-  })
-}
+    console.error('Error getting league: ', err);
+    return;
+  });
+};
 
 module.exports.getUsers = function(req, res){
   Portfolio.findAll({where: {leagueId: req.body.leagueId}})
@@ -156,9 +161,10 @@ module.exports.getUsers = function(req, res){
       res.send(portfolios);
     })
     .catch(function (err) {
-      console.error('Error getting portfolios: ', err)
-    })
-}
+      console.error('Error getting portfolios: ', err);
+      return;
+    });
+};
 
 module.exports.getLeagueByOwnerId = function(req, res){
   var userId = req.params.userId;
@@ -171,9 +177,10 @@ module.exports.getLeagueByOwnerId = function(req, res){
     res.send(leagues);
   })
   .catch(function (err) {
-      console.error('Error getting leagues: ', err)
-    })
-}
+      console.error('Error getting leagues: ', err);
+      return;
+    });
+};
 
 module.exports.deleteLeagueById = function(req, res){
   var leagueId;
@@ -196,9 +203,9 @@ module.exports.deleteLeagueById = function(req, res){
         var query = 'DELETE FROM `Transactions` WHERE `PortfolioId` = '+portfolios[0].id+" ";
         var orConditions = "";
         for(var i = 1; i < portfolios.length;i++){
-          orConditions+='OR `PortfolioId` = '+portfolios[i].id
+          orConditions+='OR `PortfolioId` = '+portfolios[i].id;
         }
-        finalQuery = query + orConditions +';'
+        finalQuery = query + orConditions +';';
 
         // deleting all transactions
         orm.query(finalQuery).then(function(transactions){
@@ -214,13 +221,13 @@ module.exports.deleteLeagueById = function(req, res){
               res.send('League and all assocated data removed.');
             });
           });
-        })
+        });
     });
   })
   .catch(function(err){
     console.log('deleteLeagueById function error: ', err);
-  })
-}
+  });
+};
 
 function makeCode(){
   var text = "";
@@ -229,6 +236,19 @@ function makeCode(){
       text += possible.charAt(Math.floor(Math.random() * possible.length));
   return text;
 }
+
+//Sets up the node schedule to run at 1pm PST which is 4pm EST, when the NYSE closes
+//The live server (heroku) appears to be on PST
+var rule = new schedule.RecurrenceRule();
+//This should pull Monday-Friday
+rule.dayOfWeek = [0, new schedule.Range(1, 5)];
+rule.hour = 13;
+rule.minute = 0;
+
+
+var j = schedule.scheduleJob(rule, function(){
+  console.log('The answer to life, the universe, and everything!************************************************************************************************************************************************************************************************************************************************************************************************************************');
+});
 
 
 //   League.destroy({

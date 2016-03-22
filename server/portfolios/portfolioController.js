@@ -27,14 +27,14 @@ module.exports.getUserStocks = function(req, res){
     })
     .catch(function(err){
       res.send("There was an error: ", err);
-    })
-    
+    });
+
   })
   .catch(function(err){
     res.send("There was an error: ", err);
-  })
+  });
 
-}
+};
 
 module.exports.updateUserStocks = function(req, res){
 
@@ -57,11 +57,10 @@ module.exports.updateUserStocks = function(req, res){
         if(stockNames.indexOf(stock.symbol) < 0){
           stockNames.push(stock.symbol);
         }
-      })
+      });
       stockNames = stockNames.join(',');
 
       var query = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20%3D%20%27"+ stockNames +"%27&diagnostics=false&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&format=json";
-      console.log('query string', query)
 
       // querying user stocks
       request(query, function(err, stocks){
@@ -74,7 +73,7 @@ module.exports.updateUserStocks = function(req, res){
           transactions[0].marketPrice = stocks.body.query.results.quote.Ask;
           transactions[0].return = ( (transactions[0].marketPrice - transactions[0].price ) / transactions[0].price) * 100;
           portfolio.portfolioValue += parseFloat(transactions[0].marketPrice) * transactions[0].shares;
-          
+
           transactions[0].save();
 
         } else {
@@ -100,14 +99,15 @@ module.exports.updateUserStocks = function(req, res){
     })
     .catch(function(err){
       res.send("There was an error: ", err);
-    })
-    
+      return;
+    });
+
   })
   .catch(function(err){
     res.send("There was an error: ", err);
-  })
+  });
 
-}
+};
 
 module.exports.getPortfolio = function(req, res){
   Portfolio.findOne({ where: {
@@ -119,17 +119,17 @@ module.exports.getPortfolio = function(req, res){
   .catch(function(err){
     res.send("There was an error: ", err);
   });
-}
+};
 
 function reduceStocks(stocks){
   // removing duplicates, adding the sum of all trades for same company
-  var storage = {}
+  var storage = {};
   var finalArray = [];
 
   stocks.forEach(function(stock){
     if (!storage[stock.symbol]){
       storage[stock.symbol] = [];
-    } 
+    }
     storage[stock.symbol].push(stock);
   });
 
@@ -172,7 +172,7 @@ function reduceStocks(stocks){
 
 // //find portfolio id based on user id
 // module.exports.updatePortfolio = function (req,res) {
-  
+
 //   var newBalance = req.body.balance;
 //   var userid = req.body.userid;
 //   var id = parseInt(req.params.id);
@@ -193,7 +193,7 @@ function reduceStocks(stocks){
 // 	Portfolio.findAll({where: {UserId: 2}})
 // 	.then(function (portfolios){
 // 		if(portfolios){
-// 		  res.send(portfolios);	
+// 		  res.send(portfolios);
 // 		} else {
 // 			console.log('No portfolios found');
 //             res.end();
@@ -204,7 +204,3 @@ function reduceStocks(stocks){
 // 		res.end();
 // 	})
 // }
-
-
-
-
