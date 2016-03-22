@@ -204,9 +204,8 @@ exports.orm = orm;
 exports.Forum = Forum;
 exports.Topic = Topic;
 exports.Order = Order;
-<<<<<<< f21892c626f8154e35dbdc2af42f9447668e8834
-exports.Badge = Badge;
-=======
+
+
 exports.Badge = Badge;
 exports.Watchlist = Watchlist;
->>>>>>> (feat) Add watchlist
+
