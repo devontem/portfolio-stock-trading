@@ -4,9 +4,7 @@ app.controller('BadgeController', ['$scope', 'BadgeFactory', '$window', function
   $scope.possibleBadges = [];
 
   $scope.tooltipper = function () {
-    $(document).ready(function () {
       $('tooltipped').tooltip({delay: 50});
-    });
   };
 
   $scope.getBadges = function () {
@@ -33,8 +31,8 @@ app.controller('BadgeController', ['$scope', 'BadgeFactory', '$window', function
           badgeFormatted.text = badge.text;
           badgeFormatted.icon = badge.icon;
           $scope.possibleBadges.push(badgeFormatted);
-          $scope.tooltipper();
         });
+        $scope.tooltipper();
       }
     );
   };
