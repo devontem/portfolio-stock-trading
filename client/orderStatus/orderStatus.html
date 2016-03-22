@@ -22,6 +22,7 @@
                     <td>Quantity</td>
                     <td>Price</td>
                     <td>Total Cost</td>
+                    <td>Duration</td>
                     <td>Order Status</td>
                   </thead>
                   <tbody>
@@ -33,6 +34,8 @@
                     <td>{{ order.shares }}</td>
                     <td>{{ order.price | currency }}</td>
                     <td>{{ (order.price * order.shares) + 10 | currency}} </td>
+                    <td ng-show="order.dayorder">Day</td>
+                    <td ng-show="!order.dayorder">GTC</td>
                     <td ng-show="order.executed">Executed</td>
                     <td ng-show="!order.executed">Open</td>
                    </tr>

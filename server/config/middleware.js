@@ -14,6 +14,7 @@ var Forum = require('../../db/models').Forum;
 var Topic = require('../../db/models').Topic;
 var Watchlist = require('../../db/models').Watchlist;
 var moment = require('moment');
+
 var Badge = require('../../db/models').Badge;
 var Badge_user = require('../../db/models').Badge_user;
 var expressJwt = require('express-jwt');
@@ -51,9 +52,9 @@ module.exports = function (app, express) {
   app.use(passport.session());
   app.use(express.static(__dirname + '/../../client'));
 
-  limitOrder();
 
-  console.log(moment(new Date()),'**************')
+  limitOrder();
+  dayOrder();
 
   // http.get('http://ichart.finance.yahoo.com/table.csv?s=AAPL&a=01&b=01&c=2014&d=01&e=01&f=2015&g=d&ignore=.csv', function(err, res){
   //   console.log(res.buffer.toString(),' ######')
