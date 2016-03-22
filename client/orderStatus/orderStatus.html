@@ -39,7 +39,7 @@
                     <td ng-show="!order.dayorder">GTC</td>
                     <td ng-show="order.executed">Executed</td>
                     <td ng-show="!order.executed">Open</td>
-                    <td ng-click="cancel(order.id)"><img src="./../assets/img/cancelbutton.png" width="30" height="30"></td>
+                    <td ng-show="!order.executed" ng-click="cancel(order.id)"><img src="./../assets/img/cancelbutton.png" width="30" height="30"></td>
                    </tr>
                  </tbody>
                </table>
