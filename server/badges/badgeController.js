@@ -89,7 +89,7 @@ var badgeMaker = function(){
   Badge.create({
     name: "The Winner's Circle",
     text: 'Congrats! You won your first league. Now for hundred more!',
-    icon: 'fiber_new'
+    icon: 'exposure_plus_1'
   });
   Badge.create({
     name: '3X',
@@ -114,22 +114,22 @@ var badgeMaker = function(){
   Badge.create({
     name: 'Beginner Broker!',
     text: 'You joined your first public league! Enjoy',
-    icon: 'fiber_new'
+    icon: 'lock'
   });
   Badge.create({
     name: '100K',
     text: 'You earned your first $100,000!',
-    icon: 'fiber_new'
+    icon: 'attach_money'
   });
   Badge.create({
     name: '1 Mil',
     text: 'You earned your first million!',
-    icon: 'fiber_new'
+    icon: 'attach_money'
   });
   Badge.create({
     name: '5 Mil',
     text: 'Five Million Earned?!?!?! Time to start looking into retirement',
-    icon: 'fiber_new'
+    icon: 'attach_money'
   });
 };
 
