@@ -21,4 +21,4 @@ module.exports = function(app){
 
   app.post('/userleague', Auth.authorize, LeagueController.userLeagues);
 
-}
+};
