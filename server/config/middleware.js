@@ -40,11 +40,8 @@ module.exports = function (app, express) {
   var router = express.Router();
   var leagueTransactionsRouter = express.Router();
   var badgeRouter = express.Router();
-<<<<<<< HEAD
   var directMessageRouter = express.Router();
-=======
   var WatchlistRouter = express.Router();
->>>>>>> 30ca0111fbbf8be3a1a9759f1735497a52de1dd6
 
   app.use(morgan('dev'));
   // Configuring middleware

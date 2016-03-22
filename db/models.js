@@ -80,7 +80,7 @@ var Topic = orm.define('Topic', {
 
 // DirectMessage
 var DirectMessage = orm.define('DirectMessage', {
-  senderUsername: Sequelize.STRING,
+  username: Sequelize.STRING,
   recipientId: Sequelize.INTEGER,
   recipientUsername: Sequelize.STRING,
   message: Sequelize.TEXT,
