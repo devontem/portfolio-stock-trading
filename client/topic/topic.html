@@ -5,17 +5,16 @@
 </ul>
 
 
-<div class="row" style="width: 100%;" id="top">
+<div class="row" style="width: 100%;" id="loc-1">
   <div class="col s12 m12" style="overflow-x: auto;">
     <div class="card-panel white">
-      <!-- INSERT TOPIC DESCRIPTION HERE -->
+
       <h5>{{topicInfo.title}}</h5>
       <p style="font-size: 16px">{{topicInfo.description}}</p>
       <p style="text-align: right; font-size: 18px">-{{topicInfo.creatorName}}, <span style="font-style: italic; font-size: 14px">{{topicInfo.createdAt | date:"longDate"}}</span></p>
-      <a ng-click="reply()" class="waves-effect waves-light btn modal-trigger">REPLY</a>
-      <a style="float: right;" ng-click="lastPost()" class="waves-effect waves-light">Go to Latest Reply</a>
-      <hr>
-      <!-- drop down form to reply -->
+      <a style="float: right;" ng-if="hasReplies" ng-click="scrollTo(2)" class="waves-effect waves-light">Go to Latest Reply</a>
+
+      <a ng-if="hasReplies" ng-click="scrollTo(2)" class="waves-effect waves-light btn modal-trigger">REPLY</a>
       <div class="row" ng-if="replyClicked">
         <form class="col s12">
           <div class="row">
@@ -53,6 +52,9 @@
                       - {{reply.userName}} |
                       <span style="font-size: 10px; font-style: italic;">{{momentJS(reply.createdAt)}}</span>
                     </p>
+                    <p ng-if="usersPost(reply.userId)" style="text-align: right;" >
+                      <a ng-click="deleteReply(reply.id)">DELETE</a>
+                    </p>
                   </div>
                 </div>
               </div>
@@ -60,7 +62,25 @@
           </tr>
         </tbody>
       </table>
-      <div id="last"><a style="float: right; padding-bottom: 10px" ng-click="toTop()" class="waves-effect waves-light">Back to Top</a></div>
+      <h3>Quick Reply</h3>
+      <div class="row">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s12">
+              <textarea id="textarea1" class="materialize-textarea" ng-model="topicReply.message">
+
+              </textarea>
+              <label for="textarea1">Enter message here</label>
+            </div>
+          </div>
+          <button class="btn waves-effect waves-light" type="submit" name="action" ng-click="submitReply(topicReply)">Submit Reply
+              <i class="material-icons right">send</i>
+          </button>
+          <button class="btn waves-effect waves-light" type="submit" name="action" ng-click="cancelReply()">Clear
+          </button>
+        </form>
+      </div>
+      <div id="loc-2"><a style="float: right; padding-bottom: 10px" ng-show="hasReplies" ng-click="scrollTo(1)" class="waves-effect waves-light">Back to Top</a></div>
       </div>
     </div>
   </div>

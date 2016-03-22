@@ -1,7 +1,9 @@
 angular.module('app.botbar', [])
 
 // TODO: likely change portofolio factory name to be more precise
-.controller('BotBarController',['$scope', 'Portfolio', '$interval', function($scope, Portfolio, $interval){
+
+.controller('BotBarController',['$scope', 'Portfolio','symbolFactory', '$window', '$interval', function($scope, Portfolio, symbolFactory, $window,$interval ){
+
   // Initializes variable if the user has not searched yet
   $scope.hasSearched = false;
 
@@ -18,5 +20,21 @@ angular.module('app.botbar', [])
     });
     $scope.stockInput = "";
   };
+  
+  $scope.addToWatchlist = function (symbol){
+    console.log(symbol,'sym')
+    $scope.userId = $window.localStorage.getItem('com.tp.userId');
+    console.log($scope.userId)
+    var data = {
+    
+      userid : $scope.userId,
+      symbol : symbol
+    }
+  console.log(data,'data')
+  symbolFactory.addToWatchlist(data)
+  .then()
+  }
+
+
 
 }]);

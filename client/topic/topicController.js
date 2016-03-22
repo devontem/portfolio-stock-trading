@@ -10,11 +10,10 @@ app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$w
   };
 
   $scope.cancelReply = function(){
-    $scope.replyClicked = false;
+    $scope.topicReply.message = '';
   };
 
   // functionality to generate a reply and post
-
   $scope.allReplies;
   $scope.topicReply = {};
   $scope.topicReply.topicId = $stateParams.topicId;
@@ -23,6 +22,8 @@ app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$w
   $scope.topicReply.message = '';
 
   $scope.topicInfo;
+
+  $scope.hasReplies = false;
 
   $scope.submitReply = function(reply){
     topicFactory.addNewReply(reply).then(function(err, res){
@@ -38,6 +39,9 @@ app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$w
   $scope.getAllReplies = function(){
     topicFactory.showAllReplies($scope.topicReply.topicId).then(function(data){
       $scope.allReplies = data.data;
+      if($scope.allReplies.length > 0){
+        $scope.hasReplies = true;
+      }
     });
   };
 
@@ -47,20 +51,30 @@ app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$w
     });
   };
 
+  $scope.deleteReply = function(replyId){
+    console.log('clicked');
+    topicFactory.deleteReply(replyId).then(function(){
+      $scope.getAllReplies();
+    })
+  };
+
   $scope.momentJS = function(time){
     return moment(time).fromNow();
   };
 
-  $scope.lastPost = function(){
-    $location.hash('last');
-  };
-
-  $scope.toTop = function(){
-    $location.hash('top');
+  $scope.scrollTo = function(div){
+    $location.hash('loc-'+div);
   };
 
   $scope.getOneTopic();
   $scope.getAllReplies();
   $anchorScroll();
+
+
+  $scope.usersPost = function(user){
+    if(user === $window.localStorage.getItem('com.tp.userId')){
+      return true;
+    }
+  }
 
 }]);

@@ -23,6 +23,13 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
         templateUrl: 'signin/signin.html'
       })
 
+      .state('watchlist', {
+        url: '/watchlist',
+        authenticate: true,
+        controller: 'WatchlistController',
+        templateUrl: 'watchlist/watchlist.html'
+      })
+
       .state('dashboard', {
         url: '/dashboard',
         authenticate: true,

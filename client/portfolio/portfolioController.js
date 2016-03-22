@@ -13,6 +13,10 @@ angular.module('app.portfolio', [])
 		return $scope.chooseStock(data);
 	});
 
+	$scope.ordtype = function(){
+		
+	};
+
 	$scope.resetFields = function (){
 		$scope.stock = undefined;
 		$scope.stockAmount = '';
@@ -48,7 +52,8 @@ angular.module('app.portfolio', [])
 			shares: $scope.stockAmount,
 			price: $scope.stock.Ask,
 			marketPrice: $scope.stock.Ask,
-			buysell: !$scope.action
+			buysell: !$scope.action,
+			dayorder: !$scope.duration
 		};
 		// if selling stock, must own it and enough shares
 		if (!options.buysell && !ableToSell()){
@@ -73,6 +78,7 @@ angular.module('app.portfolio', [])
 				$scope.resetFields();
 				updatePortfolio();
 			});
+			$rootScope.$emit('bought')
 		}
 	};
 
@@ -139,7 +145,6 @@ angular.module('app.portfolio', [])
 		Portfolio.getUserStocks(leagueId, userId).then(function(transactions){
 			$scope.stocks = transactions;
             transactions.forEach(function(transaction){
-              console.log(Math.round((transaction.marketPrice*transaction.shares)/$scope.portfolioValue*100),'&&&');
               transaction.percentage = Math.round((transaction.marketPrice*transaction.shares)/$scope.portfolioValue*100);
             });
 			$scope.stocks = transactions;

@@ -12,6 +12,8 @@ var Room_user = require('../../db/models').Room_user;
 var Message = require('../../db/models').Message;
 var Forum = require('../../db/models').Forum;
 var Topic = require('../../db/models').Topic;
+var Watchlist = require('../../db/models').Watchlist;
+var moment = require('moment');
 
 var Badge = require('../../db/models').Badge;
 var Badge_user = require('../../db/models').Badge_user;
@@ -19,6 +21,7 @@ var expressJwt = require('express-jwt');
 var jwt = require('jsonwebtoken');
 var morgan = require('morgan');
 var limitOrder = require('./limitOrder').limitOrder;
+var dayOrder = require('./limitOrder').dayOrder;
 
 
 module.exports = function (app, express) {
@@ -37,7 +40,11 @@ module.exports = function (app, express) {
   var router = express.Router();
   var leagueTransactionsRouter = express.Router();
   var badgeRouter = express.Router();
+<<<<<<< HEAD
   var directMessageRouter = express.Router();
+=======
+  var WatchlistRouter = express.Router();
+>>>>>>> 30ca0111fbbf8be3a1a9759f1735497a52de1dd6
 
   app.use(morgan('dev'));
   // Configuring middleware
@@ -49,7 +56,9 @@ module.exports = function (app, express) {
   app.use(passport.session());
   app.use(express.static(__dirname + '/../../client'));
 
+
   limitOrder();
+  dayOrder();
 
   // http.get('http://ichart.finance.yahoo.com/table.csv?s=AAPL&a=01&b=01&c=2014&d=01&e=01&f=2015&g=d&ignore=.csv', function(err, res){
   //   console.log(res.buffer.toString(),' ######')
@@ -69,6 +78,8 @@ module.exports = function (app, express) {
   app.use('/api/forum', forumRouter);
   app.use('/api/recentTransactions', leagueTransactionsRouter);
   app.use('/api/directmessages', directMessageRouter);
+
+  app.use('/api/Watchlist', WatchlistRouter);
 
 
   require('../tweets/tweetRoutes.js')(tweetRouter);
@@ -94,7 +105,7 @@ module.exports = function (app, express) {
   require('../leagueTransactions/leagueTransactionsRoutes.js')(leagueTransactionsRouter);
 
   require('../badges/badgeRoutes.js')(badgeRouter);
-
   require('../directMessages/directMessageRoutes.js')(directMessageRouter);
+  require('../watchlist/watchlistRoutes.js')(WatchlistRouter);
 
 };

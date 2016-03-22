@@ -8,6 +8,8 @@ module.exports = function(app){
 
   app.post('/getorders', transactionController.getOrders);
 
+  app.post('/cancelorder', transactionController.cancelOrder);
+  
   // app.get('/:leagueId/:userId', transactionController.getUserPortfolio);
 
   // app.get('/byPortfolioID', transactionController.getTransactionsByPortfolioId);
