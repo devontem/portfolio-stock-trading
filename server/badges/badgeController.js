@@ -12,9 +12,7 @@ module.exports.getBadges = function(req, res){
       for (var i = 0; i < badges.length; i++) {
         badgeList.push(badges[i].dataValues.BadgeId);
       }
-      console.log('*******', badgeList);
       Badge.findAll({where: {id: badgeList}}).then(function(badgeDescription){
-        console.log(badgeDescription);
         res.json(badgeDescription);
       })
       .catch(function (err) {
@@ -37,10 +35,9 @@ module.exports.postBadge = function(req, res){
   var id = req.body.userId;
   var badge = req.body.badge;
   User.findOne({id: id}).then(function (user) {
-    console.log(badge);
     user.addBadge(badge);
   }).then(function(badges){
-    res.send(badges);
+    res.json(badges);
   }).catch(function(err){
       res.send("Error posting the badge: ", err);
   });
@@ -56,9 +53,9 @@ module.exports.possibleBadges = function (req, res) {
       for (var i = 0; i < badges.length; i++) {
         badgeList.push(badges[i].dataValues.BadgeId);
       }
-      console.log('*******', badgeList);
       Badge.findAll({where: {id: {$not:  badgeList, $gt: 1}}}).then(function(badgeDescription){
         res.json(badgeDescription);
+        console.log(res);
       })
       .catch(function (err) {
         console.log('Error querying the badges databaes:', err);
@@ -89,17 +86,17 @@ var badgeMaker = function(){
   Badge.create({
     name: "The Winner's Circle",
     text: 'Congrats! You won your first league. Now for hundred more!',
-    icon: 'fiber_new'
+    icon: 'exposure_plus_1'
   });
   Badge.create({
     name: '3X',
     text: 'You Logged in for Three Consecutive Days. Woot!',
-    icon: 'fiber_new'
+    icon: 'repeat'
   });
   Badge.create({
     name: '5X',
     text: 'You Logged in for Five Consecutive Days. Woot!',
-    icon: 'fiber_new'
+    icon: 'replay_5'
   });
   Badge.create({
     name: 'Week 1',
@@ -109,27 +106,27 @@ var badgeMaker = function(){
   Badge.create({
     name: 'Shhh!',
     text: 'You joined your first private league!',
-    icon: 'fiber_new'
+    icon: 'vpn_key'
   });
   Badge.create({
     name: 'Beginner Broker!',
     text: 'You joined your first public league! Enjoy',
-    icon: 'fiber_new'
+    icon: 'lock'
   });
   Badge.create({
     name: '100K',
     text: 'You earned your first $100,000!',
-    icon: 'fiber_new'
+    icon: 'attach_money'
   });
   Badge.create({
     name: '1 Mil',
     text: 'You earned your first million!',
-    icon: 'fiber_new'
+    icon: 'attach_money'
   });
   Badge.create({
     name: '5 Mil',
     text: 'Five Million Earned?!?!?! Time to start looking into retirement',
-    icon: 'fiber_new'
+    icon: 'attach_money'
   });
 };
 
