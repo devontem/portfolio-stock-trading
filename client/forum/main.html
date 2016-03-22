@@ -5,7 +5,7 @@
       <a ng-click="openModal()" class="waves-effect waves-light btn modal-trigger">Create New Topic</a>
       <div style="overflow-x: auto;">
       <table class="highlight centered" id="createTopicScroll">
-        <thead id="top">
+        <thead id="top" ng-show="oneTopic()">
           <tr>
               <th data-field="Topic">Topic</th>
               <th data-field="Started By">Created By</th>

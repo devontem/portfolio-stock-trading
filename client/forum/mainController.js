@@ -45,6 +45,12 @@ app.controller('MainForumController', ['$scope', '$window', 'forumFactory', '$ro
     });
   };
 
+  $scope.oneTopic = function(){
+    if($scope.allTopics.length > 0){
+      return true;
+    }
+  }
+
 
   $scope.goToTop = function(){
     $location.hash('top');
