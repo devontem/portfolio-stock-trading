@@ -72,7 +72,6 @@ module.exports.getOpenAndUnreadMessages = function(req, res){
 		messages[0].forEach(function(message){
 			if (message.UserId != userId){
 				if (!storage[message.UserId]){
-					console.log('being entered', message.UserId)
 					storage[message.UserId] = [];
 				}
 				storage[message.UserId] = message
@@ -80,7 +79,6 @@ module.exports.getOpenAndUnreadMessages = function(req, res){
 
 			if (message.recipientId != userId){
 				if (!storage[message.recipientId]){
-					console.log('being entered', message.recipientId)
 					storage[message.recipientId] = [];
 				}
 				storage[message.recipientId] = message;
@@ -126,6 +124,18 @@ module.exports.markAllMessagesReadBetween = function(req, res){
 
 }
 
+module.exports.markMessageReadById = function(req, res){
+
+	var postId = req.params.postId;
+	var recipientId = req.params.recipientId;
+
+	var queryString = 'UPDATE `DirectMessages` SET `read` = 1 WHERE `id` = '+postId+';';
+
+	orm.query(queryString).then(function(messages){
+		res.send(messages);
+	});
+
+}
 
 
 

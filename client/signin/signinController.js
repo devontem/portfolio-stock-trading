@@ -51,9 +51,9 @@ app
 })
 
 //signin signup controller
-.controller('SigninController', ['$scope', '$window', 'Auth', '$rootScope', function($scope, $window, Auth, $rootScope){
+.controller('SigninController', ['$scope', '$window', 'Auth', 'DirectMessage', '$rootScope', function($scope, $window, Auth, DirectMessage, $rootScope){
   $scope.user = null;
-  $scope.id;
+  $scope.id = $window.localStorage.getItem('com.tp.userId') || undefined;
   //$scope.loggedin = false;
   $scope.username;
 
@@ -119,4 +119,30 @@ app
     $window.localStorage.removeItem('com.tp.username');
     $window.location.href = '/#/';
   };
+
+  // Handle's Messages Notifications
+  function getOpenAndUnreadMessages(){
+    counter = 0;
+    DirectMessage.getOpenAndUnreadMessages($scope.id).then(function(data){
+      //if current user was last person to send message, set message thread status to be read
+      data = data.map(function(message){
+        if ($scope.id == message.UserId){
+          message.read = true;
+          return message;
+        } else if (!!!message.read){
+          //if a message is unread, adds it to the counter
+          counter++;
+        }
+        return message;
+      });
+
+      // only update it ng-model if value changes
+      if (counter !== $scope.unreadMessages){
+        $scope.unreadMessages = counter;
+      }
+      // $scope.unreadOpenMessages = data;
+    });
+  }
+
+  setInterval(getOpenAndUnreadMessages, 3000);
 }]);

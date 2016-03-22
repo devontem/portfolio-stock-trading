@@ -66,6 +66,16 @@ app
 	    });
 	  }
 
+	  var markMessageReadById = function(postId){
+	    return $http({
+	      method: 'PUT',
+	      url: 'api/directmessages/markread/'+postId
+	    })
+	    .then(function (data) {
+	      return data.data;
+	    });
+	  }
+
   	return {
   		updateMessage: updateMessage,
   		sendMessage: sendMessage,
@@ -73,7 +83,8 @@ app
   		getOpenAndUnreadMessages: getOpenAndUnreadMessages,
   		setSendTo: setSendTo,
   		getSendTo: getSendTo,
-  		markAllMessagesReadBetween: markAllMessagesReadBetween
+  		markAllMessagesReadBetween: markAllMessagesReadBetween,
+  		markMessageReadById: markMessageReadById
   	}
 
   });

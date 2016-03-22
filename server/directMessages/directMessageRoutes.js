@@ -7,8 +7,10 @@ module.exports = function(app){
 
 	app.get('/unreadopen/:userId', directMessageController.getOpenAndUnreadMessages);
 
+	app.put('/markread/:postId', directMessageController.markMessageReadById);
+
 	app.put('/markread/:senderId/:recipientId/', directMessageController.markAllMessagesReadBetween)
-	
+
 	app.get('/:userId/:friendId', directMessageController.getMessagesBetween)
 
 	app.post('/:senderId/:recipientId', directMessageController.sendMessage)
