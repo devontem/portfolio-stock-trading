@@ -100,7 +100,8 @@ var Order = orm.define('Order', {
   price: Sequelize.FLOAT,
   buysell: Sequelize.BOOLEAN,
   shares: Sequelize.INTEGER,
-  executed: Sequelize.BOOLEAN
+  executed: Sequelize.BOOLEAN,
+  dayorder: Sequelize.BOOLEAN
 
 });
 

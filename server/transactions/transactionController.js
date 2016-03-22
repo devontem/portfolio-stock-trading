@@ -80,7 +80,6 @@ module.exports.limitOrder = function(req, res){
 
 //make a limit order
 module.exports.getOrders = function(req, res){
-  console.log("HEY")
   Portfolio.findOne({ where: {
                       userId: req.body.userId,
                       leagueId: req.body.leagueId
@@ -102,6 +101,17 @@ module.exports.getOrders = function(req, res){
         res.send('Error: ', err);
       });
 };
+
+module.exports.cancelOrder = function(req, res){
+  Order.destroy({ where:{ id: req.body.id }})
+    .then(function(order){
+      console.log("Succesfully canceld order");
+      res.send("Succesfully canceld order");
+    })
+    .catch(function(err){
+      res.send('Error:', err);
+    })
+}
 
 // module.exports.getUserPortfolio = function(req, res){
 //   console.log('hey')

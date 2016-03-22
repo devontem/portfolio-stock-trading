@@ -85,13 +85,26 @@
 				<article class="col s12">
 					<div class="divider"></div>
 					<div class="switch action-toggle">
-				    <label>
+				    <label class="col s4 center">
 				      BUY
 				      <input type="checkbox" class="test" ng-model="action">
 				      <span class="lever"></span>
 				      SELL
 				    </label>
+				    <label class="col s4 center">
+				      Market Order
+				      <input type="checkbox" ng-click="ordtype()" ng-model="ordertype">
+				      <span class="lever"></span>
+				      Limit Order
+				    </label>
+				    <label class="col s4 center">
+				      Day
+				      <input type="checkbox" class="test" ng-model="duration">
+				      <span class="lever"></span>
+				      GTC
+				    </label>
 				  </div>
+				  <br>
 				  <div class="divider"></div>
 
 				  <div class="row stock-calculator">
@@ -104,7 +117,7 @@
 				    <section class="col s3">
 				    	<span><b>x</b> Price </span>
 				  	  <div class="chip">
-				  	    <input class="stockAmount" ng-change="updateAmounts()" ng-model="singlePrice" required>
+				  	    <input class="stockAmount" ng-disabled="!ordertype" ng-change="updateAmounts()" ng-model="singlePrice" required>
 				  	  </div>
 				    </section>
 					  <section class="col s3">

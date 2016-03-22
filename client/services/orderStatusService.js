@@ -10,9 +10,22 @@ app.factory('orderStatusFactory', function($http){
     .then(function(orders){
       return orders.data;
     });
-  }
+  };
+
+  var cancelOrder = function(orderid){
+    return $http({
+      method: 'POST',
+      url: 'api/transactions/cancelorder',
+      data: { id: orderid },
+      headers: {"Content-Type": "application/json;charset=utf-8"}
+    })
+    .then(function(orders){
+      return orders.data;
+    });
+  };
 
   return {
+    cancelOrder: cancelOrder,
     getOrders: getOrders
   }
 

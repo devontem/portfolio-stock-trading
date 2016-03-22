@@ -48,7 +48,6 @@ app.controller('SymbolController', ['$scope', '$http', 'symbolFactory', 'Portfol
     $('#modal1').closeModal();
   };
 
-
   $scope.populate = function(symbol){
     $rootScope.$emit('symbolRetrieved', symbol);
     $scope.closeModal();
