@@ -393,6 +393,9 @@ th {
 .bot-search {
   margin: 10px; }
 
+.cancelbutton {
+  content: url(./../../img/cancelbutton.png); }
+
 .dashboard-wrapper {
   background: #D4D6D8;
   height: 100%; }

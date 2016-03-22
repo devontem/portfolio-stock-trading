@@ -24,6 +24,7 @@
                     <td>Total Cost</td>
                     <td>Duration</td>
                     <td>Order Status</td>
+                    <td><td>
                   </thead>
                   <tbody>
                    <tr ng-repeat="order in orders">
@@ -38,6 +39,7 @@
                     <td ng-show="!order.dayorder">GTC</td>
                     <td ng-show="order.executed">Executed</td>
                     <td ng-show="!order.executed">Open</td>
+                    <td ng-click="cancel(order.id)"><img src="./../assets/img/cancelbutton.png" width="30" height="30"></td>
                    </tr>
                  </tbody>
                </table>
