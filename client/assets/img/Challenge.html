@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Challenge</title>
+  <link href="/assets/application-357aa23f744a845b26c79d389da3a125.css" media="all" rel="stylesheet" />
+  <meta content="authenticity_token" name="csrf-param" />
+<meta content="1OQmsCBT6k7TW4eBH6h97iMEgXeKfZ9XvrDUIiH72gc=" name="csrf-token" />
+</head>
+<body>
+
+<!-- Ajax Loader, taken from http://loading.io/ -->
+<div class="ajax-loader" style="display: none;-webkit-transform:scale(0.6)"><div></div></div>
+
+<div class="app">
+  <header class="navigation">
+  <div class="navigation-wrapper">
+    <a href="javascript:void(0)" class="logo">
+      <img src="https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_1.png" alt="Logo Image">
+    </a>
+    <a href="" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
+    <div class="nav">
+      <ul class="navigation-menu">
+        <li class="nav-link"><a href="/">MakerSquare Challenges</a></li>
+      </ul>
+    </div>
+    <div class="nav right">
+        <ul class="navigation-menu">
+          <li class="nav-link more">
+            <a href="#">
+              <div class="avatar"><img alt="15037331?v=3" src="https://avatars.githubusercontent.com/u/15037331?v=3" /></div>
+              <span>Ted Hsiao</span>
+            </a>
+            <ul class="submenu">
+              <li><a data-method="delete" href="/sessions" rel="nofollow">Sign out</a></li>
+            </ul>
+          </li>
+        </ul>
+    </div>
+  </div>
+</header>
+
+
+  <div class="app-content"><div class="challenge">
+  <div class="description">
+    <h1>Function Bind</h1>
+
+    <div class="bdd-test-results" style="display: none"></div>
+
+    <div class="stack-trace alert error" style="display: none">
+      <h3>Code Error:</h3>
+      <div class="content"></div>
+    </div>
+
+    <div class="challenge-description-text">
+      <p>Implement the function ‘bind’, which accepts a function and a context as arguments.  The context argument should override an existing context that the function is defined in.  Your bind function should return the passed in function.</p>
+
+<p>For example, if we have the following object:</p>
+
+<pre><code>var alice = {
+  name: 'alice',
+  shout: function () {
+    alert('here comes' + ' ' + this.name);
+  }
+};
+
+alice.shout() //=&gt; 'here comes alice'
+</code></pre>
+
+<p>If you use your bind function with the context <code>{ name: 'bob' }</code>, as is shown here:</p>
+
+<pre><code>boundShout = bind(alice.shout, { name: 'bob' })
+</code></pre>
+
+<p>Then calling <code>boundShout()</code> will alert <code>'here comes bob'</code></p>
+
+<p>The following example should also work in the following way once your function is implemented:</p>
+
+<pre><code>var func = function(a, b){ return a + b };
+var boundFunc = bind(func, null, 'diet');
+
+boundFunc('coke'); //=&gt; 'dietcoke'
+</code></pre>
+
+<p>Once you have finished that, implement the function ‘bind’ as a method of the Function.prototype object. This will be similar to your first solution, but should be able to be used in the following way:</p>
+
+<pre><code>var alice = {
+  name: 'alice',
+  shout: function () {
+    alert(this.name);
+  }
+};
+
+var boundShout = alice.shout.bind(alice);
+boundShout(); // alerts 'alice'
+
+boundShout = alice.shout.bind({ name: 'bob' });
+boundShout(); // alerts 'bob'
+</code></pre>
+
+<p><strong>DO NOT</strong> use the native bind() function in your solutions.  You may use the functions call() and apply().</p>
+
+    </div>
+
+
+
+
+      <h3>Your Code Should Pass:</h3>
+
+      <pre class="example with-line-numbers"><code data-language="javascript">var should = chai.should();
+
+describe(&#39;bind&#39;, function(){
+  it(&#39;should exist&#39;, function(){
+    should.exist(bind);
+  });
+
+  it(&#39;should be a function&#39;, function(){
+    bind.should.be.a.Function;
+  });
+  it(&#39;should return a function&#39;, function(){
+    var func = function(){ };
+    var res = bind(func);
+    should.exist(res);
+    res.should.be.a.Function;
+  });
+  it(&#39;should not return the original function&#39;, function(){
+    var func = function(){ };
+    var res = bind(func);
+    //aka, the original function should not be returned by `bind()`
+    // instead, we want to return a new function that will call our original
+    // function with the default (aka, curried) arguments we specified in our
+    // original call to `bind`.
+    res.should.not.be.equal(func);
+  });
+  it(&#39;should return a result when calling the bounded function&#39;, function(){
+    var func = function(arg1){ return arg1 };
+    var context = null;
+    var boundFunc = bind(func, context, &quot;foobar&quot;);
+    var result = boundFunc();
+    should.exist(result);
+    result.should.be.equal(&#39;foobar&#39;);
+  });
+  it(&#39;should call the &quot;curried&quot; function in the bound context&#39;, function(){
+    // wtf does that mean, right? well, bind takes a `context` argument which
+    // is the context in which our newly returned function will be called in.
+    // see: http://msdn.microsoft.com/en-us/library/ie/ff841995(v=vs.94).aspx
+    var func = function() { return this };
+    var context = { foo: &#39;bar&#39; };
+    var boundFunc = bind(func, context);
+    var result = boundFunc();
+    should.exist(result);
+    result.should.be.equal(context);
+  });
+  it(&#39;should bind the first argument&#39;, function(){
+    // are you sure you&#39;re not forgetting about the arguments?
+    // hint: don&#39;t forget `arguments` isn&#39;t a &quot;true&quot; array
+    var func = function(a){ return a };
+    var context = null;
+    var boundFunc = bind(func, context, &#39;foo&#39;);
+    var result = boundFunc();
+    should.exist(result);
+    result.should.be.a.String;
+    result.should.equal(&#39;foo&#39;);
+  });
+  it(&#39;should allow the bound function to be called multiple times with different arguments&#39;, function(){
+    var func = function(a, b){ return a + b };
+    var context = null;
+    var boundFunc = bind(func, context, &#39;wow &#39;); // &quot;bind&quot; &#39;wow &#39; =&gt; the first argument (a)
+
+    var result1 = boundFunc(&#39;dawg&#39;); // first call to boundFunc with b=&#39;dawg&#39;
+    should.exist(result1);
+    result1.should.be.equal(&#39;wow dawg&#39;);
+
+    var result2 = boundFunc(&#39;man&#39;); // second call to boundFunc with b=&#39;man&#39;
+    should.exist(result2);
+    result2.should.be.equal(&#39;wow man&#39;);
+    // you&#39;re probably modifying some shared `args` array in the
+    // clojure scope ( or possibly the global scope :( ) everytime `boundFunc`
+    // is being called.
+    // hint: myArray.push.call(myArray, [1,2,3]) will _append_ to `myArray`
+    // hint: but myArray.concat([1,2,3]) will _return_ a new array and _not_
+    // hint: modify `myArray`
+  });
+  it(&#39;should bind the first and second arguments&#39;, function(){
+    var func = function(a, b){ return a + b };
+    var context = null;
+    var boundFunc = bind(func, context, &#39;foo&#39;, &#39;bar&#39;);
+    var result = boundFunc();
+    should.exist(result);
+    result.should.be.a.String;
+    result.should.equal(&#39;foobar&#39;);
+  });
+  it(&#39;should bind only first and second arguments (in this example) and allow the bound function to take the third&#39;, function(){
+    var func = function(a, b, c){ return a + b + c };
+    // here we only bind to the first 2 arguments, `a` and `b`
+    var context = null;
+    var boundFunc = bind(func, context, &#39;foo&#39;, &#39;bar&#39;);
+    // should call `func` with a=&#39;foo&#39;, b=&#39;bar&#39;, c=&#39;baz&#39;
+    var result = boundFunc(&#39;baz&#39;);
+    should.exist(result);
+    result.should.be.a.String;
+    result.should.equal(&#39;foobarbaz&#39;);
+  });
+  it(&#39;should bind only the first and second arguments (in this example) and allow the bound function to take the third and fourth&#39;, function(){
+    // we&#39;ve only written tests for up to 4 original arguments but your
+    // bound function should allow any number of arguments to be bound to it
+    // when calling `bind` or when calling the `bound` function return by it.
+    var func = function(a, b, c, d){ return a + b + c + d };
+    var boundFunc = bind(func, null, &#39;foo&#39;, &#39;bar&#39;);
+    var result = boundFunc(&#39;biz&#39;,&#39;baz&#39;);
+    should.exist(result);
+    result.should.be.a.String;
+    result.should.equal(&#39;foobarbizbaz&#39;);
+  });
+});
+
+describe(&#39;Function.prototype.bind&#39;, function(){
+  it(&#39;should exist&#39;, function(){
+    should.exist(Function.prototype.bind);
+  });
+  it(&#39;should be a function&#39;, function(){
+    Function.prototype.bind.should.be.a.Function;
+  });
+  it(&#39;should return a function&#39;, function(){
+    var func = function(){ };
+    var res = func.bind();
+    should.exist(res);
+    res.should.be.a.Function;
+  });
+  it(&#39;should not return the original function&#39;, function(){
+    var func = function(){ };
+    var res = func.bind();
+    //aka, the original function should not be returned by `bind()`
+    // instead, we want to return a new function that will call our original
+    // function with the default (aka, curried) arguments we specified in our
+    // original call to `bind`.
+    res.should.not.be.equal(func);
+  });
+  it(&#39;should return a result when calling the bounded function&#39;, function(){
+    var func = function(arg1){ return arg1 };
+    var context = null;
+    var boundFunc = func.bind(context, &quot;foobar&quot;);
+    var result = boundFunc();
+    should.exist(result);
+    result.should.be.equal(&#39;foobar&#39;);
+  });
+  it(&#39;should call the &quot;curried&quot; function in the bound context&#39;, function(){
+    // wtf does that mean, right? well, bind takes a `context` argument which
+    // is the context in which our newly returned function will be called in.
+    // see: http://msdn.microsoft.com/en-us/library/ie/ff841995(v=vs.94).aspx
+    var func = function() { return this };
+    var context = { foo: &#39;bar&#39; };
+    var boundFunc = func.bind(context);
+    var result = boundFunc();
+    should.exist(result);
+    result.should.be.equal(context);
+  });
+  it(&#39;should bind the first argument&#39;, function(){
+    // are you sure you&#39;re not forgetting about the arguments?
+    // hint: don&#39;t forget `arguments` isn&#39;t a &quot;true&quot; array
+    var func = function(a){ return a };
+    var context = null;
+    var boundFunc = func.bind(context, &#39;foo&#39;);
+    var result = boundFunc();
+    should.exist(result);
+    result.should.be.a.String;
+    result.should.equal(&#39;foo&#39;);
+  });
+  it(&#39;should allow the bound function to be called multiple times with different arguments&#39;, function(){
+    var func = function(a){ return a + a };
+    var context = null; // we&#39;re not worrying about the context in this text
+    var boundFunc = func.bind(context);
+
+    var result1 = boundFunc(&#39;foo&#39;);
+    should.exist(result1);
+    result1.should.be.equal(&#39;foofoo&#39;);
+
+    var result2 = boundFunc(&#39;bar&#39;);
+    should.exist(result2);
+    result2.should.be.equal(&#39;barbar&#39;);
+    // you&#39;re probably modifying some shared `args` array in the
+    // clojure scope ( or possibly the global scope :( ) everytime `boundFunc`
+    // is being called.
+    // hint: myArray.push.call(myArray, [1,2,3]) will _append_ to `myArray`
+    // hint: but myArray.concat([1,2,3]) will _return_ a new array and _not_
+    // hint: modify `myArray`
+  });
+  it(&#39;should bind the first and second arguments&#39;, function(){
+    var func = function(a, b){ return a + b };
+    var context = null; // we&#39;re not worrying about the context in this text
+    var boundFunc = func.bind(context, &#39;foo&#39;, &#39;bar&#39;);
+    var result = boundFunc();
+    should.exist(result);
+    result.should.be.a.String;
+    result.should.equal(&#39;foobar&#39;);
+  });
+  it(&#39;should bind only first and second arguments (as in this example) and allow the bound function to take the third&#39;, function(){
+    var func = function(a, b, c){ return a + b + c };
+    // here we only bind to the first 2 arguments, `a` and `b`
+    var context = null; // we&#39;re not worrying about the context in this text
+    var boundFunc = func.bind(context, &#39;foo&#39;, &#39;bar&#39;);
+    // should call `func` with a=&#39;foo&#39;, b=&#39;bar&#39;, c=&#39;baz&#39;
+    var result = boundFunc(&#39;baz&#39;);
+    should.exist(result);
+    result.should.be.a.String;
+    result.should.equal(&#39;foobarbaz&#39;);
+  });
+  it(&#39;should bind only the first and second arguments (as in this example) and allow the bound function to take the third and fourth&#39;, function(){
+    // we&#39;ve only written tests for up to 4 original arguments but your
+    // bound function should allow any number of arguments to be bound to it
+    // when calling `bind` or when calling the `bound` function return by it.
+    var func = function(a, b, c, d){ return a + b + c + d };
+    var boundFunc = func.bind(null, &#39;foo&#39;, &#39;bar&#39;);
+    var result = boundFunc(&#39;biz&#39;,&#39;baz&#39;);
+    should.exist(result);
+    result.should.be.a.String;
+    result.should.equal(&#39;foobarbizbaz&#39;);
+  });
+
+});
+</code></pre>
+
+      <script type="text/javascript">
+      // Inject line numbers for spec examples
+      (function() {
+        var pre = document.querySelectorAll('pre.with-line-numbers'),
+            pl = pre.length;
+        for (var i = 0; i < pl; i++) {
+          pre[i].innerHTML = '<span class="line-number"></span>' + pre[i].innerHTML + '<span class="cl"></span>';
+          var num = pre[i].innerHTML.split(/\n/).length;
+          for (var j = 0; j < num; j++) {
+            var line_num = pre[i].getElementsByTagName('span')[0];
+            line_num.innerHTML += '<span>' + (j + 1) + '</span>';
+          }
+        }
+      })();
+      </script>
+
+  </div>
+
+  <div class="editor">
+    <nav>
+      <button class="submit success">Submit Code</button>
+      <span class="see-other-answers" style="display: none">
+        - Solved! <a href="/c/f173d3f8244fc5886176911d6ce842d1/answers">View other answers</a>
+      </span>
+    </nav>
+    <div class="code-editor" id="code-editor">var bind = function(func, context){
+  //Your code here
+  return function(){
+    //Your code here
+  }
+};  
+
+Function.prototype.bind = function(context) {
+  //Your code here  
+  return function(){
+    //Your code here
+  }
+};
+</div>
+  </div>
+</div>
+
+<script type="text/template" class="template error-result">
+  You have a bug!<br />
+  <table>
+    <thead>
+      <th>Input Name</th>
+      <th>Value</th>
+    </thead>
+    <tbody>
+      <% for (var i=0; i < inputNames.length; i += 1) { %>
+        <tr><td><%= inputNames[i] %></td><td><%= testCase.inputs[i] && JSON.stringify(testCase.inputs[i]).maybeReplace(/\\n/g, "<br />") %></td></tr>
+      <% } %>
+    </tbody>
+  </table>
+  <table>
+    <thead>
+      <th>Expected Output</th>
+      <th>Your Output</th>
+    </thead>
+    <tbody>
+      <tr><td><%= JSON.stringify(testCase.expected).maybeReplace(/\\n/g, "<br />") %></td><td><%= JSON.stringify(testCase.actual).maybeReplace(/\\n/g, "<br />") %></td></tr>
+    </tbody>
+  </table>
+</script>
+
+<script type="text/template" class="template bdd-result">
+  <div class="bdd-result flash <%= (status === 'passed') ? 'success' : 'error' %>">
+    <h6><%= fullName %></h6>
+    <% for (var i=0; i < failedExpectations.length; i++) { %>
+      <p>
+        <%= failedExpectations[i].message %>
+        <br />
+        <ul>
+          <%= failedExpectations[i].stack.map(function(line) {
+            return '<li>' + escapeHTML(line) + '</li>';
+          }).join('') %>
+        </ul>
+      </p>
+    <% } %>
+  </div>
+</script>
+
+</div>
+</div>
+
+<script type="text/javascript">
+  var g = {
+    authToken: "1OQmsCBT6k7TW4eBH6h97iMEgXeKfZ9XvrDUIiH72gc="
+  }
+</script>
+  <script src="/assets/application-7d9a66838a64e787c5686a303d1350b0.js"></script>
+<script type="text/javascript">
+(function () {
+  String.prototype.maybeReplace = String.prototype.replace
+  var shouldReplace = false
+  if (!shouldReplace) {
+    String.prototype.maybeReplace = function () { return this }
+  }
+  // Data from the server
+  var functionName = "";
+  var testInputs = ["var should = chai.should();\n\ndescribe('bind', function(){\n  it('should exist', function(){\n    should.exist(bind);\n  });\n\n  it('should be a function', function(){\n    bind.should.be.a.Function;\n  });\n  it('should return a function', function(){\n    var func = function(){ };\n    var res = bind(func);\n    should.exist(res);\n    res.should.be.a.Function;\n  });\n  it('should not return the original function', function(){\n    var func = function(){ };\n    var res = bind(func);\n    //aka, the original function should not be returned by `bind()`\n    // instead, we want to return a new function that will call our original\n    // function with the default (aka, curried) arguments we specified in our\n    // original call to `bind`.\n    res.should.not.be.equal(func);\n  });\n  it('should return a result when calling the bounded function', function(){\n    var func = function(arg1){ return arg1 };\n    var context = null;\n    var boundFunc = bind(func, context, \"foobar\");\n    var result = boundFunc();\n    should.exist(result);\n    result.should.be.equal('foobar');\n  });\n  it('should call the \"curried\" function in the bound context', function(){\n    // wtf does that mean, right? well, bind takes a `context` argument which\n    // is the context in which our newly returned function will be called in.\n    // see: http://msdn.microsoft.com/en-us/library/ie/ff841995(v=vs.94).aspx\n    var func = function() { return this };\n    var context = { foo: 'bar' };\n    var boundFunc = bind(func, context);\n    var result = boundFunc();\n    should.exist(result);\n    result.should.be.equal(context);\n  });\n  it('should bind the first argument', function(){\n    // are you sure you're not forgetting about the arguments?\n    // hint: don't forget `arguments` isn't a \"true\" array\n    var func = function(a){ return a };\n    var context = null;\n    var boundFunc = bind(func, context, 'foo');\n    var result = boundFunc();\n    should.exist(result);\n    result.should.be.a.String;\n    result.should.equal('foo');\n  });\n  it('should allow the bound function to be called multiple times with different arguments', function(){\n    var func = function(a, b){ return a + b };\n    var context = null;\n    var boundFunc = bind(func, context, 'wow '); // \"bind\" 'wow ' =\u003e the first argument (a)\n\n    var result1 = boundFunc('dawg'); // first call to boundFunc with b='dawg'\n    should.exist(result1);\n    result1.should.be.equal('wow dawg');\n\n    var result2 = boundFunc('man'); // second call to boundFunc with b='man'\n    should.exist(result2);\n    result2.should.be.equal('wow man');\n    // you're probably modifying some shared `args` array in the\n    // clojure scope ( or possibly the global scope :( ) everytime `boundFunc`\n    // is being called.\n    // hint: myArray.push.call(myArray, [1,2,3]) will _append_ to `myArray`\n    // hint: but myArray.concat([1,2,3]) will _return_ a new array and _not_\n    // hint: modify `myArray`\n  });\n  it('should bind the first and second arguments', function(){\n    var func = function(a, b){ return a + b };\n    var context = null;\n    var boundFunc = bind(func, context, 'foo', 'bar');\n    var result = boundFunc();\n    should.exist(result);\n    result.should.be.a.String;\n    result.should.equal('foobar');\n  });\n  it('should bind only first and second arguments (in this example) and allow the bound function to take the third', function(){\n    var func = function(a, b, c){ return a + b + c };\n    // here we only bind to the first 2 arguments, `a` and `b`\n    var context = null;\n    var boundFunc = bind(func, context, 'foo', 'bar');\n    // should call `func` with a='foo', b='bar', c='baz'\n    var result = boundFunc('baz');\n    should.exist(result);\n    result.should.be.a.String;\n    result.should.equal('foobarbaz');\n  });\n  it('should bind only the first and second arguments (in this example) and allow the bound function to take the third and fourth', function(){\n    // we've only written tests for up to 4 original arguments but your\n    // bound function should allow any number of arguments to be bound to it\n    // when calling `bind` or when calling the `bound` function return by it.\n    var func = function(a, b, c, d){ return a + b + c + d };\n    var boundFunc = bind(func, null, 'foo', 'bar');\n    var result = boundFunc('biz','baz');\n    should.exist(result);\n    result.should.be.a.String;\n    result.should.equal('foobarbizbaz');\n  });\n});\n\ndescribe('Function.prototype.bind', function(){\n  it('should exist', function(){\n    should.exist(Function.prototype.bind);\n  });\n  it('should be a function', function(){\n    Function.prototype.bind.should.be.a.Function;\n  });\n  it('should return a function', function(){\n    var func = function(){ };\n    var res = func.bind();\n    should.exist(res);\n    res.should.be.a.Function;\n  });\n  it('should not return the original function', function(){\n    var func = function(){ };\n    var res = func.bind();\n    //aka, the original function should not be returned by `bind()`\n    // instead, we want to return a new function that will call our original\n    // function with the default (aka, curried) arguments we specified in our\n    // original call to `bind`.\n    res.should.not.be.equal(func);\n  });\n  it('should return a result when calling the bounded function', function(){\n    var func = function(arg1){ return arg1 };\n    var context = null;\n    var boundFunc = func.bind(context, \"foobar\");\n    var result = boundFunc();\n    should.exist(result);\n    result.should.be.equal('foobar');\n  });\n  it('should call the \"curried\" function in the bound context', function(){\n    // wtf does that mean, right? well, bind takes a `context` argument which\n    // is the context in which our newly returned function will be called in.\n    // see: http://msdn.microsoft.com/en-us/library/ie/ff841995(v=vs.94).aspx\n    var func = function() { return this };\n    var context = { foo: 'bar' };\n    var boundFunc = func.bind(context);\n    var result = boundFunc();\n    should.exist(result);\n    result.should.be.equal(context);\n  });\n  it('should bind the first argument', function(){\n    // are you sure you're not forgetting about the arguments?\n    // hint: don't forget `arguments` isn't a \"true\" array\n    var func = function(a){ return a };\n    var context = null;\n    var boundFunc = func.bind(context, 'foo');\n    var result = boundFunc();\n    should.exist(result);\n    result.should.be.a.String;\n    result.should.equal('foo');\n  });\n  it('should allow the bound function to be called multiple times with different arguments', function(){\n    var func = function(a){ return a + a };\n    var context = null; // we're not worrying about the context in this text\n    var boundFunc = func.bind(context);\n\n    var result1 = boundFunc('foo');\n    should.exist(result1);\n    result1.should.be.equal('foofoo');\n\n    var result2 = boundFunc('bar');\n    should.exist(result2);\n    result2.should.be.equal('barbar');\n    // you're probably modifying some shared `args` array in the\n    // clojure scope ( or possibly the global scope :( ) everytime `boundFunc`\n    // is being called.\n    // hint: myArray.push.call(myArray, [1,2,3]) will _append_ to `myArray`\n    // hint: but myArray.concat([1,2,3]) will _return_ a new array and _not_\n    // hint: modify `myArray`\n  });\n  it('should bind the first and second arguments', function(){\n    var func = function(a, b){ return a + b };\n    var context = null; // we're not worrying about the context in this text\n    var boundFunc = func.bind(context, 'foo', 'bar');\n    var result = boundFunc();\n    should.exist(result);\n    result.should.be.a.String;\n    result.should.equal('foobar');\n  });\n  it('should bind only first and second arguments (as in this example) and allow the bound function to take the third', function(){\n    var func = function(a, b, c){ return a + b + c };\n    // here we only bind to the first 2 arguments, `a` and `b`\n    var context = null; // we're not worrying about the context in this text\n    var boundFunc = func.bind(context, 'foo', 'bar');\n    // should call `func` with a='foo', b='bar', c='baz'\n    var result = boundFunc('baz');\n    should.exist(result);\n    result.should.be.a.String;\n    result.should.equal('foobarbaz');\n  });\n  it('should bind only the first and second arguments (as in this example) and allow the bound function to take the third and fourth', function(){\n    // we've only written tests for up to 4 original arguments but your\n    // bound function should allow any number of arguments to be bound to it\n    // when calling `bind` or when calling the `bound` function return by it.\n    var func = function(a, b, c, d){ return a + b + c + d };\n    var boundFunc = func.bind(null, 'foo', 'bar');\n    var result = boundFunc('biz','baz');\n    should.exist(result);\n    result.should.be.a.String;\n    result.should.equal('foobarbizbaz');\n  });\n\n});\n"];
+  var solvePath = "/c/f173d3f8244fc5886176911d6ce842d1/solve";
+  var helpers = [];
+  var testType = "bdd";
+  var codeId = "34c868535a3d_f173d3f8244fc5886176911d6ce842d1";
+
+  // The editor
+  var editor = ace.edit("code-editor");
+  editor.getSession().setMode("ace/mode/javascript");
+  editor.setOptions({ tabSize: 2 });
+
+  //if localstorage code, update the editor
+  if (localStorage.getItem(codeId)) {
+    editor.setValue(localStorage.getItem(codeId), 0);
+    editor.clearSelection();
+  }
+
+  //for every editor modification, update localstorage
+  editor.on('change', function(data){
+    localStorage.setItem(codeId, editor.getValue());
+  });
+
+  // Stack trace (hidden until needed)
+  $stackTrace = $('.stack-trace');
+
+  // Code submittion dance
+  var logFn = function log () {
+    postMessage({ debug: Array.prototype.slice.call(arguments) });
+  };
+  var wrapCode = function (code) {
+    var result = "var console={}; console.log = " + logFn.toString().replace(/\n/g,'') + ";"
+    result     += code + ";\ntry {";
+    result     += "\nvar _testCaseCounter = 0;";
+
+    if (helpers.length) {
+      result += helpers.join(';') + ';';
+    }
+
+    for (var i = 0; i < testInputs.length; i += 1) {
+      if (testType === 'bdd') {
+        result += wrapSpec(testInputs[i], i);
+      }
+      else {
+        result += "postMessage({ answer: " + functionName +".apply(null,"+ JSON.stringify(testInputs[i]) +") });\n";
+      }
+      result += "\n_testCaseCounter += 1;\n"
+    }
+    result +=
+    "} catch (e) {" +
+      "var trace = printStackTrace({e: e});" +
+      "postMessage({ error: { name: e.name, message: e.message, testCaseIdx: _testCaseCounter}, trace: trace });" +
+    "}";
+
+    if (testType !== 'bdd') {
+      result += "; postMessage('__terminate__');\n";
+    }
+    return result;
+  };
+
+  var displayResult = function (result) {
+    if (result.isCorrect) {
+      victoryModal()
+    }
+    else if (testType === 'bdd') {
+      sweetAlert("Uh oh...", "The server threw an unknown error :(");
+    }
+    else {
+      // Console log result
+      console.log("\n----\nInputs:");
+      for (var i=0; i < result.inputNames.length; i += 1) {
+        console.log(result.inputNames[i].toString() + ":", JSON.stringify(result.testCase.inputs[i]));
+      }
+      console.log("Expected:", result.testCase.expected);
+      console.log("Your output:", result.testCase.actual);
+      // Display result in modal
+      var message = tmpl($('.template.error-result').html(), result);
+      sweetAlert("Oops...", message, "error");
+    }
+  };
+
+  function victoryModal () {
+    sweetAlert({
+      title: "Great job!",
+      text: "You solved the challenge!",
+      type: "success",
+    }, function () {
+      $('.see-other-answers').fadeIn(2500)
+    });
+  }
+
+  $('.challenge .editor').on('click', 'nav .submit', function (e) {
+    e.preventDefault();
+    $stackTrace.hide();
+    $('.bdd-test-results').empty();
+    $('.ajax-loader').show();
+    $('.challenge > .description').scrollTop(0);
+
+    var code = editor.getValue();
+    var wrappedCode = wrapCode(code);
+    var scripts = challengeRunnerDeps.slice()
+    scripts.push( 'data:application/javascript,' + encodeURIComponent(wrappedCode) )
+
+    var answers = [];
+    var sandbox = $.sandbox({
+      timeout: (testType === 'bdd') ? 8000 : 5000,
+      url: '/sandbox.html',
+      scripts: scripts,
+      callback: function(data, error) {
+        // console.log('Got message:', data, error);
+
+        if (error === 'timeout') {
+          this.terminate(); $('.ajax-loader').hide();
+          console.log("Timeout.", data, answers);
+          var msg = "Your code took too long to run and timed out";
+          sweetAlert("Timeout!", msg + ".");
+          if (testType === 'bdd') {
+            $('.bdd-test-results').append('<div class="bdd-result flash error">Code timed out.</div>');
+          }
+        }
+        else if (error !== undefined) {
+          this.terminate(); $('.ajax-loader').hide();
+          console.log("UNKOWN ERROR:", error);
+          sweetAlert("Oops...", "Your code threw an unknown error D:");
+        }
+        else if (data === '__terminate__'){
+          this.terminate(); $('.ajax-loader').hide();
+          if (answers.length === 0) {
+            return sweetAlert("Oops...", "Your function did not return anything!", "error");
+          }
+          else if (testType === 'bdd') {
+            var payload = answers.map(function(ans){ return ans.status === 'passed' && 1 })
+                                 .reduce(function(acc,n,i){ return acc | (n << i) }) + answers.length-1
+            if ( countIncorrect(answers) > 0 ) {
+              sweetAlert("Error!", "Your code failed " + countIncorrect(answers) + " tests.", "error");
+            }
+            else {
+              victoryModal()
+            }
+            $.post(solvePath, { code: code, answers: JSON.stringify([payload, answers.length]) })
+          }
+          else {
+            $.post(solvePath, { code: code, answers: JSON.stringify(answers) }, displayResult);
+          }
+        }
+        else if (typeof data === 'object' && data.error) {
+          this.terminate(); $('.ajax-loader').hide();
+          console.log('BAD ERROR', data);
+          var testCase = testInputs[data.error.testCaseIdx]
+
+          if (testType === 'bdd') {
+            var offset = findSpecLineNumber(wrappedCode);
+            var cleanStackTrace = MKS.cleanJasmineStackTrace(data.trace.join(' at '), offset);
+          }
+          else {
+            var cleanStackTrace = MKS.cleanStackTrace(data.trace, functionName,
+                                  data.error.testCaseIdx, testType).join('<br />');
+          }
+
+          $('.content', $stackTrace)
+            .empty()
+            .append('<p>'+ data.error.name +': '+ data.error.message +'</p>')
+            .append('<h4>Stack Trace:</h4>')
+            .append(
+              $('<ul>').append( cleanStackTrace.map(escapeHTML).map(wrapTag.bind(null,'li')) )
+            )
+          ;
+          $stackTrace.show();
+        }
+        else if (data.debug) {
+          console.log.apply(console, data.debug);
+        }
+        else if (data.answer !== undefined) {
+          if (testType === 'bdd') {
+            massageAnswer(wrappedCode, data.answer);
+            renderBddResult(data.answer);
+          }
+          answers.push(data.answer);
+        }
+      }
+    });
+  });
+
+
+  function wrapSpec (testSuite) {
+    return '(function(__spec__){' +
+      testSuite +
+      ";\njasmineEnv.execute()" +
+    '})();'
+  }
+
+  function countIncorrect (answers) {
+    return answers.filter(function(answer) { return answer.status !== "passed" }).length
+  }
+
+  var answerTemplate = tmpl.bind( null, $('.template.bdd-result').html() );
+
+  function renderBddResult (answer) {
+    $('.bdd-test-results').show().append( answerTemplate(answer) );
+  }
+
+  function massageAnswer (code, answer) {
+    answer.fullName = answer.fullName.replace('Jasmine__TopLevel__Suite', 'It');
+
+    var specLineOffset = findSpecLineNumber(code);
+
+    answer.failedExpectations.forEach(function(failure) {
+      failure.stack = MKS.cleanJasmineStackTrace( failure.stack, specLineOffset );
+    });
+  }
+
+  function findSpecLineNumber (code) {
+    return findIndex(code.split('\n'), function(line) {
+      return line.match(/__spec__/);
+    })
+  }
+
+  function findIndex (array, pred) {
+    for (var i=0; i < array.length; i++) {
+      if ( pred(array[i]) ) return i;
+    }
+    return -1;
+  }
+
+  function wrapTag (tagName, str) {
+    return '<' + tagName + '>' + str + '</' + tagName + '>';
+  }
+
+  var challengeRunnerDeps = [
+    '//'+ window.location.host +'/js/stacktrace.js',
+    '//'+ window.location.host +'/js/chai.js',
+  ];
+
+  if (testType === 'bdd') {
+    challengeRunnerDeps.push(
+      '//'+ window.location.host +'/js/jasmine/jasmine.js',
+      '//'+ window.location.host +'/js/jasmine/boot.js'
+    );
+  }
+})();
+
+// Globally define for template
+function escapeHTML (str) {
+  return str.replace(/</g, "&lt;").replace(/>/g, "&gt;")
+}
+</script>
+<script type="text/javascript">
+if (window.jQuery) {
+  // TODO: Remove jQuery dependency
+  var menu = $('#navigation-menu');
+  var menuToggle = $('#js-mobile-menu');
+  var signUp = $('.sign-up');
+
+  $(menuToggle).on('click', function(e) {
+    e.preventDefault();
+    menu.slideToggle(function(){
+      if(menu.is(':hidden')) {
+        menu.removeAttr('style');
+      }
+    });
+  });
+
+  // underline under the active nav item
+  $(".nav .nav-link").click(function() {
+    $(".nav .nav-link").each(function() {
+      $(this).removeClass("active-nav-item");
+    });
+    $(this).addClass("active-nav-item");
+    $(".nav .more").removeClass("active-nav-item");
+  });
+}
+</script>
+
+</body>
+</html>

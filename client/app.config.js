@@ -49,6 +49,13 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
 
       })
 
+      .state('analysis', {
+        url: '/analysis',
+        authenticate: true,
+        controller: 'AnalysisController',
+        templateUrl: 'analysis/analysis.html'
+      })
+
       .state('forum', {
         url: '/forum',
         authenticate: true,
