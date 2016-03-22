@@ -13,24 +13,24 @@
         <thead id="top">
           <tr>
               <th data-field="Topic">Symbol</th>
-              <th data-field="Started By">Price</th>
-              <th data-field="Date Started">Open</th>
-              <th data-field="Replies">Close</th>
-              <th data-field="Replies">Days Range</th>
-              <th data-field="Replies">Day Change</th>
-              <th data-field="Replies">52 week Range</th>
+              <th data-field="Started By">Price ($)</th>
+              <th data-field="Date Started">Open ($)</th>
+              <th data-field="Replies">Close ($)</th>
+              <th data-field="Replies">Days Range ($)</th>
+              <th data-field="Replies">Day Change ($)</th>
+              <th data-field="Replies">52 week Range ($)</th>
           </tr>
         </thead>
 
         <tbody ng-repeat="result in results">
         	<tr>
         		<td>{{result[0]}}</td>
-        		<td>{{result[1]}}</td>
-        		<td>{{result[2]}}</td>
-        		<td>{{result[3]}}</td>
-        		<td>{{result[6]}}</td>
-        		<td>{{result[5]}}</td>
-        		<td>{{result[7]}}</td>
+        		<td>{{result[1] | number:2}}</td>
+        		<td>{{result[2] | number:2}}</td>
+        		<td>{{result[3] | number:2}}</td>
+        		<td>{{result[5] }}</td>
+        		<td>{{result[4] }}</td>
+        		<td>{{result[6] }}</td>
         	</tr>
 
         </tbody>

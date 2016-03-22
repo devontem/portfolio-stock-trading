@@ -49,7 +49,7 @@ module.exports.updateWatchlist = function (req,res){
         }
         list= list.slice(0,-1);
         console.log(list,'llist')
-        http.get('http://finance.yahoo.com/d/quotes.csv?s=' + list + '&f=saopc1p2mw', function(err, response){
+        http.get('http://finance.yahoo.com/d/quotes.csv?s=' + list + '&f=saopp2mw', function(err, response){
           var ask = response.buffer.toString().split('\n');
           console.log(ask,'ask')
           ask.forEach(function(stock){

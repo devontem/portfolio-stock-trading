@@ -4,12 +4,38 @@ app.controller('WatchlistController', function($scope, $http, symbolFactory, Wat
  
   $scope.watchlist = [];
   $scope.results =[];
+  $scope.stock=[];
   
   
 var userid = $window.localStorage.getItem('com.tp.userId');
 
+
 $scope.getWatchlist = function (){
- 
+    function decimalAdjust(type, value, exp) {
+    // If the exp is undefined or zero...
+    if (typeof exp === 'undefined' || +exp === 0) {
+      return Math[type](value);
+    }
+    value = +value;
+    exp = +exp;
+    // If the value is not a number or the exp is not an integer...
+    if (isNaN(value) || !(typeof exp === 'number' && exp % 1 === 0)) {
+      return NaN;
+    }
+    // Shift
+    value = value.toString().split('e');
+    value = Math[type](+(value[0] + 'e' + (value[1] ? (+value[1] - exp) : -exp)));
+    // Shift back
+    value = value.toString().split('e');
+    return +(value[0] + 'e' + (value[1] ? (+value[1] + exp) : exp));
+  }
+
+  // Decimal round
+  if (!Math.round10) {
+    Math.round10 = function(value, exp) {
+      return decimalAdjust('round', value, exp);
+    };
+  }
  
  
   	WatchlistFactory.getWatchlist(userid)
@@ -20,40 +46,58 @@ $scope.getWatchlist = function (){
     WatchlistFactory.updateWatchlist($scope.watchlist)
     .then(function (stocks){
       stocks.data.pop()
-      console.log(stocks.data,'stocks')
-      $scope.results = stocks.data
+      stocks.data.forEach(function(stock){
+
+        stock.forEach(function(result){
+          var result1 = result.replace(/\"/g,'');
+          if(/[\%]/.test(result1)){
+            
+            result1 = result1.split('.')
+            var res = result1[1].replace(/\%/,'')
+            result1[1]= res
+            var decimal = Math.round10(result1[1]);
+            if(decimal <10){
+              decimal = decimal * 10
+            }
+            var str =''
+            result1[1]=str.concat(decimal +'%')
+            result1 = result1.join('.')
+          }
+          else if(/[\-]/.test(result1)){
+            var range = [];
+            result1 = result1.split('-')
+            result1.forEach(function(num){
+              result1 = parseFloat(num).toFixed(2)
+              range.push(result1)
+
+            })
+            result1 = range.join('-')
+          }
+          $scope.stock.push(result1)
+        })
+        $scope.results.push($scope.stock)
+        $scope.stock=[];
+      })
+      console.log($scope.results,'stock')
     })
   })
   }
-
-  // $scope.updateWatchlist = function (array){
-  //   WatchlistFactory.updateWatchlist(array)
-  //   .then()
-
-  // }
-
-  
-
-
 
 })
 
 .factory('WatchlistFactory', function ($http){
     
     var getWatchlist = function(userid){
-      console.log(userid,'user')
     return $http({
       method: 'GET',
       url: '/api/watchlist/' + userid,
     })
     .then( function (data) {
-      console.log(data)
       return data;
     });
   }
 
     var updateWatchlist = function(array){
-      console.log(array,'array')
       return $http({
         method: 'Post',
         url:'/api/watchlist/array',
