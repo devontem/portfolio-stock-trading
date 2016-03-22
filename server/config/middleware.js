@@ -12,6 +12,7 @@ var Room_user = require('../../db/models').Room_user;
 var Message = require('../../db/models').Message;
 var Forum = require('../../db/models').Forum;
 var Topic = require('../../db/models').Topic;
+var Watchlist = require('../../db/models').Watchlist;
 
 var Badge = require('../../db/models').Badge;
 var Badge_user = require('../../db/models').Badge_user;
@@ -37,6 +38,7 @@ module.exports = function (app, express) {
   var router = express.Router();
   var leagueTransactionsRouter = express.Router();
   var badgeRouter = express.Router();
+  var WatchlistRouter = express.Router();
 
   app.use(morgan('dev'));
   // Configuring middleware
@@ -67,6 +69,7 @@ module.exports = function (app, express) {
   app.use('/api/badges', badgeRouter);
   app.use('/api/forum', forumRouter);
   app.use('/api/recentTransactions', leagueTransactionsRouter);
+  app.use('/api/Watchlist', WatchlistRouter);
 
 
   require('../tweets/tweetRoutes.js')(tweetRouter);
@@ -92,5 +95,7 @@ module.exports = function (app, express) {
   require('../leagueTransactions/leagueTransactionsRoutes.js')(leagueTransactionsRouter);
 
   require('../badges/badgeRoutes.js')(badgeRouter);
+
+  require('../watchlist/watchlistRoutes.js')(WatchlistRouter);
 
 };

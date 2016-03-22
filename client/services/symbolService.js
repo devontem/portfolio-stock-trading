@@ -13,7 +13,19 @@ app.factory('symbolFactory', function($http){
     });
   }
 
+  var addToWatchlist = function (data){
+    return $http ({
+      method: 'Post',
+      url:'/api/watchlist',
+      data: data
+      
+  })
+  }
+
+
+
   return {
+    addToWatchlist:addToWatchlist,
     getCompany: getCompany
   }
 

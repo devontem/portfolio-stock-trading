@@ -1,4 +1,6 @@
-app.controller('SymbolController', ['$scope', '$http', 'symbolFactory', 'Portfolio', '$rootScope', function($scope, $http, symbolFactory, Portfolio, $rootScope){
+
+app.controller('SymbolController', ['$scope', '$http', 'symbolFactory', 'Portfolio', '$rootScope', '$window',function($scope, $http, symbolFactory, Portfolio, $rootScope, $window){
+
 
   $scope.stockName;
 
@@ -26,6 +28,18 @@ app.controller('SymbolController', ['$scope', '$http', 'symbolFactory', 'Portfol
 
   };
 
+  $scope.addToWatchlist = function (symbol){
+    $scope.userId = $window.localStorage.getItem('com.tp.userId');
+    var data = {
+    
+      userid : $scope.userId,
+      symbol : symbol
+    }
+  console.log(data,'data')
+  symbolFactory.addToWatchlist(data)
+  .then()
+  }
+
   $scope.openModal = function(){
     $('#modal1').openModal();
   };
@@ -40,4 +54,6 @@ app.controller('SymbolController', ['$scope', '$http', 'symbolFactory', 'Portfol
     $scope.closeModal();
   };
 
+
 }]);
+

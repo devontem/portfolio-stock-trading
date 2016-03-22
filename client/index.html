@@ -52,6 +52,7 @@
           <li><a href="#/dashboard" ng-show="loggedin">Dashboard</a></li>
           <li><a href="#/forum" ng-show="loggedin">Forum</a></li>
           <li><a href="#/account" ng-show="loggedin">Account</a></li>
+          <li><a href="#/watchlist" ng-show="loggedin">Watchlist</a></li>
           <li><a ng-show="loggedin" ng-click="logout()">Log Out</a></li>
         </ul>
       </div>
@@ -129,6 +130,33 @@
     <span ng-show="hasSearched" class="col s1">Ask: {{stock.Ask | currency}}</span>
     <span ng-show="hasSearched" class="col s1">Change: {{stock.ChangeinPercent}} </span>
     <span ng-show="hasSearched" class="col s1">Volume: {{stock.Volume}}</span>
+    <span ng-show="hasSearched" class="col s1" ng-click="addToWatchlist(stock.Symbol)"><button>Watch</button></span>
+    <span class = 'ticker'> 
+<!--<FORM NAME="marquee1"> 
+<INPUT NAME="text" SIZE=100
+VALUE=" AAPL down GILD up FEYE down GS up JPM down TWTR up LNKD down FB up F down AMGN up P down"
+> 
+</FORM>--> 
+</span>
+<SCRIPT> 
+<!-- 
+/*Text box marquee by Dave Methvin,
+Windows Magazine
+May be used/modified if credit line is
+retained*/
+// ScrollSpeed = 300
+// ScrollChars = 1
+// function ScrollMarquee() {
+// window.setTimeout('ScrollMarquee()',ScrollSpeed);
+
+// var msg = document.marquee1.text.value; 
+// document.marquee1.text.value =
+// msg.substring(ScrollChars) +
+// msg.substring(0,ScrollChars); 
+// } 
+// ScrollMarquee()
+//-->
+</SCRIPT>
 
   </div>
 
@@ -182,8 +210,13 @@
   <script type="text/javascript" src="services/topicService.js"></script>
   <script type="text/javascript" src="badges/badgeController.js"></script>
   <script type="text/javascript" src="services/badgeService.js"></script>
+
   <script type="text/javascript" src="services/newsFactory.js"></script>
   <script type="text/javascript" src="services/transactionFactory.js"></script>
+
+  <script type="text/javascript" src="watchlist/watchlistController.js"></script>
+
+
 
 
   <script type="text/javascript" src="portfolioChart/portfolioChartController.js"></script>

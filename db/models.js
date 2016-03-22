@@ -48,6 +48,12 @@ User.beforeUpdate(function(user, options) {
   user.password = user.hashPassword();
 });
 
+var Watchlist = orm.define('Watchlist', {
+  symbol: Sequelize.STRING
+  
+
+})
+
 //Portfolio Model
 var Portfolio = orm.define('Portfolio', {
 	balance: Sequelize.INTEGER,
@@ -151,6 +157,10 @@ User.belongsToMany(League, { through: 'League_user'});
 League.hasMany(Portfolio);
 Portfolio.belongsTo(League);
 
+//User to watchlist - One to One
+
+Watchlist.belongsTo(User);
+
 //Portfolio to User - One to Many
 User.hasMany(Portfolio);
 Portfolio.belongsTo(User);
@@ -181,6 +191,7 @@ Forum.sync();
 Topic.sync();
 Order.sync();
 Badge.sync();
+Watchlist.sync();
 
 exports.League_user = League_user;
 exports.Badge_user = Badge_user;
@@ -193,4 +204,8 @@ exports.orm = orm;
 exports.Forum = Forum;
 exports.Topic = Topic;
 exports.Order = Order;
+
+
 exports.Badge = Badge;
+exports.Watchlist = Watchlist;
+
