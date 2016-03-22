@@ -1,7 +1,6 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var jshint = require('gulp-jshint');
-var concat = require('gulp-concat');
 var mocha = require('gulp-mocha');
 
 // Sets up sass
@@ -27,10 +26,4 @@ gulp.task('test', function () {
 	return gulp.src('test.js', {read: false})
 		// gulp-mocha needs filepaths so you can't have any plugins before it
 		.pipe(mocha({reporter: 'nyan'}));
-});
-
-gulp.task('concat', function() {
-  return gulp.src(['client/**/*.js', '!client/bower_components{,/**}'])
-    .pipe(concat('app.js'))
-    .pipe(gulp.dest('client/dist/'));
 });
