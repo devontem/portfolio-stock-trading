@@ -11,6 +11,8 @@ var userid = $window.localStorage.getItem('com.tp.userId');
 
 
 $scope.getWatchlist = function (){
+    $scope.watchlist =[];
+    $scope.results=[];
     function decimalAdjust(type, value, exp) {
     // If the exp is undefined or zero...
     if (typeof exp === 'undefined' || +exp === 0) {
@@ -39,19 +41,23 @@ $scope.getWatchlist = function (){
  
  
   	WatchlistFactory.getWatchlist(userid)
+
   	.then(function (list){
+       
+    // console.log($scope.results,'res1')
       for(var stock in list.data){
         $scope.watchlist.push(stock);
       }
     WatchlistFactory.updateWatchlist($scope.watchlist)
     .then(function (stocks){
+      
       stocks.data.pop()
+      console.log(stocks.data,'stocks')
       stocks.data.forEach(function(stock){
 
         stock.forEach(function(result){
           var result1 = result.replace(/\"/g,'');
           if(/[\%]/.test(result1)){
-            
             result1 = result1.split('.')
             var res = result1[1].replace(/\%/,'')
             result1[1]= res
@@ -69,20 +75,19 @@ $scope.getWatchlist = function (){
             result1.forEach(function(num){
               result1 = parseFloat(num).toFixed(2)
               range.push(result1)
-
             })
             result1 = range.join('-')
           }
+          console.log(result1,'res1')
           $scope.stock.push(result1)
         })
-        $scope.results.push($scope.stock)
+        console.log($scope.stock,'stock')
+          $scope.results.push($scope.stock)
         $scope.stock=[];
       })
-      console.log($scope.results,'stock')
     })
   })
   }
-
 })
 
 .factory('WatchlistFactory', function ($http){
