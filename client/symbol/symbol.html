@@ -18,7 +18,9 @@
                  <table>
                    <tr ng-repeat = 'result in results'>
                      <td>{{result.name}}</td>
-                     <td><a ng-click="populate(result.symbol)"><h3>{{result.symbol}}</h3></a></td>
+                     <td><h3>{{result.symbol}}</h3></td>
+                     <td><button ng-click="populate(result.symbol)">Trade</button></td>
+                     <td><button ng-click='addToWatchlist(result.symbol)'>Watch</button></td>                     
                   </tr>
                  </table>
                </div>
