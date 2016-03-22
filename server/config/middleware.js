@@ -20,7 +20,6 @@ var expressJwt = require('express-jwt');
 var jwt = require('jsonwebtoken');
 var morgan = require('morgan');
 var limitOrder = require('./limitOrder').limitOrder;
-var limitOrder = require('./limitOrder').limitOrder;
 var dayOrder = require('./limitOrder').dayOrder;
 
 
@@ -53,6 +52,8 @@ module.exports = function (app, express) {
   app.use(express.static(__dirname + '/../../client'));
 
   limitOrder();
+
+  console.log(moment(new Date()),'**************')
 
   // http.get('http://ichart.finance.yahoo.com/table.csv?s=AAPL&a=01&b=01&c=2014&d=01&e=01&f=2015&g=d&ignore=.csv', function(err, res){
   //   console.log(res.buffer.toString(),' ######')
