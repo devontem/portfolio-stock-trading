@@ -4,6 +4,7 @@ bower_components/
 .DS_Store
 
 build/
+dist/
 
 .floo
 .flooignore
