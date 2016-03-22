@@ -3,11 +3,11 @@
     <div>
 
       <h2>Badges</h2>
-      
+
       <div>
         <div class="row">
           <div class="col s2" ng-repeat="badge in badges">
-            <div class="card-panel red lighten-1">
+            <div class="card-panel red lighten-1 tooltipped" data-position="top" data-delay="50" data-tooltip={{badge.name}}>
               <i class="material-icons medium">{{badge.icon}}</i>
             </div>
           </div>
@@ -17,7 +17,7 @@
       <h2>Possible Badges</h2>
 
       <div class="col s2" ng-repeat="badge in possibleBadges">
-        <div class="card-panel blue-grey lighten-4">
+        <div class="card-panel blue-grey lighten-4 tooltipped" data-position="top" data-delay="50" data-tooltip={{badge.name}}>
           <i class="material-icons medium">{{badge.icon}}</i>
         </div>
       </div>
