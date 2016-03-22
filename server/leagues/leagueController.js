@@ -240,6 +240,7 @@ function makeCode(){
 //Sets up the node schedule to run at 1pm PST which is 4pm EST, when the NYSE closes
 //The live server (heroku) appears to be on PST
 var rule = new schedule.RecurrenceRule();
+//This should pull Monday-Friday
 rule.dayOfWeek = [0, new schedule.Range(1, 5)];
 rule.hour = 13;
 rule.minute = 0;
