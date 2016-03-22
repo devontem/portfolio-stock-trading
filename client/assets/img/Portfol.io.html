@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfol.io</title>
+  <!-- CSS styling -->
+  <link href='https://fonts.googleapis.com/css?family=Play:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Hind:400,300,500,600,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css' rel='stylesheet'>
+
+
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/portfolioStyles.css">
+  <link rel="stylesheet" href="assets/css/homeStyles.css">
+
+  <!-- Angular and jQuery CDNs -->
+  <style type='text/css'>
+  [ac-chart] {
+      float:left;
+      width: 48%;
+      height: 400px;
+      margin: 0 1%;
+    }
+
+  </style>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-sanitize.min.js"></script>
+
+</head>
+
+ <!-- adding angular app to site -->
+<body ng-app="app" ng-controller="SigninController" ng-cloak>
+
+  <!-- Top Navigation Bar -->
+
+    <nav>
+      <div class="nav-wrapper">
+        <span class="brand-img"></span>
+        <a ng-href="{{loggedin ? '/#/dashboard':'#'}}" class="brand-logo">Portfol.io</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li ng-controller="ClockController" ng-bind="time" class="col s2 clock teal-text text-lighten-4"></li>
+          <li><a ng-show="!loggedin" ng-click="toggleLogin()">Login</a></li>
+          <li><a ng-show="!loggedin" ng-click="toggleSignup()">Sign Up</a></li>
+          <li ng-show="loggedin"><span class="red-text text-lighten-2">Welcome, {{username[0].toUpperCase()+username.slice(1)}}!</span></li>
+          <li><a href="#/dashboard" ng-show="loggedin">Dashboard</a></li>
+          <li><a href="#/forum" ng-show="loggedin">Forum</a></li>
+          <li><a href="#/account" ng-show="loggedin">Account</a></li>
+          <li><a href="#/watchlist" ng-show="loggedin">Watchlist</a></li>
+          <li><a ng-show="loggedin" ng-click="logout()">Log Out</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <login-directive show='showlogin' width='350px' height='400px'>
+      <div ng-if="showlogin" class="signup">
+        <h1 class="brand-logo"> Log In </h1>
+        <form name="signinForm" ng-submit='signin(user)'>
+          <label>Email </label><br>
+          <input type='text' ng-model='user.email' required>
+          <br>
+          <label>Password </label><br>
+          <input type="password" ng-model='user.password' required><br>
+          <br>
+          <button class="waves-effect waves-light btn std-btn">Log In</button>
+        </form>
+      </div>
+    </login-directive>
+
+    <signup-directive show='showsignup' width='350px' height='500px'>
+      <div ng-if="showsignup" class="signup">
+        <h1 class="brand-logo"> Sign Up </h1>
+        <form name="signinForm" ng-submit='signup(user)'>
+          <label>User Name </label><br>
+          <input type='text' ng-model='user.username' required>
+          <br>
+          <label>Email </label><br>
+          <input type='text' ng-model='user.email' required>
+          <br>
+          <label>Password </label><br>
+          <input type="password" ng-model='user.password' required><br>
+          <br>
+          <button class="waves-effect waves-light btn std-btn">Sign Up</button>
+        </form>
+      </div>
+    </signup-directive>
+
+  <!-- Angular view goes here -->
+  <div ui-view class="ng-ui-view"></div>
+
+  <footer class="page-footer" ng-show="!loggedin">
+            <div class="container">
+              <div class="row">
+                <div class="col l6 s12">
+                  <h5>Portfol.io</h5>
+                  <p>Play smart. Win Big.</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                  <h5>Links</h5>
+                  <ul>
+                    <li><a class="grey-text text-lighten-3" href="#!">Sign Up</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Login</a></li>
+<!--                     <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li> -->
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="footer-copyright">
+              <div class="container">
+              © 2016 Copyright
+<!--               <a class="right" href="#!">More Links</a> -->
+              </div>
+            </div>
+  </footer>
+
+  <div class="botBar row" ng-controller="BotBarController" ng-if="loggedin">
+    <h5 class="col s1 offset-s1 search-bar-title"> Quote</h5>
+    <input ng-model="stockInput" class="col s1 searchquote" type="text" placeholder="enter symbol" required>
+    <a ng-click="stockSearch()" class="waves-effect waves-light btn std-btn col s1 bot-search"><i class="material-icons">search</i></a>
+    <span ng-show="hasSearched" class="col s1 stockquote">{{stock.Symbol}}</span>
+    <span ng-show="hasSearched" class="col s1">Price: {{stock.LastTradePriceOnly | currency}}</span>
+    <span ng-show="hasSearched" class="col s1">Bid: {{stock.Bid | currency}}</span>
+    <span ng-show="hasSearched" class="col s1">Ask: {{stock.Ask | currency}}</span>
+    <span ng-show="hasSearched" class="col s1">Change: {{stock.ChangeinPercent}} </span>
+    <span ng-show="hasSearched" class="col s1">Volume: {{stock.Volume}}</span>
+    <span ng-show="hasSearched" class="col s1" ng-click="addToWatchlist(stock.Symbol)"><button>Watch</button></span>
+    <span class = 'ticker'> 
+<!--<FORM NAME="marquee1"> 
+<INPUT NAME="text" SIZE=100
+VALUE=" AAPL down GILD up FEYE down GS up JPM down TWTR up LNKD down FB up F down AMGN up P down"
+> 
+</FORM>--> 
+</span>
+<SCRIPT> 
+<!-- 
+/*Text box marquee by Dave Methvin,
+Windows Magazine
+May be used/modified if credit line is
+retained*/
+// ScrollSpeed = 300
+// ScrollChars = 1
+// function ScrollMarquee() {
+// window.setTimeout('ScrollMarquee()',ScrollSpeed);
+
+// var msg = document.marquee1.text.value; 
+// document.marquee1.text.value =
+// msg.substring(ScrollChars) +
+// msg.substring(0,ScrollChars); 
+// } 
+// ScrollMarquee()
+//-->
+</SCRIPT>
+
+  </div>
+
+  <!-- script files -->
+  <script src="./bower_components/angular/angular.min.js"></script>
+  <script src="./bower_components/d3/d3.min.js"></script>
+  <script src="./bower_components/angular-charts/dist/angular-charts.js"></script>
+  <script src="
+  https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.0.1/ng-file-upload-all.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.0.1/ng-file-upload-shim.js" type="text/javascript"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/locale/af.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>
+  <script src="
+  https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+  <script type="text/javascript" src="helpers/widget.js"></script>
+  <script type="text/javascript" src="app.config.js"></script>
+  <script type="text/javascript" src="account/accountController.js"></script>
+  <script type="text/javascript" src="faqs/faqsController.js"></script>
+  <script type="text/javascript" src="league/leagueController.js"></script>
+  <script type="text/javascript" src="portfolio/portfolioController.js"></script>
+  <script type="text/javascript" src="dashboard/dashboardController.js"></script>
+  <script type="text/javascript" src="signin/signinController.js"></script>
+  <script type="text/javascript" src="leaderboard/leaderBoardController.js"></script>
+  <script type="text/javascript" src="services/leaderBoardService.js"></script>
+  <script type="text/javascript" src="services/dashboardService.js"></script>
+  <script type="text/javascript" src="leagueResults/leagueResultsController.js"></script>
+  <script type="text/javascript" src="news/newscontroller.js"></script>
+  <script type="text/javascript" src="messageboard/messageBoardController.js"></script>
+  <script type="text/javascript" src="services/messageBoardService.js"></script>
+  <script type="text/javascript" src="services/authService.js"></script>
+  <script type="text/javascript" src="botBar/botBarController.js"></script>
+  <script type="text/javascript" src="preleague/preleagueController.js"></script>
+  <script type="text/javascript" src="services/preLeagueService.js"></script>
+  <script type="text/javascript" src="account/accountController.js"></script>
+  <script type="text/javascript" src="services/accountService.js"></script>
+  <script type="text/javascript" src="services/portfolioService.js"></script>
+  <script type="text/javascript" src="recentTransactions/recentTransactionsController.js"></script>
+  <script type="text/javascript" src="profile/ProfileController.js"></script>
+  <script type="text/javascript" src="clock/clockController.js"></script>
+  <script type="text/javascript" src="symbol/symbolController.js"></script>
+  <script type="text/javascript" src="services/symbolService.js"></script>
+  <script type="text/javascript" src="forum/mainController.js"></script>
+  <script type="text/javascript" src="services/forumService.js"></script>
+  <script type="text/javascript" src="topic/topicController.js"></script>
+  <script type="text/javascript" src="services/topicService.js"></script>
+  <script type="text/javascript" src="services/orderStatusService.js"></script>
+  <script type="text/javascript" src="orderStatus/orderStatusController.js"></script>
+  <script type="text/javascript" src="topic/topicController.js"></script>
+  <script type="text/javascript" src="services/topicService.js"></script>
+  <script type="text/javascript" src="badges/badgeController.js"></script>
+  <script type="text/javascript" src="services/badgeService.js"></script>
+
+  <script type="text/javascript" src="services/newsFactory.js"></script>
+  <script type="text/javascript" src="services/transactionFactory.js"></script>
+
+  <script type="text/javascript" src="watchlist/watchlistController.js"></script>
+
+
+
+
+  <script type="text/javascript" src="portfolioChart/portfolioChartController.js"></script>
+
+<!-- <script type="text/javascript" src="dist/app.js"></script> -->
+
+
+
+</body>
+</html>

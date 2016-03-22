@@ -78,6 +78,7 @@ angular.module('app.portfolio', [])
 				$scope.resetFields();
 				updatePortfolio();
 			});
+			$rootScope.$emit('bought')
 		}
 	};
 
