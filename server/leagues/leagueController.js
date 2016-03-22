@@ -5,6 +5,8 @@ var Portfolio = require('../../db/models').Portfolio;
 var Transaction = require('../../db/models').Transaction;
 var User = require('../../db/models').User;
 var orm = require('../../db/models').orm;
+var schedule = require('node-schedule');
+
 
 module.exports.addLeague = function (req, res){
   var creatorId = req.body.creatorId;
@@ -234,6 +236,16 @@ function makeCode(){
       text += possible.charAt(Math.floor(Math.random() * possible.length));
   return text;
 }
+
+var rule = new schedule.RecurrenceRule();
+rule.dayOfWeek = [0, new schedule.Range(1, 5)];
+rule.hour = 13;
+rule.minute = 0;
+
+
+var j = schedule.scheduleJob(rule, function(){
+  console.log('The answer to life, the universe, and everything!************************************************************************************************************************************************************************************************************************************************************************************************************************');
+});
 
 
 //   League.destroy({
