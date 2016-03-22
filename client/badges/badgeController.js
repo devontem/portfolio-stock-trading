@@ -35,7 +35,6 @@ app.controller('BadgeController', ['$scope', 'BadgeFactory', '$window', function
 
   $scope.postBadge = function (userId, badge) {
     BadgeFactory.postBadge(userId, badge);
-    console.log('test');
   };
 
   $scope.postBadge(1, 2);
