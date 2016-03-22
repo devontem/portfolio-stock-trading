@@ -37,6 +37,7 @@ module.exports = function (app, express) {
   var router = express.Router();
   var leagueTransactionsRouter = express.Router();
   var badgeRouter = express.Router();
+  var directMessageRouter = express.Router();
 
   app.use(morgan('dev'));
   // Configuring middleware
@@ -67,6 +68,7 @@ module.exports = function (app, express) {
   app.use('/api/badges', badgeRouter);
   app.use('/api/forum', forumRouter);
   app.use('/api/recentTransactions', leagueTransactionsRouter);
+  app.use('/api/directmessages', directMessageRouter);
 
 
   require('../tweets/tweetRoutes.js')(tweetRouter);
@@ -92,5 +94,7 @@ module.exports = function (app, express) {
   require('../leagueTransactions/leagueTransactionsRoutes.js')(leagueTransactionsRouter);
 
   require('../badges/badgeRoutes.js')(badgeRouter);
+
+  require('../directMessages/directMessageRoutes.js')(directMessageRouter);
 
 };

@@ -52,6 +52,8 @@
           <li ng-show="loggedin"><span class="red-text text-lighten-2">Welcome, {{username[0].toUpperCase()+username.slice(1)}}!</span></li>
           <li><a href="#/dashboard" ng-show="loggedin">Dashboard</a></li>
           <li><a href="#/forum" ng-show="loggedin">Forum</a></li>
+          <li><a href="#/messages" ng-show="loggedin">Messages</a></li><!--<span class="badge circle red white-text">1</span>-->
+          <li><a ng-href="#/profiles/{{id }}" ng-show="loggedin">Profile</a></li>
           <li><a href="#/account" ng-show="loggedin">Account</a></li>
           <li><a ng-show="loggedin" ng-click="logout()">Log Out</a></li>
         </ul>
@@ -185,6 +187,8 @@
   <script type="text/javascript" src="services/badgeService.js"></script>
   <script type="text/javascript" src="services/newsFactory.js"></script>
   <script type="text/javascript" src="services/transactionFactory.js"></script>
+  <script type="text/javascript" src="messages/MessagesController.js"></script>
+  <script type="text/javascript" src="services/DirectMessage.js"></script>
 
 
   <script type="text/javascript" src="portfolioChart/portfolioChartController.js"></script>

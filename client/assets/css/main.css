@@ -471,3 +471,57 @@ th {
   margin-top: 30px; }
   .profile-container .display-pic img {
     width: 100%; }
+
+.messages-container .messages-area {
+  position: relative;
+  border: 1px solid #dddddd;
+  margin: 0.5rem 0px;
+  padding: 10px;
+  height: 475px; }
+
+.messages-container .messages-content {
+  height: 340px;
+  overflow: scroll; }
+
+.messages-container .messages-input {
+  position: absolute;
+  bottom: 0;
+  width: 95%; }
+
+.messages-container .text-right {
+  text-align: right; }
+
+.messages-container .msg-details {
+  display: block;
+  font-size: 0.8em;
+  color: #9e9e9e;
+  font-style: italic;
+  margin-top: -8px; }
+
+.messages-container .msg-search {
+  display: inline-block;
+  width: 400px; }
+
+.messages-container .collection {
+  height: 475px;
+  overflow: scroll; }
+
+.messages-container .collection-item:last-child {
+  border-bottom: 1px solid #e0e0e0 !important; }
+
+.messages-container .messages-wrapper {
+  margin-bottom: 140px;
+  margin-top: 15px; }
+
+.messages-container .quick-summary {
+  /* width: 37%; */
+  display: inline-block;
+  width: 97%;
+  overflow: hidden;
+  /* font-style: italic; */
+  white-space: nowrap;
+  /* font-size: 0.9em; */
+  text-overflow: ellipsis; }
+
+.messages-container .text-left {
+  text-align: left; }
