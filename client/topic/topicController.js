@@ -23,6 +23,8 @@ app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$w
 
   $scope.topicInfo;
 
+  $scope.hasReplies = false;
+
   $scope.submitReply = function(reply){
     topicFactory.addNewReply(reply).then(function(err, res){
       if(err){console.log(err)}
@@ -37,6 +39,9 @@ app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$w
   $scope.getAllReplies = function(){
     topicFactory.showAllReplies($scope.topicReply.topicId).then(function(data){
       $scope.allReplies = data.data;
+      if($scope.allReplies.length > 0){
+        $scope.hasReplies = true;
+      }
     });
   };
 
@@ -64,10 +69,6 @@ app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$w
   $scope.getOneTopic();
   $scope.getAllReplies();
   $anchorScroll();
-
-  // $scope.hasPosts = function(){
-  //   return $scope.allReplies.length > 3;
-  // }
 
 
   $scope.usersPost = function(user){
