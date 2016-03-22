@@ -85,8 +85,12 @@ function placeTrade (trade){
 module.exports.dayOrder = function(){
   setInterval(function(){
     var now = moment().utc().format("HH:mm:ss");
-    if(now == '00:00:00'){
+    if(now == '07:00:00'){
       Order.destroy({ where: { dayorder: true }})
+        .catch(function(err){
+            console.log("ERRORERROR")
+        });
+      Order.destroy({ where: { executed: true }})
         .catch(function(err){
             console.log("ERRORERROR")
         });
