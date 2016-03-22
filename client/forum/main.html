@@ -14,6 +14,7 @@
           </tr>
         </thead>
 
+
         <tbody>
           <tr ng-repeat="topic in allTopics | orderBy:sortLatest:sortReverse">
             <td><a href="#/topics/{{topic.id}}" style="color: orange">{{topic.title}}</a></td>
