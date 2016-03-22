@@ -4,8 +4,8 @@ app.controller('BadgeController', ['$scope', 'BadgeFactory', '$window', function
   $scope.possibleBadges = [];
 
   $scope.tooltipper = function () {
-    $(document).ready(function(arg){
-      $(arg).tooltip({delay: 50});
+    $(document).ready(function () {
+      $('tooltipped').tooltip({delay: 50});
     });
   };
 
@@ -18,10 +18,8 @@ app.controller('BadgeController', ['$scope', 'BadgeFactory', '$window', function
           badgeFormatted.text = badge.text;
           badgeFormatted.icon = badge.icon;
           $scope.badges.push(badgeFormatted);
-        })
-        // .then(function () {
-        //   $scope.tooltipper('tooltipped');
-        // });
+          $scope.tooltipper();
+        });
       }
     );
   };
@@ -35,12 +33,10 @@ app.controller('BadgeController', ['$scope', 'BadgeFactory', '$window', function
           badgeFormatted.text = badge.text;
           badgeFormatted.icon = badge.icon;
           $scope.possibleBadges.push(badgeFormatted);
+          $scope.tooltipper();
         });
       }
-    )
-    // .then(function () {
-    //   $scope.tooltipper('tooltipped2');
-    // });
+    );
   };
 
 
