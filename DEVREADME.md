@@ -9,9 +9,7 @@ In order to lint all files in the client directory, you can run either `gulp lin
 
 ##Concatenation
 
-After you have updated any javascript files on the client side, you need to run `gulp concat` submitting a pull request in order to make sure your changes are included in the main app file.
-
-As you develop, use `gulp concat:watch` in order to watch for changes you make to front-end files and then automatically concatenate the files. The watch is very fast, taking generally less than 2/10ths of a second.
+After you have updated any javascript files on the client side, you need to run `gulp concat` submitting a pull request in order to make sure your changes are included in the main app file. 
 
 
 ## Testing

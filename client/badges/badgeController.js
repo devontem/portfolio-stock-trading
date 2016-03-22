@@ -44,5 +44,4 @@ app.controller('BadgeController', ['$scope', 'BadgeFactory', '$window', function
   $scope.getBadges();
   // loads all badges that hte user has not earned
   $scope.getPossibleBadges();
-
 }]);
