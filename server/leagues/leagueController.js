@@ -251,11 +251,10 @@ rule.minute = 0;
 
 
 var j = schedule.scheduleJob(rule, function(){
-  console.log('The answer to life, the universe, and everything!************************************************************************************************************************************************************************************************************************************************************************************************************************');
+  closeLeague();
 });
 
 var getLatestPortfolioVals = function (arrayOfLeagues) {
-  arrayOfLeagues = [1];
   Portfolio.findAll({
     leagueId: arrayOfLeagues
   })
@@ -324,15 +323,22 @@ var getLatestPortfolioVals = function (arrayOfLeagues) {
 });
 };
 
-getLatestPortfolioVals();
-
 var closeLeague = function () {
   var currentMoment = moment().utc();
   League.findAll({where: {hasEnded: false}})
   .then(function (finishedLeagues) {
     var leaguesEnded = [];
     for (var i = 0; i < finishedLeagues.length; i++) {
-      leaguesEnded.push(finishedLeagues[i].dataValues.id);
+      // Checks if the league has ended
+      if (currentMoment.isAfter(finishedLeagues[i].dataValues.end)) {
+        leaguesEnded.push(finishedLeagues[i].dataValues.id);
+        // Updates model to indicate it has ended
+        League.update({
+          hasEnded: true
+        }, {
+          where: {id: finishedLeagues[i].dataValues.id}
+        });
+      }
     }
     //This updates all stocks to latest values
     getLatestPortfolioVals(leaguesEnded);
@@ -376,14 +382,10 @@ var closeLeague = function () {
           }
         }
 
-        console.log('(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((())))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))', portsToSort);
-
       });
     }
     });
 };
-
-closeLeague();
 
 
 
