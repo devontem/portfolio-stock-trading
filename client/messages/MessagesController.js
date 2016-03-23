@@ -17,7 +17,7 @@ app
 		var recipientId = $scope.sendTo.recipientId == $scope.id ? $scope.sendTo.UserId : $scope.sendTo.recipientId;
 
 		var msg = {};
-		msg.senderUsername = $scope.username;
+		msg.username = $scope.username;
 		msg.message = $scope.input;
 		console.log(msg, $scope.sendTo)
 
