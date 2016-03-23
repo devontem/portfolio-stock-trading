@@ -77,12 +77,19 @@ angular.module('app.portfolio', [])
 			Portfolio.buySell(options).then(function(data){
 				Materialize.toast('You traded '+options.shares+' shares in '+options.company, 3000, 'rounded');
 				$scope.resetFields();
-				updatePortfolio();
+
 			});
 			$rootScope.$emit('bought');
 			$rootScope.$emit('recentTrxn');
+			$scope.updateMarketPrice();
+			updatePortfolio();
 		}
 	};
+
+	// $rootScope.$on('update', function(){
+	// 	$scope.updateMarketPrice();
+	// 	updatePortfolio();
+	// })
 
 	function ableToSell(){
 		for (var i = 0; i < $scope.stocks.length; i++){
@@ -115,6 +122,7 @@ angular.module('app.portfolio', [])
 	};
 
 	$scope.updateMarketPrice = function(){
+			updatePortfolio();
 			if ($scope.stocks.length > 0){
 				Portfolio.updateUserStocks($scope.leagueId, $scope.userId).then(function(stocks){
 
