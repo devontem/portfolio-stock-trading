@@ -253,6 +253,7 @@ var j = schedule.scheduleJob(rule, function(){
 
 var closeLeague = function () {
   var currentMoment = moment().utc();
+  // TODO: Change this to false later
   League.findAll({where: {hasEnded: false}})
   .then(function (finishedLeagues) {
     var leaguesEnded = [];
@@ -263,7 +264,17 @@ var closeLeague = function () {
     for (var j = 0; j < leaguesEnded.length; j++) {
       Portfolio.findAll({where: {leagueId: leaguesEnded[j]}})
       .then(function (portfolios) {
-
+        var portsToSort = [];
+        portfolios.forEach(function (portfolio) {
+          var portObj = {};
+          portObj.id = portfolio.dataValues.id;
+          portObj.balance = portfolio.dataValues.balance;
+          portObj.portfolioValue = portfolio.dataValues.portfolioValue;
+          portObj.UserId = portfolio.dataValuesUserId;
+          portObj.LeagueId = portfolio.dataValues.LeagueId;
+          portsToSort.push(portObj);
+        });
+        
       });
     }
     });
