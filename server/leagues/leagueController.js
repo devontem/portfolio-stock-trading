@@ -34,7 +34,8 @@ module.exports.addLeague = function (req, res){
         username: creatorName,
         leaguename: league.name,
         portfolioValue: 0,
-        numOfTrades: 0
+        numOfTrades: 0,
+        hasEnded: false
       })
       .then( function(res) {
         console.log('successfully added');
@@ -249,6 +250,10 @@ rule.minute = 0;
 var j = schedule.scheduleJob(rule, function(){
   console.log('The answer to life, the universe, and everything!************************************************************************************************************************************************************************************************************************************************************************************************************************');
 });
+
+var closeLeague = function () {
+
+};
 
 
 //   League.destroy({

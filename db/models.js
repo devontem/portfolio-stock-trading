@@ -50,7 +50,7 @@ User.beforeUpdate(function(user, options) {
 
 var Watchlist = orm.define('Watchlist', {
   symbol: Sequelize.STRING
-  
+
 
 })
 
@@ -60,7 +60,8 @@ var Portfolio = orm.define('Portfolio', {
   portfolioValue: Sequelize.FLOAT,
   numOfTrades: Sequelize.INTEGER,
   username: Sequelize.STRING,
-  leaguename: Sequelize.STRING
+  leaguename: Sequelize.STRING,
+  hasEnded: Sequelize.BOOLEAN
 });
 
 // Forum & Topics Model
