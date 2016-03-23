@@ -38,13 +38,9 @@ app.controller('BadgeController', ['$scope', 'BadgeFactory', '$window', function
   };
 
 
-  $scope.postBadge = function (userId, badge) {
-    BadgeFactory.postBadge(userId, badge);
-  };
-
-  $scope.postBadge(1, 2);
-  $scope.postBadge(1, 3);
-  $scope.postBadge(1, 4);
+  // $scope.postBadge = function (userId, badge) {
+  //   BadgeFactory.postBadge(userId, badge);
+  // };
 
   // loads all badges that the user has earned so far
   $scope.getBadges();
