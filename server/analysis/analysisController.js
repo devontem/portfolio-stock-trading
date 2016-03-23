@@ -18,3 +18,30 @@ module.exports.stockdata = function(req, res){
   })
 
 }
+
+
+module.exports.getinfo = function(req, res){
+
+  http.get('http://finance.yahoo.com/d/quotes.csv?s='+req.body.symbol+'&f=reb4jkj1m3m4l1st8&ignore=.csv', function(err, response){
+    if(response){
+      var info = response.buffer.toString().split(',');
+      var stock = { pe: info[0],
+                    earning: info[1],
+                    bookvalue: info[2],
+                    '52low': info[3],
+                    '52high': info[4],
+                    marketcap: info[5],
+                    '50dayavg': info[6],
+                    '200dayavg': info[7],
+                    lastprice: info[8],
+                    symbol: info[9],
+                    pricetarget: info[10]
+                      };
+      console.log(stock, '**********')
+      console.log(response.buffer.toString(),' ######');
+      res.send(stock);
+    }else{
+      res.send('Error retrieving data');
+    }
+  })
+}

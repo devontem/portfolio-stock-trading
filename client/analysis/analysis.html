@@ -26,9 +26,9 @@
   <div class="row"><h4></h4></div>
       <div class="col s12 m4 l4">
 
-          <form ng-submit="getchart(stock)">
+          <form ng-submit="getchart(stock); stockinfo(stock)">
                 <label>Symbol</label>
-                <input ng-model="stock.symbol" placeholder="Symbol" type="text" class="validate">
+                <input ng-model="stock.symbol" placeholder="Symbol" type="text" class="validate company-symbol">
                 <section class="col s6">
                   <span>
                   <label>Start Date
@@ -46,6 +46,31 @@
                 <button class="waves-effect waves-light btn std-btn center">Submit</button>
 
           </form>
+
+            <table class="bordered">
+                  <tbody>
+                    <tr>
+                      <td><b>Price:</b> {{stock.lastprice}}</td>
+                      <td><b>P/E:</b> {{stock.pe}}</td>
+                    </tr>
+                    <tr>
+                      <td><b>Market Cap:</b> {{stock.marketcap}}</td>
+                      <td><b>Book Value:</b> {{stock.bookvalue}}</td>
+                    </tr>
+                    <tr>
+                      <td><b>50 Day Moving Avg:</b> {{stock['50dayavg']}}</td>
+                      <td><b>200 D Moving Avg:</b> {{stock['200dayavg']}}</td>
+                    </tr>
+                    <tr>
+                      <td><b>52 W Low:</b> {{stock['52low']}}</td>
+                      <td><b>52 W High:</b> {{stock['52high']}}</td>
+                    </tr>
+                    <tr>
+                      <td><b>EPS:</b> {{stock.earning}}</td>
+                      <td><b>Target Price:</b> {{stock.pricetarget}}</td>
+                    </tr>
+                  </tbody>
+            </table>
 
       </div>
       <div id="wow" class="col s12 m4 l4"></div>
