@@ -52,10 +52,8 @@
 
           <li ng-show="loggedin" style="margin-right: 5px; margin-top:12px" class='dropdown-button btn' href='#' data-hover="true" data-activates='dropdown2'>Dashboard</li>
           <ul id='dropdown2' class='dropdown-content'>
-              <li><a href="#/forum" ng-show="loggedin">Forum</a></li>
-              <li><a href="#/analysis" ng-show="loggedin">Chart</a></li>
-              <li><a href="#/account" ng-show="loggedin">Account</a></li>
-              <li><a href="#/watchlist" ng-show="loggedin">Watchlist</a></li>
+              <li><a href="#/dashboard" ng-show="loggedin">Dashboard</a></li>
+              <li ng-repeat="portfolio in portfolios"><a ng-href="#/leagues/{{portfolio.leagueId}}" ng-show="loggedin">{{portfolio.leaguename}}</a></li>
           </ul>
 
           <li ng-show="loggedin" style="margin-top:12px" class='dropdown-button btn' href='#' data-hover="true" data-activates='dropdown1'>Menu</li>
