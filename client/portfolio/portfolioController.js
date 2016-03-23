@@ -77,12 +77,19 @@ angular.module('app.portfolio', [])
 			Portfolio.buySell(options).then(function(data){
 				Materialize.toast('You traded '+options.shares+' shares in '+options.company, 3000, 'rounded');
 				$scope.resetFields();
-				updatePortfolio();
+
 			});
 			$rootScope.$emit('bought');
 			$rootScope.$emit('recentTrxn');
+			// $scope.updateMarketPrice();
+			 updatePortfolio();
 		}
 	};
+
+	// $rootScope.$on('update', function(){
+	// 	$scope.updateMarketPrice();
+	// 	updatePortfolio();
+	// })
 
 	function ableToSell(){
 		for (var i = 0; i < $scope.stocks.length; i++){
@@ -115,6 +122,7 @@ angular.module('app.portfolio', [])
 	};
 
 	$scope.updateMarketPrice = function(){
+			updatePortfolio();
 			if ($scope.stocks.length > 0){
 				Portfolio.updateUserStocks($scope.leagueId, $scope.userId).then(function(stocks){
 
@@ -141,17 +149,21 @@ angular.module('app.portfolio', [])
 		Portfolio.getPortfolio(leagueId, userId).then(function(portfolio){
 			$scope.balance = portfolio.balance;
 			$scope.portfolioValue = portfolio.portfolioValue;
+
 		});
 
 		//updating users purchased stocks
 		Portfolio.getUserStocks(leagueId, userId).then(function(transactions){
 			$scope.stocks = transactions;
             transactions.forEach(function(transaction){
-              transaction.percentage = Math.round((transaction.marketPrice*transaction.shares)/$scope.portfolioValue*100);
+              transaction.percentage = (transaction.marketPrice*transaction.shares)/$scope.portfolioValue*100;
             });
 			$scope.stocks = transactions;
 		});
 
+		$scope.twoDecimal = function(val){
+			return val.toFixed(2);
+		}
 
 
     $rootScope.$emit("PortfolioUpdate", {});
