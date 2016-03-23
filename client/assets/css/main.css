@@ -525,3 +525,6 @@ th {
 
 .messages-container .text-left {
   text-align: left; }
+
+.badge i {
+  font-size: 30px; }

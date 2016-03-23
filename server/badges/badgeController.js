@@ -81,52 +81,52 @@ var badgeMaker = function(){
   Badge.create({
     name: 'Welcome',
     text: 'The first million starts with the first dollar. You earned this badge for signing up with Portfol.io',
-    icon: 'fiber_new'
+    icon: 'flaticon-commerce'
   });
   Badge.create({
     name: "The Winner's Circle",
     text: 'Congrats! You won your first league. Now for hundred more!',
-    icon: 'exposure_plus_1'
+    icon: 'flaticon-ribbon'
   });
   Badge.create({
     name: '3X',
     text: 'You Logged in for Three Consecutive Days. Woot!',
-    icon: 'repeat'
+    icon: 'flaticon-three'
   });
   Badge.create({
     name: '5X',
     text: 'You Logged in for Five Consecutive Days. Woot!',
-    icon: 'replay_5'
+    icon: 'flaticon-interface'
   });
   Badge.create({
     name: 'Week 1',
     text: 'You Logged in every day for one week. Keep up the great work bigshot!',
-    icon: 'fiber_new'
+    icon: 'flaticon-days'
   });
   Badge.create({
     name: 'Shhh!',
     text: 'You joined your first private league!',
-    icon: 'vpn_key'
+    icon: 'flaticon-tool'
   });
   Badge.create({
     name: 'Beginner Broker!',
     text: 'You joined your first public league! Enjoy',
-    icon: 'lock'
+    icon: 'flaticon-circle'
   });
   Badge.create({
     name: '100K',
     text: 'You earned your first $100,000!',
-    icon: 'attach_money'
+    icon: 'flaticon-money'
   });
   Badge.create({
     name: '1 Mil',
     text: 'You earned your first million!',
-    icon: 'attach_money'
+    icon: 'flaticon-money-2'
   });
   Badge.create({
     name: '5 Mil',
     text: 'Five Million Earned?!?!?! Time to start looking into retirement',
-    icon: 'attach_money'
+    icon: 'flaticon-business'
   });
 };
 
