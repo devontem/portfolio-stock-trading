@@ -52,4 +52,7 @@ var app = angular.module('app')
         $scope.getleagueTransactions($scope.portfolios);
   	  });
   };
+
+  $scope.getPortfolios();
+
 }]);
