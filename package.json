@@ -33,6 +33,7 @@
     "express": "^4.13.4",
     "express-jwt": "^3.3.0",
     "express-session": "^1.13.0",
+    "fs": "0.0.2",
     "http-request": "^0.7.0",
     "jsonwebtoken": "^5.7.0",
     "mocha": "^2.4.5",
