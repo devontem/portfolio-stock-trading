@@ -315,7 +315,6 @@ var getLatestPortfolioVals = function (arrayOfLeagues) {
 
         port.save();
 
-// TODO: Fix these indentations
     });
 
   });
@@ -323,13 +322,9 @@ var getLatestPortfolioVals = function (arrayOfLeagues) {
   });
 
 });
-Portfolio.findAll({
-  leagueId: arrayOfLeagues
-})
-.then(function (ports) {
-  console.log(ports);
-});
 };
+
+getLatestPortfolioVals();
 
 var closeLeague = function () {
   var currentMoment = moment().utc();
