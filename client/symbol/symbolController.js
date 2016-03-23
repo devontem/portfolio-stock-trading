@@ -30,7 +30,6 @@ app.controller('SymbolController', ['$scope', '$http', 'WatchlistFactory','symbo
 
   $scope.addToWatchlist = function (symbol){
     $scope.userId = $window.localStorage.getItem('com.tp.userId');
-    console.log($scope.userId,'lolol')
     
     Materialize.toast('Watchlist Updated', 3000);
     WatchlistFactory.getWatchlist($scope.userId)
@@ -45,7 +44,6 @@ app.controller('SymbolController', ['$scope', '$http', 'WatchlistFactory','symbo
       userid : $scope.userId,
       symbol : symbol
     }
-  console.log(data,'data')
   symbolFactory.addToWatchlist(data)
   .then()
   }
