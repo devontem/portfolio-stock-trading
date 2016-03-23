@@ -54,6 +54,7 @@ var app = angular.module('app')
   };
 
   $rootScope.$on('recentTrxn', function(){
+
     $scope.getPortfolios();
   });
 

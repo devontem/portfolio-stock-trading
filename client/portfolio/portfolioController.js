@@ -81,8 +81,8 @@ angular.module('app.portfolio', [])
 			});
 			$rootScope.$emit('bought');
 			$rootScope.$emit('recentTrxn');
-			$scope.updateMarketPrice();
-			updatePortfolio();
+			// $scope.updateMarketPrice();
+			 updatePortfolio();
 		}
 	};
 
@@ -149,10 +149,12 @@ angular.module('app.portfolio', [])
 		Portfolio.getPortfolio(leagueId, userId).then(function(portfolio){
 			$scope.balance = portfolio.balance;
 			$scope.portfolioValue = portfolio.portfolioValue;
+
 		});
 
 		//updating users purchased stocks
 		Portfolio.getUserStocks(leagueId, userId).then(function(transactions){
+			$scope.stocks = transactions;
             transactions.forEach(function(transaction){
               transaction.percentage = (transaction.marketPrice*transaction.shares)/$scope.portfolioValue*100;
             });
