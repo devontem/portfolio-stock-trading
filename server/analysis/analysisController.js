@@ -10,7 +10,6 @@ module.exports.stockdata = function(req, res){
       fs.writeFile('client/analysis/data.csv', response.buffer.toString(), 'utf8', function(err){
         if(err) return console.log("************")
       });
-      console.log(response.buffer.toString(),' ######');
       res.send('data received');
     }else{
       res.send('Error retrieving data');
@@ -37,8 +36,6 @@ module.exports.getinfo = function(req, res){
                     symbol: info[9],
                     pricetarget: info[10]
                       };
-      console.log(stock, '**********')
-      console.log(response.buffer.toString(),' ######');
       res.send(stock);
     }else{
       res.send('Error retrieving data');
