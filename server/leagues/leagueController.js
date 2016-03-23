@@ -69,7 +69,8 @@ module.exports.joinLeague = function (req, res){
         portfolioValue: 0,
         numOfTrades: 0,
         username: temp.username,
-        leaguename: temp.leaguename
+        leaguename: temp.leaguename,
+        rank: 0
       })
       .then(function (league) {
         res.send(league);
@@ -364,7 +365,9 @@ var closeLeague = function () {
             return 0;
           }
         });
+
         var rankings = 1;
+
         for (var k = 0; k < portsToSort.length; k++) {
           Portfolio.update({
             rank: rankings
@@ -374,18 +377,20 @@ var closeLeague = function () {
             }
           });
 
+          var UserId = portsToSort[k].UserId;
+
           if (rankings === 1) {
-            User.findOne({id: portsToSort[k].UserId})
+            User.findById(UserId)
             .then(function (user) {
               user.increment('firstPlaces');
             });
           } else if (rankings === 2) {
-            User.findOne({id: portsToSort[k].UserId})
+            User.findById(UserId)
             .then(function (user) {
               user.increment('secondPlaces');
             });
           } else if (rankings === 3) {
-            User.findOne({id: portsToSort[k].UserId})
+            User.findById(UserId)
             .then(function (user) {
               user.increment('thirdPlaces');
             });
@@ -402,9 +407,6 @@ var closeLeague = function () {
     }
     });
 };
-
-
-
 
 //   League.destroy({
 //     where: {
