@@ -28,6 +28,7 @@ angular.module('app.portfolio', [])
 
 	$scope.chooseStock = function(stockName){
 		Portfolio.getStock(stockName).then(function(stock){
+			stock = stock.data;
 			if(!stock.Ask){
 				Materialize.toast('Please enter a valid symbol!',3000);
 			}

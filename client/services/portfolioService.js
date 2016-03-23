@@ -25,7 +25,7 @@ app.factory('Portfolio', function($http){
       method: 'GET',
       url: '/api/stocks/'+stockName
     }).then(function(stock){
-      return stock.data.query.results.quote;
+      return stock;
     })
   }
 
