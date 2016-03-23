@@ -272,9 +272,19 @@ var closeLeague = function () {
           portObj.portfolioValue = portfolio.dataValues.portfolioValue;
           portObj.UserId = portfolio.dataValuesUserId;
           portObj.LeagueId = portfolio.dataValues.LeagueId;
+          portObj.total = portObj.balance + portObj.portfolioValue;
           portsToSort.push(portObj);
         });
-        
+        portsToSort.sort(function (port1, port2) {
+          if (port1.total > port2.total) {
+            return 1;
+          } else if (port1.total < port2.total) {
+            return -1;
+          } else {
+            return 0;
+          }
+        });
+        console.log('(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((())))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))', portsToSort);
       });
     }
     });
