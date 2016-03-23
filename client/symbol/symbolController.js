@@ -1,5 +1,5 @@
 
-app.controller('SymbolController', ['$scope', '$http', 'symbolFactory', 'Portfolio', '$rootScope', '$window',function($scope, $http, symbolFactory, Portfolio, $rootScope, $window){
+app.controller('SymbolController', ['$scope', '$http', 'WatchlistFactory','symbolFactory', 'Portfolio', '$rootScope', '$window',function($scope, $http, WatchlistFactory, symbolFactory, Portfolio, $rootScope, $window){
 
 
   $scope.stockName;
@@ -30,6 +30,16 @@ app.controller('SymbolController', ['$scope', '$http', 'symbolFactory', 'Portfol
 
   $scope.addToWatchlist = function (symbol){
     $scope.userId = $window.localStorage.getItem('com.tp.userId');
+    console.log($scope.userId,'lolol')
+    
+    Materialize.toast('Watchlist Updated', 3000);
+    WatchlistFactory.getWatchlist($scope.userId)
+
+    .then(function (list){
+      console.log(list,'list')
+    })
+
+
     var data = {
     
       userid : $scope.userId,

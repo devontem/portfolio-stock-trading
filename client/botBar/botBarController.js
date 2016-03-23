@@ -2,7 +2,7 @@ angular.module('app.botbar', [])
 
 // TODO: likely change portofolio factory name to be more precise
 
-.controller('BotBarController',['$scope', 'Portfolio','symbolFactory', '$window', '$interval', function($scope, Portfolio, symbolFactory, $window,$interval ){
+.controller('BotBarController',['$scope', 'Portfolio','WatchlistFactory','symbolFactory', '$window', '$interval', function($scope, Portfolio, WatchlistFactory, symbolFactory, $window,$interval ){
 
   // Initializes variable if the user has not searched yet
   $scope.hasSearched = false;
@@ -24,7 +24,9 @@ angular.module('app.botbar', [])
   $scope.addToWatchlist = function (symbol){
     console.log(symbol,'sym')
     $scope.userId = $window.localStorage.getItem('com.tp.userId');
-    console.log($scope.userId)
+
+    Materialize.toast('Watchlist Updated', 3000);
+
     var data = {
     
       userid : $scope.userId,

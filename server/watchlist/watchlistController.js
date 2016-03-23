@@ -10,9 +10,14 @@ var userid = parseInt(req.body.userid) ;
 
 
 
-Watchlist.create({symbol: req.body.symbol, UserId: userid})
-  .then(function (watchlist){
-  	console.log('success');
+Watchlist.findOrCreate({ where: {
+	symbol: req.body.symbol,
+	UserId: userid
+ }})
+
+    .then(function (watchlist){
+  	console.log('success', watchlist);
+  	res.json(watchlist)
     
   })
 }

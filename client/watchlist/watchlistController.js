@@ -43,6 +43,7 @@ $scope.getWatchlist = function (){
   	WatchlistFactory.getWatchlist(userid)
 
   	.then(function (list){
+
        
     // console.log($scope.results,'res1')
       for(var stock in list.data){
@@ -88,6 +89,16 @@ $scope.getWatchlist = function (){
     })
   })
   }
+
+  $scope.removeFromWatchlist = function (watchlistId){
+    WatchlistFactory.removeFromWatchlist(watchlistId)
+    .then(function (){
+      
+    })
+
+  }
+
+
 })
 
 .factory('WatchlistFactory', function ($http){
@@ -110,9 +121,14 @@ $scope.getWatchlist = function (){
       })
     }
 
+    var removeFromWatchlist = function (){
+       
+    }
+
   return {
     getWatchlist:getWatchlist,
-    updateWatchlist:updateWatchlist
+    updateWatchlist:updateWatchlist,
+    removeFromWatchlist:removeFromWatchlist
   }
 
 })
