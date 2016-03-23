@@ -254,6 +254,7 @@ var j = schedule.scheduleJob(rule, function(){
   closeLeague();
 });
 
+// This function is mainly used in the closeLeague function to get the most up to date portfolio values before ending the league
 var getLatestPortfolioVals = function (arrayOfLeagues) {
   Portfolio.findAll({
     leagueId: arrayOfLeagues
@@ -313,14 +314,10 @@ var getLatestPortfolioVals = function (arrayOfLeagues) {
         }
 
         port.save();
-
+      });
     });
-
+    });
   });
-
-  });
-
-});
 };
 
 var closeLeague = function () {
@@ -375,13 +372,14 @@ var closeLeague = function () {
               id: portsToSort[k].id
             }
           });
+
+          // Checks to make sure that the current score does not equal the next score, and if so, makes them both have the same rank
           if (portsToSort[k + 1] && portsToSort[k].total === portsToSort[k + 1].total) {
             continue;
           } else {
             rankings +=1;
           }
         }
-
       });
     }
     });

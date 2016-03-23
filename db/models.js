@@ -19,8 +19,9 @@ var User = orm.define('User', {
     },
     // Badge related behavior
     badgeJoined: Sequelize.BOOLEAN,
-    badgeWonLeague: Sequelize.BOOLEAN,
-    badgeNumberOfLogins: Sequelize.INTEGER,
+    firstPlaces: Sequelize.BOOLEAN,
+    secondPlaces: Sequelize.INTEGER,
+    thirdPlaces: Sequelize.INTEGER,
     badgeLastLogin: Sequelize.DATE,
 
     email: {
