@@ -256,7 +256,34 @@ angular.module('app.dashboard', [])
         });
   };
 
+  $scope.autoAddLeague = function (name, max, balance, hour) {
+    var league = {};
+    var tomorrow = new Date(new Date().getTime() + hour * 60 * 60 * 1000);
+    var dayLater = new Date(new Date().getTime() + (hour + 24) * 60 * 60 * 1000);
+    var start = moment(tomorrow).utc().hour(13).minute(30);
+    var end = moment(dayLater).utc().hour(20);
+    league.start = start.format();
+    league.end = end.format();
+    league.name = name;
+    league.max = max;
+    league.balance = balance;
+    league.isPrivate = false;
+    league.creatorId = 1000;
+    league.creatorName = 'Admin'
+    DashboardFactory.addLeague(league)
+  };
+
   $scope.getUserLeagues();
   $scope.getLeaguesToJoin();
+
+  var hour = 24;
+
+  // $window.setInterval(function(){
+  //   $scope.autoAddLeague('Rookie League', 10, 25000, hour);
+  //   $scope.autoAddLeague('Junior Broker League', 10, 75000, hour);
+  //   $scope.autoAddLeague('Elite Broker League', 10, 250000, hour);
+  //   hour+=24;
+  //   $scope.getLeaguesToJoin();
+  // }, 10000)
 
 }]);
