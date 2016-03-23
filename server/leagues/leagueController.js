@@ -339,6 +339,7 @@ var closeLeague = function () {
     }
     //This updates all stocks to latest values
     getLatestPortfolioVals(leaguesEnded);
+
     for (var j = 0; j < leaguesEnded.length; j++) {
       Portfolio.findAll({where: {leagueId: leaguesEnded[j]}})
       .then(function (portfolios) {
@@ -372,6 +373,23 @@ var closeLeague = function () {
               id: portsToSort[k].id
             }
           });
+
+          if (rankings === 1) {
+            User.findOne({id: portsToSort[k].UserId})
+            .then(function (user) {
+              user.increment('firstPlaces');
+            });
+          } else if (rankings === 2) {
+            User.findOne({id: portsToSort[k].UserId})
+            .then(function (user) {
+              user.increment('secondPlaces');
+            });
+          } else if (rankings === 3) {
+            User.findOne({id: portsToSort[k].UserId})
+            .then(function (user) {
+              user.increment('thirdPlaces');
+            });
+          }
 
           // Checks to make sure that the current score does not equal the next score, and if so, makes them both have the same rank
           if (portsToSort[k + 1] && portsToSort[k].total === portsToSort[k + 1].total) {
