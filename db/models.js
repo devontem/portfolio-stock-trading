@@ -60,8 +60,7 @@ var Portfolio = orm.define('Portfolio', {
   portfolioValue: Sequelize.FLOAT,
   numOfTrades: Sequelize.INTEGER,
   username: Sequelize.STRING,
-  leaguename: Sequelize.STRING,
-  hasEnded: Sequelize.BOOLEAN
+  leaguename: Sequelize.STRING
 });
 
 // Forum & Topics Model
@@ -147,7 +146,8 @@ var League = orm.define('league', {
   start: Sequelize.STRING,
   end: Sequelize.STRING,
   private: Sequelize.BOOLEAN,
-  code: Sequelize.STRING
+  code: Sequelize.STRING,
+  hasEnded: Sequelize.BOOLEAN
 });
 
 // Badges

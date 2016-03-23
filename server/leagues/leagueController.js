@@ -24,7 +24,8 @@ module.exports.addLeague = function (req, res){
     start:req.body.start,
     end: req.body.end,
     private: req.body.private,
-    code: randomCode
+    code: randomCode,
+    hasEnded: false
   })
   .then(function (league) {
     Portfolio.create({
@@ -34,8 +35,7 @@ module.exports.addLeague = function (req, res){
         username: creatorName,
         leaguename: league.name,
         portfolioValue: 0,
-        numOfTrades: 0,
-        hasEnded: false
+        numOfTrades: 0
       })
       .then( function(res) {
         console.log('successfully added');
@@ -253,10 +253,20 @@ var j = schedule.scheduleJob(rule, function(){
 
 var closeLeague = function () {
   var currentMoment = moment().utc();
-  League.findAll({where: {end: {$lte: currentMoment}}})
-  .then(function (leagues) {
-    console.log('************************************************************************************************************************************************************************************************************************************************************************************************************************',leagues);
-  });
+  League.findAll({where: {hasEnded: false}})
+  .then(function (finishedLeagues) {
+    var leaguesEnded = [];
+    // console.log(finishedLeagues);
+    for (var i = 0; i < finishedLeagues.length; i++) {
+      leaguesEnded.push(finishedLeagues[i].dataValues.id);
+    }
+    for (var j = 0; j < leaguesEnded.length; j++) {
+      Portfolio.findAll({where: {leagueId: leaguesEnded[j]}})
+      .then(function (portfolios) {
+
+      });
+    }
+    });
 };
 
 closeLeague();
