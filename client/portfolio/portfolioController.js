@@ -14,7 +14,7 @@ angular.module('app.portfolio', [])
 	});
 
 	$scope.ordtype = function(){
-		
+
 	};
 
 	$scope.resetFields = function (){
@@ -79,7 +79,8 @@ angular.module('app.portfolio', [])
 				$scope.resetFields();
 				updatePortfolio();
 			});
-			$rootScope.$emit('bought')
+			$rootScope.$emit('bought');
+			$rootScope.$emit('recentTrxn');
 		}
 	};
 
