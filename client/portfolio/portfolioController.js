@@ -153,13 +153,15 @@ angular.module('app.portfolio', [])
 
 		//updating users purchased stocks
 		Portfolio.getUserStocks(leagueId, userId).then(function(transactions){
-			$scope.stocks = transactions;
             transactions.forEach(function(transaction){
-              transaction.percentage = Math.round((transaction.marketPrice*transaction.shares)/$scope.portfolioValue*100);
+              transaction.percentage = (transaction.marketPrice*transaction.shares)/$scope.portfolioValue*100;
             });
 			$scope.stocks = transactions;
 		});
 
+		$scope.twoDecimal = function(val){
+			return val.toFixed(2);
+		}
 
 
     $rootScope.$emit("PortfolioUpdate", {});

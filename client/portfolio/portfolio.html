@@ -35,7 +35,7 @@
 		        <td>{{stock.price | currency}}</td>
 		        <td>{{stock.marketPrice | currency}}</td>
 		        <td>{{stock.return | number:3}}%</td>
-		        <td>{{stock.percentage}}%</td>
+		        <td>{{twoDecimal(stock.percentage)}}%</td>
 		        <td><a ng-click="sellStock(stock)"class="btn-floating red sell-button"><i class="material-icons">supervisor_account</i></a></td>
 		      </tr>
 		    </tbody>
