@@ -14,6 +14,7 @@ var Forum = require('../../db/models').Forum;
 var Topic = require('../../db/models').Topic;
 var Watchlist = require('../../db/models').Watchlist;
 var moment = require('moment');
+var fs = require('fs');
 
 var Badge = require('../../db/models').Badge;
 var Badge_user = require('../../db/models').Badge_user;
@@ -22,7 +23,6 @@ var jwt = require('jsonwebtoken');
 var morgan = require('morgan');
 var limitOrder = require('./limitOrder').limitOrder;
 var dayOrder = require('./limitOrder').dayOrder;
-var fs = require('fs')
 
 module.exports = function (app, express) {
 
@@ -42,6 +42,7 @@ module.exports = function (app, express) {
   var badgeRouter = express.Router();
   var directMessageRouter = express.Router();
   var WatchlistRouter = express.Router();
+  var analysisRouter = express.Router();
 
   app.use(morgan('dev'));
   // Configuring middleware
@@ -57,13 +58,12 @@ module.exports = function (app, express) {
   limitOrder();
   dayOrder();
 
-  http.get('http://ichart.finance.yahoo.com/table.csv?s=AAPL&a=01&b=01&c=1990&d=01&e=01&f=2015&ignore=.csv', function(err, res){
-    fs.writeFile('./data.csv', res.buffer.toString(), 'utf8', function(err){
-      if(err) return console.log("************")
-        console.log('done ######')
-    });
-    console.log(res.buffer.toString(),' ######')
-  })
+  // http.get('http://ichart.finance.yahoo.com/table.csv?s=AAPL&a=01&b=01&c=2014&d=01&e=01&f=2015&ignore=.csv', function(err, res){
+  //   fs.writeFile('../client/analysis/data.csv', res.buffer.toString(), 'utf8', function(err){
+  //     if(err) return console.log("************")
+  //   });
+  //   console.log(res.buffer.toString(),' ######')
+  // })
 
   // Connecting Router to route files
   app.use('/api/users', userRouter);
@@ -79,32 +79,21 @@ module.exports = function (app, express) {
   app.use('/api/forum', forumRouter);
   app.use('/api/recentTransactions', leagueTransactionsRouter);
   app.use('/api/directmessages', directMessageRouter);
-
+  app.use('/api/analysis', analysisRouter);
   app.use('/api/Watchlist', WatchlistRouter);
 
-
+  require('../analysis/analysisRoutes.js')(analysisRouter);
   require('../tweets/tweetRoutes.js')(tweetRouter);
-
   require('../stocks/stockRoutes.js')(stockRouter);
-
   require('../symbol/symbolRoutes.js')(symbolRouter);
-
   require('../users/userRoutes.js')(userRouter);
-
   require('../leagues/leagueRoutes.js')(leagueRouter);
-
   require('../portfolios/portfolioRoutes.js')(portfolioRouter);
-
   require('../messageboard/messageRoutes.js')(messageRouter);
-
   require('../transactions/transactionRoutes.js')(transactionRouter);
-
   require('../forum/forumRoutes.js')(forumRouter);
-
   require('../topic/topicRoutes.js')(topicRouter);
-
   require('../leagueTransactions/leagueTransactionsRoutes.js')(leagueTransactionsRouter);
-
   require('../badges/badgeRoutes.js')(badgeRouter);
   require('../directMessages/directMessageRoutes.js')(directMessageRouter);
   require('../watchlist/watchlistRoutes.js')(WatchlistRouter);

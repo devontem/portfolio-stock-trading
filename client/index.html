@@ -46,15 +46,27 @@
         <a ng-href="{{loggedin ? '/#/dashboard':'#'}}" class="brand-logo">Portfol.io</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li ng-controller="ClockController" ng-bind="time" class="col s2 clock teal-text text-lighten-4"></li>
+
           <li><a ng-show="!loggedin" ng-click="toggleLogin()">Login</a></li>
           <li><a ng-show="!loggedin" ng-click="toggleSignup()">Sign Up</a></li>
           <li ng-show="loggedin"><span class="red-text text-lighten-2">Welcome, {{username[0].toUpperCase()+username.slice(1)}}!</span></li>
           <li><a href="#/dashboard" ng-show="loggedin">Dashboard</a></li>
-          <li><a href="#/forum" ng-show="loggedin">Forum</a></li>
-          <li><a href="#/messages" ng-show="loggedin">Messages<span ng-if="unreadMessages" class="badge circle red white-text">{{unreadMessages}}</span></a></li><!---->
-          <!-- <li><a ng-href="#/profiles/{{id }}" ng-show="loggedin">Profile</a></li> -->
+
+          <li ng-show="loggedin" style="margin-top:12px" class='dropdown-button btn' href='#' data-hover="true" data-activates='dropdown1'>Menu</li>
+          <ul id='dropdown1' class='dropdown-content'>
+              <li><a href="#/forum" ng-show="loggedin">Forum</a></li>
+              <li><a href="#/analysis" ng-show="loggedin">Chart</a></li>
+              <li><a href="#/messages" ng-show="loggedin">Messages<span ng-if="unreadMessages" class="badge circle red white-text">{{unreadMessages}}</span></a></li>
+              <li><a href="#/account" ng-show="loggedin">Account</a></li>
+              <li><a href="#/watchlist" ng-show="loggedin">Watchlist</a></li>
+          </ul>
+
+      <!--    <li><a href="#/forum" ng-show="loggedin">Forum</a></li>
+          <li><a href="#/analysis" ng-show="loggedin">Chart</a></li>
+          <li><a href="#/messages" ng-show="loggedin">Messages<span ng-if="unreadMessages" class="badge circle red white-text">{{unreadMessages}}</span></a></li><!--
+          <!-- <li><a ng-href="#/profiles/{{id }}" ng-show="loggedin">Profile</a></li> 
           <li><a href="#/account" ng-show="loggedin">Account</a></li>
-          <li><a href="#/watchlist" ng-show="loggedin">Watchlist</a></li>
+          <li><a href="#/watchlist" ng-show="loggedin">Watchlist</a></li> -->
           <li><a ng-show="loggedin" ng-click="logout()">Log Out</a></li>
         </ul>
       </div>
@@ -213,17 +225,15 @@ retained*/
   <script type="text/javascript" src="services/topicService.js"></script>
   <script type="text/javascript" src="badges/badgeController.js"></script>
   <script type="text/javascript" src="services/badgeService.js"></script>
-
   <script type="text/javascript" src="services/newsFactory.js"></script>
   <script type="text/javascript" src="services/transactionFactory.js"></script>
   <script type="text/javascript" src="messages/MessagesController.js"></script>
   <script type="text/javascript" src="services/DirectMessage.js"></script>
-
   <script type="text/javascript" src="watchlist/watchlistController.js"></script>
   <script type="text/javascript" src="analysis/analysisController.js"></script>
   <script type="text/javascript" src="portfolioChart/portfolioChartController.js"></script>
+  <script type="text/javascript" src="services/analysisService.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.js"></script>
-  <script src="./d3app.js"></script>
 <!-- <script type="text/javascript" src="dist/app.js"></script> -->
 
 
