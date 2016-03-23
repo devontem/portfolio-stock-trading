@@ -336,7 +336,6 @@ var closeLeague = function () {
   League.findAll({where: {hasEnded: false}})
   .then(function (finishedLeagues) {
     var leaguesEnded = [];
-    // console.log(finishedLeagues);
     for (var i = 0; i < finishedLeagues.length; i++) {
       leaguesEnded.push(finishedLeagues[i].dataValues.id);
     }
