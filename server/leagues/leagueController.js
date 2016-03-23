@@ -35,7 +35,9 @@ module.exports.addLeague = function (req, res){
         username: creatorName,
         leaguename: league.name,
         portfolioValue: 0,
-        numOfTrades: 0
+        numOfTrades: 0,
+        // Initializes the value to zero, won't be calculated until the league actually ends
+        rank: 0
       })
       .then( function(res) {
         console.log('successfully added');
@@ -253,7 +255,6 @@ var j = schedule.scheduleJob(rule, function(){
 
 var closeLeague = function () {
   var currentMoment = moment().utc();
-  // TODO: Change this to false later
   League.findAll({where: {hasEnded: false}})
   .then(function (finishedLeagues) {
     var leaguesEnded = [];
@@ -276,15 +277,32 @@ var closeLeague = function () {
           portsToSort.push(portObj);
         });
         portsToSort.sort(function (port1, port2) {
-          if (port1.total > port2.total) {
+          if (port1.total < port2.total) {
             return 1;
-          } else if (port1.total < port2.total) {
+          } else if (port1.total > port2.total) {
             return -1;
           } else {
             return 0;
           }
         });
+        var rankings = 1;
+        for (var k = 0; k < portsToSort.length; k++) {
+          Portfolio.update({
+            rank: rankings
+          }, {
+            where: {
+              id: portsToSort[k].id
+            }
+          });
+          if (portsToSort[k -1] && portsToSort[k].total === portsToSort[k - 1].total) {
+            continue;
+          } else {
+            rankings +=1;
+          }
+        }
+        
         console.log('(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((())))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))', portsToSort);
+
       });
     }
     });

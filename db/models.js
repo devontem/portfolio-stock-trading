@@ -60,7 +60,8 @@ var Portfolio = orm.define('Portfolio', {
   portfolioValue: Sequelize.FLOAT,
   numOfTrades: Sequelize.INTEGER,
   username: Sequelize.STRING,
-  leaguename: Sequelize.STRING
+  leaguename: Sequelize.STRING,
+  rank: Sequelize.INTEGER
 });
 
 // Forum & Topics Model
