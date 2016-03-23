@@ -17,7 +17,7 @@ var app = angular.module('app')
   };
 })
 
-.controller('recentTransactionsController', ['$scope', 'transactionFactory', '$stateParams', 'leaderBoardFactory', function ($scope, transactionFactory, $stateParams, leaderBoardFactory) {
+.controller('recentTransactionsController', ['$scope', 'transactionFactory', '$stateParams', 'leaderBoardFactory', '$rootScope', function ($scope, transactionFactory, $stateParams, leaderBoardFactory, $rootScope) {
 
   var leagueId = $stateParams.leagueId;
 
@@ -52,6 +52,10 @@ var app = angular.module('app')
         $scope.getleagueTransactions($scope.portfolios);
   	  });
   };
+
+  $rootScope.$on('recentTrxn', function(){
+    $scope.getPortfolios();
+  });
 
   $scope.getPortfolios();
 
