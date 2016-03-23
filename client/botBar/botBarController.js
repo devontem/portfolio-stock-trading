@@ -2,7 +2,7 @@ angular.module('app.botbar', [])
 
 // TODO: likely change portofolio factory name to be more precise
 
-.controller('BotBarController',['$scope', 'Portfolio','WatchlistFactory','BotbarFactory', '$window', '$interval', function($scope, Portfolio, WatchlistFactory, BotbarFactory, $window,$interval ){
+.controller('BotBarController',['$scope', 'Portfolio','symbolFactory','WatchlistFactory','BotbarFactory', '$window', '$interval','$rootScope', function($scope, Portfolio, symbolFactory, WatchlistFactory, BotbarFactory, $window,$interval,$rootScope ){
 
   // Initializes variable if the user has not searched yet
   $scope.hasSearched = false;
@@ -14,7 +14,6 @@ angular.module('app.botbar', [])
         Materialize.toast('Please enter valid symbol!', 3000);
       }
       else{
-        console.log(stock,'******$$$');
         $scope.stock = stock;
         $scope.hasSearched = true;
     }
@@ -24,18 +23,24 @@ angular.module('app.botbar', [])
   
   $scope.addToWatchlist = function (symbol){
     $scope.userId = $window.localStorage.getItem('com.tp.userId');
-
-    Materialize.toast('Watchlist Updated', 3000);
-
-    var data = {
     
+    Materialize.toast('Watchlist Updated', 3000);
+    WatchlistFactory.getWatchlist($scope.userId)
+    .then(function (list){
+      console.log(list,'list')
+    })
+    var data = {
       userid : $scope.userId,
       symbol : symbol
     }
   symbolFactory.addToWatchlist(data)
-  .then()
-  }
+  .then(function(){
+    $rootScope.$emit('addedToWatchlist')
+  })
+}
+  
+  
 
 
-
+  
 }]);

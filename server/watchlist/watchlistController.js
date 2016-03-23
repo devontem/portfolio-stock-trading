@@ -64,6 +64,20 @@ module.exports.updateWatchlist = function (req,res){
           res.json(results);
       
       })
+    }
       
+module.exports.removeFromWatchlist = function (req,res){
+    console.log(req.body, '****')
+    var userid = req.body.userid;
+    var symbol = req.body.symbol
 
+	Watchlist.findOne({where: { UserId: userid, symbol:symbol }})
+	.then(function(stock){
+		stock.destroy()
+	})
+	.then(function(yo){
+		console.log('DESTROYED');
+		res.json(yo);
+
+	})
 }

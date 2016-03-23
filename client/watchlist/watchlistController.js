@@ -10,6 +10,7 @@ app.controller('WatchlistController', function($scope, $http, symbolFactory, Wat
 var userid = $window.localStorage.getItem('com.tp.userId');
 
 
+
 $scope.getWatchlist = function (){
     $scope.watchlist =[];
     $scope.results=[];
@@ -90,14 +91,28 @@ $scope.getWatchlist = function (){
   })
   }
 
-  $scope.removeFromWatchlist = function (watchlistId){
-    WatchlistFactory.removeFromWatchlist(watchlistId)
-    .then(function (){
-      
-    })
+  $scope.removeFromWatchlist = function (symbol){
 
+    var userid = $window.localStorage.getItem('com.tp.userId');
+
+    var data = {
+      symbol: symbol,
+      userid: userid
+    }
+    console.log(data,'data')
+    WatchlistFactory.removeFromWatchlist(data)
+    .then(function(yo){
+      Materialize.toast('Removed from Watchlist', 3000)
+      $scope.getWatchlist();
+    })
   }
 
+  $rootScope.$on('addedToWatchlist', function(){
+
+    $scope.getWatchlist();
+  });
+
+  $scope.getWatchlist();
 
 })
 
@@ -121,8 +136,12 @@ $scope.getWatchlist = function (){
       })
     }
 
-    var removeFromWatchlist = function (){
-       
+    var removeFromWatchlist = function (data){
+       return $http({
+        method:'Post',
+        url: '/api/watchlist/remove',
+        data: data 
+       })
     }
 
   return {

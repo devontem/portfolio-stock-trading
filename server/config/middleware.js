@@ -80,7 +80,7 @@ module.exports = function (app, express) {
   app.use('/api/recentTransactions', leagueTransactionsRouter);
   app.use('/api/directmessages', directMessageRouter);
   app.use('/api/analysis', analysisRouter);
-  app.use('/api/Watchlist', WatchlistRouter);
+  app.use('/api/watchlist', WatchlistRouter);
 
   require('../analysis/analysisRoutes.js')(analysisRouter);
   require('../tweets/tweetRoutes.js')(tweetRouter);
