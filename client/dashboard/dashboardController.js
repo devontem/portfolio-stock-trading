@@ -151,11 +151,11 @@ angular.module('app.dashboard', [])
             DashboardFactory.getLeagueById($scope.portfolios[index].id)
               .then(function(league){
                 $scope.portfolios[index].endDate = league.end;
-              })
+              });
           })(i)
         }
 
-      })
+      });
   };
 
   $scope.joinLeague = function (leagueId) {
@@ -174,7 +174,6 @@ angular.module('app.dashboard', [])
     DashboardFactory.getAvailLeagues()
       .then(function(leagues){
         $scope.leagues = leagues;
-        console.log($scope.leagues)
         $scope.numtojoin = $scope.leagues.length - $scope.portfolios.length;
 
 
@@ -186,7 +185,7 @@ angular.module('app.dashboard', [])
             leaderBoardFactory.getPortfolios($scope.leagues[index].id)
               .then(function(portfolio){
                 $scope.leagues[index].usersJoined = portfolio.length;
-              })
+              });
           })(i)
         }
       });
@@ -208,7 +207,7 @@ angular.module('app.dashboard', [])
     if(league.maxNum - league.usersJoined > 0){
       return true;
     }
-  }
+  };
 
   $scope.notstarted = function(league){
     var now = new Date();
@@ -218,7 +217,7 @@ angular.module('app.dashboard', [])
     if(convertedNow <= start){
       return true;
     }
-  }
+  };
 
   $scope.joinPrivate = function(){
     swal({title: "Join a Private League",
@@ -269,8 +268,8 @@ angular.module('app.dashboard', [])
     league.balance = balance;
     league.isPrivate = false;
     league.creatorId = 1000;
-    league.creatorName = 'Admin'
-    DashboardFactory.addLeague(league)
+    league.creatorName = 'Admin';
+    DashboardFactory.addLeague(league);
   };
 
   $scope.getUserLeagues();
