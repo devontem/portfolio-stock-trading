@@ -5,4 +5,6 @@ module.exports = function(app){
 
 	app.get('/:stockName', Auth.authorize, stockController.getStock);
 
+  app.get('/searchbar/:stockName', Auth.authorize, stockController.searchBar);
+
 }
