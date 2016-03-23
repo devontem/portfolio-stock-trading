@@ -19,8 +19,9 @@ var User = orm.define('User', {
     },
     // Badge related behavior
     badgeJoined: Sequelize.BOOLEAN,
-    badgeWonLeague: Sequelize.BOOLEAN,
-    badgeNumberOfLogins: Sequelize.INTEGER,
+    firstPlaces: Sequelize.INTEGER,
+    secondPlaces: Sequelize.INTEGER,
+    thirdPlaces: Sequelize.INTEGER,
     badgeLastLogin: Sequelize.DATE,
 
     email: {
@@ -50,7 +51,7 @@ User.beforeUpdate(function(user, options) {
 
 var Watchlist = orm.define('Watchlist', {
   symbol: Sequelize.STRING
-  
+
 
 })
 
@@ -60,7 +61,8 @@ var Portfolio = orm.define('Portfolio', {
   portfolioValue: Sequelize.FLOAT,
   numOfTrades: Sequelize.INTEGER,
   username: Sequelize.STRING,
-  leaguename: Sequelize.STRING
+  leaguename: Sequelize.STRING,
+  rank: Sequelize.INTEGER
 });
 
 // Forum & Topics Model
@@ -146,7 +148,8 @@ var League = orm.define('league', {
   start: Sequelize.STRING,
   end: Sequelize.STRING,
   private: Sequelize.BOOLEAN,
-  code: Sequelize.STRING
+  code: Sequelize.STRING,
+  hasEnded: Sequelize.BOOLEAN
 });
 
 // Badges
