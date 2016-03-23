@@ -2,6 +2,14 @@ app.controller('AnalysisController', ['$scope', 'AnalysisFactory', function($sco
 
   $scope.stock = {};
 
+  $scope.stockinfo = function(stock){
+    AnalysisFactory.getinfo(stock)
+      .then(function(stock){
+        $scope.stock = stock;
+        console.log($scope.stock)
+      })
+  }
+
   $scope.getchart = function(stock){
     stock.end = moment(stock.end).format("YYYY-MM-DD").toString();
     stock.start = moment(stock.start).format("YYYY-MM-DD").toString();

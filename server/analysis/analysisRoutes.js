@@ -4,4 +4,6 @@ module.exports = function(app){
 
   app.post('/', analysisController.stockdata);
 
+  app.post('/getinfo', analysisController.getinfo);
+
 };

@@ -10,9 +10,20 @@ app.factory('AnalysisFactory', function($http){
     });
   };
 
+  var getinfo = function(stock){
+    return $http({
+      method: 'POST',
+      url: '/api/analysis/getinfo',
+      data: stock
+    })
+    .then(function(stock){
+      return stock.data;
+    });
+  };
 
   return {
     getchart: getchart,
+    getinfo: getinfo
   };
 
 });
