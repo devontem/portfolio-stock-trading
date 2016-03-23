@@ -7,6 +7,7 @@ var User = require('../../db/models').User;
 var orm = require('../../db/models').orm;
 var schedule = require('node-schedule');
 var moment = require('moment');
+var request = require('request');
 
 module.exports.addLeague = function (req, res){
   var creatorId = req.body.creatorId;
@@ -253,6 +254,83 @@ var j = schedule.scheduleJob(rule, function(){
   console.log('The answer to life, the universe, and everything!************************************************************************************************************************************************************************************************************************************************************************************************************************');
 });
 
+var getLatestPortfolioVals = function (arrayOfLeagues) {
+  arrayOfLeagues = [1];
+  Portfolio.findAll({
+    leagueId: arrayOfLeagues
+  })
+  .then(function(portfolios){
+    portfolios.forEach(function (port) {
+      Transaction.findAll({ where: {
+        PortfolioId: port.id
+      }}).then(function(transactions){
+
+      if (transactions.length < 1){
+        return;
+      }
+
+      port.portfolioValue = 0;
+
+      // creates a list of all user stocks in order to query
+      var stockNames = [];
+      transactions.forEach(function(stock){
+        if(stockNames.indexOf(stock.symbol) < 0){
+          stockNames.push(stock.symbol);
+        }
+      });
+      stockNames = stockNames.join(',');
+
+      var query = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20%3D%20%27"+ stockNames +"%27&diagnostics=false&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&format=json";
+
+      // querying user stocks
+      request(query, function(err, stocks){
+        stocks.body = JSON.parse(stocks.body);
+
+        // Too many queries instantaneously cause API to fail, sends error emit to client
+        if (!stocks.body.query) {
+          console.log('error with the api request');
+        }
+
+        if (stocks.body.query.count === 1){
+          transactions[0].marketPrice = stocks.body.query.results.quote.Ask;
+          transactions[0].return = ( (transactions[0].marketPrice - transactions[0].price ) / transactions[0].price) * 100;
+          port.portfolioValue += parseFloat(transactions[0].marketPrice) * transactions[0].shares;
+
+          transactions[0].save();
+
+        } else {
+          var updatedStocks = stocks.body.query.results.quote;
+          for (var i = 0; i < updatedStocks.length; i++){
+            for (var j = 0; j < transactions.length; j++){
+              if (updatedStocks[i].symbol === transactions[j].symbol){
+                transactions[j].marketPrice = updatedStocks[i].Ask;
+                transactions[j].return = ( (updatedStocks[i].Ask - transactions[j].price) / transactions[j].price) * 100;
+                port.portfolioValue += parseFloat(transactions[j].marketPrice) * transactions[j].shares;
+                transactions[j].save();
+                break;
+              }
+            }
+          }
+        }
+
+        port.save();
+
+// TODO: Fix these indentations
+    });
+
+  });
+
+  });
+
+});
+Portfolio.findAll({
+  leagueId: arrayOfLeagues
+})
+.then(function (ports) {
+  console.log(ports);
+});
+};
+
 var closeLeague = function () {
   var currentMoment = moment().utc();
   League.findAll({where: {hasEnded: false}})
@@ -262,17 +340,20 @@ var closeLeague = function () {
     for (var i = 0; i < finishedLeagues.length; i++) {
       leaguesEnded.push(finishedLeagues[i].dataValues.id);
     }
+    //This updates all stocks to latest values
+    getLatestPortfolioVals(leaguesEnded);
     for (var j = 0; j < leaguesEnded.length; j++) {
       Portfolio.findAll({where: {leagueId: leaguesEnded[j]}})
       .then(function (portfolios) {
+
         var portsToSort = [];
         portfolios.forEach(function (portfolio) {
           var portObj = {};
           portObj.id = portfolio.dataValues.id;
           portObj.balance = portfolio.dataValues.balance;
           portObj.portfolioValue = portfolio.dataValues.portfolioValue;
-          portObj.UserId = portfolio.dataValuesUserId;
-          portObj.LeagueId = portfolio.dataValues.LeagueId;
+          portObj.UserId = portfolio.dataValues.UserId;
+          portObj.LeagueId = portfolio.dataValues.leagueId;
           portObj.total = portObj.balance + portObj.portfolioValue;
           portsToSort.push(portObj);
         });
@@ -294,13 +375,13 @@ var closeLeague = function () {
               id: portsToSort[k].id
             }
           });
-          if (portsToSort[k -1] && portsToSort[k].total === portsToSort[k - 1].total) {
+          if (portsToSort[k + 1] && portsToSort[k].total === portsToSort[k + 1].total) {
             continue;
           } else {
             rankings +=1;
           }
         }
-        
+
         console.log('(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((())))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))', portsToSort);
 
       });
@@ -309,6 +390,9 @@ var closeLeague = function () {
 };
 
 closeLeague();
+
+
+
 
 //   League.destroy({
 //     where: {
