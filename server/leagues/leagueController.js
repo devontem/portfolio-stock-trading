@@ -6,7 +6,7 @@ var Transaction = require('../../db/models').Transaction;
 var User = require('../../db/models').User;
 var orm = require('../../db/models').orm;
 var schedule = require('node-schedule');
-
+var moment = require('moment');
 
 module.exports.addLeague = function (req, res){
   var creatorId = req.body.creatorId;
@@ -252,9 +252,14 @@ var j = schedule.scheduleJob(rule, function(){
 });
 
 var closeLeague = function () {
-
+  var currentMoment = moment().utc();
+  League.findAll({where: {end: {$lte: currentMoment}}})
+  .then(function (leagues) {
+    console.log('************************************************************************************************************************************************************************************************************************************************************************************************************************',leagues);
+  });
 };
 
+closeLeague();
 
 //   League.destroy({
 //     where: {
