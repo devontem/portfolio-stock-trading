@@ -24,6 +24,7 @@ angular.module('app.portfolio', [])
 		$scope.estPrice = '';
 		$scope.singlePrice = '';
 		$scope.total = '';
+		$scope.action = false;
 	};
 
 	$scope.chooseStock = function(stockName){
