@@ -131,6 +131,10 @@ app
       })
   };
 
+  $window.onload = function(e) {
+    $scope.getUserLeagues();
+  }
+
   $rootScope.$on('userSignedIn', function(){
      $scope.getUserLeagues();
    });
@@ -166,5 +170,5 @@ app
   if ($scope.id){
     setInterval(getOpenAndUnreadMessages, 3000);
   }
-  
+
 }]);
