@@ -163,5 +163,8 @@ app
     });
   }
 
-  // setInterval(getOpenAndUnreadMessages, 3000);
+  if ($scope.id){
+    setInterval(getOpenAndUnreadMessages, 3000);
+  }
+  
 }]);
