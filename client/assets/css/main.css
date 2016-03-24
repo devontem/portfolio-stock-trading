@@ -531,6 +531,7 @@ th {
   background: #f1404b;
   height: 100px;
   width: 100px;
+  margin-bottom: 40px;
   -moz-border-radius: 50px;
   -webkit-border-radius: 50px;
   border-radius: 50px; }
@@ -562,6 +563,7 @@ th {
   background: gray;
   height: 100px;
   width: 100px;
+  margin-bottom: 40px;
   -moz-border-radius: 50px;
   -webkit-border-radius: 50px;
   border-radius: 50px; }
