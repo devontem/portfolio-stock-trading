@@ -78,18 +78,15 @@ angular.module('app.portfolio', [])
 				Materialize.toast('You traded '+options.shares+' shares in '+options.company, 3000, 'rounded');
 				$scope.resetFields();
 
+			}).then(function(){
+				$rootScope.$emit('bought');
+				$rootScope.$emit('recentTrxn');
+				$scope.updateMarketPrice();
+				updatePortfolio();
 			});
-			$rootScope.$emit('bought');
-			$rootScope.$emit('recentTrxn');
-			// $scope.updateMarketPrice();
-			 updatePortfolio();
 		}
 	};
 
-	// $rootScope.$on('update', function(){
-	// 	$scope.updateMarketPrice();
-	// 	updatePortfolio();
-	// })
 
 	function ableToSell(){
 		for (var i = 0; i < $scope.stocks.length; i++){
@@ -137,7 +134,6 @@ angular.module('app.portfolio', [])
 		};
 
 	// MY STOCKS MODAL
-	updatePortfolio();
 	// $scope.updateMarketPrice();
 
 	function updatePortfolio(){
@@ -157,7 +153,7 @@ angular.module('app.portfolio', [])
 			$scope.stocks = transactions;
 
       transactions.forEach(function(transaction){
-        transaction.percentage = Math.round((transaction.marketPrice*transaction.shares)/$scope.portfolioValue*100);
+        transaction.percentage = (transaction.marketPrice*transaction.shares)/($scope.portfolioValue)*100;
       });
 
 			$scope.stocks = transactions;
@@ -170,4 +166,7 @@ angular.module('app.portfolio', [])
 
     $rootScope.$emit("PortfolioUpdate", {});
 	}
+
+	updatePortfolio();
+
 }]);
