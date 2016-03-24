@@ -38,6 +38,7 @@ app.controller('LeaderBoardController', ['$scope', '$window', '$stateParams', 'D
           if(portfolios[i].UserId === Number(userId)) joined = true;
           console.log(portfolios[i].UserId, Number(userId) )
         }
+        console.log('********' , joined)
         $scope.portfolios = portfolios;
         $scope.leagueName = portfolios[0].leaguename;
         $scope.code = portfolios[0].code;
