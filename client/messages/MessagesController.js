@@ -32,7 +32,7 @@ app
 	 	// RecipientId's key is 'recipientId' if from left panel, 'id' if from profiles page
 	 	$scope.recipientId = $scope.sendTo.recipientId == $scope.id ? $scope.sendTo.UserId : $scope.sendTo.recipientId;
 
-	 	console.log('Sending from: ', $scope.id, 'to: ', $scope.recipientId)
+	 	// console.log('Sending from: ', $scope.id, 'to: ', $scope.recipientId)
 		DirectMessage.getMessagesBetween($scope.id, $scope.recipientId).then(function(messages){
 			$scope.messages = messages;
 
