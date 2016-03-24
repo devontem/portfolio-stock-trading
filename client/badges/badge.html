@@ -6,7 +6,7 @@
 
       <div>
         <div class="row">
-          <div class="col s2" ng-repeat="badge in badges">
+          <div class="col s6 m2" ng-repeat="badge in badges">
             <div class="tooltipped badge-ribbon" data-position="top" data-delay="50" data-tooltip={{badge.name}}:{{badge.text}}>
               <i class={{badge.icon}}></i>
             </div>
@@ -16,7 +16,7 @@
 
       <h2>Possible Badges</h2>
 
-      <div class="col s2 badge" ng-repeat="badge in possibleBadges">
+      <div class="col s6 m2" ng-repeat="badge in possibleBadges">
         <div class="possible-badge-ribbon tooltipped" data-position="top" data-delay="50" data-tooltip={{badge.name}}>
           <i class={{badge.icon}}></i>
         </div>
