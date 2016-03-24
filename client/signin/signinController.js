@@ -131,6 +131,13 @@ app
       })
   };
 
+
+  $scope.notDone = function(league){
+    if(league.leagueEnded = false){
+      return true;
+    }
+  };
+
   $window.onload = function(e) {
     $scope.getUserLeagues();
   }
