@@ -56,7 +56,7 @@ app
   $scope.id = $window.localStorage.getItem('com.tp.userId') || undefined;
   //$scope.loggedin = false;
   $scope.username;
-  $scope.portfolios;
+  // $scope.userLeagues;
   $scope.authorize = function(){
     if(Auth.isAuth()){
       $scope.loggedin = true;
@@ -93,6 +93,8 @@ app
       $scope.loggedin = true;
       $window.location.href = '/#/dashboard';
     });
+    // Creates a badge for signing up
+    BadgeFactory.postBadge($scope.id, 2);
   };
 
   $scope.signin = function(user){
@@ -106,6 +108,7 @@ app
         $scope.toggleLogin();
         $scope.loggedin = true;
         $window.location.href = '/#/dashboard';
+        $rootScope.$emit('userSignedIn');
       }else{
         $window.location.href = '/#/';
       }
@@ -123,12 +126,14 @@ app
   $scope.getUserLeagues = function () {
     var userId = $window.localStorage.getItem('com.tp.userId');
     DashboardFactory.getUserLeagues(userId)
-      .then(function(portfolios){
-        $scope.portfolios = portfolios;
+      .then(function(userLeagues){
+        $scope.userLeagues = userLeagues;
       })
   };
 
-  $scope.getUserLeagues();
+  $rootScope.$on('userSignedIn', function(){
+     $scope.getUserLeagues();
+   });
 
   $rootScope.$on('newleague', function(){
     $scope.getUserLeagues();
