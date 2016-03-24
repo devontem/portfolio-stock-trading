@@ -6,7 +6,8 @@ var Transaction = require('../../db/models').Transaction;
 var User = require('../../db/models').User;
 var orm = require('../../db/models').orm;
 var schedule = require('node-schedule');
-
+var moment = require('moment');
+var request = require('request');
 
 module.exports.addLeague = function (req, res){
   var creatorId = req.body.creatorId;
@@ -24,7 +25,8 @@ module.exports.addLeague = function (req, res){
     start:req.body.start,
     end: req.body.end,
     private: req.body.private,
-    code: randomCode
+    code: randomCode,
+    hasEnded: false
   })
   .then(function (league) {
     Portfolio.create({
@@ -34,7 +36,9 @@ module.exports.addLeague = function (req, res){
         username: creatorName,
         leaguename: league.name,
         portfolioValue: 0,
-        numOfTrades: 0
+        numOfTrades: 0,
+        // Initializes the value to zero, won't be calculated until the league actually ends
+        rank: 0
       })
       .then( function(res) {
         console.log('successfully added');
@@ -65,7 +69,8 @@ module.exports.joinLeague = function (req, res){
         portfolioValue: 0,
         numOfTrades: 0,
         username: temp.username,
-        leaguename: temp.leaguename
+        leaguename: temp.leaguename,
+        rank: 0
       })
       .then(function (league) {
         res.send(league);
@@ -247,9 +252,161 @@ rule.minute = 0;
 
 
 var j = schedule.scheduleJob(rule, function(){
-  console.log('The answer to life, the universe, and everything!************************************************************************************************************************************************************************************************************************************************************************************************************************');
+  closeLeague();
 });
 
+// This function is mainly used in the closeLeague function to get the most up to date portfolio values before ending the league
+var getLatestPortfolioVals = function (arrayOfLeagues) {
+  Portfolio.findAll({
+    leagueId: arrayOfLeagues
+  })
+  .then(function(portfolios){
+    portfolios.forEach(function (port) {
+      Transaction.findAll({ where: {
+        PortfolioId: port.id
+      }}).then(function(transactions){
+
+      if (transactions.length < 1){
+        return;
+      }
+
+      port.portfolioValue = 0;
+
+      // creates a list of all user stocks in order to query
+      var stockNames = [];
+      transactions.forEach(function(stock){
+        if(stockNames.indexOf(stock.symbol) < 0){
+          stockNames.push(stock.symbol);
+        }
+      });
+      stockNames = stockNames.join(',');
+
+      var query = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20%3D%20%27"+ stockNames +"%27&diagnostics=false&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&format=json";
+
+      // querying user stocks
+      request(query, function(err, stocks){
+        stocks.body = JSON.parse(stocks.body);
+
+        // Too many queries instantaneously cause API to fail, sends error emit to client
+        if (!stocks.body.query) {
+          console.log('error with the api request');
+        }
+
+        if (stocks.body.query.count === 1){
+          transactions[0].marketPrice = stocks.body.query.results.quote.Ask;
+          transactions[0].return = ( (transactions[0].marketPrice - transactions[0].price ) / transactions[0].price) * 100;
+          port.portfolioValue += parseFloat(transactions[0].marketPrice) * transactions[0].shares;
+
+          transactions[0].save();
+
+        } else {
+          var updatedStocks = stocks.body.query.results.quote;
+          for (var i = 0; i < updatedStocks.length; i++){
+            for (var j = 0; j < transactions.length; j++){
+              if (updatedStocks[i].symbol === transactions[j].symbol){
+                transactions[j].marketPrice = updatedStocks[i].Ask;
+                transactions[j].return = ( (updatedStocks[i].Ask - transactions[j].price) / transactions[j].price) * 100;
+                port.portfolioValue += parseFloat(transactions[j].marketPrice) * transactions[j].shares;
+                transactions[j].save();
+                break;
+              }
+            }
+          }
+        }
+
+        port.save();
+      });
+    });
+    });
+  });
+};
+
+var closeLeague = function () {
+  var currentMoment = moment().utc();
+  League.findAll({where: {hasEnded: false}})
+  .then(function (finishedLeagues) {
+    var leaguesEnded = [];
+    for (var i = 0; i < finishedLeagues.length; i++) {
+      // Checks if the league has ended
+      if (currentMoment.isAfter(finishedLeagues[i].dataValues.end)) {
+        leaguesEnded.push(finishedLeagues[i].dataValues.id);
+        // Updates model to indicate it has ended
+        League.update({
+          hasEnded: true
+        }, {
+          where: {id: finishedLeagues[i].dataValues.id}
+        });
+      }
+    }
+    //This updates all stocks to latest values
+    getLatestPortfolioVals(leaguesEnded);
+
+    for (var j = 0; j < leaguesEnded.length; j++) {
+      Portfolio.findAll({where: {leagueId: leaguesEnded[j]}})
+      .then(function (portfolios) {
+
+        var portsToSort = [];
+        portfolios.forEach(function (portfolio) {
+          var portObj = {};
+          portObj.id = portfolio.dataValues.id;
+          portObj.balance = portfolio.dataValues.balance;
+          portObj.portfolioValue = portfolio.dataValues.portfolioValue;
+          portObj.UserId = portfolio.dataValues.UserId;
+          portObj.LeagueId = portfolio.dataValues.leagueId;
+          portObj.total = portObj.balance + portObj.portfolioValue;
+          portsToSort.push(portObj);
+        });
+        portsToSort.sort(function (port1, port2) {
+          if (port1.total < port2.total) {
+            return 1;
+          } else if (port1.total > port2.total) {
+            return -1;
+          } else {
+            return 0;
+          }
+        });
+
+        var rankings = 1;
+
+        for (var k = 0; k < portsToSort.length; k++) {
+          Portfolio.update({
+            rank: rankings
+          }, {
+            where: {
+              id: portsToSort[k].id
+            }
+          });
+
+          var UserId = portsToSort[k].UserId;
+
+          if (rankings === 1) {
+            User.findById(UserId)
+            .then(function (user) {
+              user.increment('firstPlaces');
+            });
+          } else if (rankings === 2) {
+            User.findById(UserId)
+            .then(function (user) {
+              user.increment('secondPlaces');
+            });
+          } else if (rankings === 3) {
+            User.findById(UserId)
+            .then(function (user) {
+              user.increment('thirdPlaces');
+            });
+          }
+
+          // Checks to make sure that the current score does not equal the next score, and if so, makes them both have the same rank
+          if (portsToSort[k + 1] && portsToSort[k].total === portsToSort[k + 1].total) {
+            continue;
+          } else {
+            rankings +=1;
+          }
+        }
+      });
+    }
+    });
+};
 
 //   League.destroy({
 //     where: {

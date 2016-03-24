@@ -35,7 +35,7 @@ angular.module('app.dashboard', [])
   };
 })
 
-.controller('DashboardController', ['$scope', '$window', 'DashboardFactory', 'leaderBoardFactory', function ($scope, $window, DashboardFactory, leaderBoardFactory) {
+.controller('DashboardController', ['$scope', '$window', 'DashboardFactory', 'leaderBoardFactory', '$rootScope', function ($scope, $window, DashboardFactory, leaderBoardFactory, $rootScope) {
 
   $scope.currentTab = 'user';
   $scope.leagues;
@@ -124,8 +124,8 @@ angular.module('app.dashboard', [])
             html: true
           });
         }
-
         $window.location.href = '/#/leagues/'+league.id;
+        $rootScope.$emit('newleague');
       });
   };
 

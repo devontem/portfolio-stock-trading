@@ -45,29 +45,57 @@
         <span class="brand-img"></span>
         <a ng-href="{{loggedin ? '/#/dashboard':'#'}}" class="brand-logo">Portfol.io</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li ng-controller="ClockController" ng-bind="time" class="col s2 clock teal-text text-lighten-4"></li>
 
-          <li><a ng-show="!loggedin" ng-click="toggleLogin()">Login</a></li>
-          <li><a ng-show="!loggedin" ng-click="toggleSignup()">Sign Up</a></li>
-          <li ng-show="loggedin"><span class="red-text text-lighten-2">Welcome, {{username[0].toUpperCase()+username.slice(1)}}!</span></li>
-          <li><a href="#/dashboard" ng-show="loggedin">Dashboard</a></li>
+          <li style="padding-right: 15px" ng-show="loggedin"><span class="red-text text-lighten-2">Welcome, {{username[0].toUpperCase()+username.slice(1)}}!</span></li>
 
-          <li ng-show="loggedin" style="margin-top:12px" class='dropdown-button btn' href='#' data-hover="true" data-activates='dropdown1'>Menu</li>
+          <li style="padding-right: 5px"><a href="#/messages" ng-show="loggedin">Messages<span ng-if="unreadMessages" class="badge circle red white-text">{{unreadMessages}}</span></a></li>
+
+          <li ng-show="loggedin" style="padding-right: 15px">
+
+            <a href="#/dashboard" class="dropdown-button" data-hover="true" data-activates='dropdown2' data-constrainwidth="false" data-beloworigin="true">Dashboard</a>
+
+          </li>
+
+            <ul id='dropdown2' class='dropdown-content'>
+                <li class="dd-collection" ng-repeat="portfolio in portfolios"><a ng-href="#/leagues/{{portfolio.leagueId}}">{{portfolio.leaguename}}</a></li>
+            </ul>
+
+
+          <li ng-show="loggedin">
+
+            <a class='dropdown-button' href='#' data-hover="true" data-activates='dropdown1' data-constrainwidth="false" data-beloworigin="true">Resources</a>
+
+          </li>
+
           <ul id='dropdown1' class='dropdown-content'>
               <li><a href="#/forum" ng-show="loggedin">Forum</a></li>
               <li><a href="#/analysis" ng-show="loggedin">Chart</a></li>
-              <li><a href="#/messages" ng-show="loggedin">Messages<span ng-if="unreadMessages" class="badge circle red white-text">{{unreadMessages}}</span></a></li>
-              <li><a href="#/account" ng-show="loggedin">Account</a></li>
               <li><a href="#/watchlist" ng-show="loggedin">Watchlist</a></li>
           </ul>
+
+          <li ng-controller="ClockController" ng-bind="time" class="col s2 clock teal-text text-lighten-4"></li>
+
+          <li><a ng-show="!loggedin" ng-click="toggleLogin()">Login</a></li>
+
+          <li><a ng-show="!loggedin" ng-click="toggleSignup()">Sign Up</a></li>
 
       <!--    <li><a href="#/forum" ng-show="loggedin">Forum</a></li>
           <li><a href="#/analysis" ng-show="loggedin">Chart</a></li>
           <li><a href="#/messages" ng-show="loggedin">Messages<span ng-if="unreadMessages" class="badge circle red white-text">{{unreadMessages}}</span></a></li><!--
-          <!-- <li><a ng-href="#/profiles/{{id }}" ng-show="loggedin">Profile</a></li> 
+          <!-- <li><a ng-href="#/profiles/{{id }}" ng-show="loggedin">Profile</a></li>
           <li><a href="#/account" ng-show="loggedin">Account</a></li>
           <li><a href="#/watchlist" ng-show="loggedin">Watchlist</a></li> -->
-          <li><a ng-show="loggedin" ng-click="logout()">Log Out</a></li>
+
+          <li ng-show="loggedin" style="padding-right: 15px">
+
+            <a href="#/account" class="dropdown-button" data-hover="true" data-activates='dropdown3' data-constrainwidth="false" data-beloworigin="true">My Account</a>
+
+          </li>
+
+            <ul id='dropdown3' class='dropdown-content'>
+                <li><a ng-show="loggedin" ng-click="logout()">Log Out</a></li>
+            </ul>
+
         </ul>
       </div>
     </nav>
@@ -116,13 +144,7 @@
                   <p>Play smart. Win Big.</p>
                 </div>
                 <div class="col l4 offset-l2 s12">
-                  <h5>Links</h5>
-                  <ul>
-                    <li><a class="grey-text text-lighten-3" href="#!">Sign Up</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">Login</a></li>
-<!--                     <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li> -->
-                  </ul>
+                  <a href="https://github.com/hrr12-04pistons/2016-01-thesis"><img div="github" height="80" title="GitHub" src="../assets/img/github.png" onmouseover="this.src='../assets/img/github.hover.png'" onmouseout="this.src='../assets/img/github.png'"></a>
                 </div>
               </div>
             </div>
@@ -134,7 +156,7 @@
             </div>
   </footer>
 
-  <div class="botBar row" ng-controller="BotBarController" ng-if="loggedin">
+  <div class="botBar row" ng-controller="BotBarController" ng-if="loggedin" style='margin-top: 50ox'>
     <h5 class="col s1 offset-s1 search-bar-title"> Quote</h5>
     <input ng-model="stockInput" class="col s1 searchquote" type="text" placeholder="enter symbol" required>
     <a ng-click="stockSearch()" class="waves-effect waves-light btn std-btn col s1 bot-search"><i class="material-icons">search</i></a>
@@ -145,15 +167,15 @@
     <span ng-show="hasSearched" class="col s1">Change: {{stock.ChangeinPercent}} </span>
     <span ng-show="hasSearched" class="col s1">Volume: {{stock.Volume}}</span>
     <span ng-show="hasSearched" class="col s1" ng-click="addToWatchlist(stock.Symbol)"><button>Watch</button></span>
-    <span class = 'ticker'> 
-<!--<FORM NAME="marquee1"> 
+    <span class = 'ticker'>
+<!--<FORM NAME="marquee1">
 <INPUT NAME="text" SIZE=100
 VALUE=" AAPL down GILD up FEYE down GS up JPM down TWTR up LNKD down FB up F down AMGN up P down"
-> 
-</FORM>--> 
+>
+</FORM>-->
 </span>
-<SCRIPT> 
-<!-- 
+<SCRIPT>
+<!--
 /*Text box marquee by Dave Methvin,
 Windows Magazine
 May be used/modified if credit line is
@@ -163,11 +185,11 @@ retained*/
 // function ScrollMarquee() {
 // window.setTimeout('ScrollMarquee()',ScrollSpeed);
 
-// var msg = document.marquee1.text.value; 
+// var msg = document.marquee1.text.value;
 // document.marquee1.text.value =
 // msg.substring(ScrollChars) +
-// msg.substring(0,ScrollChars); 
-// } 
+// msg.substring(0,ScrollChars);
+// }
 // ScrollMarquee()
 //-->
 </SCRIPT>

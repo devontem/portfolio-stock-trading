@@ -1,15 +1,8 @@
-<style>
 
-.watchlist {
-	
-}
 
-</style>
-
-<div class="watchlist">
+<div class="watchlist" style="padding-bottom: 100px">
 	<h1>Watchlist</h1>
-    <button ng-click='getWatchlist()'>watchlist</button>
-	<table class="highlight centered" id="createTopicScroll">
+	<table class="highlight centered" id="createTopicScroll" >
         <thead id="top">
           <tr>
               <th data-field="Symbol">Symbol</th>
@@ -32,7 +25,7 @@
         		<td>{{result[5] }}</td>
         		<td>{{result[4] }}</td>
         		<td>{{result[6] }}</td>
-            <td><button>X</button><button>Compare</button>
+            <td ng-show='result[1]'><button ng-click='removeFromWatchlist(result[0])'>X</button><button ng-click='sendToChart(result[0],delay)'>Chart</button>
         	</tr>
 
         </tbody>

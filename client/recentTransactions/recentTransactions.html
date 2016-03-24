@@ -1,20 +1,44 @@
-   
-
 
    <div class="col s12 m12">
      <div class="">
        <div class="card-content black-text">
          <span class="card-title">Recent transactions</span>
-         <button class= 'btn std-btn getTweets' ng-click="getPortfolios()">Get transactions</button>
+         <!-- <button class= 'btn std-btn getTweets' ng-click="getPortfolios()">Get transactions</button> -->
          <div class="leaderboard-container" style="height: 300px;
            overflow-x: auto;" scroll-directive="posts">
 
 
-           <table style="padding-bottom: 15px; flot:top">
-
+           <table class="centered" style="padding-bottom: 15px; float:top">
+            <thead>
+              <tr>
+                  <th data-field="Member">League Member</th>
+                  <th data-field="Transaction">Transaction</th>
+                  <th data-field="Shares">Shares</th>
+                  <th data-field="Stock">Stock</th>
+                  <th data-field="Time">Time</th>
+              </tr>
+            </thead>
              <tbody ng-repeat="transaction in transactions | reverse">
                <tr class="recentTransactions">
-                 <td>{{transaction.portfolioid}} <span ng-show="transaction.buysell>0">bought</span><span ng-show="transaction.buysell<0">sold</span> {{transaction.buysell | negative}} <span ng-show='transaction.buysell===1 || transaction.buysell === -1'>share</span> <span ng-show='transaction.buysell > 1 || transaction.buysell < -1'>shares</span> of {{transaction.symbol}} on {{transaction.time }} </td>
+                 <td>
+                  {{transaction.portfolioid}}
+                 </td>
+
+                 <td>
+                  <span ng-show="transaction.buysell > 0"> bought</span>
+                  <span ng-show="transaction.buysell < 0"> sold </span>
+                 </td>
+
+                 <td>
+                  {{transaction.buysell | negative}}
+                 </td>
+
+                 <td>
+                 <span ng-show='transaction.buysell > 1 || transaction.buysell < -1'></span>
+                 {{transaction.symbol}}
+                 </td>
+
+                 <td>{{ transaction.time }} </td>
                </tr>
              </tbody>
            </table>

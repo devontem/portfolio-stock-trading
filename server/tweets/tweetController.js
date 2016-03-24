@@ -37,6 +37,7 @@ module.exports.getTweets = function (req, res){
             var shareNum = transaction.shares;
             userCurrentStocks[sym] = shareNum;
           })
+     
       var search = ''
         for(var key in userCurrentStocks){
           if(userCurrentStocks[key] > 0){

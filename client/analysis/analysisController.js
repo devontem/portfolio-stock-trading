@@ -1,6 +1,33 @@
-app.controller('AnalysisController', ['$scope', 'AnalysisFactory', function($scope, AnalysisFactory){
+app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFactory', '$window', '$rootScope', function($scope, WatchlistFactory,AnalysisFactory, $window, $rootScope){
 
   $scope.stock = {};
+  var temp = ""
+  //$scope.stock.symbol = $window.sym;
+
+  function watchlistToAnalysis(symbol){
+    $scope.stock.symbol = symbol;
+    console.log($scope.stock.symbol,'lolo')
+  }
+
+  
+
+  $rootScope.$on('symbolAnalysis', function (event, data){
+    console.log(data,'data');
+    $scope.stock.symbol = data;
+    console.log($scope.stock.symbol, 'yoyo');
+    
+    //watchlistToAnalysis(data);
+  })
+
+
+
+  $scope.stockinfo = function(stock){
+    AnalysisFactory.getinfo(stock)
+      .then(function(stock){
+        $scope.stock = stock;
+        console.log($scope.stock)
+      })
+  }
 
   $scope.getchart = function(stock){
     stock.end = moment(stock.end).format("YYYY-MM-DD").toString();
@@ -79,4 +106,6 @@ app.controller('AnalysisController', ['$scope', 'AnalysisFactory', function($sco
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");     
   
+console.log($scope.stock.symbol, 'hoho');
+
 }]);

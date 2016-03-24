@@ -1,6 +1,6 @@
 
 var app = angular.module('app')
-app.controller('WatchlistController', function($scope, $http, symbolFactory, WatchlistFactory, $rootScope, $window){
+app.controller('WatchlistController', function($scope, $http, symbolFactory, WatchlistFactory,  $rootScope, $location,$window){
  
   $scope.watchlist = [];
   $scope.results =[];
@@ -8,6 +8,7 @@ app.controller('WatchlistController', function($scope, $http, symbolFactory, Wat
   
   
 var userid = $window.localStorage.getItem('com.tp.userId');
+
 
 
 $scope.getWatchlist = function (){
@@ -82,22 +83,53 @@ $scope.getWatchlist = function (){
           console.log(result1,'res1')
           $scope.stock.push(result1)
         })
-        console.log($scope.stock,'stock')
+        
           $scope.results.push($scope.stock)
+          console.log($scope.results,'stock')
         $scope.stock=[];
       })
     })
   })
   }
 
-  $scope.removeFromWatchlist = function (watchlistId){
-    WatchlistFactory.removeFromWatchlist(watchlistId)
-    .then(function (){
-      
+  $scope.removeFromWatchlist = function (symbol){
+
+    var userid = $window.localStorage.getItem('com.tp.userId');
+
+    var data = {
+      symbol: symbol,
+      userid: userid
+    }
+    console.log(data,'data')
+    WatchlistFactory.removeFromWatchlist(data)
+    .then(function(yo){
+      Materialize.toast('Removed from Watchlist', 3000)
+      $scope.getWatchlist();
     })
-
   }
+   
+  $scope.delay = function(symbol){
+    console.log('hello buddy', symbol)
 
+    $rootScope.$emit('symbolAnalysis', symbol)
+  } 
+
+  $scope.sendToChart = function (symbol, callback){
+    console.log(symbol,'sym')
+    //$window.sym = symbol;
+        
+    $location.path('/analysis')
+    callback(symbol);
+    
+  }
+    
+  
+  $rootScope.$on('addedToWatchlist', function(){
+
+    $scope.getWatchlist();
+  });
+
+  $scope.getWatchlist();
 
 })
 
@@ -121,14 +153,22 @@ $scope.getWatchlist = function (){
       })
     }
 
-    var removeFromWatchlist = function (){
-       
+    var removeFromWatchlist = function (data){
+       return $http({
+        method:'Post',
+        url: '/api/watchlist/remove',
+        data: data 
+       })
     }
-
+    
   return {
     getWatchlist:getWatchlist,
     updateWatchlist:updateWatchlist,
     removeFromWatchlist:removeFromWatchlist
+    
   }
 
 })
+
+
+
