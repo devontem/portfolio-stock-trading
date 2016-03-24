@@ -84,17 +84,9 @@ angular.module('app.portfolio', [])
 				$scope.updateMarketPrice();
 				updatePortfolio();
 			});
-			// $rootScope.$emit('bought');
-			// $rootScope.$emit('recentTrxn');
-			// $scope.updateMarketPrice();
-
 		}
 	};
 
-	// $rootScope.$on('update', function(){
-	// 	$scope.updateMarketPrice();
-	// 	updatePortfolio();
-	// })
 
 	function ableToSell(){
 		for (var i = 0; i < $scope.stocks.length; i++){
