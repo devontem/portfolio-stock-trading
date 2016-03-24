@@ -125,13 +125,17 @@ app
     DashboardFactory.getUserLeagues(userId)
       .then(function(portfolios){
         $scope.portfolios = portfolios;
+        if($scope.portfolios.length > 0){
+          $scope.userBelongs = true;
+        }
       })
   };
+
+  $scope.userBelongs = false;
 
   $scope.getUserLeagues();
 
   $rootScope.$on('newleague', function(){
-    console.log('rootscope works')
     $scope.getUserLeagues();
   })
 

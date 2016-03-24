@@ -48,11 +48,12 @@
 
           <li style="padding-right: 15px" ng-show="loggedin"><span class="red-text text-lighten-2">Welcome, {{username[0].toUpperCase()+username.slice(1)}}!</span></li>
 
-          <li style="padding-right: 15px"><a href="#/messages" ng-show="loggedin">Messages<span ng-if="unreadMessages" class="badge circle red white-text">{{unreadMessages}}</span></a></li>
+          <li style="padding-right: 5px"><a href="#/messages" ng-show="loggedin">Messages<span ng-if="unreadMessages" class="badge circle red white-text">{{unreadMessages}}</span></a></li>
 
-          <li ng-show="loggedin" style="margin-right: 5px; margin-top:12px" class='dropdown-button btn' href='#' data-hover="true" data-activates='dropdown2'>Dashboard</li>
+          <li style="padding-right: 15px"><a href="#/dashboard" ng-show="loggedin">Dashboard</a></li>
+
+          <li ng-show="loggedin" ng-if="userBelongs" style="margin-right: 5px; margin-top:12px" class='dropdown-button btn' href='#' data-hover="true" data-activates='dropdown2'>My Leagues</li>
           <ul id='dropdown2' class='dropdown-content'>
-              <li><a href="#/dashboard" ng-show="loggedin">Dashboard</a></li>
               <li ng-repeat="portfolio in portfolios"><a ng-href="#/leagues/{{portfolio.leagueId}}" ng-show="loggedin">{{portfolio.leaguename}}</a></li>
           </ul>
 
