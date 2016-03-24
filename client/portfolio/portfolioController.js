@@ -153,7 +153,7 @@ angular.module('app.portfolio', [])
 			$scope.stocks = transactions;
 
       transactions.forEach(function(transaction){
-        transaction.percentage = Math.round((transaction.marketPrice*transaction.shares)/$scope.portfolioValue*100);
+        transaction.percentage = (transaction.marketPrice*transaction.shares)/($scope.portfolioValue)*100;
       });
 
 			$scope.stocks = transactions;
