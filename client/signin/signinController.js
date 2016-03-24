@@ -131,7 +131,6 @@ app
   $scope.getUserLeagues();
 
   $rootScope.$on('newleague', function(){
-    console.log('rootscope works')
     $scope.getUserLeagues();
   })
 
