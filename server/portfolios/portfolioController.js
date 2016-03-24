@@ -23,7 +23,10 @@ module.exports.getUserStocks = function(req, res){
         return transaction.buysell && transaction.shares > 0;
       });
 
+      // console.log('updatedShares', updatedShares, 'reducedStocks', reducedStocks)
+
       res.send(reducedStocks);
+
     })
     .catch(function(err){
       res.send("There was an error: ", err);
@@ -49,11 +52,19 @@ module.exports.updateUserStocks = function(req, res){
 
       if (transactions.length < 1){ res.send({error:null}); return }
 
-      portfolio.portfolioValue = 0;
+      var portfolioValue = 0;
+
+      // minimizes doubles, adds all shares from same company
+      var updatedShares = reduceStocks(transactions);
+
+      // returns only the bought shares
+      var reducedStocks = _.filter(updatedShares, function(transaction){
+        return transaction.buysell && transaction.shares > 0;
+      });
 
       // creates a list of all user stocks in order to query
       var stockNames = [];
-      transactions.forEach(function(stock){
+      reducedStocks.forEach(function(stock){
         if(stockNames.indexOf(stock.symbol) < 0){
           stockNames.push(stock.symbol);
         }
@@ -69,30 +80,45 @@ module.exports.updateUserStocks = function(req, res){
         // Too many queries instantaneously cause API to fail, sends error emit to client
         if (!stocks.body.query){ res.send({error:true}); return 0; }
 
+        // if only one stock is being updated
         if (stocks.body.query.count === 1){
-          transactions[0].marketPrice = stocks.body.query.results.quote.Ask;
-          transactions[0].return = ( (transactions[0].marketPrice - transactions[0].price ) / transactions[0].price) * 100;
-          portfolio.portfolioValue += parseFloat(transactions[0].marketPrice) * transactions[0].shares;
+          var updatedStock = stocks.body.query.results.quote;
+          for (var i = 0; i < transactions.length; i++){
+            if (transactions[i].symbol === updatedStock.symbol){
 
-          transactions[0].save();
+              // Updating portfolioValue and marketprice for every transaction
+              portfolioValue += (updatedStock.Ask * transactions[i].shares);
+              transactions[i].update({
+                marketPrice: updatedStock.Ask,
+                return: ( (updatedStock.Ask - transactions[i].price ) / transactions[i].price) * 100
+              });
+
+            }
+          }
 
         } else {
+          // when multiple stocks are being updated
           var updatedStocks = stocks.body.query.results.quote;
-          for (var i = 0; i < updatedStocks.length; i++){
-            for (var j = 0; j < transactions.length; j++){
-              if (updatedStocks[i].symbol === transactions[j].symbol){
-                transactions[j].marketPrice = updatedStocks[i].Ask;
-                transactions[j].return = ( (updatedStocks[i].Ask - transactions[j].price) / transactions[j].price) * 100;
-                // console.log('new price->', newStock, 'oldPrice->', transactions[index].price)
-                portfolio.portfolioValue += parseFloat(transactions[j].marketPrice) * transactions[j].shares;
-                transactions[j].save();
-                break;
+          for (var i = 0; i < transactions.length; i++){
+            for (var j = 0; j < updatedStocks.length; j++){
+              if (transactions[i].symbol === updatedStocks[j].symbol){
+
+                // Updating portfolioValue and marketprice for every transaction
+                portfolioValue += (updatedStocks[j].Ask * transactions[i].shares);
+                transactions[i].update({
+                  marketPrice: updatedStocks[j].Ask,
+                  return: ( (updatedStocks[j].Ask - transactions[i].price ) / transactions[i].price) * 100
+                });
+
               }
             }
           }
         }
 
-        portfolio.save();
+        // Saving final updated portfolio value
+        portfolio.update({
+          portfolioValue: portfolioValue
+        })
 
        res.send({error:false});
       });
@@ -142,65 +168,36 @@ function reduceStocks(stocks){
         return prev + curr;
       });
 
-      // assigning the total shares / avgPrice to the first object in the array since all other properties are identical
-      storage[key][0].shares = totalShares;
-      storage[key][0].price = avgPrice / storage[key].length;
-      finalArray.push(storage[key][0]);
+      /// Sending a copy of the summary stock (with net values)
+      var netStock = {
+        company: storage[key][0].company,
+        symbol: storage[key][0].symbol,
+        marketPrice: storage[key][0].marketPrice,
+        shares: totalShares,
+        return: storage[key][0].return,
+        buysell: storage[key][0].buysell,
+        percentage: storage[key][0].percentage,
+        price: avgPrice / storage[key].length
+      }
+
+      finalArray.push(netStock);
     } else {
-      finalArray.push(storage[key][0]);
+
+      // Sending a copy of the summary stock (with net values)
+      var netStock = {
+        company: storage[key][0].company,
+        symbol: storage[key][0].symbol,
+        marketPrice: storage[key][0].marketPrice,
+        shares: storage[key][0].shares,
+        return: storage[key][0].return,
+        buysell: storage[key][0].buysell,
+        percentage: storage[key][0].percentage,
+        price: storage[key][0].price
+      }
+
+      finalArray.push(netStock);
     }
   }
+
   return finalArray;
 }
-
-// module.exports.addPortfolioToDB = function (req,res) {
-//   //var userid = req.body.userid;
-//   var userid = 2
-//   Portfolio.create({
-//   	balance: 12000,
-//   	UserId: userid
-//   })
-//   .then(function (portfolio){
-//   	console.log(portfolio, 'port')
-//   	res.send(portfolio)
-//   })
-//   .catch(function(err){
-//   	console.error('Error creating portfolio: ', err.message);
-//   	res.end();
-//   })
-// }
-
-// //find portfolio id based on user id
-// module.exports.updatePortfolio = function (req,res) {
-
-//   var newBalance = req.body.balance;
-//   var userid = req.body.userid;
-//   var id = parseInt(req.params.id);
-
-//   Portfolio.findById(id,{where: {UserId: userid}})
-//   .then(function (portfolio) {
-//   	  portfolio.balance = newBalance;
-//   	  portfolio.save().then( function (){
-//   	  	res.send(portfolio);
-//   	  })
-//   	  .catch(function (err) {
-//   	    console.error('Error updating portfolio: ', err)
-//       });
-//   	})
-// }
-// //get all user's portfolios
-// module.exports.getAllPortfolio = function (req, res){
-// 	Portfolio.findAll({where: {UserId: 2}})
-// 	.then(function (portfolios){
-// 		if(portfolios){
-// 		  res.send(portfolios);
-// 		} else {
-// 			console.log('No portfolios found');
-//             res.end();
-// 		}
-// 	})
-// 	.catch(function (err){
-// 		console.error('Error getting portfolios: ', err);
-// 		res.end();
-// 	})
-// }
