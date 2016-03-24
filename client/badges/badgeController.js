@@ -4,10 +4,15 @@ app.controller('BadgeController', ['$scope', 'BadgeFactory', '$window', function
   $scope.possibleBadges = [];
 
   $scope.tooltipper = function () {
-    $(document).ready(function(){
+    // $(document).ready(function(){
       $('.tooltipped').tooltip({delay: 50});
-    });
+    // });
   };
+
+  $scope.removeTooltips = function () {
+    $('.tooltipped').tooltip('remove');
+  };
+
 
   $scope.getBadges = function () {
     BadgeFactory.getBadges(userId).then(
