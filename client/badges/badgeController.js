@@ -18,7 +18,6 @@ app.controller('BadgeController', ['$scope', 'BadgeFactory', '$window', function
           badgeFormatted.text = badge.text;
           badgeFormatted.icon = badge.icon;
           $scope.badges.push(badgeFormatted);
-          $scope.tooltipper();
         });
         if (!$scope.badges.length) {
           $scope.postBadge(1, 2)
@@ -39,7 +38,6 @@ app.controller('BadgeController', ['$scope', 'BadgeFactory', '$window', function
           badgeFormatted.text = badge.text;
           badgeFormatted.icon = badge.icon;
           $scope.possibleBadges.push(badgeFormatted);
-          $scope.tooltipper();
         });
       }
     );
