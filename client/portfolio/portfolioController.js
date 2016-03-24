@@ -164,13 +164,12 @@ angular.module('app.portfolio', [])
 			$scope.stocks = transactions;
 		});
 
-		$scope.twoDecimal = function(val){
-			return val.toFixed(2);
-		}
-
-
     $rootScope.$emit("PortfolioUpdate", {});
 	}
+
+	$scope.twoDecimal = function(val){
+			return val.toFixed(2);
+		}
 
 	updatePortfolio();
 
