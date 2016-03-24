@@ -50,12 +50,25 @@
 
           <li style="padding-right: 5px"><a href="#/messages" ng-show="loggedin">Messages<span ng-if="unreadMessages" class="badge circle red white-text">{{unreadMessages}}</span></a></li>
 
-          <li style="padding-right: 15px"><a href="#/dashboard" ng-show="loggedin">Dashboard</a></li>
+          <li ng-show="loggedin" style="padding-right: 15px">
 
-          <li ng-show="loggedin" ng-if="userBelongs" style="margin-right: 5px; margin-top:12px" class='dropdown-button btn' href='#' data-hover="true" data-activates='dropdown2'>My Leagues</li>
-          <ul id='dropdown2' class='dropdown-content'>
-              <li ng-repeat="portfolio in portfolios"><a ng-href="#/leagues/{{portfolio.leagueId}}" ng-show="loggedin">{{portfolio.leaguename}}</a></li>
-          </ul>
+            <a href="#/dashboard" class="dropdown-button" data-hover="true" data-activates='dropdown2' data-beloworigin="true">Dashboard</a>
+
+          </li>
+
+            <ul id='dropdown2' class='dropdown-content'>
+                <li ng-repeat="portfolio in portfolios"><a ng-href="#/leagues/{{portfolio.leagueId}}">{{portfolio.leaguename}}</a></li>
+            </ul>
+
+<!--           <li ng-show="loggedin" style="margin-right: 5px; margin-top:12px">
+
+            <a class="dropdown-button" href='#/forum' data-hover="true" data-activates='dropdown2' data-beloworigin="true">My Leagues</a>
+
+          </li> -->
+
+          <!-- <ul id='dropdown2' class='dropdown-content'>
+              <li ng-repeat="portfolio in portfolios"><a ng-href="#/leagues/{{portfolio.leagueId}}">{{portfolio.leaguename}}</a></li>
+          </ul> -->
 
           <li ng-show="loggedin" style="margin-top:12px" class='dropdown-button btn' href='#' data-hover="true" data-activates='dropdown1'>Menu</li>
           <ul id='dropdown1' class='dropdown-content'>
