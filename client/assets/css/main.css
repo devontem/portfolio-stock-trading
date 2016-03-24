@@ -526,5 +526,64 @@ th {
 .messages-container .text-left {
   text-align: left; }
 
-.badge i {
-  font-size: 30px; }
+.badge-ribbon {
+  position: relative;
+  background: #f1404b;
+  height: 100px;
+  width: 100px;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px; }
+
+.badge-ribbon:before,
+.badge-ribbon:after {
+  content: '';
+  position: absolute;
+  border-bottom: 70px solid #f1404b;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  top: 70px;
+  left: -10px;
+  -webkit-transform: rotate(-140deg);
+  -moz-transform: rotate(-140deg);
+  -ms-transform: rotate(-140deg);
+  -o-transform: rotate(-140deg); }
+
+.badge-ribbon:after {
+  left: auto;
+  right: -10px;
+  -webkit-transform: rotate(140deg);
+  -moz-transform: rotate(140deg);
+  -ms-transform: rotate(140deg);
+  -o-transform: rotate(140deg); }
+
+.possible-badge-ribbon {
+  position: relative;
+  background: gray;
+  height: 100px;
+  width: 100px;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px; }
+
+.possible-badge-ribbon:before,
+.possible-badge-ribbon:after {
+  content: '';
+  position: absolute;
+  border-bottom: 70px solid gray;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  top: 70px;
+  left: -10px;
+  -webkit-transform: rotate(-140deg);
+  -moz-transform: rotate(-140deg);
+  -ms-transform: rotate(-140deg);
+  -o-transform: rotate(-140deg); }
+
+.possible-badge-ribbon:after {
+  left: auto;
+  right: -10px;
+  -webkit-transform: rotate(140deg);
+  -moz-transform: rotate(140deg);
+  -ms-transform: rotate(140deg);
+  -o-transform: rotate(140deg); }

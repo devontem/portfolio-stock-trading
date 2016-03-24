@@ -93,6 +93,8 @@ app
       $scope.loggedin = true;
       $window.location.href = '/#/dashboard';
     });
+    // Creates a badge for signing up
+    BadgeFactory.postBadge($scope.id, 2);
   };
 
   $scope.signin = function(user){
