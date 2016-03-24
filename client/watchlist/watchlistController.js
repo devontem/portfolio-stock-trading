@@ -1,6 +1,6 @@
 
 var app = angular.module('app')
-app.controller('WatchlistController', function($scope, $http, symbolFactory, WatchlistFactory, $rootScope, $window){
+app.controller('WatchlistController', function($scope, $http, symbolFactory, WatchlistFactory,  $rootScope, $location,$window){
  
   $scope.watchlist = [];
   $scope.results =[];
@@ -83,8 +83,9 @@ $scope.getWatchlist = function (){
           console.log(result1,'res1')
           $scope.stock.push(result1)
         })
-        console.log($scope.stock,'stock')
+        
           $scope.results.push($scope.stock)
+          console.log($scope.results,'stock')
         $scope.stock=[];
       })
     })
@@ -106,7 +107,23 @@ $scope.getWatchlist = function (){
       $scope.getWatchlist();
     })
   }
+   
+  $scope.delay = function(symbol){
+    console.log('hello buddy', symbol)
 
+    $rootScope.$emit('symbolAnalysis', symbol)
+  } 
+
+  $scope.sendToChart = function (symbol, callback){
+    console.log(symbol,'sym')
+    //$window.sym = symbol;
+        
+    $location.path('/analysis')
+    callback(symbol);
+    
+  }
+    
+  
   $rootScope.$on('addedToWatchlist', function(){
 
     $scope.getWatchlist();
@@ -143,11 +160,15 @@ $scope.getWatchlist = function (){
         data: data 
        })
     }
-
+    
   return {
     getWatchlist:getWatchlist,
     updateWatchlist:updateWatchlist,
     removeFromWatchlist:removeFromWatchlist
+    
   }
 
 })
+
+
+
