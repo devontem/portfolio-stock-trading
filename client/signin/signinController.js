@@ -51,12 +51,12 @@ app
 })
 
 //signin signup controller
-.controller('SigninController', ['$scope', '$window', 'Auth', 'DirectMessage', '$rootScope', function($scope, $window, Auth, DirectMessage, $rootScope){
+.controller('SigninController', ['$scope', '$window', 'Auth', 'DirectMessage', '$rootScope', 'DashboardFactory', function($scope, $window, Auth, DirectMessage, $rootScope, DashboardFactory){
   $scope.user = null;
   $scope.id = $window.localStorage.getItem('com.tp.userId') || undefined;
   //$scope.loggedin = false;
   $scope.username;
-
+  $scope.portfolios;
   $scope.authorize = function(){
     if(Auth.isAuth()){
       $scope.loggedin = true;
@@ -119,6 +119,21 @@ app
     $window.localStorage.removeItem('com.tp.username');
     $window.location.href = '/#/';
   };
+
+  $scope.getUserLeagues = function () {
+    var userId = $window.localStorage.getItem('com.tp.userId');
+    DashboardFactory.getUserLeagues(userId)
+      .then(function(portfolios){
+        $scope.portfolios = portfolios;
+      })
+  };
+
+  $scope.getUserLeagues();
+
+  $rootScope.$on('newleague', function(){
+    console.log('rootscope works')
+    $scope.getUserLeagues();
+  })
 
   // Handle's Messages Notifications
   function getOpenAndUnreadMessages(){
