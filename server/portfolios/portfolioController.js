@@ -14,8 +14,6 @@ module.exports.getUserStocks = function(req, res){
     Transaction.findAll({ where: {
       PortfolioId: portfolio.id
     }}).then(function(transactions){
-      var originalPrice = transactions[0].price;
-      var originalShares = transactions[0].shares;
 
       // minimizes doubles, adds all shares from same company
       var updatedShares = reduceStocks(transactions);
@@ -25,15 +23,10 @@ module.exports.getUserStocks = function(req, res){
         return transaction.buysell && transaction.shares > 0;
       });
 
-      console.log('updatedShares', updatedShares, 'reducedStocks', reducedStocks)
+      // console.log('updatedShares', updatedShares, 'reducedStocks', reducedStocks)
 
       res.send(reducedStocks);
 
-      // transacations[0] was altered in reduceStocks, setting it back to original values
-      transactions[0].update({
-        shares: originalShares,
-        price: originalPrice
-      });
     })
     .catch(function(err){
       res.send("There was an error: ", err);
@@ -60,23 +53,14 @@ module.exports.updateUserStocks = function(req, res){
       if (transactions.length < 1){ res.send({error:null}); return }
 
       var portfolioValue = 0;
-      var originalPrice = transactions[0].price;
-      var originalShares = transactions[0].shares;
-
-      console.log('transactions', transactions)
-      var trans = Array.prototype.slice.call(transactions)
 
       // minimizes doubles, adds all shares from same company
       var updatedShares = reduceStocks(transactions);
-
-      // console.log('updatedShares', updatedShares)
 
       // returns only the bought shares
       var reducedStocks = _.filter(updatedShares, function(transaction){
         return transaction.buysell && transaction.shares > 0;
       });
-
-      console.log('reducedStocks', reducedStocks)
 
       // creates a list of all user stocks in order to query
       var stockNames = [];
@@ -85,17 +69,7 @@ module.exports.updateUserStocks = function(req, res){
           stockNames.push(stock.symbol);
         }
       });
-
-      // transacations[0] was altered in reduceStocks, setting it back to original values
-      transactions[0].update({
-        shares: originalShares,
-        price: originalPrice
-      });
-
-      console.log('transactions2', transactions)
-
       stockNames = stockNames.join(',');
-      console.log('stocknames', stockNames);
 
       var query = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20%3D%20%27"+ stockNames +"%27&diagnostics=false&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&format=json";
 
@@ -108,58 +82,40 @@ module.exports.updateUserStocks = function(req, res){
 
         // if only one stock is being updated
         if (stocks.body.query.count === 1){
-          console.log('************** DOING ONLY ONE LOOP');
           var updatedStock = stocks.body.query.results.quote;
           for (var i = 0; i < transactions.length; i++){
             if (transactions[i].symbol === updatedStock.symbol){
-              console.log('SYMBOLS MATCH '+transactions[i].symbol, 'was "'+transactions[i].price+'" and is now "'+updatedStock.Ask+'". Share # is '+transactions[i].shares)
-              // transactions[i].marketPrice = updatedStock.Ask;
 
-              // updating portfolio value with new market price * shares, for each transaction (incl negatives [aka sold shares])
+              // Updating portfolioValue and marketprice for every transaction
               portfolioValue += (updatedStock.Ask * transactions[i].shares);
-              console.log('**********portfolioValue ->'+portfolioValue+' amount added ->'+updatedStock.Ask * transactions[i].shares)
-
               transactions[i].update({
-                marketPrice: updatedStock.Ask
+                marketPrice: updatedStock.Ask,
+                return: ( (updatedStock.Ask - transactions[i].price ) / transactions[i].price) * 100
               });
 
-              // transactions[i].save();
             }
           }
-          // transactions[0].marketPrice = stocks.body.query.results.quote.Ask;
-          // transactions[0].return = ( (transactions[0].marketPrice - transactions[0].price ) / transactions[0].price) * 100;
-          // portfolio.portfolioValue += parseFloat(transactions[0].marketPrice) * transactions[0].shares;
-
-          // transactions[0].save();
 
         } else {
-          console.log('*************DOING THE MULTIPLE LOOP');
           // when multiple stocks are being updated
           var updatedStocks = stocks.body.query.results.quote;
           for (var i = 0; i < transactions.length; i++){
-            // console.log('**** first loop working!')
             for (var j = 0; j < updatedStocks.length; j++){
-              // console.log('**** second loop working!')
               if (transactions[i].symbol === updatedStocks[j].symbol){
-                console.log('SYMBOLS MATCH '+transactions[i].symbol, 'was "'+transactions[i].price+'" and is now"'+updatedStocks[j].Ask+'". SHares -> '+transactions[i].shares)
-                // transactions[j].marketPrice = updatedStocks[i].Ask;
-                // transactions[j].return = ( (updatedStocks[i].Ask - transactions[j].price) / transactions[j].price) * 100;
-                // console.log('new price->', newStock, 'oldPrice->', transactions[index].price)
-                // portfolio.portfolioValue += parseFloat(transactions[j].marketPrice) * transactions[j].shares;
-                // transactions[j].save();
-                // break;
+
+                // Updating portfolioValue and marketprice for every transaction
                 portfolioValue += (updatedStocks[j].Ask * transactions[i].shares);
-                console.log('********** Adding '+updatedStocks[j].Ask * transactions[i].shares)
-                console.log('********** New portfolioValue ->'+portfolioValue)
                 transactions[i].update({
-                  marketPrice: updatedStocks[j].Ask
+                  marketPrice: updatedStocks[j].Ask,
+                  return: ( (updatedStocks[j].Ask - transactions[i].price ) / transactions[i].price) * 100
                 });
+
               }
             }
           }
         }
 
-        console.log('final portfolio value', portfolioValue)
+        // Saving final updated portfolio value
         portfolio.update({
           portfolioValue: portfolioValue
         })
@@ -212,7 +168,7 @@ function reduceStocks(stocks){
         return prev + curr;
       });
 
-      // assigning the total shares / avgPrice to the first object in the array since all other properties are identical
+      /// Sending a copy of the summary stock (with net values)
       var netStock = {
         company: storage[key][0].company,
         symbol: storage[key][0].symbol,
@@ -223,79 +179,25 @@ function reduceStocks(stocks){
         percentage: storage[key][0].percentage,
         price: avgPrice / storage[key].length
       }
-      // storage[key][0].shares = totalShares;
-      // storage[key][0].price = avgPrice / storage[key].length;
+
       finalArray.push(netStock);
     } else {
-      // var copy = _.extend({}, storage[key][0]);
-      // finalArray.push(storage[key][0]);
+
+      // Sending a copy of the summary stock (with net values)
       var netStock = {
         company: storage[key][0].company,
         symbol: storage[key][0].symbol,
         marketPrice: storage[key][0].marketPrice,
-        shares: totalShares,
+        shares: storage[key][0].shares,
         return: storage[key][0].return,
         buysell: storage[key][0].buysell,
         percentage: storage[key][0].percentage,
-        price: avgPrice / storage[key].length
+        price: storage[key][0].price
       }
-      // storage[key][0].shares = totalShares;
-      // storage[key][0].price = avgPrice / storage[key].length;
+
       finalArray.push(netStock);
     }
   }
-  // console.log('final array', finalArray)
+
   return finalArray;
 }
-
-// module.exports.addPortfolioToDB = function (req,res) {
-//   //var userid = req.body.userid;
-//   var userid = 2
-//   Portfolio.create({
-//   	balance: 12000,
-//   	UserId: userid
-//   })
-//   .then(function (portfolio){
-//   	console.log(portfolio, 'port')
-//   	res.send(portfolio)
-//   })
-//   .catch(function(err){
-//   	console.error('Error creating portfolio: ', err.message);
-//   	res.end();
-//   })
-// }
-
-// //find portfolio id based on user id
-// module.exports.updatePortfolio = function (req,res) {
-
-//   var newBalance = req.body.balance;
-//   var userid = req.body.userid;
-//   var id = parseInt(req.params.id);
-
-//   Portfolio.findById(id,{where: {UserId: userid}})
-//   .then(function (portfolio) {
-//   	  portfolio.balance = newBalance;
-//   	  portfolio.save().then( function (){
-//   	  	res.send(portfolio);
-//   	  })
-//   	  .catch(function (err) {
-//   	    console.error('Error updating portfolio: ', err)
-//       });
-//   	})
-// }
-// //get all user's portfolios
-// module.exports.getAllPortfolio = function (req, res){
-// 	Portfolio.findAll({where: {UserId: 2}})
-// 	.then(function (portfolios){
-// 		if(portfolios){
-// 		  res.send(portfolios);
-// 		} else {
-// 			console.log('No portfolios found');
-//             res.end();
-// 		}
-// 	})
-// 	.catch(function (err){
-// 		console.error('Error getting portfolios: ', err);
-// 		res.end();
-// 	})
-// }
