@@ -58,7 +58,7 @@
 
           </li>
 
-            <ul id='dropdown2' class='dropdown-content'>
+            <ul ng-show="loggedin" id='dropdown2' class='dropdown-content'>
                 <li class="dd-collection" ng-repeat="league in userLeagues"><a ng-href="#/leagues/{{league.leagueId}}">{{league.leaguename}}</a></li>
             </ul>
 
