@@ -25,6 +25,8 @@ module.exports.getUserStocks = function(req, res){
         return transaction.buysell && transaction.shares > 0;
       });
 
+      console.log('updatedShares', updatedShares, 'reducedStocks', reducedStocks)
+
       res.send(reducedStocks);
 
       // transacations[0] was altered in reduceStocks, setting it back to original values
@@ -61,13 +63,13 @@ module.exports.updateUserStocks = function(req, res){
       var originalPrice = transactions[0].price;
       var originalShares = transactions[0].shares;
 
-      // console.log('transactions', transactions.get())
+      console.log('transactions', transactions)
       var trans = Array.prototype.slice.call(transactions)
 
       // minimizes doubles, adds all shares from same company
       var updatedShares = reduceStocks(transactions);
 
-      console.log('updatedShares', updatedShares)
+      // console.log('updatedShares', updatedShares)
 
       // returns only the bought shares
       var reducedStocks = _.filter(updatedShares, function(transaction){
@@ -91,7 +93,7 @@ module.exports.updateUserStocks = function(req, res){
       });
 
       console.log('transactions2', transactions)
-      console.log('trans', trans)
+
       stockNames = stockNames.join(',');
       console.log('stocknames', stockNames);
 
@@ -114,7 +116,7 @@ module.exports.updateUserStocks = function(req, res){
               // transactions[i].marketPrice = updatedStock.Ask;
 
               // updating portfolio value with new market price * shares, for each transaction (incl negatives [aka sold shares])
-              portfolioValue += (updatedStock.Ask * trans[i].shares);
+              portfolioValue += (updatedStock.Ask * transactions[i].shares);
               console.log('**********portfolioValue ->'+portfolioValue+' amount added ->'+updatedStock.Ask * transactions[i].shares)
 
               transactions[i].update({
@@ -131,26 +133,33 @@ module.exports.updateUserStocks = function(req, res){
           // transactions[0].save();
 
         } else {
-          // console.log('*************DOING THE MULTIPLE LOOP', stocks.body.query.results.quote);
-          // // when multiple stocks are being updated
-          // var updatedStocks = stocks.body.query.results.quote;
-          // for (var i = 0; i < updatedStocks.length; i++){
-          //   console.log('**** first loop working!')
-          //   for (var j = 0; j < transactions.length; j++){
-          //     console.log('**** second loop working!')
-          //     if (updatedStocks[i].symbol === transactions[j].symbol){
-          //       console.log('SYMBOLS MATCH '+transactions[j].symbol, 'was "'+transactions[j].Ask+'" and is now"'+updatedStocks[i].Ask+'".')
-          //       transactions[j].marketPrice = updatedStocks[i].Ask;
-          //       // transactions[j].return = ( (updatedStocks[i].Ask - transactions[j].price) / transactions[j].price) * 100;
-          //       // console.log('new price->', newStock, 'oldPrice->', transactions[index].price)
-          //       portfolio.portfolioValue += parseFloat(transactions[j].marketPrice) * transactions[j].shares;
-          //       transactions[j].save();
-          //       // break;
-          //     }
-          //   }
-          // }
+          console.log('*************DOING THE MULTIPLE LOOP');
+          // when multiple stocks are being updated
+          var updatedStocks = stocks.body.query.results.quote;
+          for (var i = 0; i < transactions.length; i++){
+            // console.log('**** first loop working!')
+            for (var j = 0; j < updatedStocks.length; j++){
+              // console.log('**** second loop working!')
+              if (transactions[i].symbol === updatedStocks[j].symbol){
+                console.log('SYMBOLS MATCH '+transactions[i].symbol, 'was "'+transactions[i].price+'" and is now"'+updatedStocks[j].Ask+'". SHares -> '+transactions[i].shares)
+                // transactions[j].marketPrice = updatedStocks[i].Ask;
+                // transactions[j].return = ( (updatedStocks[i].Ask - transactions[j].price) / transactions[j].price) * 100;
+                // console.log('new price->', newStock, 'oldPrice->', transactions[index].price)
+                // portfolio.portfolioValue += parseFloat(transactions[j].marketPrice) * transactions[j].shares;
+                // transactions[j].save();
+                // break;
+                portfolioValue += (updatedStocks[j].Ask * transactions[i].shares);
+                console.log('********** Adding '+updatedStocks[j].Ask * transactions[i].shares)
+                console.log('********** New portfolioValue ->'+portfolioValue)
+                transactions[i].update({
+                  marketPrice: updatedStocks[j].Ask
+                });
+              }
+            }
+          }
         }
 
+        console.log('final portfolio value', portfolioValue)
         portfolio.update({
           portfolioValue: portfolioValue
         })
@@ -204,15 +213,38 @@ function reduceStocks(stocks){
       });
 
       // assigning the total shares / avgPrice to the first object in the array since all other properties are identical
-      storage[key][0].shares = totalShares;
-      storage[key][0].price = avgPrice / storage[key].length;
-      finalArray.push(storage[key][0]);
+      var netStock = {
+        company: storage[key][0].company,
+        symbol: storage[key][0].symbol,
+        marketPrice: storage[key][0].marketPrice,
+        shares: totalShares,
+        return: storage[key][0].return,
+        buysell: storage[key][0].buysell,
+        percentage: storage[key][0].percentage,
+        price: avgPrice / storage[key].length
+      }
+      // storage[key][0].shares = totalShares;
+      // storage[key][0].price = avgPrice / storage[key].length;
+      finalArray.push(netStock);
     } else {
-      var copy = _.extend({}, storage[key][0]);
-      finalArray.push(storage[key][0]);
+      // var copy = _.extend({}, storage[key][0]);
+      // finalArray.push(storage[key][0]);
+      var netStock = {
+        company: storage[key][0].company,
+        symbol: storage[key][0].symbol,
+        marketPrice: storage[key][0].marketPrice,
+        shares: totalShares,
+        return: storage[key][0].return,
+        buysell: storage[key][0].buysell,
+        percentage: storage[key][0].percentage,
+        price: avgPrice / storage[key].length
+      }
+      // storage[key][0].shares = totalShares;
+      // storage[key][0].price = avgPrice / storage[key].length;
+      finalArray.push(netStock);
     }
   }
-  console.log('final array', finalArray)
+  // console.log('final array', finalArray)
   return finalArray;
 }
 
