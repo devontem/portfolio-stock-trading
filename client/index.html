@@ -57,7 +57,7 @@
           </li>
 
             <ul id='dropdown2' class='dropdown-content'>
-                <li class="dd-collection" ng-repeat="portfolio in portfolios"><a ng-href="#/leagues/{{portfolio.leagueId}}">{{portfolio.leaguename}}</a></li>
+                <li class="dd-collection" ng-repeat="league in userLeagues"><a ng-href="#/leagues/{{league.leagueId}}">{{league.leaguename}}</a></li>
             </ul>
 
 
@@ -166,7 +166,7 @@
     <span ng-show="hasSearched" class="col s1">Ask: {{stock.Ask | currency}}</span>
     <span ng-show="hasSearched" class="col s1">Change: {{stock.ChangeinPercent}} </span>
     <span ng-show="hasSearched" class="col s1">Volume: {{stock.Volume}}</span>
-    <span ng-show="hasSearched" class="col s1" ng-click="addToWatchlist(stock.Symbol)"><button>Watch</button></span>
+    <span ng-show="hasSearched" class="col s1" ng-click="addToWatchlist(stock.Symbol)"><a class="waves-effect waves-light btn std-btn">Watch</a></span>
     <span class = 'ticker'>
 <!--<FORM NAME="marquee1">
 <INPUT NAME="text" SIZE=100
