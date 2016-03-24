@@ -52,29 +52,24 @@
 
           <li ng-show="loggedin" style="padding-right: 15px">
 
-            <a href="#/dashboard" class="dropdown-button" data-hover="true" data-activates='dropdown2' data-beloworigin="true">Dashboard</a>
+            <a href="#/dashboard" class="dropdown-button" data-hover="true" data-activates='dropdown2' data-constrainwidth="false" data-beloworigin="true">Dashboard</a>
 
           </li>
 
             <ul id='dropdown2' class='dropdown-content'>
-                <li ng-repeat="portfolio in portfolios"><a ng-href="#/leagues/{{portfolio.leagueId}}">{{portfolio.leaguename}}</a></li>
+                <li class="dd-collection" ng-repeat="portfolio in portfolios"><a ng-href="#/leagues/{{portfolio.leagueId}}">{{portfolio.leaguename}}</a></li>
             </ul>
 
-<!--           <li ng-show="loggedin" style="margin-right: 5px; margin-top:12px">
 
-            <a class="dropdown-button" href='#/forum' data-hover="true" data-activates='dropdown2' data-beloworigin="true">My Leagues</a>
+          <li ng-show="loggedin">
 
-          </li> -->
+            <a class='dropdown-button' href='#' data-hover="true" data-activates='dropdown1' data-constrainwidth="false" data-beloworigin="true">Resources</a>
 
-          <!-- <ul id='dropdown2' class='dropdown-content'>
-              <li ng-repeat="portfolio in portfolios"><a ng-href="#/leagues/{{portfolio.leagueId}}">{{portfolio.leaguename}}</a></li>
-          </ul> -->
+          </li>
 
-          <li ng-show="loggedin" style="margin-top:12px" class='dropdown-button btn' href='#' data-hover="true" data-activates='dropdown1'>Menu</li>
           <ul id='dropdown1' class='dropdown-content'>
               <li><a href="#/forum" ng-show="loggedin">Forum</a></li>
               <li><a href="#/analysis" ng-show="loggedin">Chart</a></li>
-              <li><a href="#/account" ng-show="loggedin">Account</a></li>
               <li><a href="#/watchlist" ng-show="loggedin">Watchlist</a></li>
           </ul>
 
@@ -90,7 +85,17 @@
           <!-- <li><a ng-href="#/profiles/{{id }}" ng-show="loggedin">Profile</a></li>
           <li><a href="#/account" ng-show="loggedin">Account</a></li>
           <li><a href="#/watchlist" ng-show="loggedin">Watchlist</a></li> -->
-          <li><a ng-show="loggedin" ng-click="logout()">Log Out</a></li>
+
+          <li ng-show="loggedin" style="padding-right: 15px">
+
+            <a href="#/account" class="dropdown-button" data-hover="true" data-activates='dropdown3' data-constrainwidth="false" data-beloworigin="true">My Account</a>
+
+          </li>
+
+            <ul id='dropdown3' class='dropdown-content'>
+                <li><a ng-show="loggedin" ng-click="logout()">Log Out</a></li>
+            </ul>
+
         </ul>
       </div>
     </nav>
