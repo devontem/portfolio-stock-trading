@@ -701,7 +701,7 @@ th{
 
 .possible-badge-ribbon {
  position: relative;
- background: gray;
+ background: #90a4ae;
  height: 100px;
  width: 100px;
  margin-bottom: 40px;
@@ -714,7 +714,7 @@ th{
 .possible-badge-ribbon:after {
   content: '';
   position: absolute;
-  border-bottom: 70px solid gray;
+  border-bottom: 70px solid #90a4ae;
   border-left: 40px solid transparent;
   border-right: 40px solid transparent;
   top: 70px;
