@@ -163,6 +163,7 @@ angular.module('app.dashboard', [])
     DashboardFactory.joinLeague(leagueId, userId)
       .then(function(){
         $window.location.href = '/#/leagues/'+leagueId.toString();
+        $rootScope.$emit('newleague');
       });
   };
 //returns all public leagues
