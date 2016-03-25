@@ -23,6 +23,8 @@ var User = orm.define('User', {
     secondPlaces: Sequelize.INTEGER,
     thirdPlaces: Sequelize.INTEGER,
     badgeLastLogin: Sequelize.DATE,
+    averageReturn: Sequelize.INTEGER,
+    leaguesJoined: Sequelize.INTEGER,
 
     email: {
     	type: Sequelize.STRING,

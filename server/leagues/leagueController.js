@@ -382,6 +382,12 @@ var closeLeague = function () {
 
           var UserId = portsToSort[k].UserId;
 
+          // Increments leagues joined
+          User.findById(UserId)
+          .then(function (user) {
+            user.increment('leaguesJoined');
+          });
+
           if (rankings === 1) {
             User.findById(UserId)
             .then(function (user) {
