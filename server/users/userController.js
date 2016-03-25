@@ -16,7 +16,9 @@ module.exports.newUser = function (req, res){
           badgeJoined: true,
           firstPlaces: 0,
           secondPlaces: 0,
-          thirdPlaces: 0
+          thirdPlaces: 0,
+          leaguesJoined: 0,
+          averageReturn: 0
         })
         .then(function(user){
               var myToken = jwt.sign( {user: user.id},

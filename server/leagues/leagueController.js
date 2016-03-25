@@ -244,18 +244,46 @@ function makeCode(){
   return text;
 }
 
-//Sets up the node schedule to run at 1pm PST which is 4pm EST, when the NYSE closes
-//The live server (heroku) appears to be on PST
-var rule = new schedule.RecurrenceRule();
-//This should pull Monday-Friday
-rule.dayOfWeek = [0, new schedule.Range(1, 5)];
-rule.hour = 13;
-rule.minute = 1;
 
+// Function for calculating a return
+var calcReturn = function (leagueId, portfolioId) {
+  var startBal = 0;
+  var curTotal = 0;
+  var difference = 0;
+  var returnPercentage = 0;
 
-var j = schedule.scheduleJob(rule, function(){
-  closeLeague();
-});
+  League.findById(leagueId)
+  .then(function (league) {
+    startBal = league.startbalance;
+
+    Portfolio.findById(portfolioId)
+    .then(function (port) {
+      curTotal = port.portfolioValue + port.balance;
+      difference = curTotal - startBal;
+      returnPercentage = (difference / startBal) * 100;
+      Portfolio.update({
+        returnPercentage: returnPercentage
+      }, {
+        where:
+        {id: port.id }
+      });
+    });
+  });
+};
+
+var averageReturner = function (UserId, currentReturn) {
+  User.findById(UserId)
+  .then(function (user) {
+    var prevAverage = user.averageReturn;
+    var priorLeagueTotal = user.leaguesJoined;
+    // We are adding one to the priorLeagueTotal in order to get the correct number of leagues
+    var average = ((prevAverage * priorLeagueTotal) + (currentReturn)) / (priorLeagueTotal + 1);
+
+    user.update({
+      averageReturn: average
+    });
+  });
+};
 
 // This function is mainly used in the closeLeague function to get the most up to date portfolio values before ending the league
 var getLatestPortfolioVals = function (arrayOfLeagues) {
@@ -380,7 +408,30 @@ var closeLeague = function () {
             }
           });
 
+          var leagueId = portsToSort[k].LeagueId;
           var UserId = portsToSort[k].UserId;
+
+          // Calculates the return for the current portfolio and updates the model
+          calcReturn(leagueId, portsToSort[k].id);
+
+          var currentReturn = 0;
+          // Gets the value of the returnPercentage from the portfolio to be
+          // used in the average return calculations
+          Portfolio.findById(portsToSort[k].id)
+          .then(function (port) {
+            var currentReturn = port.returnPercentage;
+          });
+
+          // This calculates the average return by comparing it to the average
+          // on user model
+          averageReturner(UserId, currentReturn);
+
+          // Increments leagues joined
+          User.findById(UserId)
+          .then(function (user) {
+            user.increment('leaguesJoined');
+          });
+
 
           if (rankings === 1) {
             User.findById(UserId)
@@ -413,6 +464,19 @@ var closeLeague = function () {
     }
     });
 };
+
+//Sets up the node schedule to run at 1pm PST which is 4pm EST, when the NYSE closes
+//The live server (heroku) appears to be on PST
+var rule = new schedule.RecurrenceRule();
+//This should pull Monday-Friday
+rule.dayOfWeek = [0, new schedule.Range(1, 5)];
+rule.hour = 13;
+rule.minute = 1;
+
+
+var j = schedule.scheduleJob(rule, function(){
+  closeLeague();
+});
 
 //   League.destroy({
 //     where: {
