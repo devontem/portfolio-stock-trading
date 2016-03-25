@@ -278,7 +278,7 @@ var averageReturner = function (userId, currentReturn) {
     var priorLeagueTotal = user.leaguesJoined;
     // We are adding one to the priorLeagueTotal in order to get the correct number of leagues
     var average = ((prevAverage * priorLeagueTotal) + (currentReturn)) / (priorLeagueTotal + 1);
-    
+
     user.update({
       averageReturn: average
     });
@@ -476,9 +476,6 @@ var closeLeague = function () {
     }
     });
 };
-
-closeLeague();
-
 
 
 //   League.destroy({
