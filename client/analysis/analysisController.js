@@ -6,7 +6,10 @@ app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFact
 
   // console.log('SCOPE SYMBOL:', test)
   var temp = ""
-  //$scope.stock.symbol = $window.sym;
+  $scope.stock.symbol='';
+  $scope.stock.symbol = $window.sym;
+  console.log($scope.stock.symbol,'symbple')
+  
 
   // function watchlistToAnalysis(symbol){
   //   $scope.stock.symbol = symbol;
@@ -24,10 +27,14 @@ app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFact
 // console.log('AFTER:', test)
 
 
+
   // $rootScope.$on('symbolAnalysis', function (event, data){
   //   console.log(data,'data');
   //   $scope.stock.symbol = data;
   //   console.log($scope.stock.symbol, 'yoyo');
+
+
+
 
   //   //watchlistToAnalysis(data);
   // })
@@ -89,6 +96,8 @@ app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFact
               .attr("d", line);
         });
       });
+   
+
   };
 
   var margin = {top: 20, right: 20, bottom: 30, left: 50},

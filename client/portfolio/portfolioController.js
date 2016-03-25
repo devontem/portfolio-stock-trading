@@ -28,6 +28,7 @@ angular.module('app.portfolio', [])
 	};
 
 	$scope.chooseStock = function(stockName){
+		console.log(stockName,'name')
 		Portfolio.getStock(stockName).then(function(stock){
 			stock = stock.data;
 			if(!stock.Ask){
@@ -35,6 +36,7 @@ angular.module('app.portfolio', [])
 			}
 			else {
 			$scope.stock = stock;
+			console.log($scope.stock,'lol')
 			$scope.estPrice = stock.Ask;
 			$scope.singlePrice = stock.Ask;
 		}
