@@ -1,8 +1,8 @@
 var User = require('../../db/models').User;
 var Portfolio = require('../../db/models').Portfolio;
 var jwt = require('jsonwebtoken');
-var domain = 'sandbox5e718182e3c24b69a06f7da83d141d9f.mailgun.org';
-var api_key = 'key-983c9a49f87895b83eeb82f07388eef4';
+var domain = process.env.MAILGUN_DOMAIN || 'sandbox5e718182e3c24b69a06f7da83d141d9f.mailgun.org';
+var api_key = process.env.MAILGUN_API_KEY || 'key-983c9a49f87895b83eeb82f07388eef4';
 var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 
 module.exports.newUser = function (req, res){
