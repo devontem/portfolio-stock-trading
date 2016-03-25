@@ -162,9 +162,15 @@ module.exports.editOneLeague = function (req, res) {
 };
 
 module.exports.getUsers = function(req, res){
+  var leagueId = req.body.leagueId;
+  // Gets the most up to date values for the portfolios
+  // And update the rankings
+  getLatestPortfolioVals([leagueId]);
   Portfolio.findAll({where: {leagueId: req.body.leagueId}})
     .then(function(portfolios){
-    if(!portfolios) res.redirect("/#/dashboard");
+    if (!portfolios) {
+      res.redirect("/#/dashboard");
+    }
       res.send(portfolios);
     })
     .catch(function (err) {
@@ -271,6 +277,7 @@ var calcReturn = function (leagueId, portfolioId) {
   });
 };
 
+// Calculates overall average
 var averageReturner = function (UserId, currentReturn) {
   User.findById(UserId)
   .then(function (user) {
@@ -283,6 +290,31 @@ var averageReturner = function (UserId, currentReturn) {
       averageReturn: average
     });
   });
+};
+
+var portfolioSorter = function (portfolios) {
+  var portsToSort = [];
+  portfolios.forEach(function (portfolio) {
+    var portObj = {};
+    portObj.id = portfolio.dataValues.id;
+    portObj.balance = portfolio.dataValues.balance;
+    portObj.portfolioValue = portfolio.dataValues.portfolioValue;
+    portObj.UserId = portfolio.dataValues.UserId;
+    portObj.LeagueId = portfolio.dataValues.leagueId;
+    portObj.total = portObj.balance + portObj.portfolioValue;
+    portsToSort.push(portObj);
+  });
+  portsToSort.sort(function (port1, port2) {
+    if (port1.total < port2.total) {
+      return 1;
+    } else if (port1.total > port2.total) {
+      return -1;
+    } else {
+      return 0;
+    }
+  });
+
+  return portsToSort;
 };
 
 // This function is mainly used in the closeLeague function to get the most up to date portfolio values before ending the league
@@ -351,6 +383,10 @@ var getLatestPortfolioVals = function (arrayOfLeagues) {
   });
 };
 
+var setRankings = function () {
+
+};
+
 var closeLeague = function () {
   var currentMoment = moment().utc();
   League.findAll({where: {hasEnded: false}})
@@ -375,26 +411,8 @@ var closeLeague = function () {
       Portfolio.findAll({where: {leagueId: leaguesEnded[j]}})
       .then(function (portfolios) {
 
-        var portsToSort = [];
-        portfolios.forEach(function (portfolio) {
-          var portObj = {};
-          portObj.id = portfolio.dataValues.id;
-          portObj.balance = portfolio.dataValues.balance;
-          portObj.portfolioValue = portfolio.dataValues.portfolioValue;
-          portObj.UserId = portfolio.dataValues.UserId;
-          portObj.LeagueId = portfolio.dataValues.leagueId;
-          portObj.total = portObj.balance + portObj.portfolioValue;
-          portsToSort.push(portObj);
-        });
-        portsToSort.sort(function (port1, port2) {
-          if (port1.total < port2.total) {
-            return 1;
-          } else if (port1.total > port2.total) {
-            return -1;
-          } else {
-            return 0;
-          }
-        });
+        var portsToSort = portfolioSorter(portfolios);
+
 
         var rankings = 1;
 
@@ -477,25 +495,3 @@ rule.minute = 1;
 var j = schedule.scheduleJob(rule, function(){
   closeLeague();
 });
-
-//   League.destroy({
-//     where: {
-//       subject: 'programming'
-//     },
-//     truncate: true /* this will ignore where and truncate the table instead */
-
-//   });
-
-
-      //   Transaction.findAll({
-      //     where: {
-      //       PortfolioId: portfolio.id
-      //     }
-      //   }).then(function(transactions){
-      //     refTransactions = transactions;
-      //     res.send(transactions);
-      //   })
-      // });
-
-
-    // });
