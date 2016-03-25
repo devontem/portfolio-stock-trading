@@ -108,6 +108,7 @@ $scope.getWatchlist = function (){
     })
   }
 
+
   $scope.delay = function(symbol, delay1){
     console.log('hello buddy', symbol)
     $scope.delay1(symbol);

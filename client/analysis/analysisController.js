@@ -34,6 +34,7 @@ app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFact
   //   console.log($scope.stock.symbol, 'yoyo');
 
 
+
   //   //watchlistToAnalysis(data);
   // })
 
