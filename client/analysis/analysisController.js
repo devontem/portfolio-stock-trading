@@ -9,23 +9,25 @@ app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFact
     console.log($scope.stock.symbol,'lolo')
   }
 
-  
+
 
   $rootScope.$on('symbolAnalysis', function (event, data){
     console.log(data,'data');
     $scope.stock.symbol = data;
     console.log($scope.stock.symbol, 'yoyo');
-    
+
     //watchlistToAnalysis(data);
   })
 
-
+  $scope.submitted = false;
 
   $scope.stockinfo = function(stock){
     AnalysisFactory.getinfo(stock)
       .then(function(stock){
         $scope.stock = stock;
         console.log($scope.stock)
+      }).then(function(){
+        $scope.submitted = true;
       })
   }
 
@@ -45,7 +47,7 @@ app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFact
         d3.csv("/analysis/data.csv", function(error, data) {
           if (error) throw error;
             data.forEach(function(d){
-            
+
             d.date = formatDate.parse(d.Date);
             d.close = +d.Close;
           })
@@ -75,7 +77,7 @@ app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFact
         });
       });
   };
-  
+
   var margin = {top: 20, right: 20, bottom: 30, left: 50},
       width = 960 - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom;
@@ -104,8 +106,8 @@ app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFact
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
     .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");     
-  
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
 console.log($scope.stock.symbol, 'hoho');
 
 }]);
