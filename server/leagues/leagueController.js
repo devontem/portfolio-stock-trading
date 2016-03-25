@@ -249,7 +249,7 @@ var rule = new schedule.RecurrenceRule();
 //This should pull Monday-Friday
 rule.dayOfWeek = [0, new schedule.Range(1, 5)];
 rule.hour = 13;
-rule.minute = 0;
+rule.minute = 1;
 
 
 var j = schedule.scheduleJob(rule, function(){

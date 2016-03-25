@@ -44,6 +44,16 @@ module.exports.postBadge = function(req, res){
 
 };
 
+module.exports.postBadgeServer = function(id, badge){
+  User.findOne({id: id}).then(function (user) {
+    user.addBadge(badge);
+  })
+  .catch(function(err){
+      console.log("Error posting the badge: ", err);
+      return;
+  });
+};
+
 //fethes badges the user has not earned yet
 module.exports.possibleBadges = function (req, res) {
   var id = req.body.userId;
@@ -86,6 +96,16 @@ var badgeMaker = function(){
   Badge.create({
     name: "The Winner's Circle",
     text: 'Congrats! You won your first league. Now for hundred more!',
+    icon: 'flaticon-ribbon'
+  });
+  Badge.create({
+    name: "Second Place",
+    text: 'Congrats! You earned second place!',
+    icon: 'flaticon-ribbon'
+  });
+  Badge.create({
+    name: "Third Place",
+    text: 'Congrats! You earned Third place!',
     icon: 'flaticon-ribbon'
   });
   Badge.create({
