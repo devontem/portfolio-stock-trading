@@ -142,10 +142,6 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
           'symbol@league':{
             controller: 'SymbolController',
             templateUrl: 'symbol/symbol.html'
-          },
-          'chart@league':{
-            //controller: 'PortfolioChartController',
-            templateUrl: 'portfolioChart/portfolioChart.html'
           }
         }
       })
