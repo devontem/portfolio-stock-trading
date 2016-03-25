@@ -23,7 +23,7 @@
       <div class="col s12 m4 l3">
           <form ng-submit="getchart(stock); stockinfo(stock)">
                 <label>Symbol</label>
-                <input ng-model="stock.symbol" placeholder="enter symbol" type="text" class="validate company-symbol">
+                <input ng-model="stock.symbol" placeholder="enter symbol" type="text" class="validate company-symbol" maxlength="5">
                 <section class="col s6">
                   <span>
                   <label>From:
