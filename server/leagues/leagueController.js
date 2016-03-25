@@ -387,19 +387,19 @@ var closeLeague = function () {
             .then(function (user) {
               user.increment('firstPlaces');
             });
-            badgeController.postBadge(userId, 3);
+            badgeController.postBadgeServer(UserId, 3);
           } else if (rankings === 2) {
             User.findById(UserId)
             .then(function (user) {
               user.increment('secondPlaces');
             });
-            badgeController.postBadge(userId, 4);
+            badgeController.postBadgeServer(UserId, 4);
           } else if (rankings === 3) {
             User.findById(UserId)
             .then(function (user) {
               user.increment('thirdPlaces');
             });
-            badgeController.postBadge(userId, 5);
+            badgeController.postBadgeServer(UserId, 5);
           }
 
           // Checks to make sure that the current score does not equal the next score, and if so, makes them both have the same rank
@@ -413,6 +413,8 @@ var closeLeague = function () {
     }
     });
 };
+
+closeLeague();
 
 //   League.destroy({
 //     where: {

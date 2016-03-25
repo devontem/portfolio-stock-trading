@@ -6,7 +6,7 @@ var request = require('request');
 
 module.exports.getBadges = function(req, res){
   var id = req.body.userId;
-  Badge_user.findAll({UserId: id}).then(function(badges){
+  Badge_user.findAll({where:{UserId: id}}).then(function(badges){
     if(badges){
       var badgeList = [];
       for (var i = 0; i < badges.length; i++) {
@@ -34,7 +34,7 @@ module.exports.getBadges = function(req, res){
 module.exports.postBadge = function(req, res){
   var id = req.body.userId;
   var badge = req.body.badge;
-  User.findOne({id: id}).then(function (user) {
+  User.findById(id).then(function (user) {
     user.addBadge(badge);
   }).then(function(badges){
     res.json(badges);
@@ -45,7 +45,7 @@ module.exports.postBadge = function(req, res){
 };
 
 module.exports.postBadgeServer = function(id, badge){
-  User.findOne({id: id}).then(function (user) {
+  User.findById(id).then(function (user) {
     user.addBadge(badge);
   })
   .catch(function(err){
@@ -57,7 +57,7 @@ module.exports.postBadgeServer = function(id, badge){
 //fethes badges the user has not earned yet
 module.exports.possibleBadges = function (req, res) {
   var id = req.body.userId;
-  Badge_user.findAll({UserId: id}).then(function(badges){
+  Badge_user.findAll({where:{UserId: id}}).then(function(badges){
     if(badges){
       var badgeList = [];
       for (var i = 0; i < badges.length; i++) {

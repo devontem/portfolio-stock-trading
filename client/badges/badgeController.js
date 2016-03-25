@@ -25,10 +25,8 @@ app.controller('BadgeController', ['$scope', 'BadgeFactory', '$window', function
           $scope.badges.push(badgeFormatted);
         });
         if (!$scope.badges.length) {
-          $scope.postBadge(1, 2)
-          .then(function () {
-            $scope.getBadges();
-          });
+          $scope.postBadge(1, 2);
+          $scope.getBadges();
         }
       }
     );
