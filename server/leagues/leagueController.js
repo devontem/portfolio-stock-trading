@@ -271,7 +271,7 @@ var calcReturn = function (leagueId, portfolioId) {
   });
 };
 
-var averageReturner = function (userId, currentReturn) {
+var averageReturner = function (UserId, currentReturn) {
   User.findById(UserId)
   .then(function (user) {
     var prevAverage = user.averageReturn;
@@ -284,18 +284,6 @@ var averageReturner = function (userId, currentReturn) {
     });
   });
 };
-//Sets up the node schedule to run at 1pm PST which is 4pm EST, when the NYSE closes
-//The live server (heroku) appears to be on PST
-var rule = new schedule.RecurrenceRule();
-//This should pull Monday-Friday
-rule.dayOfWeek = [0, new schedule.Range(1, 5)];
-rule.hour = 13;
-rule.minute = 1;
-
-
-var j = schedule.scheduleJob(rule, function(){
-  closeLeague();
-});
 
 // This function is mainly used in the closeLeague function to get the most up to date portfolio values before ending the league
 var getLatestPortfolioVals = function (arrayOfLeagues) {
@@ -477,6 +465,18 @@ var closeLeague = function () {
     });
 };
 
+//Sets up the node schedule to run at 1pm PST which is 4pm EST, when the NYSE closes
+//The live server (heroku) appears to be on PST
+var rule = new schedule.RecurrenceRule();
+//This should pull Monday-Friday
+rule.dayOfWeek = [0, new schedule.Range(1, 5)];
+rule.hour = 13;
+rule.minute = 1;
+
+
+var j = schedule.scheduleJob(rule, function(){
+  closeLeague();
+});
 
 //   League.destroy({
 //     where: {
