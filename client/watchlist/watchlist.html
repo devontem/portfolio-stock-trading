@@ -27,8 +27,9 @@
             <td>{{result[5] }}</td>
             <td>{{result[4] }}</td>
             <td>{{result[6] }}</td>
-            <td ng-show='result[1]'><a style="cursor: pointer;" ng-click='removeFromWatchlist(result[0])'>Remove</a> |
-            <a style="cursor: pointer;" ng-click='sendToChart(result[0],delay)'>View Chart</a>
+            <td ng-show='result[1]'>
+            <a style="cursor: pointer;" ng-click='sendToChart(result[0],delay)'>View Chart</a>  |
+            <a style="cursor: pointer;" ng-click='removeFromWatchlist(result[0])'>Remove</a>
           </tr>
         </tbody>
       </table>
