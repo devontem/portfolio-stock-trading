@@ -8,7 +8,7 @@ var salt = bcrypt.genSaltSync(10);
 if (process.env.DEPLOYED === 'TRUE'){
   var orm = new Sequelize(process.env.JAWSDB_URL);
 } else {
-  var orm = new Sequelize('Pistonsdb', 'root', '', {logging:false});
+  var orm = new Sequelize('Pistonsdb', 'root', '');
 }
 
 //User Model
