@@ -1,5 +1,7 @@
 app.controller('PortfolioChartController', ['$scope', 'Portfolio', '$stateParams', '$window', '$rootScope', function($scope, Portfolio, $stateParams, $window, $rootScope){
 
+
+
 $scope.data1 = {
 		series: ['yo', 'yo1'],
 		data: [{
@@ -23,11 +25,13 @@ $scope.data1 = {
 		title: "Asset Allocation",
 		legend: {
 			display: true,
-			position: 'right'
+			position: 'left'
 		},
 		colors: ['#6baed6','#9ecae1'],
 		innerRadius: 0
 	};
+
+
 
 
 $scope.getBalance = function (){
@@ -50,3 +54,7 @@ $rootScope.$on('bought', function(){
 $scope.getBalance();
 
 }]);
+
+
+
+

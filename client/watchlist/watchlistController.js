@@ -107,6 +107,7 @@ $scope.getWatchlist = function (){
       $scope.getWatchlist();
     })
   }
+<<<<<<< 1b3ecc542d684967b2a21c65e3995d3c786e0651
 
   $scope.delay = function(symbol, delay1){
     console.log('hello buddy', symbol)
@@ -129,6 +130,19 @@ $scope.getWatchlist = function (){
   // }
 
 
+=======
+   
+
+  $scope.sendToChart = function (symbol){
+    console.log(symbol,'sym')
+    $window.sym = symbol;
+        
+    $location.path('/analysis')
+    
+  }
+    
+  
+>>>>>>> (fix) chart and watchlist
   $rootScope.$on('addedToWatchlist', function(){
 
     $scope.getWatchlist();
