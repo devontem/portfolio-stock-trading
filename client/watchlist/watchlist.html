@@ -1,3 +1,15 @@
+<style>
+
+
+.positive {
+  color: green;
+}
+
+.negative {
+  color: red;
+}
+</style>
+
 <div class="row">
   <div class="col s12 m12" style="overflow-x: auto;">
     <div class="card-panel white">
@@ -31,12 +43,12 @@
 
         <tbody ng-repeat="result in results">
           <tr>
-            <td>{{result[0]}}</td>
-            <td>{{result[1] | number:2}}</td>
-            <td>{{result[2] | number:2}}</td>
+            <td >{{result[0]}}</td>
+            <td >{{result[1] | number:2}}</td>
+            <td >{{result[2] | number:2}}</td>
             <td>{{result[3] | number:2}}</td>
-            <td>{{result[5] }}</td>
-            <td>{{result[4] }}</td>
+            <td>{{result[5]}}</td>
+            <td ng-class="isPositive(result[4])">{{result[4]}}</td>
             <td>{{result[6] }}</td>
             <td ng-show='result[1]'>
             <a style="cursor: pointer;" ng-click='sendToChart(result[0])'>View Chart</a>  |
