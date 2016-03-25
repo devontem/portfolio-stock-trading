@@ -48,10 +48,29 @@ app.controller('LeagueController', ['$scope', '$stateParams', 'DashboardFactory'
       }
     });
 
-     $(document).ready(function(){
-      // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-      $('.modal-trigger').leanModal();
-    });
+    $scope.getUserLeagues = function () {
+    var userId = $window.localStorage.getItem('com.tp.userId');
+    DashboardFactory.getUserLeagues(userId)
+      .then(function(portfolios){
+        $scope.portfolios = portfolios;
+
+        for(var i = 0; i < $scope.portfolios.length; i++){
+
+          (function(index){
+            $scope.portfolios[index].endDate = '';
+            DashboardFactory.getLeagueById($scope.portfolios[index].id)
+              .then(function(league){
+                $scope.portfolios[index].endDate = league.end;
+              });
+          })(i)
+        }
+        console.log('portfolios', $scope.portfolios);
+        $(document).ready(function(){
+        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+        $('.modal-trigger').leanModal();
+      });
+      });
+  };
       
 
 }]);

@@ -3,21 +3,27 @@
     <div class="card-panel">
       <div class="row">
         <div class="messages-list col s12 l4 center">
-        	<h5 class="center">Inbox<span ng-if="unreadMessages"> ({{unreadMessages}})</span></h5>
+            <div class="message-tabs">
+                <section>
+        	       <h5 class="center">Inbox<span ng-if="unreadMessages"> ({{unreadMessages}})</span></h5>
+                </section>
+                <section>
+                    <h5 class="center">Invites<span ng-if="unreadMessages"> ({{unreadMessages}})</span></h5>
+                </section>
+            </div>
         	<ul class="collection">
-        	<!-- ng-class="(msg.recipientId == sendTo.recipientId ? 'teal lighten-4' : ( !!!msg.read ? 'teal lighten-5' : '')" -->
-				    <li ng-class="currentTab == $index ? 'teal lighten-4' : ( !!!msg.read ? 'teal lighten-5' : '')" ng-repeat="msg in unreadOpenMessages" ng-click="selectSendTo(msg, $index)" class="collection-item avatar clickable">
-				      <i class="material-icons circle blue">perm_identity</i>
-				      <p class="title blue-text text-left">Direct Message</p>
-				      <!-- {{msg}} -->
-				      <p class="text-left">From: {{ msg.recipientId == id ? msg.username[0].toUpperCase()+msg.username.slice(1) : msg.recipientUsername[0].toUpperCase()+msg.recipientUsername.slice(1) }}</p>
-				      <p class="green-text text-left">MSG: "{{msg.message | limitTo: 15}}.."</p>
-				      </p>
-				      <a ng-if="!!!msg.read" class="secondary-content"><i class="material-icons red-text">new_releases</i></a>
-				    </li>
-				    <p ng-if="!unreadOpenMessages.length">You don't have any messages.</p>
-				  </ul>
-				 </div>
+    		    <li ng-class="currentTab == $index ? 'teal lighten-4' : ( !!!msg.read ? 'teal lighten-5' : '')" ng-repeat="msg in unreadOpenMessages" ng-click="selectSendTo(msg, $index)" class="collection-item avatar clickable">
+    		      <i class="material-icons circle blue">perm_identity</i>
+    		      <p class="title blue-text text-left">Direct Message</p>
+    		      <!-- {{msg}} -->
+    		      <p class="text-left">From: {{ msg.recipientId == id ? msg.username[0].toUpperCase()+msg.username.slice(1) : msg.recipientUsername[0].toUpperCase()+msg.recipientUsername.slice(1) }}</p>
+    		      <p class="green-text text-left">MSG: "{{msg.message | limitTo: 15}}.."</p>
+    		      </p>
+    		      <a ng-if="!!!msg.read" class="secondary-content"><i class="material-icons red-text">new_releases</i></a>
+    		    </li>
+    		    <p ng-if="!unreadOpenMessages.length">You don't have any messages.</p>
+    		</ul>
+    	   </div>
         <div class="col s12 l8">
         	<h5 class="center">Messages</h5>
         	<div class="messages-area">
