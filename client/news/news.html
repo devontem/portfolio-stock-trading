@@ -1,28 +1,3 @@
-<!--
-<div class="news-container" style="background-color: white">
-
-
-
-  <table class="news-table highlight">
-    <caption>Tweets</caption>
-    <button ng-click="getTweets()">Tweets</button>
-    <thead>
-      <tr>
-      </tr>
-    </thead>
-
-    <tbody ng-repeat="n in tweets">
-      <tr>
-      <td>
-      <p>time: {{n.time}}</p>
-      <p>{{n.text}} - {{n.user}}</p>
-      </td>
-      </tr>
-    </tbody>
-  </table>
-
-</div>
--->
 
 <div class="news-container">
 
@@ -33,7 +8,7 @@
       <div class = 'card-panel'>
 
         <p style="font-style: italic;">{{n.time}}</p>
-        <p class='twittermessage'>{{n.text}}</p>
+        <p ng-bind-html="tweetLink(n.text)"></p>
         <p class='twitteruser'>{{n.user}}</p>
 
 

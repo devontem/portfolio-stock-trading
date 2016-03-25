@@ -24,9 +24,11 @@ angular.module('app.portfolio', [])
 		$scope.estPrice = '';
 		$scope.singlePrice = '';
 		$scope.total = '';
+		$scope.action = false;
 	};
 
 	$scope.chooseStock = function(stockName){
+		console.log(stockName,'name')
 		Portfolio.getStock(stockName).then(function(stock){
 			stock = stock.data;
 			if(!stock.Ask){
@@ -34,6 +36,7 @@ angular.module('app.portfolio', [])
 			}
 			else {
 			$scope.stock = stock;
+			console.log($scope.stock,'lol')
 			$scope.estPrice = stock.Ask;
 			$scope.singlePrice = stock.Ask;
 		}
@@ -163,13 +166,12 @@ angular.module('app.portfolio', [])
 			$scope.stocks = transactions;
 		});
 
-		$scope.twoDecimal = function(val){
-			return val.toFixed(2);
-		}
-
-
     $rootScope.$emit("PortfolioUpdate", {});
 	}
+
+	$scope.twoDecimal = function(val){
+			return val.toFixed(2);
+		}
 
 	updatePortfolio();
 

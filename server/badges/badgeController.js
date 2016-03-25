@@ -6,7 +6,7 @@ var request = require('request');
 
 module.exports.getBadges = function(req, res){
   var id = req.body.userId;
-  Badge_user.findAll({UserId: id}).then(function(badges){
+  Badge_user.findAll({where:{UserId: id}}).then(function(badges){
     if(badges){
       var badgeList = [];
       for (var i = 0; i < badges.length; i++) {
@@ -34,7 +34,7 @@ module.exports.getBadges = function(req, res){
 module.exports.postBadge = function(req, res){
   var id = req.body.userId;
   var badge = req.body.badge;
-  User.findOne({id: id}).then(function (user) {
+  User.findById(id).then(function (user) {
     user.addBadge(badge);
   }).then(function(badges){
     res.json(badges);
@@ -44,18 +44,27 @@ module.exports.postBadge = function(req, res){
 
 };
 
+module.exports.postBadgeServer = function(id, badge){
+  User.findById(id).then(function (user) {
+    user.addBadge(badge);
+  })
+  .catch(function(err){
+      console.log("Error posting the badge: ", err);
+      return;
+  });
+};
+
 //fethes badges the user has not earned yet
 module.exports.possibleBadges = function (req, res) {
   var id = req.body.userId;
-  Badge_user.findAll({UserId: id}).then(function(badges){
+  Badge_user.findAll({where:{UserId: id}}).then(function(badges){
     if(badges){
       var badgeList = [];
       for (var i = 0; i < badges.length; i++) {
         badgeList.push(badges[i].dataValues.BadgeId);
       }
       Badge.findAll({where: {id: {$not:  badgeList, $gt: 1}}}).then(function(badgeDescription){
-        res.json(badgeDescription);
-        console.log(res);
+        res.send(badgeDescription);
       })
       .catch(function (err) {
         console.log('Error querying the badges databaes:', err);
@@ -89,12 +98,22 @@ var badgeMaker = function(){
     icon: 'flaticon-ribbon'
   });
   Badge.create({
-    name: '3X',
-    text: 'You Logged in for Three Consecutive Days. Woot!',
+    name: "Second Place",
+    text: 'Congrats! You earned second place!',
+    icon: 'flaticon-two-1'
+  });
+  Badge.create({
+    name: "Third Place",
+    text: 'Congrats! You earned Third place!',
     icon: 'flaticon-three'
   });
   Badge.create({
-    name: '5X',
+    name: 'Three Consecutive Logins',
+    text: 'You Logged in for Three Consecutive Days. Woot!',
+    icon: 'flaticon-time'
+  });
+  Badge.create({
+    name: 'Five Consecutive Logins',
     text: 'You Logged in for Five Consecutive Days. Woot!',
     icon: 'flaticon-interface'
   });
@@ -104,12 +123,12 @@ var badgeMaker = function(){
     icon: 'flaticon-days'
   });
   Badge.create({
-    name: 'Shhh!',
+    name: 'Private League',
     text: 'You joined your first private league!',
     icon: 'flaticon-tool'
   });
   Badge.create({
-    name: 'Beginner Broker!',
+    name: 'Beginner Broker',
     text: 'You joined your first public league! Enjoy',
     icon: 'flaticon-circle'
   });

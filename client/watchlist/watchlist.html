@@ -1,8 +1,9 @@
-
-
-<div class="watchlist" style="padding-bottom: 100px">
-	<h1>Watchlist</h1>
-	<table class="highlight centered" id="createTopicScroll" >
+<div class="row" style="width: 100%;">
+  <div class="col s12 m12" style="overflow-x: auto;">
+    <div class="card-panel white">
+      <h3>Watchlist</h3>
+      <div style="overflow-x: auto;">
+      <table class="highlight centered" id="createTopicScroll">
         <thead id="top">
           <tr>
               <th data-field="Symbol">Symbol</th>
@@ -16,22 +17,26 @@
           </tr>
         </thead>
 
+        
+
+
+
         <tbody ng-repeat="result in results">
-        	<tr>
-        		<td>{{result[0]}}</td>
-        		<td>{{result[1] | number:2}}</td>
-        		<td>{{result[2] | number:2}}</td>
-        		<td>{{result[3] | number:2}}</td>
-        		<td>{{result[5] }}</td>
-        		<td>{{result[4] }}</td>
-        		<td>{{result[6] }}</td>
-            <td ng-show='result[1]'><button ng-click='removeFromWatchlist(result[0])'>X</button><button ng-click='sendToChart(result[0],delay)'>Chart</button>
-        	</tr>
-
+          <tr>
+            <td>{{result[0]}}</td>
+            <td>{{result[1] | number:2}}</td>
+            <td>{{result[2] | number:2}}</td>
+            <td>{{result[3] | number:2}}</td>
+            <td>{{result[5] }}</td>
+            <td>{{result[4] }}</td>
+            <td>{{result[6] }}</td>
+            <td ng-show='result[1]'>
+            <a style="cursor: pointer;" ng-click='sendToChart(result[0])'>View Chart</a>  |
+            <a style="cursor: pointer;" ng-click='removeFromWatchlist(result[0])'>Remove</a>
+          </tr>
         </tbody>
-    </table>
-
-
-
-
+      </table>
+      </div>
+    </div>
+  </div>
 </div>

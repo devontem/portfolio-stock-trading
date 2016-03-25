@@ -27,24 +27,27 @@ app.controller('LeaderBoardController', ['$scope', '$window', '$stateParams', 'D
   $scope.leagueId = $stateParams.leagueId;
   $scope.portfolios;
   $scope.leagueName;
+  $scope.userId = $window.localStorage.getItem('com.tp.userId');
 
   $scope.getLeaderBoard = function(){
     // this will call a factory function to grab http data from server and assign returned data to $scope.members;
     leaderBoardFactory.getPortfolios($scope.leagueId)
       .then(function(portfolios){
-        var userId = $window.localStorage.getItem('com.tp.userId');
+        //var userId = $window.localStorage.getItem('com.tp.userId');
         var joined = false;
+        console.log(portfolios, 'what is this');
         for(var i=0; i<portfolios.length; i++){
-          if(portfolios[i].UserId === Number(userId)) joined = true;
-          console.log(portfolios[i].UserId, Number(userId) )
+          if(portfolios[i].UserId === Number($scope.userId)) joined = true;
+          console.log(portfolios[i].UserId, Number($scope.userId) )
         }
-        $scope.portfolios = portfolios;
-        $scope.leagueName = portfolios[0].leaguename;
-        $scope.code = portfolios[0].code;
         if(!joined) {
           $window.location.href = '/#/dashboard';
           Materialize.toast('You are not in the league.',1000);
         }
+        console.log('********' , joined)
+        $scope.portfolios = portfolios;
+        $scope.leagueName = portfolios[0].leaguename;
+        $scope.code = portfolios[0].code;
       });
   };
 

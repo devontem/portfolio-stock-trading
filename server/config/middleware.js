@@ -3,21 +3,6 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var http = require('http-request');
-var League = require('../../db/models').League;
-var User = require('../../db/models').User;
-var Order = require('../../db/models').Order;
-var Portfolio = require('../../db/models').Portfolio;
-var Transaction = require('../../db/models').Transaction;
-var Room_user = require('../../db/models').Room_user;
-var Message = require('../../db/models').Message;
-var Forum = require('../../db/models').Forum;
-var Topic = require('../../db/models').Topic;
-var Watchlist = require('../../db/models').Watchlist;
-var moment = require('moment');
-var fs = require('fs');
-
-var Badge = require('../../db/models').Badge;
-var Badge_user = require('../../db/models').Badge_user;
 var expressJwt = require('express-jwt');
 var jwt = require('jsonwebtoken');
 var morgan = require('morgan');
@@ -57,13 +42,7 @@ module.exports = function (app, express) {
 
   limitOrder();
   dayOrder();
-
-  // http.get('http://ichart.finance.yahoo.com/table.csv?s=AAPL&a=01&b=01&c=2014&d=01&e=01&f=2015&ignore=.csv', function(err, res){
-  //   fs.writeFile('../client/analysis/data.csv', res.buffer.toString(), 'utf8', function(err){
-  //     if(err) return console.log("************")
-  //   });
-  //   console.log(res.buffer.toString(),' ######')
-  // })
+  
 
   // Connecting Router to route files
   app.use('/api/users', userRouter);

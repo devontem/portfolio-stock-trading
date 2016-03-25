@@ -50,12 +50,38 @@ app
   };
 })
 
+//modal for forgot password
+.directive('forgotDirective', function() {
+  return {
+    restrict: 'E',
+    scope: {
+      show: '='
+    },
+    replace: true,
+    link: function(scope, element, attrs) {
+      scope.dialogStyle = {};
+      if (attrs.width) {
+        scope.dialogStyle.width = attrs.width;
+      }
+      if (attrs.height) {
+        scope.dialogStyle.height = attrs.height;
+      }
+      scope.hideforgot = function() {
+        scope.show = false;
+      };
+    },
+    transclude: true,
+    template: "<div class='ng-modal' ng-show='show'><div class='ng-modal-overlay' ng-click='hideforgot()'></div><div class='ng-modal-dialog' ng-style='dialogStyle'><div class='ng-modal-dialog-content' ng-transclude></div></div></div>"
+  };
+})
+
 //signin signup controller
 .controller('SigninController', ['$scope', '$window', 'Auth', 'DirectMessage', '$rootScope', 'DashboardFactory', function($scope, $window, Auth, DirectMessage, $rootScope, DashboardFactory){
   $scope.user = null;
   $scope.id = $window.localStorage.getItem('com.tp.userId') || undefined;
   //$scope.loggedin = false;
   $scope.username;
+
   // $scope.userLeagues;
   $scope.authorize = function(){
     if(Auth.isAuth()){
@@ -82,6 +108,31 @@ app
     $scope.showlogin = !$scope.showlogin;
   };
 
+  $scope.showforgot = false;
+  $scope.toggleForgot = function() {
+    $scope.showforgot = !$scope.showforgot;
+    $scope.emailsent = false;
+  };
+
+  $scope.forgot = function(){
+    $scope.toggleLogin();
+    $scope.toggleForgot();
+  };
+
+  $scope.emailsent = false;
+  $scope.forgotpassword = function(email){
+    if(email) $window.localStorage.setItem('email', email);
+    if(!email) email = $window.localStorage.getItem('email');
+    Auth.forgotpw(email)
+      .then(function(data){
+        if(data === 'User not found'){
+          Materialize.toast('Cannot find the email you entered', 1000);
+        }else{
+          $scope.emailsent = true;
+        }
+      })
+  };
+
   $scope.signup = function(user){
     Auth.createuser(user).then(function(data){
       $window.localStorage.setItem('com.tp', data.token);
@@ -93,8 +144,6 @@ app
       $scope.loggedin = true;
       $window.location.href = '/#/dashboard';
     });
-    // Creates a badge for signing up
-    BadgeFactory.postBadge($scope.id, 2);
   };
 
   $scope.signin = function(user){
@@ -128,8 +177,14 @@ app
     DashboardFactory.getUserLeagues(userId)
       .then(function(userLeagues){
         $scope.userLeagues = userLeagues;
+        console.log('LEAGUES', userLeagues)
       })
   };
+
+
+  $window.onload = function(e) {
+    $scope.getUserLeagues();
+  }
 
   $rootScope.$on('userSignedIn', function(){
      $scope.getUserLeagues();
@@ -166,5 +221,9 @@ app
   if ($scope.id){
     setInterval(getOpenAndUnreadMessages, 3000);
   }
-  
+
+  $scope.notdone = function(league){
+    return !league.leagueEnded;
+  };
+
 }]);

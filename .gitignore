@@ -9,3 +9,4 @@ dist/
 .floo
 .flooignore
 config.js
+data.csv

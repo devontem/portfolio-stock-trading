@@ -1,3 +1,12 @@
+<style>
+.cols .s12 .portfolioChart {
+  height: 500px;
+  width: 500px;
+}
+
+</style>
+
+
 <div class="league-wrapper">
   <div class="league-container row" ng-cloak style="padding-bottom: 100px">
 
@@ -19,17 +28,17 @@
         <!-- News template injected here -->
         <div ui-view="news"></div>
       </div>
-
-      <div class="col s12 messageboard-box card">
-        <!-- Message template injected here -->
-        <div ui-view="messageboard"></div>
+      <div class="row"></div>
+        <div class="col s6 m6 l6 messageboard-box card">
+          <!-- Message template injected here -->
+          <div ui-view="messageboard"></div>
+        </div>
+        <div class="col s1 m1 l1 messageboard-box card"></div>
+        <div class='col s5 m5 l5 recentTransactions-box card'>
+          <div ui-view='recentTransactions'></div>
+        </div>
       </div>
-
-      <div class='col s12 recentTransactions-box card'>
-        <div ui-view='recentTransactions'></div>
-      </div>
-
-      <div class='portfolioChart'>
+      <div class='col s12 portfolioChart'>
         <div ui-view='chart'></div>
       </div>
 

@@ -9,6 +9,8 @@ module.exports = function(app){
 
   app.post('/signin', userController.signIn);
 
+  app.post('/forgotpw', userController.forgotpw);
+
 	app.get('/users/:id', userController.getUserById);
 
   app.post('/getuser', userController.getSingleUser);

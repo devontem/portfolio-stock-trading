@@ -1,6 +1,9 @@
 var User = require('../../db/models').User;
 var Portfolio = require('../../db/models').Portfolio;
 var jwt = require('jsonwebtoken');
+var domain = process.env.MAILGUN_DOMAIN || 'sandbox5e718182e3c24b69a06f7da83d141d9f.mailgun.org';
+var api_key = process.env.MAILGUN_API_KEY || 'key-983c9a49f87895b83eeb82f07388eef4';
+var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 
 module.exports.newUser = function (req, res){
   User.findOne({where:{ username: req.body.username }})
@@ -64,6 +67,40 @@ module.exports.getSingleUser = function (req, res) {
       res.send(err);
     });
 };
+
+module.exports.forgotpw = function(req, res){
+  User.findOne({where: {email: req.body.email }})
+    .then(function(user){
+      if(!user){
+        res.json('User not found');
+      }else{
+        //generate random temp pw
+        var temppw = ''
+        for(var i=0; i<8; i++){
+          var randnum = Math.floor(Math.random()*36);
+          var string = 'abcdefghijklmnopqrstuvwxyz1234567890';
+          temppw += string[randnum];
+        }
+        user.update({
+          password: temppw
+        })
+        var data = {
+          from: 'Excited User <me@samples.mailgun.org>',
+          to: req.body.email,
+          subject: 'Your password has been reset @ Portfol.io',
+          text: 'Hello dear ' + user.username + '!\nYour temporary password has been set to the\
+following:\n'+ temppw + '\n\nPlease go to Portfol.io and log in with your temporary password.\
+ Remember to reset your password in your account page after! Thank you!'
+        };
+        mailgun.messages().send(data, function (error, body) {
+          res.send('Email sent');
+        });
+      }
+    })
+    .catch(function (err) {
+      res.send(err);
+    });
+}
 
 module.exports.updateUser = function (req, res) {
   var iden = req.params.id;

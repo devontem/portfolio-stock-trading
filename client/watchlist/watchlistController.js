@@ -1,12 +1,12 @@
 
 var app = angular.module('app')
 app.controller('WatchlistController', function($scope, $http, symbolFactory, WatchlistFactory,  $rootScope, $location,$window){
- 
+
   $scope.watchlist = [];
   $scope.results =[];
   $scope.stock=[];
-  
-  
+
+
 var userid = $window.localStorage.getItem('com.tp.userId');
 
 
@@ -39,20 +39,20 @@ $scope.getWatchlist = function (){
       return decimalAdjust('round', value, exp);
     };
   }
- 
- 
+
+
   	WatchlistFactory.getWatchlist(userid)
 
   	.then(function (list){
 
-       
+
     // console.log($scope.results,'res1')
       for(var stock in list.data){
         $scope.watchlist.push(stock);
       }
     WatchlistFactory.updateWatchlist($scope.watchlist)
     .then(function (stocks){
-      
+
       stocks.data.pop()
       console.log(stocks.data,'stocks')
       stocks.data.forEach(function(stock){
@@ -83,7 +83,7 @@ $scope.getWatchlist = function (){
           console.log(result1,'res1')
           $scope.stock.push(result1)
         })
-        
+
           $scope.results.push($scope.stock)
           console.log($scope.results,'stock')
         $scope.stock=[];
@@ -107,23 +107,48 @@ $scope.getWatchlist = function (){
       $scope.getWatchlist();
     })
   }
-   
-  $scope.delay = function(symbol){
+
+
+
+  $scope.delay = function(symbol, delay1){
     console.log('hello buddy', symbol)
+    $scope.delay1(symbol);
 
+  }
+
+  $scope.delay1 = function (symbol){
+
+    console.log('hello buddies', symbol)
     $rootScope.$emit('symbolAnalysis', symbol)
-  } 
+  }
 
-  $scope.sendToChart = function (symbol, callback){
+   
+
+
+  $scope.sendToChart = function (symbol){
     console.log(symbol,'sym')
-    //$window.sym = symbol;
+    $window.sym = symbol;
         
     $location.path('/analysis')
-    callback(symbol);
+    
+
+  }
+    
+  
+
+
+   
+
+  $scope.sendToChart = function (symbol){
+    console.log(symbol,'sym')
+    $window.sym = symbol;
+        
+    $location.path('/analysis')
     
   }
     
   
+
   $rootScope.$on('addedToWatchlist', function(){
 
     $scope.getWatchlist();
@@ -134,7 +159,7 @@ $scope.getWatchlist = function (){
 })
 
 .factory('WatchlistFactory', function ($http){
-    
+
     var getWatchlist = function(userid){
     return $http({
       method: 'GET',
@@ -149,7 +174,7 @@ $scope.getWatchlist = function (){
       return $http({
         method: 'Post',
         url:'/api/watchlist/array',
-        data: array 
+        data: array
       })
     }
 
@@ -157,15 +182,15 @@ $scope.getWatchlist = function (){
        return $http({
         method:'Post',
         url: '/api/watchlist/remove',
-        data: data 
+        data: data
        })
     }
-    
+
   return {
     getWatchlist:getWatchlist,
     updateWatchlist:updateWatchlist,
     removeFromWatchlist:removeFromWatchlist
-    
+
   }
 
 })

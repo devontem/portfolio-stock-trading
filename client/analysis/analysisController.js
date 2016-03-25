@@ -1,31 +1,57 @@
 app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFactory', '$window', '$rootScope', function($scope, WatchlistFactory,AnalysisFactory, $window, $rootScope){
 
   $scope.stock = {};
+  // $scope.stock.symbol;
+  // var test;
+
+  // console.log('SCOPE SYMBOL:', test)
   var temp = ""
-  //$scope.stock.symbol = $window.sym;
-
-  function watchlistToAnalysis(symbol){
-    $scope.stock.symbol = symbol;
-    console.log($scope.stock.symbol,'lolo')
-  }
-
-  
-
-  $rootScope.$on('symbolAnalysis', function (event, data){
-    console.log(data,'data');
-    $scope.stock.symbol = data;
-    console.log($scope.stock.symbol, 'yoyo');
-    
-    //watchlistToAnalysis(data);
-  })
+  $scope.stock.symbol='';
+  $scope.stock.symbol = $window.sym;
+  $scope.displayStock = '';
+  console.log($scope.stock.symbol,'symbple')
 
 
+  // function watchlistToAnalysis(symbol){
+  //   $scope.stock.symbol = symbol;
+  //   console.log($scope.stock.symbol,'lolo')
+  // }
 
+//   $rootScope.$on('watchToChart', function(event, data){
+//     console.log('DATATATTAT', data)
+//     console.log(test, 'TEST TEST TEST')
+//     test = data.symbol;
+//     console.log('INSIDE ROOT', data.symbol)
+//     console.log(test, 'WS WS WS')
+//   });
+
+// console.log('AFTER:', test)
+
+
+
+  // $rootScope.$on('symbolAnalysis', function (event, data){
+  //   console.log(data,'data');
+  //   $scope.stock.symbol = data;
+  //   console.log($scope.stock.symbol, 'yoyo');
+
+
+
+
+  //   //watchlistToAnalysis(data);
+  // })
+
+  $scope.submitted = false;
+  $scope.searched = false;
   $scope.stockinfo = function(stock){
     AnalysisFactory.getinfo(stock)
       .then(function(stock){
         $scope.stock = stock;
+        $scope.displayStock = $scope.stock.symbol;
+        $scope.searched = true;
         console.log($scope.stock)
+      }).then(function(){
+        $scope.stock.symbol = '';
+        $scope.submitted = true;
       })
   }
 
@@ -45,7 +71,7 @@ app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFact
         d3.csv("/analysis/data.csv", function(error, data) {
           if (error) throw error;
             data.forEach(function(d){
-            
+
             d.date = formatDate.parse(d.Date);
             d.close = +d.Close;
           })
@@ -74,8 +100,10 @@ app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFact
               .attr("d", line);
         });
       });
+
+
   };
-  
+
   var margin = {top: 20, right: 20, bottom: 30, left: 50},
       width = 960 - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom;
@@ -104,8 +132,8 @@ app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFact
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
     .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");     
-  
-console.log($scope.stock.symbol, 'hoho');
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
 
 }]);

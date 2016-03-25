@@ -11,10 +11,21 @@ app.controller('NewsController', ['$scope', '$window', '$stateParams', 'News', f
     News.getNews(userId, leagueId)
     .then(function (res){
       res.data.forEach(function(tweet){
-        $scope.tweets.push({text : tweet.text, user : tweet.user, time: tweet.created_at});
+        console.log('TWEET: ', tweet)
+        $scope.tweets.push({text: tweet.text, user: tweet.user, time: tweet.created_at});
       });
 
     });
   };
+
+  String.prototype.parseURL = function() {
+    return text.replace(/[A-Za-z]+:\/\/[A-Za-z0-9-_]+\.[A-Za-z0-9-_:%&~\?\/.=]+/g);
+  };
+
+  $scope.tweetLink = function(tweet){
+    var exp = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+    return tweet.replace(exp, "<a href='$1' target='_blank'>$1</a>");
+  }
+
   $scope.getTweets();
 }]);
