@@ -19,7 +19,7 @@
 </style>
 
 <div class="row card-panel white" style="width: 100%; margin-bottom:100px">
-  <div class="row"><h3>Stock Chart</h3></div>
+  <div class="row"><h3>Stock Chart <span ng-if="searched"> for {{ displayStock | uppercase}}</span></h3></div>
       <div class="col s12 m4 l3">
           <form ng-submit="getchart(stock); stockinfo(stock)">
                 <label>Symbol</label>

@@ -8,8 +8,9 @@ app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFact
   var temp = ""
   $scope.stock.symbol='';
   $scope.stock.symbol = $window.sym;
+  $scope.displayStock = '';
   console.log($scope.stock.symbol,'symbple')
-  
+
 
   // function watchlistToAnalysis(symbol){
   //   $scope.stock.symbol = symbol;
@@ -40,13 +41,16 @@ app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFact
   // })
 
   $scope.submitted = false;
-
+  $scope.searched = false;
   $scope.stockinfo = function(stock){
     AnalysisFactory.getinfo(stock)
       .then(function(stock){
         $scope.stock = stock;
+        $scope.displayStock = $scope.stock.symbol;
+        $scope.searched = true;
         console.log($scope.stock)
       }).then(function(){
+        $scope.stock.symbol = '';
         $scope.submitted = true;
       })
   }
@@ -96,7 +100,7 @@ app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFact
               .attr("d", line);
         });
       });
-   
+
 
   };
 
