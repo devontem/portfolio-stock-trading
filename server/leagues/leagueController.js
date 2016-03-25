@@ -244,6 +244,33 @@ function makeCode(){
   return text;
 }
 
+
+// Function for calculating a return
+var calcReturn = function (leagueId, portfolioId) {
+  var startBal = 0;
+  var curTotal = 0;
+  var difference = 0;
+  var returnPercentage = 0;
+
+  League.findById(leagueId)
+  .then(function (league) {
+    startBal = league.startbalance;
+
+    Portfolio.findById(portfolioId)
+    .then(function (port) {
+      curTotal = port.portfolioValue + port.balance;
+      difference = curTotal - startBal;
+      returnPercentage = (difference / startBal) * 100;
+      Portfolio.update({
+        returnPercentage: returnPercentage
+      }, {
+        where:
+        {id: port.id }
+      });
+    });
+  });
+
+};
 //Sets up the node schedule to run at 1pm PST which is 4pm EST, when the NYSE closes
 //The live server (heroku) appears to be on PST
 var rule = new schedule.RecurrenceRule();
@@ -380,8 +407,11 @@ var closeLeague = function () {
             }
           });
 
+          var leagueId = portsToSort[k].LeagueId;
           var UserId = portsToSort[k].UserId;
 
+          // Calculates the return for the current portfolio and updates the model
+          calcReturn(leagueId, portsToSort[k].id);
           // Increments leagues joined
           User.findById(UserId)
           .then(function (user) {
@@ -418,6 +448,17 @@ var closeLeague = function () {
       });
     }
     });
+};
+
+closeLeague();
+
+var averageReturner = function (userId, currentReturn) {
+  User.findById(UserId)
+  .then(function (user) {
+    var prevAverage = user.averageReturn;
+    var priorLeagueTotal = user.leaguesJoined;
+  });
+
 };
 
 //   League.destroy({
