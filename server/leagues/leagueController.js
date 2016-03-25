@@ -317,6 +317,80 @@ var portfolioSorter = function (portfolios) {
   return portsToSort;
 };
 
+// Adds rankings to the portfolios after they are sorted
+// and also calculates the current returnPercentage
+// Also performs specific behavior on league end, such as updating
+// average overall return rate to the user model
+var leagueUpdater = function (portsToSort, leagueIsEnding) {
+  leagueIsEnding = leagueIsEnding || false;
+  var rankings = 1;
+
+  for (var k = 0; k < portsToSort.length; k++) {
+    Portfolio.update({
+      rank: rankings,
+      leagueEnded: true
+    }, {
+      where: {
+        id: portsToSort[k].id
+      }
+    });
+
+    var leagueId = portsToSort[k].LeagueId;
+    var UserId = portsToSort[k].UserId;
+
+    // Calculates the return for the current portfolio and updates the model
+    calcReturn(leagueId, portsToSort[k].id);
+
+    var currentReturn = 0;
+    // Gets the value of the returnPercentage from the portfolio to be
+    // used in the average return calculations
+    Portfolio.findById(portsToSort[k].id)
+    .then(function (port) {
+      var currentReturn = port.returnPercentage;
+    });
+
+    if (leagueIsEnding) {
+      // This calculates the average return by comparing it to the average
+      // on user model
+      averageReturner(UserId, currentReturn);
+
+      // Increments leagues joined
+      User.findById(UserId)
+      .then(function (user) {
+        user.increment('leaguesJoined');
+      });
+
+
+      if (rankings === 1) {
+        User.findById(UserId)
+        .then(function (user) {
+          user.increment('firstPlaces');
+        });
+        badgeController.postBadgeServer(UserId, 3);
+      } else if (rankings === 2) {
+        User.findById(UserId)
+        .then(function (user) {
+          user.increment('secondPlaces');
+        });
+        badgeController.postBadgeServer(UserId, 4);
+      } else if (rankings === 3) {
+        User.findById(UserId)
+        .then(function (user) {
+          user.increment('thirdPlaces');
+        });
+        badgeController.postBadgeServer(UserId, 5);
+      }
+    }
+
+
+    // Checks to make sure that the current score does not equal the next score, and if so, makes them both have the same rank
+    if (portsToSort[k + 1] && portsToSort[k].total === portsToSort[k + 1].total) {
+      continue;
+    } else {
+      rankings +=1;
+    }
+  }
+};
 // This function is mainly used in the closeLeague function to get the most up to date portfolio values before ending the league
 var getLatestPortfolioVals = function (arrayOfLeagues) {
   Portfolio.findAll({
@@ -383,10 +457,6 @@ var getLatestPortfolioVals = function (arrayOfLeagues) {
   });
 };
 
-var setRankings = function () {
-
-};
-
 var closeLeague = function () {
   var currentMoment = moment().utc();
   League.findAll({where: {hasEnded: false}})
@@ -413,71 +483,8 @@ var closeLeague = function () {
 
         var portsToSort = portfolioSorter(portfolios);
 
+        leagueUpdater(portsToSort, true);
 
-        var rankings = 1;
-
-        for (var k = 0; k < portsToSort.length; k++) {
-          Portfolio.update({
-            rank: rankings,
-            leagueEnded: true
-          }, {
-            where: {
-              id: portsToSort[k].id
-            }
-          });
-
-          var leagueId = portsToSort[k].LeagueId;
-          var UserId = portsToSort[k].UserId;
-
-          // Calculates the return for the current portfolio and updates the model
-          calcReturn(leagueId, portsToSort[k].id);
-
-          var currentReturn = 0;
-          // Gets the value of the returnPercentage from the portfolio to be
-          // used in the average return calculations
-          Portfolio.findById(portsToSort[k].id)
-          .then(function (port) {
-            var currentReturn = port.returnPercentage;
-          });
-
-          // This calculates the average return by comparing it to the average
-          // on user model
-          averageReturner(UserId, currentReturn);
-
-          // Increments leagues joined
-          User.findById(UserId)
-          .then(function (user) {
-            user.increment('leaguesJoined');
-          });
-
-
-          if (rankings === 1) {
-            User.findById(UserId)
-            .then(function (user) {
-              user.increment('firstPlaces');
-            });
-            badgeController.postBadgeServer(UserId, 3);
-          } else if (rankings === 2) {
-            User.findById(UserId)
-            .then(function (user) {
-              user.increment('secondPlaces');
-            });
-            badgeController.postBadgeServer(UserId, 4);
-          } else if (rankings === 3) {
-            User.findById(UserId)
-            .then(function (user) {
-              user.increment('thirdPlaces');
-            });
-            badgeController.postBadgeServer(UserId, 5);
-          }
-
-          // Checks to make sure that the current score does not equal the next score, and if so, makes them both have the same rank
-          if (portsToSort[k + 1] && portsToSort[k].total === portsToSort[k + 1].total) {
-            continue;
-          } else {
-            rankings +=1;
-          }
-        }
       });
     }
     });
@@ -495,3 +502,5 @@ rule.minute = 1;
 var j = schedule.scheduleJob(rule, function(){
   closeLeague();
 });
+
+closeLeague();
