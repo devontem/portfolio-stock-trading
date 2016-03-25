@@ -33,5 +33,37 @@
         <div ui-view='chart'></div>
       </div>
 
+      <!-- TESTING INVITE LEAGUES -->
+  <!-- Modal Trigger -->
+   <button data-target="invite-modal" class="btn modal-trigger">Invite</button>
+
+    <!-- Modal Structure -->
+    <div id="invite-modal" class="modal">
+      <div class="modal-content">
+        <h4 class="center blue-text">Invite to Join a League!</h4>
+        <h6>Leagues You're In</h6>
+        <div>
+          <article ng-repeat="league in leaguesJoined">
+            <img src="" />
+            <p><b>league name</b></p>
+            <p>Start:</p>
+            <p>End:</p>
+            <p>Spots: </p>
+          </article>
+        </div>
+        <p>A bunch of text</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+      </div>
+    </div>
+    <script>
+     $(document).ready(function(){
+        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+        $('.modal-trigger').leanModal();
+      });
+    </script>
+
+    <!-- END OF TEST -->
   </div>
 </div>
