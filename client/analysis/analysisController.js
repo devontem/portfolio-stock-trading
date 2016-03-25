@@ -1,23 +1,36 @@
 app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFactory', '$window', '$rootScope', function($scope, WatchlistFactory,AnalysisFactory, $window, $rootScope){
 
   $scope.stock = {};
+  // $scope.stock.symbol;
+  // var test;
+
+  // console.log('SCOPE SYMBOL:', test)
   var temp = ""
   //$scope.stock.symbol = $window.sym;
 
-  function watchlistToAnalysis(symbol){
-    $scope.stock.symbol = symbol;
-    console.log($scope.stock.symbol,'lolo')
-  }
+  // function watchlistToAnalysis(symbol){
+  //   $scope.stock.symbol = symbol;
+  //   console.log($scope.stock.symbol,'lolo')
+  // }
+
+//   $rootScope.$on('watchToChart', function(event, data){
+//     console.log('DATATATTAT', data)
+//     console.log(test, 'TEST TEST TEST')
+//     test = data.symbol;
+//     console.log('INSIDE ROOT', data.symbol)
+//     console.log(test, 'WS WS WS')
+//   });
+
+// console.log('AFTER:', test)
 
 
+  // $rootScope.$on('symbolAnalysis', function (event, data){
+  //   console.log(data,'data');
+  //   $scope.stock.symbol = data;
+  //   console.log($scope.stock.symbol, 'yoyo');
 
-  $rootScope.$on('symbolAnalysis', function (event, data){
-    console.log(data,'data');
-    $scope.stock.symbol = data;
-    console.log($scope.stock.symbol, 'yoyo');
-
-    //watchlistToAnalysis(data);
-  })
+  //   //watchlistToAnalysis(data);
+  // })
 
   $scope.submitted = false;
 
@@ -108,6 +121,6 @@ app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFact
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-console.log($scope.stock.symbol, 'hoho');
+
 
 }]);

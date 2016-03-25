@@ -21,10 +21,10 @@
 <div class="row card-panel white" style="width: 100%; margin-bottom:100px">
   <div class="row"><h3>Stock Chart</h3></div>
       <div class="col s12 m4 l4">
-
+          <h3>SYMBOL YES:{{stock.symbol}}</h3>
           <form ng-submit="getchart(stock); stockinfo(stock)">
                 <label>Symbol</label>
-                <input ng-model="stock.symbol" placeholder="Enter Symbol" type="text" class="validate company-symbol">
+                <input ng-model="stock.symbol" value="hello" placeholder="enter symbol" type="text" class="validate company-symbol">
                 <section class="col s6">
                   <span>
                   <label>Start Date
