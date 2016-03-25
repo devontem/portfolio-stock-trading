@@ -124,6 +124,7 @@ $scope.getWatchlist = function (){
 
    
 
+
   $scope.sendToChart = function (symbol){
     console.log(symbol,'sym')
     $window.sym = symbol;
