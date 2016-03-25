@@ -28,6 +28,7 @@ module.exports = function (app, express) {
   var directMessageRouter = express.Router();
   var WatchlistRouter = express.Router();
   var analysisRouter = express.Router();
+  var leagueInviteRouter = express.Router();
 
   app.use(morgan('dev'));
   // Configuring middleware
@@ -60,6 +61,7 @@ module.exports = function (app, express) {
   app.use('/api/directmessages', directMessageRouter);
   app.use('/api/analysis', analysisRouter);
   app.use('/api/watchlist', WatchlistRouter);
+  app.use('/api/leagueinvites', leagueInviteRouter);
 
   require('../analysis/analysisRoutes.js')(analysisRouter);
   require('../tweets/tweetRoutes.js')(tweetRouter);
@@ -76,5 +78,6 @@ module.exports = function (app, express) {
   require('../badges/badgeRoutes.js')(badgeRouter);
   require('../directMessages/directMessageRoutes.js')(directMessageRouter);
   require('../watchlist/watchlistRoutes.js')(WatchlistRouter);
+  require('../leagueInvites/leagueInviteRoutes.js')(leagueInviteRouter);
 
 };

@@ -164,40 +164,9 @@
         </form>
       </div>
       </addleague-directive>
-            <!-- TESTING INVITE LEAGUES -->
-  <!-- Modal Trigger -->
-   <button data-target="invite-modal" class="btn modal-trigger">Invite</button>
-
-    <!-- Modal Structure -->
-    <div id="invite-modal" class="modal">
-      <div class="modal-content">
-        <h4 class="center blue-text text-darken-1">Invite friends!</h4>
-        <h5 class="center blue-text text-darken-3">Send Invites for Leagues You're In.</h5>
-        <div class="league-wrapper teal lighten-5">
-          <article ng-click="toggleInvite(league)" ng-class="isSelected(league) ? 'teal lighten-3' : ''" class="clickable" ng-repeat="league in portfolios">
-            <img src="../assets/img/money-flat.png" />
-            <p><b>{{league.leaguename}}</b></p>
-            <p>Start: {{league.createdAt | date:'mediumDate'}}</p>
-            <p>End: {{ league.endDate | date:'mediumDate'}}</p>
-          </article>
-        </div>
-
-      </div>
-      <div class="modal-footer">
-        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-      </div>
-    </div>
-
-    <!-- END OF TEST -->
       <div ui-view="badge">
 
       </div>
   </div>
 </div>
 
-  <script>
-     $(document).ready(function(){
-        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-        $('.modal-trigger').leanModal();
-      });
-    </script>

@@ -1,11 +1,14 @@
 app
 
-.controller('MessagesController', function($scope, $window, DirectMessage){
+.controller('MessagesController', function($scope, $window, $rootScope, DashboardFactory, LeagueInvite, DirectMessage){
   $scope.username = $window.localStorage.getItem('com.tp.username');
   $scope.id = $window.localStorage.getItem('com.tp.userId');
   $scope.sendTo = null;
+  $scope.tab = "inbox";
 
-
+  $scope.changeTab = function(view){
+  	$scope.tab = view;
+  }
 
 	$scope.sendMessage = function(){
 		if (!$scope.sendTo){
@@ -19,7 +22,6 @@ app
 		var msg = {};
 		msg.username = $scope.username;
 		msg.message = $scope.input;
-		console.log(msg, $scope.sendTo)
 
 		DirectMessage.sendMessage($scope.id, recipientId, msg).then(function(){
 			console.log('Message Sent', msg);
@@ -90,10 +92,90 @@ app
 
 	function updateMessageCenter(){
 		getOpenAndUnreadMessages();
+		getInvitesByUserId()
+
+		// if a chat is open, it refreshes for new messages
 		if ($scope.sendTo){
 			getMessagesBetween();
 		}
 	}
+
+	$scope.joinLeague = function (leagueId) {
+    var userId = $window.localStorage.getItem('com.tp.userId');
+    DashboardFactory.joinLeague(leagueId, userId)
+      .then(function(){
+        $window.location.href = '/#/leagues/'+leagueId.toString();
+        $rootScope.$emit('newleague');
+      });
+  };
+
+  $scope.getUserLeagues = function () {
+    var userId = $window.localStorage.getItem('com.tp.userId');
+    DashboardFactory.getUserLeagues(userId)
+      .then(function(portfolios){
+        $scope.portfolios = portfolios;
+
+        for(var i = 0; i < $scope.portfolios.length; i++){
+
+          (function(index){
+            $scope.portfolios[index].endDate = '';
+            DashboardFactory.getLeagueById($scope.portfolios[index].id)
+              .then(function(league){
+                $scope.portfolios[index].endDate = league.end;
+              });
+          })(i)
+        }
+      });
+  };
+
+  $scope.getUserLeagues();
+
+	function getInvitesByUserId(){
+    LeagueInvite.getInvitesByUserId($scope.id).then(function(data){
+      $scope.invites = data;
+
+      // updating counter
+      var counter = 0;
+	    $scope.invites.forEach(function(invite){
+	    	if (!invite.read){ counter++ }
+	    });
+	    $scope.unreadInvites = counter;
+    });
+  }
+
+  $scope.openInvite = function(invite){
+
+  	swal({title: "Join "+invite.leaguename+"?",  
+  				text: invite.username+" wants you to join this league with them!",   
+  				type: "info",   
+  				showCancelButton: true,   
+  				confirmButtonColor: "#DD6B55",
+  				cancelButtonText: "Decline",
+  				confirmButtonText: "Accept",  
+  				confirmButtonColor: '#9ccc65', 
+  				closeOnConfirm: false }, function(){   
+
+
+  					//checks to see if user is already in the league
+  					for (var i = 0; i < $scope.portfolios.length; i++){
+  						if ($scope.portfolios[i].leagueId == invite.leagueId){
+  							swal("Cannot Join", "You're already in this league!", "error"); 
+  							return false;
+  						}
+  					}
+
+  					// joining the league
+  					$scope.joinLeague(invite.leagueId);
+  					swal("Joined!", "You are now apart of this league!", "success"); 
+  				});
+
+  	// changes that message to read
+		LeagueInvite.markRead(invite.id).then(function(){
+			getInvitesByUserId();
+		});
+  }
+
+  getInvitesByUserId();
 
 	// On page load fetches already open conversations
 	DirectMessage.getOpenAndUnreadMessages($scope.id).then(function(data){
@@ -109,7 +191,7 @@ app
 				}
 				return message;
 			});
-			// only update it ng-model if value changes
+			// only update it's ng-model if value changes
       if (counter !== $scope.unreadMessages){
         $scope.unreadMessages = counter;
       }

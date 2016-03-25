@@ -160,6 +160,17 @@ var Badge = orm.define('Badge', {
   icon: Sequelize.STRING
 });
 
+//League Invite
+var LeagueInvite = orm.define('LeagueInvite', {
+  receiverId: Sequelize.INTEGER,
+  leaguename: Sequelize.STRING,
+  leagueId: Sequelize.STRING,
+  username: Sequelize.STRING,
+  read: Sequelize.BOOLEAN,
+  start: Sequelize.STRING,
+  end: Sequelize.STRING
+});
+
 //Join table for League and user
 var League_user = orm.define('League_user', {
 });
@@ -212,6 +223,10 @@ Order.belongsTo(Portfolio);
 User.hasMany(DirectMessage);
 DirectMessage.belongsTo(User);
 
+//league invite
+User.hasMany(LeagueInvite);
+LeagueInvite.belongsTo(User);
+
 // // User to FriendRequest - One to Many
 // User.hasMany(FriendRequest);
 // FriendRequest.belongsTo(User);
@@ -233,6 +248,7 @@ Order.sync();
 Badge.sync();
 DirectMessage.sync();
 Watchlist.sync();
+LeagueInvite.sync();
 
 exports.League_user = League_user;
 exports.Badge_user = Badge_user;
@@ -251,3 +267,4 @@ exports.Badge = Badge;
 exports.DirectMessage = DirectMessage;
 exports.Badge = Badge;
 exports.Watchlist = Watchlist;
+exports.LeagueInvite = LeagueInvite;

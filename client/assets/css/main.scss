@@ -664,18 +664,14 @@ th{
 	}
 
 	.message-tabs{
-		border: 1px solid #ddd;
-    border-bottom: none;
+/*		border: 1px solid #ddd;
+    border-bottom: none;*/
     max-height: 48px;
     min-height: 48px;
 
     	section{
     		width: 48%;
     		display: inline-block;
-
-    		&:first-child{
-    			border-right: 1px solid #ddd;
-    		}
     	}
 	}
 }
@@ -748,6 +744,10 @@ th{
   -moz-transform:    rotate(140deg);
   -ms-transform:     rotate(140deg);
   -o-transform:      rotate(140deg);
+}
+
+.smaller{
+	font-size: 0.8em
 }
 
 #invite-modal{

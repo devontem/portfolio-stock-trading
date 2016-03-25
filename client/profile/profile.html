@@ -9,7 +9,7 @@
           <div class="collection clickable">
             <a ng-class="active === 'accountInfo' ? 'active' : ''" class="collection-item" ng-click="showAccount()">Add Friend</a>
             <a ng-class="active === 'editLogin' ? 'active' : ''" class="collection-item" ng-click="sendMessage()">Send Message</a>
-            <a ng-class="active === 'editLeagues' ? 'active' : ''" class="collection-item" ng-click="editLeagues()">Send League Invite</a>
+            <a data-target="invite-modal" class="collection-item modal-trigger">Send League Invite</a>
             <a class="collection-item red-text" ng-click="delete()">REPORT USER</a>
           </div>
         </div>
@@ -114,5 +114,28 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+            <!-- TESTING INVITE LEAGUES -->
+  <!-- Modal Trigger -->
+<!--    <button data-target="invite-modal" class="btn modal-trigger">Invite</button> -->
+
+<!-- Invite Leagues Modal Structure -->
+<div id="invite-modal" class="modal">
+  <div class="modal-content">
+    <h4 class="center blue-text text-darken-1">Invite friends!</h4>
+    <h5 class="center blue-text text-darken-3">Send Invites for Leagues You're In.</h5>
+    <div class="league-wrapper teal lighten-5 center">
+      <article ng-click="toggleInvite(league)" ng-class="isSelected(league.leagueId) ? 'teal lighten-3' : ''" class="clickable" ng-repeat="league in visitorPortfolios">
+        <img src="../assets/img/money-flat.png" />
+        <p><b>{{league.leaguename}}</b></p>
+        <p>End: {{ league.endDate | date:'mediumDate'}}</p>
+      </article>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <a ng-click="sendInvite()" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
   </div>
 </div>

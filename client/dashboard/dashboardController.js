@@ -35,7 +35,7 @@ angular.module('app.dashboard', [])
   };
 })
 
-.controller('DashboardController', ['$scope', '$window', 'DashboardFactory', 'leaderBoardFactory', '$rootScope', function ($scope, $window, DashboardFactory, leaderBoardFactory, $rootScope) {
+.controller('DashboardController', ['$scope', '$window', 'DashboardFactory', 'leaderBoardFactory', 'LeagueInvite', '$rootScope', function ($scope, $window, DashboardFactory, leaderBoardFactory, LeagueInvite, $rootScope) {
 
   $scope.currentTab = 'user';
   $scope.leagues;
@@ -154,7 +154,6 @@ angular.module('app.dashboard', [])
               });
           })(i)
         }
-        console.log('internal', $scope.portfolios)
       });
   };
 
@@ -285,35 +284,4 @@ angular.module('app.dashboard', [])
   //   hour+=24;
   //   $scope.getLeaguesToJoin();
   // }, 10000)
-
-  // SEND LEAGUE INVITE TEST
-    //REQUIRE $scope.portfolios, getuserleagues() function
-
-    $scope.leagueInvites = [];
-
-    $scope.toggleInvite = function(league){
-      // if deselecting, remove
-      var index = $scope.leagueInvites.indexOf(league);
-      console.log('index is...', index)
-      if (index > -1){
-        $scope.leagueInvites.splice(index, 1);
-      } else {
-        $scope.leagueInvites.push(league);
-      }
-      console.log('array', $scope.leagueInvites);
-      console.log($scope.leagueInvites.indexOf(league) > -1)
-    }
-
-    $scope.isSelected = function(league){
-      return $scope.leagueInvites.indexOf(league) > -1;
-    }
-
-
-  $(document).ready(function(){
-        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-        $('.modal-trigger').leanModal();
-      });
-
-  //END SEND LEAGUE INVITE TEST
-
 }]);

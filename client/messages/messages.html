@@ -4,17 +4,17 @@
       <div class="row">
         <div class="messages-list col s12 l4 center">
             <div class="message-tabs">
-                <section>
-        	       <h5 class="center">Inbox<span ng-if="unreadMessages"> ({{unreadMessages}})</span></h5>
+                <section ng-click="changeTab('inbox')" ng-class="tab==='inbox' ? 'grey lighten-2': ''">
+        	       <h5 class="center clickable">Inbox<span class="smaller" ng-if="unreadMessages"> ({{unreadMessages}})</span></h5>
                 </section>
-                <section>
-                    <h5 class="center">Invites<span ng-if="unreadMessages"> ({{unreadMessages}})</span></h5>
+                <section ng-click="changeTab('invites')" ng-class="tab==='invites' ? 'grey lighten-2': ''">
+                    <h5 class="center clickable">Invites<span class="smaller" ng-if="unreadInvites"> ({{unreadInvites}})</span></h5>
                 </section>
             </div>
-        	<ul class="collection">
+        	<ul ng-if="tab === 'inbox'"class="collection">
     		    <li ng-class="currentTab == $index ? 'teal lighten-4' : ( !!!msg.read ? 'teal lighten-5' : '')" ng-repeat="msg in unreadOpenMessages" ng-click="selectSendTo(msg, $index)" class="collection-item avatar clickable">
     		      <i class="material-icons circle blue">perm_identity</i>
-    		      <p class="title blue-text text-left">Direct Message</p>
+    		      <p class="title blue-text text-darken-3 text-left">Direct Message</p>
     		      <!-- {{msg}} -->
     		      <p class="text-left">From: {{ msg.recipientId == id ? msg.username[0].toUpperCase()+msg.username.slice(1) : msg.recipientUsername[0].toUpperCase()+msg.recipientUsername.slice(1) }}</p>
     		      <p class="green-text text-left">MSG: "{{msg.message | limitTo: 15}}.."</p>
@@ -23,6 +23,18 @@
     		    </li>
     		    <p ng-if="!unreadOpenMessages.length">You don't have any messages.</p>
     		</ul>
+            <ul ng-if="tab === 'invites'" class="collection">
+                <li ng-class="!invite.read ? 'teal lighten-5' : ''" ng-repeat="invite in invites" ng-click="openInvite(invite)" class="collection-item avatar clickable">
+                  <i class="material-icons circle orange">email</i>
+                  <p class="title orange-text text-darken-3 text-left">League Invite</p>
+                  <!-- {{msg}} -->
+                  <p class="text-left">From: {{invite.username[0].toUpperCase()+invite.username.slice(1) }}</p>
+                  <p class="green-text text-left">END DATE: {{invite.end | date:'mediumDate'}}</p>
+                  </p>
+                  <a ng-if="!!!invite.read" class="secondary-content"><i class="material-icons red-text">new_releases</i></a>
+                </li>
+                <p ng-if="!invites.length">You don't have any invites.</p>
+            </ul>
     	   </div>
         <div class="col s12 l8">
         	<h5 class="center">Messages</h5>

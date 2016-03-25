@@ -528,15 +528,13 @@ th {
   text-align: left; }
 
 .messages-container .message-tabs {
-  border: 1px solid #ddd;
-  border-bottom: none;
+  /*		border: 1px solid #ddd;
+    border-bottom: none;*/
   max-height: 48px;
   min-height: 48px; }
   .messages-container .message-tabs section {
     width: 48%;
     display: inline-block; }
-    .messages-container .message-tabs section:first-child {
-      border-right: 1px solid #ddd; }
 
 .badge-ribbon {
   position: relative;
@@ -601,6 +599,9 @@ th {
   -moz-transform: rotate(140deg);
   -ms-transform: rotate(140deg);
   -o-transform: rotate(140deg); }
+
+.smaller {
+  font-size: 0.8em; }
 
 #invite-modal .league-wrapper {
   overflow-x: scroll;
