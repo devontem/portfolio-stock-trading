@@ -20,20 +20,20 @@
 
 <div class="row card-panel white" style="width: 100%; margin-bottom:100px">
   <div class="row"><h3>Stock Chart</h3></div>
-      <div class="col s12 m4 l4">
+      <div class="col s12 m4 l3">
           <form ng-submit="getchart(stock); stockinfo(stock)">
                 <label>Symbol</label>
                 <input ng-model="stock.symbol" placeholder="enter symbol" type="text" class="validate company-symbol">
                 <section class="col s6">
                   <span>
-                  <label>Start Date
+                  <label>From:
                   <input id="datepick1" ng-model="stock.start" type="date" class="datepicker">
                   </label>
                   </span>
                 </section>
                 <section class="col s6">
                   <span>
-                  <label>End Date
+                  <label>To:
                   <input id="datepick2" ng-model="stock.end" type="date" class="datepicker">
                   </label>
                   </span>
