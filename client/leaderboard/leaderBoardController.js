@@ -35,6 +35,7 @@ app.controller('LeaderBoardController', ['$scope', '$window', '$stateParams', 'D
       .then(function(portfolios){
         //var userId = $window.localStorage.getItem('com.tp.userId');
         var joined = false;
+        console.log(portfolios, 'what is this');
         for(var i=0; i<portfolios.length; i++){
           if(portfolios[i].UserId === Number($scope.userId)) joined = true;
           console.log(portfolios[i].UserId, Number($scope.userId) )
