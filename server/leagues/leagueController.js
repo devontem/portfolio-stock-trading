@@ -170,6 +170,9 @@ module.exports.getUsers = function(req, res){
     .then(function(portfolios){
     if (!portfolios) {
       res.redirect("/#/dashboard");
+    } else {
+      var portsToSort = portfolioSorter(portfolios);
+      leagueUpdater(portsToSort, false);
     }
       res.send(portfolios);
     })
@@ -328,7 +331,7 @@ var leagueUpdater = function (portsToSort, leagueIsEnding) {
   for (var k = 0; k < portsToSort.length; k++) {
     Portfolio.update({
       rank: rankings,
-      leagueEnded: true
+      leagueEnded: leagueIsEnding
     }, {
       where: {
         id: portsToSort[k].id
@@ -502,5 +505,3 @@ rule.minute = 1;
 var j = schedule.scheduleJob(rule, function(){
   closeLeague();
 });
-
-closeLeague();
