@@ -67,7 +67,8 @@
                  <table>
                    <tr ng-repeat = 'result in symbolResults'>
                      <td>{{result.name}}</td>
-                     <td><a ng-click="addStock(result.symbol)"><h3>{{result.symbol}}</h3></a></td>
+                     <td><a style="cursor: pointer" onMouseOver="this.style.color='white'"
+   onMouseOut="this.style.color='red'" ng-click="addStock(result.symbol)"><h3>{{result.symbol}}</h3></a></td>
                   </tr>
                  </table>
                </div>
