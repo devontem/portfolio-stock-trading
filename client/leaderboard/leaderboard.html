@@ -18,6 +18,7 @@
             <th data-field="user">Name</th>
             <th data-field="value">Total Value</th>
             <th data-field="trades"># of Trades</th>
+            <th data-field="returnPercentage">% Return</th>
 
         </tr>
       </thead>
@@ -27,6 +28,8 @@
           <td class="tdcenter"><a ng-href="/#/profiles/{{portfolio.UserId}}">{{portfolio.username}}</a></td>
           <td class="tdcenter">{{portfolio.balance + portfolio.portfolioValue  | currency : symbol : fractionSize}}</td>
           <td class="tdcenter">{{portfolio.numOfTrades}}</td>
+          <td class="tdcenter">{{portfolio.returnPercentage}}</td>
+
         </tr>
       </tbody>
       </table>
