@@ -89,7 +89,8 @@ module.exports.forgotpw = function(req, res){
           to: req.body.email,
           subject: 'Your password has been reset @ Portfol.io',
           text: 'Hello dear ' + user.username + '!\nYour temporary password has been set to the\
-          following:\n'+ temppw + '\n\nPlease login and go to your account page to reset your password.  Thank you!'
+following:\n'+ temppw + '\n\nPlease go to Portfol.io and log in with your temporary password.\
+ Remember to reset your password in your account page after! Thank you!'
         };
         mailgun.messages().send(data, function (error, body) {
           res.send('Email sent');
