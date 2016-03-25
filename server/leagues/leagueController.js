@@ -37,6 +37,7 @@ module.exports.addLeague = function (req, res){
         leaguename: league.name,
         portfolioValue: 0,
         numOfTrades: 0,
+        leagueEnded: false,
         // Initializes the value to zero, won't be calculated until the league actually ends
         rank: 0
       })
@@ -370,7 +371,8 @@ var closeLeague = function () {
 
         for (var k = 0; k < portsToSort.length; k++) {
           Portfolio.update({
-            rank: rankings
+            rank: rankings,
+            leagueEnded: true
           }, {
             where: {
               id: portsToSort[k].id

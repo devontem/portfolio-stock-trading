@@ -128,8 +128,14 @@ app
     DashboardFactory.getUserLeagues(userId)
       .then(function(userLeagues){
         $scope.userLeagues = userLeagues;
+        console.log('LEAGUES', userLeagues)
       })
   };
+
+
+  $window.onload = function(e) {
+    $scope.getUserLeagues();
+  }
 
   $rootScope.$on('userSignedIn', function(){
      $scope.getUserLeagues();
@@ -166,5 +172,9 @@ app
   if ($scope.id){
     setInterval(getOpenAndUnreadMessages, 3000);
   }
-  
+
+  $scope.notdone = function(league){
+    return !league.leagueEnded;
+  };
+
 }]);
