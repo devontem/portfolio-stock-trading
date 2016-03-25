@@ -120,6 +120,7 @@ $scope.getWatchlist = function (){
 
     console.log('hello buddies', symbol)
     $rootScope.$emit('symbolAnalysis', symbol)
+  }
 
    
 
