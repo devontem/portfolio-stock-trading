@@ -316,6 +316,10 @@ footer.page-footer {
   font-size: 0.8em;
   font-weight: bold; }
 
+.forgot:hover {
+  color: blue;
+  text-decoration: underline; }
+
 /*.portfolio-search input{
 	display: inline-block;
 	width: 70%;

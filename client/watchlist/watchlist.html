@@ -1,7 +1,29 @@
-<div class="row" style="width: 100%;">
+<style>
+
+
+.positive {
+  color: green;
+}
+
+.negative {
+  color: red;
+}
+</style>
+
+<div class="row">
   <div class="col s12 m12" style="overflow-x: auto;">
     <div class="card-panel white">
-      <h3>Watchlist</h3>
+      <h3>Watchlist <a ng-click="reload()" style="cursor: pointer" onMouseOver="this.style.color='teal'"
+   onMouseOut="this.style.color='red'"><i class="material-icons small" title="refresh" style="">replay</i></a></h3>
+      <span>
+        <div class="input-field">
+              <input style="width: 200px; margin-bottom: 20px" ng-model="stockSym" placeholder="Symbol" type="text" class="validate" maxlength="5" required>
+              <div class="row">
+              <button class="btn col s1" style="margin-right: 15px" ng-click="addStock(stockSym)">Add</button>
+              <button ng-click="openModal()"style="width: 200px" class="btn col s1">Find Symbol</button>
+              </div>
+        </div>
+      </span>
       <div style="overflow-x: auto;">
       <table class="highlight centered" id="createTopicScroll">
         <thead id="top">
@@ -10,25 +32,23 @@
               <th data-field="Price">Price ($)</th>
               <th data-field="Open">Open ($)</th>
               <th data-field="Close">Close ($)</th>
-              <th data-field="DaysRange">Days Range ($)</th>
+              <th data-field="DaysRange">Day Range ($)</th>
               <th data-field="DayChange">Day Change ($)</th>
-              <th data-field="52Range">52 week Range ($)</th>
+              <th data-field="52Range">52-week Range ($)</th>
               <th data-field="Action">Action</th>
           </tr>
         </thead>
-
-        
 
 
 
         <tbody ng-repeat="result in results">
           <tr>
-            <td>{{result[0]}}</td>
-            <td>{{result[1] | number:2}}</td>
-            <td>{{result[2] | number:2}}</td>
+            <td >{{result[0]}}</td>
+            <td >{{result[1] | number:2}}</td>
+            <td >{{result[2] | number:2}}</td>
             <td>{{result[3] | number:2}}</td>
-            <td>{{result[5] }}</td>
-            <td>{{result[4] }}</td>
+            <td>{{result[5]}}</td>
+            <td ng-class="isPositive(result[4])">{{result[4]}}</td>
             <td>{{result[6] }}</td>
             <td ng-show='result[1]'>
             <a style="cursor: pointer;" ng-click='sendToChart(result[0])'>View Chart</a>  |
@@ -40,3 +60,42 @@
     </div>
   </div>
 </div>
+
+
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <div class="row">
+      <div class="col m12">
+        <div class="card blue-grey darken-1">
+          <div class="card-content white-text">
+            <span class="card-title">Find Ticker Symbol</span>
+            <div class="row" style="color: white">
+               <div class="input-field">
+                 <input ng-model="stockName" placeholder="type in company here" id="first_name2" type="text" class="validate" >
+                 <label class="active" for="first_name2">Stock LookUp</label>
+                 <a ng-click="getStock(stockName)"class="waves-effect waves-light btn">Find Stock Symbol</a>
+                 <table>
+                   <tr ng-repeat = 'result in symbolResults'>
+                     <td>{{result.name}}</td>
+                     <td><a style="cursor: pointer" onMouseOver="this.style.color='white'"
+   onMouseOut="this.style.color='red'" ng-click="addStock(result.symbol)"><h3>{{result.symbol}}</h3></a></td>
+                  </tr>
+                 </table>
+               </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+ $(document).ready(function(){
+    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    $('.modal-trigger').openModal();
+  });
+</script>

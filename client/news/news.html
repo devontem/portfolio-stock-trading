@@ -8,7 +8,7 @@
       <div class = 'card-panel'>
 
         <p style="font-style: italic;">{{n.time}}</p>
-        <p ng-bind-html="tweetLink(n.text)"></p>
+        <p ng-bind-html="n.text | linky:'_blank'"></p>
         <p class='twitteruser'>{{n.user}}</p>
 
 

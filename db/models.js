@@ -23,6 +23,8 @@ var User = orm.define('User', {
     secondPlaces: Sequelize.INTEGER,
     thirdPlaces: Sequelize.INTEGER,
     badgeLastLogin: Sequelize.DATE,
+    averageReturn: Sequelize.INTEGER,
+    leaguesJoined: Sequelize.INTEGER,
 
     email: {
     	type: Sequelize.STRING,
@@ -53,7 +55,7 @@ var Watchlist = orm.define('Watchlist', {
   symbol: Sequelize.STRING
 
 
-})
+});
 
 //Portfolio Model
 var Portfolio = orm.define('Portfolio', {
@@ -63,7 +65,8 @@ var Portfolio = orm.define('Portfolio', {
   username: Sequelize.STRING,
   leaguename: Sequelize.STRING,
   rank: Sequelize.INTEGER,
-  leagueEnded: Sequelize.BOOLEAN
+  leagueEnded: Sequelize.BOOLEAN,
+  returnPercentage: Sequelize.INTEGER
 });
 
 // Forum & Topics Model

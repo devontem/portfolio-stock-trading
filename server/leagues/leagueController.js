@@ -162,9 +162,18 @@ module.exports.editOneLeague = function (req, res) {
 };
 
 module.exports.getUsers = function(req, res){
+  var leagueId = req.body.leagueId;
+  // Gets the most up to date values for the portfolios
+  // And update the rankings
+  getLatestPortfolioVals([leagueId]);
   Portfolio.findAll({where: {leagueId: req.body.leagueId}})
     .then(function(portfolios){
-    if(!portfolios) res.redirect("/#/dashboard");
+    if (!portfolios) {
+      res.redirect("/#/dashboard");
+    } else {
+      var portsToSort = portfolioSorter(portfolios);
+      leagueUpdater(portsToSort, false);
+    }
       res.send(portfolios);
     })
     .catch(function (err) {
@@ -244,19 +253,147 @@ function makeCode(){
   return text;
 }
 
-//Sets up the node schedule to run at 1pm PST which is 4pm EST, when the NYSE closes
-//The live server (heroku) appears to be on PST
-var rule = new schedule.RecurrenceRule();
-//This should pull Monday-Friday
-rule.dayOfWeek = [0, new schedule.Range(1, 5)];
-rule.hour = 13;
-rule.minute = 1;
+
+// Function for calculating a return
+var calcReturn = function (leagueId, portfolioId) {
+  var startBal = 0;
+  var curTotal = 0;
+  var difference = 0;
+  var returnPercentage = 0;
+
+  League.findById(leagueId)
+  .then(function (league) {
+    startBal = league.startbalance;
+
+    Portfolio.findById(portfolioId)
+    .then(function (port) {
+      curTotal = port.portfolioValue + port.balance;
+      difference = curTotal - startBal;
+      returnPercentage = (difference / startBal) * 100;
+      Portfolio.update({
+        returnPercentage: returnPercentage
+      }, {
+        where:
+        {id: port.id }
+      });
+    });
+  });
+};
+
+// Calculates overall average
+var averageReturner = function (UserId, currentReturn) {
+  User.findById(UserId)
+  .then(function (user) {
+    var prevAverage = user.averageReturn;
+    var priorLeagueTotal = user.leaguesJoined;
+    // We are adding one to the priorLeagueTotal in order to get the correct number of leagues
+    var average = ((prevAverage * priorLeagueTotal) + (currentReturn)) / (priorLeagueTotal + 1);
+
+    user.update({
+      averageReturn: average
+    });
+  });
+};
+
+var portfolioSorter = function (portfolios) {
+  var portsToSort = [];
+  portfolios.forEach(function (portfolio) {
+    var portObj = {};
+    portObj.id = portfolio.dataValues.id;
+    portObj.balance = portfolio.dataValues.balance;
+    portObj.portfolioValue = portfolio.dataValues.portfolioValue;
+    portObj.UserId = portfolio.dataValues.UserId;
+    portObj.LeagueId = portfolio.dataValues.leagueId;
+    portObj.total = portObj.balance + portObj.portfolioValue;
+    portsToSort.push(portObj);
+  });
+  portsToSort.sort(function (port1, port2) {
+    if (port1.total < port2.total) {
+      return 1;
+    } else if (port1.total > port2.total) {
+      return -1;
+    } else {
+      return 0;
+    }
+  });
+
+  return portsToSort;
+};
+
+// Adds rankings to the portfolios after they are sorted
+// and also calculates the current returnPercentage
+// Also performs specific behavior on league end, such as updating
+// average overall return rate to the user model
+var leagueUpdater = function (portsToSort, leagueIsEnding) {
+  leagueIsEnding = leagueIsEnding || false;
+  var rankings = 1;
+
+  for (var k = 0; k < portsToSort.length; k++) {
+    Portfolio.update({
+      rank: rankings,
+      leagueEnded: leagueIsEnding
+    }, {
+      where: {
+        id: portsToSort[k].id
+      }
+    });
+
+    var leagueId = portsToSort[k].LeagueId;
+    var UserId = portsToSort[k].UserId;
+
+    // Calculates the return for the current portfolio and updates the model
+    calcReturn(leagueId, portsToSort[k].id);
+
+    var currentReturn = 0;
+    // Gets the value of the returnPercentage from the portfolio to be
+    // used in the average return calculations
+    Portfolio.findById(portsToSort[k].id)
+    .then(function (port) {
+      var currentReturn = port.returnPercentage;
+    });
+
+    if (leagueIsEnding) {
+      // This calculates the average return by comparing it to the average
+      // on user model
+      averageReturner(UserId, currentReturn);
+
+      // Increments leagues joined
+      User.findById(UserId)
+      .then(function (user) {
+        user.increment('leaguesJoined');
+      });
 
 
-var j = schedule.scheduleJob(rule, function(){
-  closeLeague();
-});
+      if (rankings === 1) {
+        User.findById(UserId)
+        .then(function (user) {
+          user.increment('firstPlaces');
+        });
+        badgeController.postBadgeServer(UserId, 3);
+      } else if (rankings === 2) {
+        User.findById(UserId)
+        .then(function (user) {
+          user.increment('secondPlaces');
+        });
+        badgeController.postBadgeServer(UserId, 4);
+      } else if (rankings === 3) {
+        User.findById(UserId)
+        .then(function (user) {
+          user.increment('thirdPlaces');
+        });
+        badgeController.postBadgeServer(UserId, 5);
+      }
+    }
 
+
+    // Checks to make sure that the current score does not equal the next score, and if so, makes them both have the same rank
+    if (portsToSort[k + 1] && portsToSort[k].total === portsToSort[k + 1].total) {
+      continue;
+    } else {
+      rankings +=1;
+    }
+  }
+};
 // This function is mainly used in the closeLeague function to get the most up to date portfolio values before ending the league
 var getLatestPortfolioVals = function (arrayOfLeagues) {
   Portfolio.findAll({
@@ -347,91 +484,24 @@ var closeLeague = function () {
       Portfolio.findAll({where: {leagueId: leaguesEnded[j]}})
       .then(function (portfolios) {
 
-        var portsToSort = [];
-        portfolios.forEach(function (portfolio) {
-          var portObj = {};
-          portObj.id = portfolio.dataValues.id;
-          portObj.balance = portfolio.dataValues.balance;
-          portObj.portfolioValue = portfolio.dataValues.portfolioValue;
-          portObj.UserId = portfolio.dataValues.UserId;
-          portObj.LeagueId = portfolio.dataValues.leagueId;
-          portObj.total = portObj.balance + portObj.portfolioValue;
-          portsToSort.push(portObj);
-        });
-        portsToSort.sort(function (port1, port2) {
-          if (port1.total < port2.total) {
-            return 1;
-          } else if (port1.total > port2.total) {
-            return -1;
-          } else {
-            return 0;
-          }
-        });
+        var portsToSort = portfolioSorter(portfolios);
 
-        var rankings = 1;
+        leagueUpdater(portsToSort, true);
 
-        for (var k = 0; k < portsToSort.length; k++) {
-          Portfolio.update({
-            rank: rankings,
-            leagueEnded: true
-          }, {
-            where: {
-              id: portsToSort[k].id
-            }
-          });
-
-          var UserId = portsToSort[k].UserId;
-
-          if (rankings === 1) {
-            User.findById(UserId)
-            .then(function (user) {
-              user.increment('firstPlaces');
-            });
-            badgeController.postBadgeServer(UserId, 3);
-          } else if (rankings === 2) {
-            User.findById(UserId)
-            .then(function (user) {
-              user.increment('secondPlaces');
-            });
-            badgeController.postBadgeServer(UserId, 4);
-          } else if (rankings === 3) {
-            User.findById(UserId)
-            .then(function (user) {
-              user.increment('thirdPlaces');
-            });
-            badgeController.postBadgeServer(UserId, 5);
-          }
-
-          // Checks to make sure that the current score does not equal the next score, and if so, makes them both have the same rank
-          if (portsToSort[k + 1] && portsToSort[k].total === portsToSort[k + 1].total) {
-            continue;
-          } else {
-            rankings +=1;
-          }
-        }
       });
     }
     });
 };
 
-//   League.destroy({
-//     where: {
-//       subject: 'programming'
-//     },
-//     truncate: true /* this will ignore where and truncate the table instead */
-
-//   });
-
-
-      //   Transaction.findAll({
-      //     where: {
-      //       PortfolioId: portfolio.id
-      //     }
-      //   }).then(function(transactions){
-      //     refTransactions = transactions;
-      //     res.send(transactions);
-      //   })
-      // });
+//Sets up the node schedule to run at 1pm PST which is 4pm EST, when the NYSE closes
+//The live server (heroku) appears to be on PST
+var rule = new schedule.RecurrenceRule();
+//This should pull Monday-Friday
+rule.dayOfWeek = [0, new schedule.Range(1, 5)];
+rule.hour = 13;
+rule.minute = 1;
 
 
-    // });
+var j = schedule.scheduleJob(rule, function(){
+  closeLeague();
+});
