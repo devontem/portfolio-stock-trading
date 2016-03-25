@@ -269,7 +269,19 @@ var calcReturn = function (leagueId, portfolioId) {
       });
     });
   });
+};
 
+var averageReturner = function (userId, currentReturn) {
+  User.findById(UserId)
+  .then(function (user) {
+    var prevAverage = user.averageReturn;
+    var priorLeagueTotal = user.leaguesJoined;
+    // We are adding one to the priorLeagueTotal in order to get the correct number of leagues
+    var average = (prevAverage * priorLeagueTotal) + (currentReturn) / (priorLeagueTotal + 1);
+    user.update({
+      averageReturn: average
+    });
+  });
 };
 //Sets up the node schedule to run at 1pm PST which is 4pm EST, when the NYSE closes
 //The live server (heroku) appears to be on PST
@@ -412,11 +424,25 @@ var closeLeague = function () {
 
           // Calculates the return for the current portfolio and updates the model
           calcReturn(leagueId, portsToSort[k].id);
+
+          var currentReturn = 0;
+          // Gets the value of the returnPercentage from the portfolio to be
+          // used in the average return calculations
+          Portfolio.findById(portsToSort[k].id)
+          .then(function (port) {
+            var currentReturn = port.returnPercentage;
+          });
+
+          // This calculates the average return by comparing it to the average
+          // on user model
+          averageReturner(UserId, currentReturn);
+
           // Increments leagues joined
           User.findById(UserId)
           .then(function (user) {
             user.increment('leaguesJoined');
           });
+
 
           if (rankings === 1) {
             User.findById(UserId)
@@ -452,14 +478,7 @@ var closeLeague = function () {
 
 closeLeague();
 
-var averageReturner = function (userId, currentReturn) {
-  User.findById(UserId)
-  .then(function (user) {
-    var prevAverage = user.averageReturn;
-    var priorLeagueTotal = user.leaguesJoined;
-  });
 
-};
 
 //   League.destroy({
 //     where: {
