@@ -18,10 +18,5 @@ app.controller('NewsController', ['$scope', '$window', '$stateParams', 'News', f
     });
   };
 
-  $scope.tweetLink = function(tweet){
-    var exp = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
-    return tweet.replace(exp, "<a href='$1' target='_blank'>$1</a>");
-  }
-
   $scope.getTweets();
 }]);
