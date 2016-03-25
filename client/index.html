@@ -111,7 +111,7 @@
           <br>
           <label>Password </label><br>
           <input type="password" ng-model='user.password' required><br>
-          <br>
+          <p ng-click="forgot()">Forgot Password?</p>
           <button class="waves-effect waves-light btn std-btn">Log In</button>
         </form>
       </div>
@@ -134,6 +134,28 @@
         </form>
       </div>
     </signup-directive>
+
+    <forgot-directive show='showforgot' width='350px' height='420px'>
+      <div ng-if="showforgot && !emailsent" class="signup">
+        <h3 class="brand-logo"> Forgot your password? </h3>
+        <h6>Don't worry! We will email you instructions on how to reset it.</h6>
+        <br>
+        <form name="signinForm" ng-submit='forgotpassword(user.email)'>
+          <label>Email </label><br>
+          <input type='text' ng-model='user.email' required>
+          <br>
+          <button class="waves-effect waves-light btn std-btn">Reset Password</button>
+        </form>
+      </div>
+      <div ng-if="showforgot && emailsent" class="signup">
+        <h3 class="brand-logo"> You're almost finished! </h3>
+        <h6>Instructions on how to reset your password have been emailed. Don't see it? Click below to resend.</h6>
+        <br>
+        <form name="signinForm" ng-submit='forgotpassword(user.email)'>
+          <button class="waves-effect waves-light btn std-btn">Reset Password</button>
+        </form>
+      </div>
+    </forgot-directive>
 
   <!-- Angular view goes here -->
   <div ui-view class="ng-ui-view"></div>
