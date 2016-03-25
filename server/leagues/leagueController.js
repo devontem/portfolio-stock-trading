@@ -414,8 +414,6 @@ var closeLeague = function () {
     });
 };
 
-closeLeague();
-
 //   League.destroy({
 //     where: {
 //       subject: 'programming'
