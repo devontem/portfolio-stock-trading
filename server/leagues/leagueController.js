@@ -8,6 +8,7 @@ var orm = require('../../db/models').orm;
 var schedule = require('node-schedule');
 var moment = require('moment');
 var request = require('request');
+var badgeController = require('../badges/badgeController.js');
 
 module.exports.addLeague = function (req, res){
   var creatorId = req.body.creatorId;
@@ -249,7 +250,7 @@ var rule = new schedule.RecurrenceRule();
 //This should pull Monday-Friday
 rule.dayOfWeek = [0, new schedule.Range(1, 5)];
 rule.hour = 13;
-rule.minute = 0;
+rule.minute = 1;
 
 
 var j = schedule.scheduleJob(rule, function(){
@@ -386,16 +387,19 @@ var closeLeague = function () {
             .then(function (user) {
               user.increment('firstPlaces');
             });
+            badgeController.postBadgeServer(UserId, 3);
           } else if (rankings === 2) {
             User.findById(UserId)
             .then(function (user) {
               user.increment('secondPlaces');
             });
+            badgeController.postBadgeServer(UserId, 4);
           } else if (rankings === 3) {
             User.findById(UserId)
             .then(function (user) {
               user.increment('thirdPlaces');
             });
+            badgeController.postBadgeServer(UserId, 5);
           }
 
           // Checks to make sure that the current score does not equal the next score, and if so, makes them both have the same rank
