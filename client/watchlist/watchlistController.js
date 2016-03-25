@@ -17,6 +17,10 @@ $scope.closeModal = function(){
   $('#modal1').closeModal();
 };
 
+$scope.reload = function(){
+  $scope.getWatchlist();
+}
+
 $scope.getStock = function(stock){
  $scope.symbolResults=[];
  var filter =[];

@@ -1,7 +1,8 @@
 <div class="row">
   <div class="col s12 m12" style="overflow-x: auto;">
     <div class="card-panel white">
-      <h3>Watchlist</h3>
+      <h3>Watchlist <a ng-click="reload()" style="cursor: pointer" onMouseOver="this.style.color='teal'"
+   onMouseOut="this.style.color='red'"><i class="material-icons small" title="refresh" style="">replay</i></a></h3>
       <span>
         <div class="input-field">
               <input style="width: 200px; margin-bottom: 20px" ng-model="stockSym" placeholder="Symbol" type="text" class="validate" maxlength="5" required>
