@@ -64,8 +64,7 @@ module.exports.possibleBadges = function (req, res) {
         badgeList.push(badges[i].dataValues.BadgeId);
       }
       Badge.findAll({where: {id: {$not:  badgeList, $gt: 1}}}).then(function(badgeDescription){
-        res.json(badgeDescription);
-        console.log(res);
+        res.send(badgeDescription);
       })
       .catch(function (err) {
         console.log('Error querying the badges databaes:', err);
