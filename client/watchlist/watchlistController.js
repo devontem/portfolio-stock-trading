@@ -9,6 +9,19 @@ app.controller('WatchlistController', ['$scope', '$http', 'symbolFactory', 'Watc
 var userid = $window.localStorage.getItem('com.tp.userId');
 
 
+$scope.isPositive = function (val){
+  val = val.slice(0,-1);
+  var result = parseFloat(val);
+  if(result > 0) {
+    return 'positive';
+    }
+    else {
+      return 'negative';
+    }  
+
+}
+
+
 $scope.openModal = function(){
   $('#modal1').openModal();
 };
@@ -157,47 +170,6 @@ $scope.stockSym = '';
     $rootScope.$emit('addedToWatchlist')
   })
 }
-
-
-
-  $scope.delay = function(symbol, delay1){
-    console.log('hello buddy', symbol)
-    $scope.delay1(symbol);
-
-  }
-
-  $scope.delay1 = function (symbol){
-
-    console.log('hello buddies', symbol)
-    $rootScope.$emit('symbolAnalysis', symbol)
-  }
-
-
-
-
-  $scope.sendToChart = function (symbol){
-    console.log(symbol,'sym')
-    $window.sym = symbol;
-
-    $location.path('/analysis')
-
-
-  }
-
-
-
-
-
-
-
-  $scope.sendToChart = function (symbol){
-    $window.sym = symbol;
-
-    $location.path('/analysis')
-
-  }
-
-
 
 
 
