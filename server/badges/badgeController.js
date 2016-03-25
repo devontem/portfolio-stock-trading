@@ -100,20 +100,20 @@ var badgeMaker = function(){
   Badge.create({
     name: "Second Place",
     text: 'Congrats! You earned second place!',
-    icon: 'flaticon-ribbon'
+    icon: 'flaticon-two-1'
   });
   Badge.create({
     name: "Third Place",
     text: 'Congrats! You earned Third place!',
-    icon: 'flaticon-ribbon'
-  });
-  Badge.create({
-    name: '3X',
-    text: 'You Logged in for Three Consecutive Days. Woot!',
     icon: 'flaticon-three'
   });
   Badge.create({
-    name: '5X',
+    name: 'Three Consecutive Logins',
+    text: 'You Logged in for Three Consecutive Days. Woot!',
+    icon: 'flaticon-time'
+  });
+  Badge.create({
+    name: 'Five Consecutive Logins',
     text: 'You Logged in for Five Consecutive Days. Woot!',
     icon: 'flaticon-interface'
   });
@@ -123,12 +123,12 @@ var badgeMaker = function(){
     icon: 'flaticon-days'
   });
   Badge.create({
-    name: 'Shhh!',
+    name: 'Private League',
     text: 'You joined your first private league!',
     icon: 'flaticon-tool'
   });
   Badge.create({
-    name: 'Beginner Broker!',
+    name: 'Beginner Broker',
     text: 'You joined your first public league! Enjoy',
     icon: 'flaticon-circle'
   });

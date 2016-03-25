@@ -1,6 +1,6 @@
 	/*
   	Flaticon icon font: Flaticon
-  	Creation date: 24/03/2016 00:10
+  	Creation date: 25/03/2016 16:45
   	*/
 
 @font-face {
@@ -25,8 +25,8 @@
 [class^="flaticon-"]:after, [class*=" flaticon-"]:after {
   font-family: Flaticon;
         font-size: 50px;
-        margin: 25px;
 font-style: normal;
+margin-left: 26px;
 }
 
 .flaticon-agenda:before { content: "\f100"; }
@@ -35,24 +35,33 @@ font-style: normal;
 .flaticon-circle:before { content: "\f103"; }
 .flaticon-coins:before { content: "\f104"; }
 .flaticon-commerce:before { content: "\f105"; }
-.flaticon-days:before { content: "\f106"; }
-.flaticon-graphic:before { content: "\f107"; }
-.flaticon-graphic-1:before { content: "\f108"; }
-.flaticon-graphic-2:before { content: "\f109"; }
-.flaticon-interface:before { content: "\f10a"; }
-.flaticon-line:before { content: "\f10b"; }
-.flaticon-line-1:before { content: "\f10c"; }
-.flaticon-man:before { content: "\f10d"; }
-.flaticon-money:before { content: "\f10e"; }
-.flaticon-money-1:before { content: "\f10f"; }
-.flaticon-money-2:before { content: "\f110"; }
-.flaticon-people:before { content: "\f111"; }
-.flaticon-profile:before { content: "\f112"; }
-.flaticon-ribbon:before { content: "\f113"; }
-.flaticon-shapes:before { content: "\f114"; }
-.flaticon-three:before { content: "\f115"; }
-.flaticon-time:before { content: "\f116"; }
-.flaticon-time-1:before { content: "\f117"; }
-.flaticon-tool:before { content: "\f118"; }
-.flaticon-tool-1:before { content: "\f119"; }
-.flaticon-two:before { content: "\f11a"; }
+.flaticon-computer:before { content: "\f106"; }
+.flaticon-cup:before { content: "\f107"; }
+.flaticon-days:before { content: "\f108"; }
+.flaticon-graphic:before { content: "\f109"; }
+.flaticon-graphic-1:before { content: "\f10a"; }
+.flaticon-graphic-2:before { content: "\f10b"; }
+.flaticon-graphic-3:before { content: "\f10c"; }
+.flaticon-interface:before { content: "\f10d"; }
+.flaticon-line:before { content: "\f10e"; }
+.flaticon-line-1:before { content: "\f10f"; }
+.flaticon-man:before { content: "\f110"; }
+.flaticon-money:before { content: "\f111"; }
+.flaticon-money-1:before { content: "\f112"; }
+.flaticon-money-2:before { content: "\f113"; }
+.flaticon-money-3:before { content: "\f114"; }
+.flaticon-money-4:before { content: "\f115"; }
+.flaticon-money-5:before { content: "\f116"; }
+.flaticon-people:before { content: "\f117"; }
+.flaticon-profile:before { content: "\f118"; }
+.flaticon-ribbon:before { content: "\f119"; }
+.flaticon-shapes:before { content: "\f11a"; }
+.flaticon-symbols:before { content: "\f11b"; }
+.flaticon-three:before { content: "\f11c"; }
+.flaticon-time:before { content: "\f11d"; }
+.flaticon-time-1:before { content: "\f11e"; }
+.flaticon-tool:before { content: "\f11f"; }
+.flaticon-tool-1:before { content: "\f120"; }
+.flaticon-tool-2:before { content: "\f121"; }
+.flaticon-two:before { content: "\f122"; }
+.flaticon-two-1:before { content: "\f123"; }
