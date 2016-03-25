@@ -4,11 +4,6 @@
       <div class="nav-wrapper">
         <a class="brand-logo center">Account Settings</b></a>
         <ul class="right hide-on-med-and-down">
-<!--          <li><a href="sass.html"><i class="material-icons">search</i></a></li>
-          <li><a href="badges.html"><i class="material-icons">view_module</i></a></li> -->
-          <!-- <li>Portfolio Value: {{ portfolioValue | currency }}   |   Balance: {{ balance | currency }}</li> -->
-          <!-- <li><a ng-click="getLeaderBoard()"><i class="material-icons">refresh</i></a></li> -->
-<!--          <li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li> -->
         </ul>
       </div>
     </nav>
@@ -18,7 +13,8 @@
           <div class="collection clickable">
             <a ng-class="active === 'accountInfo' ? 'active' : ''" class="collection-item" ng-click="showAccount()">Account Information</a>
             <a class="collection-item" ng-href="/#/profiles/{{id}}">View Profile</a>
-            <a ng-class="active === 'editLogin' ? 'active' : ''" class="collection-item" ng-click="editLogin()">Edit Login</a>
+            <a ng-class="active === 'updatepw' ? 'active' : ''" class="collection-item" ng-click="editPW()">Update Password</a>
+            <a ng-class="active === 'editEmail' ? 'active' : ''" class="collection-item" ng-click="editEmail()">Edit Email</a>
             <a ng-class="active === 'editLeagues' ? 'active' : ''" class="collection-item" ng-click="editLeagues()">Manage Leagues</a>
             <a class="collection-item red-text" ng-click="delete()">DELETE ACCOUNT</a>
           </div>
@@ -45,17 +41,32 @@
 
             </ul>
           </div>
-          <div ng-if="active === 'editLogin'">
-            <h5 class="center">Edit Login</h5>
-            <form ng-submit="updateLogin(newlogin)">
-              <input ng-model="newlogin.email" id="email" type="email" class="validate">
+          <div ng-if="active === 'editEmail'">
+            <h5 class="center">Edit Email</h5>
+            <form ng-submit="updateEmail(newemail)">
+              <input ng-model="newemail.email" id="email" type="email" class="validate">
               <label for="email">New Email</label>
+              <input ng-model="newemail.confirmemail" id="email" type="email" class="validate">
+              <label for="email">Confirm New Email</label>
+              <input ng-model="newemail.password" id="email" type="password" class="validate">
+              <label for="password">Current Password</label>
+              <div class="buttons center">
+              <input class="waves-effect waves-light btn" type="submit" value="Submit">
+              <a class="waves-effect waves-light btn" ng-click="cancel()">Cancel</a>
+              </div>
+            </form>
+          </div>
+          <div ng-if="active === 'updatepw'">
+            <h5 class="center">Update Password</h5>
+            <form ng-submit="updatePW(newpw)">
+              <input ng-model="newpw.oldpw" id="email" type="password" class="validate">
+              <label for="email">Old Password</label>
 
-              <input ng-model="newlogin.oldpass" id="email" type="password" class="validate">
-              <label for="password">Old Password</label>
-
-              <input ng-model="newlogin.pass" id="password" type="password" class="validate">
+              <input ng-model="newpw.newpw" id="email" type="password" class="validate">
               <label for="password">New Password</label>
+
+              <input ng-model="newpw.confirmnewpw" id="password" type="password" class="validate">
+              <label for="password">Confirm New Password</label>
 
               <div class="buttons center">
                 <input class="waves-effect waves-light btn" type="submit" value="Submit">

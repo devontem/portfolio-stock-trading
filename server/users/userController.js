@@ -175,9 +175,9 @@ module.exports.profileImage = function(req, res){
   User.findOne({where:{ id: req.body.userId }})
     .then(function(user){
       if(user){
-        user.update({ image : req.body.image })
+        user.update({ image : req.body.image });
       }else{
-        res.status(404).json('No user found!')
+        res.status(404).json('No user found!');
       }
     })
     .catch(function (err) {
@@ -185,6 +185,52 @@ module.exports.profileImage = function(req, res){
     });
 }
 
-module.exports.signOut = function (req, res){
+module.exports.updateEmail = function (req, res){
+  
+  User.findOne({where: {id: req.body.userId }})
+    .then(function(user){
+      if(user){
+        if(!user.validPassword(req.body.password, user.password)){
+          res.json('Wrong password');
+          res.end();
+        }else{
+          User.findOne({where: {email: req.body.email }})
+            .then(function(_user){
+              if(_user){
+                res.json('Email Taken');
+              }else{
+                user.update({ email: req.body.email,
+                              password: req.body.password });
+                res.json('Email updated');
+              }
+            })
+        }
+      }else{
+        res.json('No user found!');
+      }
+    })
+    .catch(function (err) {
+      res.send('Error finding user: ', err.message);
+    });
+};
 
+module.exports.updatePW = function (req, res){
+
+  User.findOne({where: {id: req.body.userId }})
+    .then(function(user){
+      if(user){
+        if(!user.validPassword(req.body.oldpw, user.password)){
+          res.json('Wrong password');
+          res.end();
+        }else{
+          user.update({ password: req.body.newpw });
+          res.json('Password updated');
+        }
+      }else{
+        res.json('No user found!');
+      }
+    })
+    .catch(function (err) {
+      res.send('Error finding user: ', err.message);
+    });
 };

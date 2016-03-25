@@ -49,7 +49,7 @@ app
         // TODO: Structure this appropriately once you have the exact route
         return leagues.data;
       });
-    }
+    };
 
     var editOneLeague = function(id, data){
       return $http({
@@ -60,7 +60,7 @@ app
       .then(function(league){
 
       });
-    }
+    };
 
     var deleteLeagueById = function(id, data){
       return $http({
@@ -70,10 +70,9 @@ app
       .then(function(data){
         console.log(data);
       });
-    }
+    };
 
     var profileImage = function(data){
-      console.log(data);
       return $http({
         method: 'POST',
         url: 'api/users/profileimage',
@@ -82,7 +81,30 @@ app
       .then(function(user){
         return user.data;
       });
-    }
+    };
+
+    var updateEmail = function(newemail){
+      return $http({
+        method: 'POST',
+        url: 'api/users/updateemail',
+        data: newemail
+      })
+      .then(function(user){
+        return user.data;
+      })
+    };
+
+    var updatePW = function(newpw){
+      return $http({
+        method: 'POST',
+        url: 'api/users/updatepw',
+        data: newpw
+      })
+      .then(function(user){
+        return user.data;
+      })
+    };
+
 
     return {
       deleteAccount: deleteAccount,
@@ -92,7 +114,9 @@ app
       editOneLeague: editOneLeague,
       deleteLeagueById: deleteLeagueById,
       getSingleUser: getSingleUser,
-      profileImage: profileImage
+      profileImage: profileImage,
+      updateEmail: updateEmail,
+      updatePW: updatePW
     };
 
   })

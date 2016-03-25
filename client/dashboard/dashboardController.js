@@ -284,6 +284,6 @@ angular.module('app.dashboard', [])
   //   $scope.autoAddLeague('Elite Broker League', 10, 250000, hour);
   //   hour+=24;
   //   $scope.getLeaguesToJoin();
-  // }, 10000)
+  // }, 100000)
 
 }]);
