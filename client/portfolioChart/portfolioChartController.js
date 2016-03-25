@@ -7,7 +7,6 @@ $scope.data1 = {
 		data: [{
 			x: "Cash",
 			y: [50],
-			//tooltip: "this is tooltip"
 		},
 		{
 			x:'Stocks',
@@ -18,10 +17,7 @@ $scope.data1 = {
 
 	$scope.config1 = {
 		labels: true,
-		click: function(d) {
-			$scope.getBalance();
-			Materialize.toast('Assets Updated!', 1000);
-		},
+		
 		title: "Asset Allocation",
 		legend: {
 			display: true,
