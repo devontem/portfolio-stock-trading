@@ -307,7 +307,6 @@ footer.page-footer {
   margin-top: 10px;
   color: green; }
 
-
 .larger {
   font-size: 1.5em; }
 
@@ -316,6 +315,10 @@ footer.page-footer {
   text-transform: uppercase;
   font-size: 0.8em;
   font-weight: bold; }
+
+.forgot:hover {
+  color: blue;
+  text-decoration: underline; }
 
 /*.portfolio-search input{
 	display: inline-block;

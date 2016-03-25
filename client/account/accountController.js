@@ -51,12 +51,20 @@ app.controller('AccountController', ['$scope', '$window', 'AccountFactory', '$lo
 
   $scope.getUser();
 
-  $scope.newlogin = {};
-  $scope.newlogin.userId = $scope.id;
+  $scope.newemail = {};
+  $scope.newemail.userId = $scope.id
+
+  $scope.newpw = {};
+  $scope.newpw.userId = $scope.id
+
   $scope.change = false;
 
-  $scope.editLogin = function(){
-    $scope.active = 'editLogin';
+  $scope.editPW = function(){
+    $scope.active = 'updatepw';
+    resetEditMode();
+  };
+  $scope.editEmail = function(){
+    $scope.active = 'editEmail';
     resetEditMode();
   };
   $scope.editLeagues = function(){
@@ -106,19 +114,54 @@ app.controller('AccountController', ['$scope', '$window', 'AccountFactory', '$lo
     });
   };
 
-  $scope.updateLogin = function(){
-    AccountFactory.editLogin($scope.newlogin)
+  var clearemailupdate = function(){
+    $scope.newemail.email = '';
+    $scope.newemail.confirmemail = '';
+    $scope.newemail.password = '';
+  }
+
+  var clearpwupdate = function(){
+    $scope.newpw.newpw = '';
+    $scope.newpw.oldpw = '';
+    $scope.newpw.confirmnewpw = '';
+  }
+
+  $scope.updateEmail = function(newemail){
+    if(newemail.email !== newemail.confirmemail){
+      Materialize.toast('Email did not match.', 2000);
+      return 
+    };
+    AccountFactory.updateEmail($scope.newemail)
       .then(function(user){
-        if(user.data === "Wrong old password"){
-          Materialize.toast('You entered the wrong old password!', 2000);
-        }else if(user.data === "Email already taken"){
-          Materialize.toast('New Email already taken, please use another Email.', 2000);
+        if(user === 'Wrong password' ){
+          Materialize.toast('Incorrect Password!.', 2000);
+        }else if(user === 'Email taken'){
+          Materialize.toast('Email is already taken.', 2000);
+        }else if(user === 'Email updated'){
+          Materialize.toast('Email updated', 2000);
+          clearemailupdate();
         }else{
-          $scope.newlogin = {};
-          $scope.cancel();
-          Materialize.toast('Your login has been updated', 2000);
-        }
-      });
+          Materialize.toast('No user found!', 2000);
+        };
+      })
+  };
+
+  $scope.updatePW = function(newpw){
+    if(newpw.newpw !== newpw.confirmnewpw){
+      Materialize.toast('New passwords do not match.', 2000);
+      return 
+    };
+    AccountFactory.updatePW($scope.newpw)
+      .then(function(user){
+        if(user === 'Wrong password' ){
+          Materialize.toast('Incorrect Password!.', 2000);
+        }else if(user === 'Password updated'){
+          Materialize.toast('Password updated', 2000);
+          clearpwupdate();
+        }else{
+          Materialize.toast('No user found!', 2000);
+        };
+      })
   };
 
 
@@ -139,7 +182,6 @@ app.controller('AccountController', ['$scope', '$window', 'AccountFactory', '$lo
               });
           });
   };
-
 
 
   $scope.upload = function (file) {
