@@ -1,7 +1,16 @@
-<div class="row" style="width: 100%;">
+<div class="row">
   <div class="col s12 m12" style="overflow-x: auto;">
     <div class="card-panel white">
       <h3>Watchlist</h3>
+      <span>
+        <div class="input-field">
+              <input style="width: 100px; margin-bottom: 20px" ng-model="stockSym" placeholder="Symbol" id="first_name2" type="text" class="validate" maxlength="5">
+              <div class="row">
+              <button class="btn col s1" style="margin-right: 15px" ng-click="addStock(stockSym)">Add</button>
+              <button style="width: 200px" class="btn col s1" ng-click="addStock(stockSym)">Find Symbol</button>
+              </div>
+        </div>
+      </span>
       <div style="overflow-x: auto;">
       <table class="highlight centered" id="createTopicScroll">
         <thead id="top">
@@ -10,14 +19,14 @@
               <th data-field="Price">Price ($)</th>
               <th data-field="Open">Open ($)</th>
               <th data-field="Close">Close ($)</th>
-              <th data-field="DaysRange">Days Range ($)</th>
+              <th data-field="DaysRange">Day Range ($)</th>
               <th data-field="DayChange">Day Change ($)</th>
-              <th data-field="52Range">52 week Range ($)</th>
+              <th data-field="52Range">52-week Range ($)</th>
               <th data-field="Action">Action</th>
           </tr>
         </thead>
 
-        
+
 
 
 
