@@ -144,7 +144,7 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
             templateUrl: 'symbol/symbol.html'
           },
           'chart@league':{
-            controller: 'PortfolioChartController',
+            //controller: 'PortfolioChartController',
             templateUrl: 'portfolioChart/portfolioChart.html'
           }
         }

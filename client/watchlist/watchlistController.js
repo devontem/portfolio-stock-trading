@@ -108,24 +108,12 @@ $scope.getWatchlist = function (){
     })
   }
    
-  $scope.delay = function(symbol, delay1){
-    console.log('hello buddy', symbol)
-    $scope.delay1(symbol);
-    
-  } 
 
-  $scope.delay1 = function (symbol){
-
-    console.log('hello buddies', symbol)
-    $rootScope.$emit('symbolAnalysis', symbol)
-  }
-
-  $scope.sendToChart = function (symbol, callback){
+  $scope.sendToChart = function (symbol){
     console.log(symbol,'sym')
-    //$window.sym = symbol;
+    $window.sym = symbol;
         
     $location.path('/analysis')
-    callback(symbol);
     
   }
     

@@ -2,22 +2,25 @@ app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFact
 
   $scope.stock = {};
   var temp = ""
-  //$scope.stock.symbol = $window.sym;
+  $scope.stock.symbol='';
+  $scope.stock.symbol = $window.sym;
+  console.log($scope.stock.symbol,'symbple')
+  
 
-  function watchlistToAnalysis(symbol){
-    $scope.stock.symbol = symbol;
-    console.log($scope.stock.symbol,'lolo')
-  }
+  // function watchlistToAnalysis(symbol){
+  //   $scope.stock.symbol = symbol;
+  //   console.log($scope.stock.symbol,'lolo')
+  // }
 
   
 
-  $rootScope.$on('symbolAnalysis', function (event, data){
-    console.log(data,'data');
-    $scope.stock.symbol = data;
-    console.log($scope.stock.symbol, 'yoyo');
+  // $rootScope.$on('symbolAnalysis', function (event, data){
+  //   console.log(data,'data');
+  //   $scope.stock.symbol = data;
+  //   console.log($scope.stock.symbol, 'yoyo');
     
-    //watchlistToAnalysis(data);
-  })
+  //   //watchlistToAnalysis(data);
+  // })
 
 
 
@@ -74,6 +77,7 @@ app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFact
               .attr("d", line);
         });
       });
+   $scope.stock.symbol = '';
   };
   
   var margin = {top: 20, right: 20, bottom: 30, left: 50},
