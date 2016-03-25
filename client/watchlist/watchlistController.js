@@ -6,8 +6,8 @@ app.controller('WatchlistController', ['$scope', '$http', 'symbolFactory', 'Watc
   $scope.results =[];
   $scope.stock=[];
 
-
 var userid = $window.localStorage.getItem('com.tp.userId');
+
 
 $scope.openModal = function(){
   $('#modal1').openModal();
@@ -40,9 +40,11 @@ $scope.getStock = function(stock){
 
 };
 
+
 $scope.getWatchlist = function (){
     $scope.watchlist =[];
     $scope.results=[];
+
     function decimalAdjust(type, value, exp) {
     // If the exp is undefined or zero...
     if (typeof exp === 'undefined' || +exp === 0) {
@@ -73,9 +75,6 @@ $scope.getWatchlist = function (){
   	WatchlistFactory.getWatchlist(userid)
 
   	.then(function (list){
-
-
-    // console.log($scope.results,'res1')
       for(var stock in list.data){
         $scope.watchlist.push(stock);
       }
@@ -84,7 +83,6 @@ $scope.getWatchlist = function (){
     .then(function (stocks){
 
       stocks.data.pop()
-      console.log(stocks.data,'stocks')
       stocks.data.forEach(function(stock){
 
         stock.forEach(function(result){
@@ -110,12 +108,10 @@ $scope.getWatchlist = function (){
             })
             result1 = range.join('-')
           }
-          console.log(result1,'res1')
           $scope.stock.push(result1)
         })
 
           $scope.results.push($scope.stock)
-          console.log($scope.results,'stock')
         $scope.stock=[];
       })
     })
@@ -130,7 +126,6 @@ $scope.getWatchlist = function (){
       symbol: symbol,
       userid: userid
     }
-    console.log(data,'data')
     WatchlistFactory.removeFromWatchlist(data)
     .then(function(yo){
       Materialize.toast('Removed from Watchlist', 3000)
@@ -158,6 +153,7 @@ $scope.stockSym = '';
     $rootScope.$emit('addedToWatchlist')
   })
 }
+
 
 
   $scope.delay = function(symbol, delay1){
@@ -189,8 +185,8 @@ $scope.stockSym = '';
 
 
 
+
   $scope.sendToChart = function (symbol){
-    console.log(symbol,'sym')
     $window.sym = symbol;
 
     $location.path('/analysis')
@@ -199,51 +195,20 @@ $scope.stockSym = '';
 
 
 
+
+
   $rootScope.$on('addedToWatchlist', function(){
 
     $scope.getWatchlist();
   });
-
   $scope.getWatchlist();
-
 }])
 
-.factory('WatchlistFactory', function ($http){
 
-    var getWatchlist = function(userid){
-    return $http({
-      method: 'GET',
-      url: '/api/watchlist/' + userid,
-    })
-    .then( function (data) {
-      return data;
-    });
-  }
 
-    var updateWatchlist = function(array){
-      return $http({
-        method: 'Post',
-        url:'/api/watchlist/array',
-        data: array
-      })
-    }
 
-    var removeFromWatchlist = function (data){
-       return $http({
-        method:'Post',
-        url: '/api/watchlist/remove',
-        data: data
-       })
-    }
 
-  return {
-    getWatchlist:getWatchlist,
-    updateWatchlist:updateWatchlist,
-    removeFromWatchlist:removeFromWatchlist
 
-  }
-
-})
 
 
 
