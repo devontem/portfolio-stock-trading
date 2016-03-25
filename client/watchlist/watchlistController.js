@@ -1,6 +1,6 @@
 
 var app = angular.module('app')
-app.controller('WatchlistController', function($scope, $http, symbolFactory, WatchlistFactory,  $rootScope, $location,$window){
+app.controller('WatchlistController', ['$scope', '$http', 'symbolFactory', 'WatchlistFactory',  '$rootScope', '$location','$window', function($scope, $http, symbolFactory, WatchlistFactory,  $rootScope, $location,$window){
 
   $scope.watchlist = [];
   $scope.results =[];
@@ -50,6 +50,7 @@ $scope.getWatchlist = function (){
       for(var stock in list.data){
         $scope.watchlist.push(stock);
       }
+
     WatchlistFactory.updateWatchlist($scope.watchlist)
     .then(function (stocks){
 
@@ -108,6 +109,26 @@ $scope.getWatchlist = function (){
     })
   }
 
+$scope.stockSym = '';
+
+  $scope.addStock = function (symbol){
+    symbol = symbol.toUpperCase();
+    $scope.userId = $window.localStorage.getItem('com.tp.userId');
+
+    Materialize.toast('Watchlist Updated', 3000);
+    WatchlistFactory.getWatchlist($scope.userId)
+    .then(function (list){
+      console.log(list,'list')
+    })
+    var data = {
+      userid : $scope.userId,
+      symbol : symbol
+    }
+  symbolFactory.addToWatchlist(data)
+  .then(function(){
+    $rootScope.$emit('addedToWatchlist')
+  })
+}
 
 
   $scope.delay = function(symbol, delay1){
@@ -122,32 +143,32 @@ $scope.getWatchlist = function (){
     $rootScope.$emit('symbolAnalysis', symbol)
   }
 
-   
+
+
+
+  $scope.sendToChart = function (symbol){
+    console.log(symbol,'sym')
+    $window.sym = symbol;
+
+    $location.path('/analysis')
+
+
+  }
+
+
+
+
 
 
   $scope.sendToChart = function (symbol){
     console.log(symbol,'sym')
     $window.sym = symbol;
-        
+
     $location.path('/analysis')
-    
 
   }
-    
-  
 
 
-   
-
-  $scope.sendToChart = function (symbol){
-    console.log(symbol,'sym')
-    $window.sym = symbol;
-        
-    $location.path('/analysis')
-    
-  }
-    
-  
 
   $rootScope.$on('addedToWatchlist', function(){
 
@@ -156,7 +177,7 @@ $scope.getWatchlist = function (){
 
   $scope.getWatchlist();
 
-})
+}])
 
 .factory('WatchlistFactory', function ($http){
 
