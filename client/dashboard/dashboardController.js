@@ -150,7 +150,7 @@ angular.module('app.dashboard', [])
             $scope.portfolios[index].endDate = '';
             DashboardFactory.getLeagueById($scope.portfolios[index].id)
               .then(function(league){
-                $scope.portfolios[index].endDate = league.end;
+                $scope.portfolios[index].endDate = JSON.parse(league.end);
               });
           })(i)
         }
