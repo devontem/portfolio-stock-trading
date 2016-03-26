@@ -253,6 +253,37 @@ function makeCode(){
   return text;
 }
 
+// auto create leagues /////////////////////
+
+
+
+module.exports.publicLeagueAutoPilot = function(name, max, balance){
+  var hour = 72;
+  var tomorrow = new Date(new Date().getTime() + hour * 60 * 60 * 1000);
+  var dayLater = new Date(new Date().getTime() + (hour + 24) * 60 * 60 * 1000);
+  var start = JSON.stringify(moment(tomorrow).utc().hour(13).minute(30));
+  var end = JSON.stringify(moment(dayLater).utc().hour(20));
+
+
+  League.create({
+    ownerid: 5000,
+    name: name,
+    maxNum: max,
+    startbalance: balance,
+    start: start,
+    end: end,
+    private: false,
+    hasEnded: false
+  })
+  .then(function (league) {
+      console.log('successfully added');
+  });
+}
+
+// window.setInterval(function(){
+
+// }, 5000)
+////////////////////////////////////////
 
 // Function for calculating a return
 var calcReturn = function (leagueId, portfolioId) {

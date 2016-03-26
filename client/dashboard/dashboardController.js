@@ -174,6 +174,7 @@ angular.module('app.dashboard', [])
     DashboardFactory.getAvailLeagues()
       .then(function(leagues){
         $scope.leagues = leagues;
+        console.log('LEAGUES TO JOIN', $scope.leagues)
         $scope.numtojoin = $scope.leagues.length - $scope.portfolios.length;
 
 
@@ -182,6 +183,8 @@ angular.module('app.dashboard', [])
 
           (function(index){
             $scope.leagues[index].usersJoined = 0;
+            $scope.leagues[index].start = JSON.parse($scope.leagues[index].start);
+            $scope.leagues[index].end = JSON.parse($scope.leagues[index].end);
             leaderBoardFactory.getPortfolios($scope.leagues[index].id)
               .then(function(portfolio){
                 $scope.leagues[index].usersJoined = portfolio.length;

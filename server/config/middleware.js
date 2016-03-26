@@ -8,6 +8,7 @@ var jwt = require('jsonwebtoken');
 var morgan = require('morgan');
 var limitOrder = require('./limitOrder').limitOrder;
 var dayOrder = require('./limitOrder').dayOrder;
+var publicLeagueAutoPilot = require('../leagues/leagueController').publicLeagueAutoPilot;
 
 module.exports = function (app, express) {
 
@@ -43,7 +44,11 @@ module.exports = function (app, express) {
 
   limitOrder();
   dayOrder();
-  
+
+  publicLeagueAutoPilot('Rookie League', 10, 25000);
+  publicLeagueAutoPilot('Junior Broker League', 10, 75000);
+  publicLeagueAutoPilot('Elite Broker League', 10, 250000);
+
 
   // Connecting Router to route files
   app.use('/api/users', userRouter);
