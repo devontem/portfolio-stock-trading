@@ -9,27 +9,37 @@ module.exports.newUser = function (req, res){
   User.findOne({where:{ username: req.body.username }})
     .then(function (user) {
       if(!user){
-        User.create({
-          username: req.body.username,
-          password: req.body.password,
-          email: req.body.email,
-          badgeJoined: true,
-          firstPlaces: 0,
-          secondPlaces: 0,
-          thirdPlaces: 0,
-          leaguesJoined: 0,
-          averageReturn: 0
-        })
-        .then(function(user){
-              var myToken = jwt.sign( {user: user.id},
-                                      'secret',
-                                     { expiresIn: 24 * 60 * 60 });
-              res.send(200, {'token': myToken,
-                             'userId':    user.id,
-                             'username': user.username } );
-        });
+        User.findOne({where: {email: req.body.email}})
+          .then(function(user){
+            if(!user){
+              User.create({
+                username: req.body.username,
+                password: req.body.password,
+                email: req.body.email,
+                badgeJoined: true,
+                firstPlaces: 0,
+                secondPlaces: 0,
+                thirdPlaces: 0,
+                leaguesJoined: 0,
+                averageReturn: 0
+              })
+              .then(function(user){
+                    var myToken = jwt.sign( {user: user.id},
+                                            'secret',
+                                           { expiresIn: 24 * 60 * 60 });
+                    res.send(200, {'token': myToken,
+                                   'userId':    user.id,
+                                   'username': user.username } );
+              });
+            }else{
+              res.json('Email already in use');
+            }
+          })
+          .catch(function (err) {
+            res.send('Error creating user: ', err);
+          });        
       }else{
-        res.status(404).json('Username already exist!');
+        res.json('Username already exist');
       }
     })
     .catch(function (err) {
@@ -162,7 +172,7 @@ module.exports.signIn = function (req, res){
                          'userId': user.id,
                          'username': user.username } );
         }else{
-          res.status(404).json('Authentication failed. Wrong password.');
+          res.json('Wrong password');
         }
       }
     })

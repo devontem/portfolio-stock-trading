@@ -77,7 +77,7 @@ app
 
 //signin signup controller
 .controller('SigninController', ['$scope', '$window', 'Auth', 'DirectMessage', '$rootScope', 'DashboardFactory', 'LeagueInvite', function($scope, $window, Auth, DirectMessage, $rootScope, DashboardFactory, LeagueInvite){
-  $scope.user = null;
+  $scope.user = {};
   $scope.id = $window.localStorage.getItem('com.tp.userId') || undefined;
   //$scope.loggedin = false;
   $scope.username;
@@ -133,22 +133,44 @@ app
       })
   };
 
+  //clear out input fields
+  $scope.clearsignup = function(){
+    $scope.user.username = '';
+    $scope.user.password = '';
+    $scope.user.email = '';
+  }
+
   $scope.signup = function(user){
-    Auth.createuser(user).then(function(data){
-      $window.localStorage.setItem('com.tp', data.token);
-      $window.localStorage.setItem('com.tp.userId', data.userId);
-      $window.localStorage.setItem('com.tp.username', data.username);
-      $scope.username = $window.localStorage.getItem('com.tp.username');
-      $scope.id = $window.localStorage.getItem('com.tp.userId');
-      $scope.toggleSignup();
-      $scope.loggedin = true;
-      $window.location.href = '/#/dashboard';
-    });
+    Auth.createuser(user)
+      .then(function(data){
+        if(data === 'Email already in use'){
+          Materialize.toast('Email already in use.', 2000);
+          $scope.clearsignup();
+        }else if(data === 'Username already exist'){
+          Materialize.toast('Username is taken.', 2000);
+          $scope.clearsignup();
+        }else if(data.token){
+          $window.localStorage.setItem('com.tp', data.token);
+          $window.localStorage.setItem('com.tp.userId', data.userId);
+          $window.localStorage.setItem('com.tp.username', data.username);
+          $scope.username = $window.localStorage.getItem('com.tp.username');
+          $scope.id = $window.localStorage.getItem('com.tp.userId');
+          $scope.toggleSignup();
+          $scope.loggedin = true;
+          $window.location.href = '/#/dashboard';
+        }
+      });
   };
 
   $scope.signin = function(user){
     Auth.loginuser(user).then(function(data){
-      if(data.token){
+      if(data === 'User not found'){
+        Materialize.toast('No user found.', 2000);
+        $scope.clearsignup();
+      }else if(data === 'Wrong password'){
+        Materialize.toast('Incorrect password.', 2000);
+        $scope.clearsignup();
+      }else if(data.token){
         $window.localStorage.setItem('com.tp', data.token);
         $window.localStorage.setItem('com.tp.userId', data.userId);
         $window.localStorage.setItem('com.tp.username', data.username);
@@ -164,6 +186,7 @@ app
     });
   };
 
+  //remove everything from localstorage
   $scope.logout = function(user){
     $scope.loggedin = false;
     $window.localStorage.removeItem('com.tp');
