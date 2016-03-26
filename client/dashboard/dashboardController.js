@@ -42,7 +42,7 @@ angular.module('app.dashboard', [])
   $scope.league = {};
   $scope.portfolios = {};
   $scope.numtojoin = 0;
-  $scope.league.isPrivate = "false";
+  $scope.league.isPrivate = "true";
 
   $scope.sortStart = 'start';
   $scope.sortEnd = 'endDate';
