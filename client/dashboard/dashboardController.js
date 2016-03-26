@@ -35,7 +35,7 @@ angular.module('app.dashboard', [])
   };
 })
 
-.controller('DashboardController', ['$scope', '$window', 'DashboardFactory', 'leaderBoardFactory', '$rootScope', function ($scope, $window, DashboardFactory, leaderBoardFactory, $rootScope) {
+.controller('DashboardController', ['$scope', '$window', 'DashboardFactory', 'leaderBoardFactory', 'LeagueInvite', '$rootScope', function ($scope, $window, DashboardFactory, leaderBoardFactory, LeagueInvite, $rootScope) {
 
   $scope.currentTab = 'user';
   $scope.leagues;
@@ -154,7 +154,6 @@ angular.module('app.dashboard', [])
               });
           })(i)
         }
-
       });
   };
 
@@ -285,5 +284,4 @@ angular.module('app.dashboard', [])
   //   hour+=24;
   //   $scope.getLeaguesToJoin();
   // }, 100000)
-
 }]);

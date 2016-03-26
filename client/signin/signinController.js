@@ -76,7 +76,7 @@ app
 })
 
 //signin signup controller
-.controller('SigninController', ['$scope', '$window', 'Auth', 'DirectMessage', '$rootScope', 'DashboardFactory', function($scope, $window, Auth, DirectMessage, $rootScope, DashboardFactory){
+.controller('SigninController', ['$scope', '$window', 'Auth', 'DirectMessage', '$rootScope', 'DashboardFactory', 'LeagueInvite', function($scope, $window, Auth, DirectMessage, $rootScope, DashboardFactory, LeagueInvite){
   $scope.user = null;
   $scope.id = $window.localStorage.getItem('com.tp.userId') || undefined;
   //$scope.loggedin = false;
@@ -218,8 +218,26 @@ app
     });
   }
 
+  function getInvitesByUserId(){
+    LeagueInvite.getInvitesByUserId($scope.id).then(function(data){
+      $scope.invites = data;
+
+      // updating counter
+      var counter = 0;
+      $scope.invites.forEach(function(invite){
+        if (!invite.read){ counter++ }
+      });
+      $scope.unreadInvites = counter;
+    });
+  }
+
+  function updateMessageCenter(){
+    getOpenAndUnreadMessages();
+    getInvitesByUserId();
+  }
+
   if ($scope.id){
-    setInterval(getOpenAndUnreadMessages, 3000);
+    setInterval(updateMessageCenter, 3000);
   }
 
   $scope.notdone = function(league){

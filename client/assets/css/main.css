@@ -508,6 +508,7 @@ th {
 
 .messages-container .collection {
   height: 475px;
+  margin-top: 0px;
   overflow: scroll; }
 
 .messages-container .collection-item:last-child {
@@ -529,6 +530,15 @@ th {
 
 .messages-container .text-left {
   text-align: left; }
+
+.messages-container .message-tabs {
+  /*		border: 1px solid #ddd;
+    border-bottom: none;*/
+  max-height: 48px;
+  min-height: 48px; }
+  .messages-container .message-tabs section {
+    width: 48%;
+    display: inline-block; }
 
 .badge-ribbon {
   position: relative;
@@ -593,3 +603,28 @@ th {
   -moz-transform: rotate(140deg);
   -ms-transform: rotate(140deg);
   -o-transform: rotate(140deg); }
+
+.smaller {
+  font-size: 0.8em; }
+
+#invite-modal .league-wrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  border-radius: 14px;
+  white-space: nowrap; }
+
+#invite-modal article {
+  min-width: 120px;
+  padding: 10px;
+  border-radius: 14px;
+  margin: 10px 10px;
+  display: inline-block; }
+  #invite-modal article img {
+    width: 90px;
+    display: block;
+    text-align: center;
+    margin: 0px auto; }
+  #invite-modal article p {
+    margin: 0px;
+    font-size: 0.8em;
+    text-align: center; }
