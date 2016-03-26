@@ -257,8 +257,8 @@ function makeCode(){
 
 
 
-module.exports.publicLeagueAutoPilot = function(name, max, balance){
-  var hour = 72;
+module.exports.publicLeagueAutoPilot = function(name, max, balance, hour){
+  var hour = hour;
   var tomorrow = new Date(new Date().getTime() + hour * 60 * 60 * 1000);
   var dayLater = new Date(new Date().getTime() + (hour + 24) * 60 * 60 * 1000);
   var start = JSON.stringify(moment(tomorrow).utc().hour(13).minute(30));
@@ -280,9 +280,6 @@ module.exports.publicLeagueAutoPilot = function(name, max, balance){
   });
 }
 
-// window.setInterval(function(){
-
-// }, 5000)
 ////////////////////////////////////////
 
 // Function for calculating a return

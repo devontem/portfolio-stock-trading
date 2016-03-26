@@ -174,7 +174,6 @@ angular.module('app.dashboard', [])
     DashboardFactory.getAvailLeagues()
       .then(function(leagues){
         $scope.leagues = leagues;
-        console.log('LEAGUES TO JOIN', $scope.leagues)
         $scope.numtojoin = $scope.leagues.length - $scope.portfolios.length;
 
 
@@ -278,13 +277,4 @@ angular.module('app.dashboard', [])
   $scope.getUserLeagues();
   $scope.getLeaguesToJoin();
 
-  var hour = 24;
-
-  // $window.setInterval(function(){
-  //   $scope.autoAddLeague('Rookie League', 10, 25000, hour);
-  //   $scope.autoAddLeague('Junior Broker League', 10, 75000, hour);
-  //   $scope.autoAddLeague('Elite Broker League', 10, 250000, hour);
-  //   hour+=24;
-  //   $scope.getLeaguesToJoin();
-  // }, 100000)
 }]);

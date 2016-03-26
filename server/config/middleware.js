@@ -45,9 +45,9 @@ module.exports = function (app, express) {
   limitOrder();
   dayOrder();
 
-  publicLeagueAutoPilot('Rookie League', 10, 25000);
-  publicLeagueAutoPilot('Junior Broker League', 10, 75000);
-  publicLeagueAutoPilot('Elite Broker League', 10, 250000);
+  publicLeagueAutoPilot('Rookie League', 10, 25000, 48);
+  publicLeagueAutoPilot('Junior Broker League', 10, 75000, 48);
+  publicLeagueAutoPilot('Elite Broker League', 10, 250000, 48);
 
 
   // Connecting Router to route files
