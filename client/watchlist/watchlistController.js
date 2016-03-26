@@ -168,9 +168,15 @@ $scope.stockSym = '';
   symbolFactory.addToWatchlist(data)
   .then(function(){
     $rootScope.$emit('addedToWatchlist')
+    $scope.stockSym = '';
   })
 }
 
+  $scope.sendToChart = function (symbol){
+    $window.sym = symbol;
+
+    $location.path('/analysis')
+  }
 
 
   $rootScope.$on('addedToWatchlist', function(){
