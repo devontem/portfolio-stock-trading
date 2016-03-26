@@ -18,6 +18,7 @@ app.factory('Auth', function($http, $location, $window){
       data: user
     })
     .then(function(data){
+      console.log("data", data)
       return data.data;
     })
   };
@@ -31,7 +32,6 @@ app.factory('Auth', function($http, $location, $window){
       }
     })
     .then(function(data){
-      console.log("data", data)
       return data.data;
     })
   };
