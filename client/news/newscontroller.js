@@ -11,7 +11,6 @@ app.controller('NewsController', ['$scope', '$window', '$stateParams', 'News', f
     News.getNews(userId, leagueId)
     .then(function (res){
       res.data.forEach(function(tweet){
-        console.log('TWEET: ', tweet)
         $scope.tweets.push({text: tweet.text, user: tweet.user, time: tweet.created_at});
       });
 
