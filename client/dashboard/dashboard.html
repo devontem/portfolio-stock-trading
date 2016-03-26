@@ -10,7 +10,7 @@
       <div class="col s12 l4">
         <div class="card-panel z-index-5 center">
           <section>
-            <h7 class="btn std-btn" ng-click="toggleAdd()">Create League</h7>
+            <h7 class="btn std-btn" ng-click="toggleAdd()">Create Private League</h7>
           </section>
           <div class="divider"></div>
           <section>
@@ -136,7 +136,7 @@
 
       <addleague-directive show='showadd' width='450px' height='650px'>
       <div ng-if="showadd" class="signup">
-        <h4 class="brand-logo"> Create League </h4>
+        <h4 class="brand-logo">Private League </h4>
         <form name="addleagueForm" ng-submit='addLeague(league)'>
           <br>
           <label>Name:</label><br>
@@ -149,17 +149,17 @@
           <input type="text" ng-change="ll()" ng-model='league.balance' required>
           <br>
           <label>Start: </label><br>
-          <input type="date" id="startdate" ng-model='league.start' ng-click="pickstart()" format-date>
+          <input type="date" id="startdate" ng-model='league.start' ng-click="pickstart()" format-date required>
           <label>End Date: </label><br>
-          <input type="date" id="enddate" ng-model='league.end' ng-click="pickend()" format-date>
-          <span>
+          <input type="date" id="enddate" ng-model='league.end' ng-click="pickend()" format-date required>
+<!--           <span>
             <input name="isPrivate" ng-model="league.isPrivate" value="false" type="radio" id="test1" />
             <label for="test1">Public League</label>
-          </span>
-          <span>
+          </span> -->
+         <!--  <span>
             <input name="isPrivate" ng-model="league.isPrivate" value="true" type="radio" id="test2" />
             <label for="test2">Private League</label>
-          </span>
+          </span> -->
           <button class="waves-effect waves-light btn std-btn center">Create</button>
         </form>
       </div>
