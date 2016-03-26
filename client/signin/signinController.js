@@ -177,7 +177,6 @@ app
     DashboardFactory.getUserLeagues(userId)
       .then(function(userLeagues){
         $scope.userLeagues = userLeagues;
-        console.log('LEAGUES', userLeagues)
       })
   };
 
