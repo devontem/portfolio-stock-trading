@@ -257,7 +257,7 @@ function makeCode(){
 
 
 
-module.exports.publicLeagueAutoPilot = function(name, max, balance, hour){
+module.exports.publicLeagueAutoPilot = function(name, max, balance, hour, duration){
   var hour = hour;
   var tomorrow = new Date(new Date().getTime() + hour * 60 * 60 * 1000);
   var dayLater = new Date(new Date().getTime() + (hour + 24) * 60 * 60 * 1000);
@@ -272,6 +272,7 @@ module.exports.publicLeagueAutoPilot = function(name, max, balance, hour){
     startbalance: balance,
     start: start,
     end: end,
+    duration: duration,
     private: false,
     hasEnded: false
   })

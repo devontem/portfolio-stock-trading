@@ -153,6 +153,7 @@ var League = orm.define('league', {
   end: Sequelize.STRING,
   private: Sequelize.BOOLEAN,
   code: Sequelize.STRING,
+  duration: Sequelize.STRING,
   hasEnded: Sequelize.BOOLEAN
 });
 
