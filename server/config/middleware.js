@@ -30,6 +30,7 @@ module.exports = function (app, express) {
   var WatchlistRouter = express.Router();
   var analysisRouter = express.Router();
   var leagueInviteRouter = express.Router();
+  var tickerRouter = express.Router();
 
   app.use(morgan('dev'));
   // Configuring middleware
@@ -67,6 +68,7 @@ module.exports = function (app, express) {
   app.use('/api/analysis', analysisRouter);
   app.use('/api/watchlist', WatchlistRouter);
   app.use('/api/leagueinvites', leagueInviteRouter);
+  app.use('/api/ticker', tickerRouter);
 
   require('../analysis/analysisRoutes.js')(analysisRouter);
   require('../tweets/tweetRoutes.js')(tweetRouter);
@@ -84,5 +86,6 @@ module.exports = function (app, express) {
   require('../directMessages/directMessageRoutes.js')(directMessageRouter);
   require('../watchlist/watchlistRoutes.js')(WatchlistRouter);
   require('../leagueInvites/leagueInviteRoutes.js')(leagueInviteRouter);
+  require('../ticker/tickerRoutes.js')(tickerRouter);
 
 };

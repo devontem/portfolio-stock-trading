@@ -17,7 +17,6 @@ module.exports.addTopic = function (req, res){
 };
 
 module.exports.getOneTopic = function(req, res){
-  console.log('WHAT IS IT????', req.body)
   Forum.findAll({where: {id: req.body.id}}).then(function (topic) {
     if(!topic) {
       res.send('No topics found.');
