@@ -1,4 +1,5 @@
 app.controller('LeagueController', ['$scope', '$stateParams', 'DashboardFactory', function($scope, $stateParams, DashboardFactory){
+
   //Gets the league
   var leagueId = $stateParams.leagueId;
 
@@ -71,6 +72,6 @@ app.controller('LeagueController', ['$scope', '$stateParams', 'DashboardFactory'
       });
       });
   };
-      
+
 
 }]);
