@@ -1,4 +1,57 @@
 app.controller('LeagueController', ['$scope', '$stateParams', 'DashboardFactory', function($scope, $stateParams, DashboardFactory){
+
+  //to show and hide views
+
+  $scope.showPort = false;
+  $scope.showLeader = true;
+  $scope.showMessage = true;
+  $scope.showTrans = true;
+  $scope.showNews = true;
+
+  $scope.displayPort = function(){
+    $scope.showPort = false;
+    $scope.showLeader = true;
+    $scope.showMessage = true;
+    $scope.showTrans = true;
+    $scope.showNews = true;
+  }
+
+  $scope.displayLB = function(){
+
+      $scope.showPort = true;
+      $scope.showLeader = false;
+      $scope.showMessage = true;
+      $scope.showTrans = true;
+      $scope.showNews = true;
+  }
+
+  $scope.displayMessage = function(){
+
+      $scope.showPort = true;
+      $scope.showLeader = true;
+      $scope.showMessage = false;
+      $scope.showTrans = true;
+      $scope.showNews = true;
+  }
+
+  $scope.displayTrans = function(){
+
+      $scope.showPort = true;
+      $scope.showLeader = true;
+      $scope.showMessage = true;
+      $scope.showTrans = false;
+      $scope.showNews = true;
+  }
+
+  $scope.displayNews = function(){
+
+      $scope.showPort = true;
+      $scope.showLeader = true;
+      $scope.showMessage = true;
+      $scope.showTrans = true;
+      $scope.showNews = false;
+  }
+
   //Gets the league
   var leagueId = $stateParams.leagueId;
 
@@ -71,6 +124,6 @@ app.controller('LeagueController', ['$scope', '$stateParams', 'DashboardFactory'
       });
       });
   };
-      
+
 
 }]);

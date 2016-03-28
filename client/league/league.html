@@ -2,20 +2,34 @@
 .cols .s12 .portfolioChart {
   height: 500px;
   width: 500px;
+
+  [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+  }
+
 }
 
 </style>
 
-<div style="margin: 50px">
-  <ul class="pagination">
-    <li class="disabled"><a href="#!"></a></li>
-    <li class="active"><a href="#lb">Leaderboard</a></li>
-    <li class="waves-effect"><a href="#!">Recent Transactions</a></li>
-    <li class="waves-effect"><a href="#!">Message Board</a></li>
-    <li class="waves-effect"><a href="#!">Recent News</a></li>
+
+<div style="margin: 50px" ng-cloak>
+
+  <ul class="pagination center-align">
+
+    <li class="waves-effect"><a ng-click="displayPort()">Portfolio</a></li>
+
+    <li class="waves-effect"><a ng-click="displayLB()">Leaderboard</a></li>
+
+    <li class="waves-effect"><a ng-click="displayTrans()">Recent Transactions</a></li>
+
+    <li class="waves-effect"><a ng-click="displayMessage()">Message Board</a></li>
+
+    <li class="waves-effect"><a ng-click="displayNews()">Recent News</a></li>
+
   </ul>
 
-  <div class="row">
+
+  <div class="row" ng-hide="showPort">
     <div class="col s12 m12 l12">
       <div ng-if="!hasStarted" ui-view="preleague"></div>
       <!-- <div ui-view="symbol"></div> -->
@@ -23,21 +37,31 @@
        <div ng-if="hasEnded" ui-view="leagueResults"></div>
     </div>
   </div>
-  <div class="row">
+  <div class="row" ng-hide="showLeader">
     <div class="col s12 m12 l12">
       <div id="lb" ui-view="leaderboard"></div>
     </div>
   </div>
 
-  <div class="row" style="margin: 5px">
-    <div class="col s5 m5 l5 messageboard-box card" style="float: left">
+  <div class="row" ng-hide="showMessage">
+    <div class="col s12 m12 l12 messageboard-box card" style="float: left">
       <div ui-view='messageboard'></div>
     </div>
+  </div>
 
-    <div class="col s6 m6 l6 recentTransactions-box card" style="float: right">
+  <div class="row" ng-hide="showTrans">
+    <div class="col s12 m12 l12 recentTransactions-box card" ng-hide="showTrans" style="float: right">
       <div ui-view='recentTransactions'></div>
     </div>
   </div>
+
+  <div class="row" ng-hide="showNews">
+    <div class="col s12 m12 l12 news-box" style="float: right" ng-hide="showNews">
+      <div ui-view="news"></div>
+    </div>
+  </div>
+
+
 
 
 <!-- The original layout -->
