@@ -17,5 +17,5 @@ app.controller('NewsController', ['$scope', '$window', '$stateParams', 'News', f
     });
   };
 
-  $scope.getTweets();
+  //$scope.getTweets();
 }]);
