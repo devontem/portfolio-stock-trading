@@ -3,22 +3,22 @@ var Auth = require('./../config/auth.js');
 
 module.exports = function(app){
 
-  app.post('/' , Auth.authorize, LeagueController.addLeague);
+  app.post('/' , LeagueController.addLeague);
 
-  app.get('/', Auth.authorize, LeagueController.getAllLeagues);
+  app.get('/', LeagueController.getAllLeagues);
 
-  app.get('/:id', Auth.authorize, LeagueController.getOneLeague);
+  app.get('/:id', LeagueController.getOneLeague);
 
-  app.put('/:id', Auth.authorize, LeagueController.editOneLeague);
+  app.put('/:id', LeagueController.editOneLeague);
 
   app.delete('/:id', LeagueController.deleteLeagueById);
 
   app.get('/owner/:userId', LeagueController.getLeagueByOwnerId);
 
-  app.post('/getusers', Auth.authorize, LeagueController.getUsers);
+  app.post('/getusers', LeagueController.getUsers);
 
-  app.post('/joinleague', Auth.authorize, LeagueController.joinLeague);
+  app.post('/joinleague', LeagueController.joinLeague);
 
-  app.post('/userleague', Auth.authorize, LeagueController.userLeagues);
+  app.post('/userleague', LeagueController.userLeagues);
 
 };
