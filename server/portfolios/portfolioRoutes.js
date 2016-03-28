@@ -15,5 +15,5 @@ module.exports = function(app){
   app.put('/stocks/:leagueId/:userId', portfolioController.updateUserStocks);
 
   // gets users portfolio basic info
-  app.get('/:leagueId/:userId', Auth.authorize, portfolioController.getPortfolio);
+  app.get('/:leagueId/:userId',  portfolioController.getPortfolio);
 };
