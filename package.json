@@ -6,7 +6,7 @@
   "scripts": {
     "prestart": "gulp concat",
     "start": "node server/server.js",
-    "test": "mocha test && karma start --single-run --browsers PhantomJS",
+    "test": "mocha test",
     "lint": "gulp lint",
     "sass": "gulp sass",
     "postinstall": "bower install && gulp concat"
