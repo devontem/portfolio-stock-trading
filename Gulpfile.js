@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var jshint = require('gulp-jshint');
 var mocha = require('gulp-mocha');
+var concat = require('gulp-concat');
 
 // Sets up sass
 gulp.task('sass', function () {
