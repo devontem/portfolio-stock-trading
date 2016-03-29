@@ -3,6 +3,7 @@ var sass = require('gulp-sass');
 var jshint = require('gulp-jshint');
 var mocha = require('gulp-mocha');
 var concat = require('gulp-concat');
+var del = require('del');
 
 // Sets up sass
 gulp.task('sass', function () {
@@ -30,9 +31,12 @@ gulp.task('test', function () {
 });
 
 gulp.task('concat', function() {
-  return gulp.src(['client/**/*.js', '!client/bower_components{,/**}'])
-    .pipe(concat('app.js'))
-    .pipe(gulp.dest('client/dist/'));
+  del('client/dist')
+  .then(function () {
+    return gulp.src(['client/**/*.js', '!client/bower_components{,/**}'])
+      .pipe(concat('app.js'))
+      .pipe(gulp.dest('client/dist/'));
+  });
 });
 
 gulp.task('concat:watch', function () {
