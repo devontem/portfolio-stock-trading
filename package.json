@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prestart": "gulp concat",
     "start": "node server/server.js",
     "test": "mocha test && karma start --single-run --browsers PhantomJS",
     "lint": "gulp lint",
