@@ -34,7 +34,7 @@ angular.module('app.profile', [])
   $scope.sendMessage = function(){
     DirectMessage.setSendTo($scope.user);
     $window.location.href = '/#/messages';
-  }
+  };
 
   $scope.getUser();
 
@@ -57,7 +57,7 @@ angular.module('app.profile', [])
 
   $scope.toggleInvite = function(league){
     // if deselecting, remove
-    var index = $scope.findIndex(league.leagueId)
+    var index = $scope.findIndex(league.leagueId);
 
     if (index > -1){
       $scope.leagueInvites.splice(index, 1);
@@ -73,7 +73,7 @@ angular.module('app.profile', [])
 
       $scope.leagueInvites.push(invite);
     }
-  }
+  };
 
   $scope.isSelected = function(leagueId){
     for (var key in $scope.leagueInvites){
@@ -82,7 +82,7 @@ angular.module('app.profile', [])
       }
     }
     return false;
-  }
+  };
 
   $scope.findIndex = function(leagueId){
     for (var i = 0 ; i< $scope.leagueInvites.length; i++){
@@ -91,19 +91,17 @@ angular.module('app.profile', [])
       }
     }
     return -1;
-  }
+  };
 
   $scope.sendInvite = function(){
     if (!$scope.leagueInvites.length){
       Materialize.toast("Please select leagues before sending.", 3000);
       return false;
     }
-    console.log('sending to', $scope.userid, $stateParams.userId)
     LeagueInvite.sendInvite($scope.userid, $stateParams.userId, $scope.leagueInvites).then(function(data){
-      console.log('INVITES SENT ')
       $scope.leagueInvites = [];
-    })    
-  }
+    });
+  };
 
   // League Invite module initialization
    $(document).ready(function(){

@@ -17,9 +17,9 @@ $scope.isPositive = function (val){
     }
     else {
       return 'negative';
-    }  
+    }
 
-}
+};
 
 
 $scope.openModal = function(){
@@ -32,7 +32,7 @@ $scope.closeModal = function(){
 
 $scope.reload = function(){
   $scope.getWatchlist();
-}
+};
 
 $scope.getStock = function(stock){
  $scope.symbolResults=[];
@@ -99,41 +99,41 @@ $scope.getWatchlist = function (){
     WatchlistFactory.updateWatchlist($scope.watchlist)
     .then(function (stocks){
 
-      stocks.data.pop()
+      stocks.data.pop();
       stocks.data.forEach(function(stock){
 
         stock.forEach(function(result){
           var result1 = result.replace(/\"/g,'');
           if(/[\%]/.test(result1)){
-            result1 = result1.split('.')
-            var res = result1[1].replace(/\%/,'')
-            result1[1]= res
+            result1 = result1.split('.');
+            var res = result1[1].replace(/\%/,'');
+            result1[1]= res;
             var decimal = Math.round10(result1[1]);
             if(decimal <10){
-              decimal = decimal * 10
+              decimal = decimal * 10;
             }
-            var str =''
-            result1[1]=str.concat(decimal +'%')
-            result1 = result1.join('.')
+            var str ='';
+            result1[1]=str.concat(decimal +'%');
+            result1 = result1.join('.');
           }
           else if(/[\-]/.test(result1)){
             var range = [];
-            result1 = result1.split('-')
+            result1 = result1.split('-');
             result1.forEach(function(num){
-              result1 = parseFloat(num).toFixed(2)
-              range.push(result1)
+              result1 = parseFloat(num).toFixed(2);
+              range.push(result1);
             })
-            result1 = range.join('-')
+            result1 = range.join('-');
           }
-          $scope.stock.push(result1)
+          $scope.stock.push(result1);
         })
 
-          $scope.results.push($scope.stock)
+          $scope.results.push($scope.stock);
         $scope.stock=[];
-      })
-    })
-  })
-  }
+      });
+    });
+  });
+};
 
   $scope.removeFromWatchlist = function (symbol){
 
@@ -142,13 +142,13 @@ $scope.getWatchlist = function (){
     var data = {
       symbol: symbol,
       userid: userid
-    }
+    };
     WatchlistFactory.removeFromWatchlist(data)
     .then(function(yo){
-      Materialize.toast('Removed from Watchlist', 3000)
+      Materialize.toast('Removed from Watchlist', 3000);
       $scope.getWatchlist();
-    })
-  }
+    });
+  };
 
 $scope.stockSym = '';
 
@@ -159,24 +159,23 @@ $scope.stockSym = '';
     Materialize.toast('Watchlist Updated', 3000);
     WatchlistFactory.getWatchlist($scope.userId)
     .then(function (list){
-      console.log(list,'list')
-    })
+    });
     var data = {
       userid : $scope.userId,
       symbol : symbol
-    }
+    };
   symbolFactory.addToWatchlist(data)
   .then(function(){
-    $rootScope.$emit('addedToWatchlist')
+    $rootScope.$emit('addedToWatchlist');
     $scope.stockSym = '';
-  })
-}
+  });
+};
 
   $scope.sendToChart = function (symbol){
     $window.sym = symbol;
 
-    $location.path('/analysis')
-  }
+    $location.path('/analysis');
+  };
 
 
   $rootScope.$on('addedToWatchlist', function(){
@@ -184,13 +183,4 @@ $scope.stockSym = '';
     $scope.getWatchlist();
   });
   $scope.getWatchlist();
-}])
-
-
-
-
-
-
-
-
-
+}]);

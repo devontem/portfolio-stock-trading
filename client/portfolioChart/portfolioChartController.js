@@ -17,7 +17,7 @@ $scope.data1 = {
 
 	$scope.config1 = {
 		labels: true,
-		
+
 		title: "Asset Allocation",
 		legend: {
 			display: true,
@@ -45,12 +45,8 @@ $scope.getBalance = function (){
 
 $rootScope.$on('bought', function(){
 	$scope.getBalance();
-})
+});
 
 $scope.getBalance();
 
 }]);
-
-
-
-

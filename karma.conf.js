@@ -18,28 +18,10 @@ module.exports = function(config) {
     'node_modules/angular-mocks/angular-mocks.js',
     'node_modules/angular-ui-router/release/angular-ui-router.js',
     'node_modules/sinon/pkg/sinon-1.7.3.js',
-    'client/app.config.js',
-    'client/account/AccountController.js',
-    'client/leagueResults/leagueResultsController.js',
-    'client/portfolio/portfolioController.js',
-    'client/services/dashboardService.js',
-    'client/dashboard/dashboardController.js',
-    'client/league/leagueController.js',
-    'client/faqs/faqsController.js',
-    'client/signin/signinController.js',
-    'client/leaderboard/leaderBoardController.js',
-    'client/news/newscontroller.js',
-    'client/messageboard/messageBoardController.js',
-    'client/services/messageBoardService.js',
-    'client/services/authService.js',
-    'client/botBar/botBarController.js',
-    'client/preleague/preleagueController.js',
-    'client/services/preLeagueService.js',
-    'client/services/accountService.js',
-    'client/services/portfolioService.js',
-    'client/clock/clockController.js',
-    'client/symbol/symbolController.js',
-    'client/services/symbolService.js',
+    'node_modules/ng-file-upload/dist/ng-file-upload-all.min.js',
+    'client/bower_components/angular-charts/dist/angular-charts.min.js',
+    'node_modules/angular-sanitize/angular-sanitize.min.js',
+    'client/dist/app.js',
     'tests/*.js'
     ],
 
@@ -63,7 +45,8 @@ module.exports = function(config) {
     plugins : [
       'karma-chrome-launcher',
       'karma-jasmine',
-      'karma-spec-reporter'
+      'karma-spec-reporter',
+      'karma-phantomjs-launcher'
     ],
 
     // web server port
@@ -85,7 +68,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['Chrome', 'PhantomJS'],
 
 
     // Continuous Integration mode
@@ -95,5 +78,5 @@ module.exports = function(config) {
     // Concurrency level
     // how many browser should be started simultaneous
     concurrency: Infinity
-  })
-}
+  });
+};

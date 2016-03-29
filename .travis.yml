@@ -1,9 +1,13 @@
 language: node_js
 node_js:
   - "5"
-  - "5.1"
-  - "4"
-  - "4.2"
-  - "4.1"
-  - "4.0"
+  # - "5.1"
+  # - "4"
+  # - "4.2"
+  # - "4.1"
+  # - "4.0"
   - "0.12"
+before_script:
+  - 'export CHROME_BIN=chromium-browser'
+  - 'npm install -g bower karma grunt-cli'
+  - 'npm install' # install npm packages

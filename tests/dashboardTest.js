@@ -1,19 +1,10 @@
-
-// describe('DashboardController', function () {
-//   var $scope, $rootScope, createController, DashboardFactory, $httpBackend;
-
-
-
-/*describe('DashboardFactory', function () {
+describe('DashboardFactory', function () {
   var $scope, $rootScope, createController, DashboardFactory, $httpBackend, $q;
   // using angular mocks, we can inject the injector
   // to retrieve our dependencies
   beforeEach(module('app'));
   beforeEach(inject(function($injector) {
-
-
-
-
+    
     // mock out our dependencies
     $rootScope = $injector.get('$rootScope');
     $httpBackend = $injector.get('$httpBackend');

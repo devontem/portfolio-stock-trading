@@ -27,7 +27,10 @@ app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$w
 
   $scope.submitReply = function(reply){
     topicFactory.addNewReply(reply).then(function(err, res){
-      if(err){console.log(err)}
+      if (err){
+        console.log(err);
+        return;
+      }
     })
     .then(function(){
       $scope.topicReply.message = '';
@@ -55,7 +58,7 @@ app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$w
     console.log('clicked');
     topicFactory.deleteReply(replyId).then(function(){
       $scope.getAllReplies();
-    })
+    });
   };
 
   $scope.momentJS = function(time){
@@ -80,6 +83,6 @@ app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$w
     if(user === $window.localStorage.getItem('com.tp.userId')){
       return true;
     }
-  }
+  };
 
 }]);
