@@ -49,6 +49,8 @@ module.exports = function(config) {
       'karma-phantomjs-launcher'
     ],
 
+    //test
+
     // web server port
     port: 9876,
 
