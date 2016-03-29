@@ -62,33 +62,6 @@ $scope.getWatchlist = function (){
     $scope.watchlist =[];
     $scope.results=[];
 
-    function decimalAdjust(type, value, exp) {
-    // If the exp is undefined or zero...
-    if (typeof exp === 'undefined' || +exp === 0) {
-      return Math[type](value);
-    }
-    value = +value;
-    exp = +exp;
-    // If the value is not a number or the exp is not an integer...
-    if (isNaN(value) || !(typeof exp === 'number' && exp % 1 === 0)) {
-      return NaN;
-    }
-    // Shift
-    value = value.toString().split('e');
-    value = Math[type](+(value[0] + 'e' + (value[1] ? (+value[1] - exp) : -exp)));
-    // Shift back
-    value = value.toString().split('e');
-    return +(value[0] + 'e' + (value[1] ? (+value[1] + exp) : exp));
-  }
-
-  // Decimal round
-  if (!Math.round10) {
-    Math.round10 = function(value, exp) {
-      return decimalAdjust('round', value, exp);
-    };
-  }
-
-
   	WatchlistFactory.getWatchlist(userid)
 
   	.then(function (list){
@@ -105,16 +78,26 @@ $scope.getWatchlist = function (){
         stock.forEach(function(result){
           var result1 = result.replace(/\"/g,'');
           if(/[\%]/.test(result1)){
-            result1 = result1.split('.');
-            var res = result1[1].replace(/\%/,'');
-            result1[1]= res;
-            var decimal = Math.round10(result1[1]);
-            if(decimal <10){
-              decimal = decimal * 10;
-            }
-            var str ='';
-            result1[1]=str.concat(decimal +'%');
-            result1 = result1.join('.');
+
+            // result1 = result1.split('.');
+            // var res = result1[1].replace(/\%/,'');
+            // result1[1]= res;
+            // var decimal = Math.round10(result1[1]);
+            // if(decimal <10){
+            //   decimal = decimal * 10;
+            // }
+            // var str ='';
+            // result1[1]=str.concat(decimal +'%');
+            // result1 = result1.join('.');
+
+            
+            var res = result1.replace(/\%/,'')
+            var sign = res[0];
+            var decimal = res.substr(1)
+            var ans = parseFloat(decimal).toFixed(2)
+            var final = sign + ans.toString()
+            result1=final.concat('%')
+
           }
           else if(/[\-]/.test(result1)){
             var range = [];

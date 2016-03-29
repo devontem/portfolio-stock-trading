@@ -1,0 +1,61 @@
+<html>
+
+
+<style>
+
+.positive {
+  color: green;
+}
+
+.negative {
+  color: red;
+}
+
+
+.box {
+    border-style: solid;
+    border-width: 1px;
+    display: block;
+    width: 100px;
+    height: 100px;
+    background-color: #0000FF;
+    -webkit-animation: fadeOut 2s forwards;
+    animation: fadeOut 2s forwards;
+    -webkit-animation-delay: 1s;
+    animation-delay: 5s;
+    
+}
+@-webkit-keyframes fadeOut {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+@keyframes fadeOut {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+   
+
+</style>
+<body>
+	<!--<div >
+<button  ng-click= 'bool=true; getAllPortfolioId()'>yoooo</button>
+<div ng-repeat='stock in finalstocks' ng-if='bool'  class='fade'>
+ <div> {{stock[0]}}</span><span> {{stock[1]}}</span><span> {{stock[2]}}</span><span> {{stock[3]}} </span></div>-->
+
+
+<button ng-click='getAllPortfolioId()'>yooooo</button>
+<div ng-repeat='stock in finalstocks'>
+	<table>
+	<tr class='box'><span> {{stock[0]}}</span><span> {{stock[1]}}</span><span ng-class="isPositive(stock[2])"> {{stock[2]}}</span><span> {{stock[3]}} </span></tr>
+</table>
+	</div>
+
+
+
+
+<!--</div>
+</div>-->
+</body>
+</html>
