@@ -20,6 +20,7 @@ module.exports = function(config) {
     'node_modules/sinon/pkg/sinon-1.7.3.js',
     'node_modules/ng-file-upload/dist/ng-file-upload-all.min.js',
     'client/bower_components/angular-charts/dist/angular-charts.min.js',
+    'node_modules/angular-sanitize/angular-sanitize.min.js',
     'client/dist/app.js',
     'tests/*.js'
     ],

@@ -37,11 +37,4 @@ describe('SymbolController', function () {
     expect($scope.results.length).toEqual(0);
   });
 
-
-  it('should have populate function', function (){
-  	spyOn(populate, '$scope')
-  	expect($scope.populate).toHaveBeenCalled();
-  })
-	
 });
-

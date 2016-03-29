@@ -55,6 +55,7 @@
   "devDependencies": {
     "angular": "^1.5.1",
     "angular-mocks": "^1.5.1",
+    "angular-sanitize": "^1.5.3",
     "angular-ui-router": "^0.2.18",
     "gulp": "^3.9.1",
     "gulp-jshint": "^2.0.0",
