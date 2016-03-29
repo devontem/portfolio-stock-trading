@@ -28,6 +28,7 @@ angular.module('app.portfolio', [])
 	};
 
 	$scope.chooseStock = function(stockName){
+		stockName = stockName.toLowerCase();
 		Portfolio.getStock(stockName).then(function(stock){
 			stock = stock.data;
 			if(!stock.Ask){
