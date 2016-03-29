@@ -1,6 +1,6 @@
 angular.module('app.leagueResults', [])
 
-.controller('LeagueResultsController', function($scope, $stateParams, $window, leaderBoardFactory, DashboardFactory, Portfolio){
+.controller('LeagueResultsController', ['$scope', '$stateParams', '$window', 'leaderBoardFactory', 'DashboardFactory', 'Portfolio', function($scope, $stateParams, $window, leaderBoardFactory, DashboardFactory, Portfolio){
 	var leagueId = $stateParams.leagueId;
 	var userId = $window.localStorage.getItem('com.tp.userId');
 
@@ -39,4 +39,4 @@ angular.module('app.leagueResults', [])
 			$scope.mostShares = mostStockShares;
 		});
 
-});
+}]);

@@ -1,6 +1,6 @@
 app
 
-.controller('MessagesController', function($scope, $window, $rootScope, DashboardFactory, LeagueInvite, DirectMessage){
+.controller('MessagesController', ['$scope', '$window', '$rootScope', 'DashboardFactory', 'LeagueInvite', 'DirectMessage', function($scope, $window, $rootScope, DashboardFactory, LeagueInvite, DirectMessage){
   $scope.username = $window.localStorage.getItem('com.tp.username');
   $scope.id = $window.localStorage.getItem('com.tp.userId');
   $scope.sendTo = null;
@@ -8,7 +8,7 @@ app
 
   $scope.changeTab = function(view){
   	$scope.tab = view;
-  }
+  };
 
 	$scope.sendMessage = function(){
 		if (!$scope.sendTo){
@@ -28,7 +28,7 @@ app
 			$scope.input = "";
 			updateMessageCenter();
 		});
-	}
+	};
 
 	 function getMessagesBetween(){
 	 	// RecipientId's key is 'recipientId' if from left panel, 'id' if from profiles page
@@ -71,7 +71,7 @@ app
       if (counter !== $scope.unreadMessages){
         $scope.unreadMessages = counter;
       }
-      
+
 		  $scope.unreadOpenMessages = data;
 		});
 	}
@@ -85,14 +85,14 @@ app
 			var messageId = $scope.sendTo.id;
 			DirectMessage.markMessageReadById(messageId).then(function(){
 				console.log('Most recent message marked read!');
-			})
+			});
 		}
 		getMessagesBetween();
-	}
+	};
 
 	function updateMessageCenter(){
 		getOpenAndUnreadMessages();
-		getInvitesByUserId()
+		getInvitesByUserId();
 
 		// if a chat is open, it refreshes for new messages
 		if ($scope.sendTo){
@@ -123,7 +123,7 @@ app
               .then(function(league){
                 $scope.portfolios[index].endDate = league.end;
               });
-          })(i)
+          })(i);
         }
       });
   };
@@ -137,7 +137,9 @@ app
       // updating counter
       var counter = 0;
 	    $scope.invites.forEach(function(invite){
-	    	if (!invite.read){ counter++ }
+	    	if (!invite.read) {
+          counter++;
+        }
 	    });
 	    $scope.unreadInvites = counter;
     });
@@ -145,35 +147,35 @@ app
 
   $scope.openInvite = function(invite){
 
-  	swal({title: "Join "+invite.leaguename+"?",  
-  				text: invite.username+" wants you to join this league with them!",   
-  				type: "info",   
-  				showCancelButton: true,   
+  	swal({title: "Join "+invite.leaguename+"?",
+  				text: invite.username+" wants you to join this league with them!",
+  				type: "info",
+  				showCancelButton: true,
   				confirmButtonColor: "#DD6B55",
   				cancelButtonText: "Decline",
-  				confirmButtonText: "Accept",  
-  				confirmButtonColor: '#9ccc65', 
-  				closeOnConfirm: false }, function(){   
+  				confirmButtonText: "Accept",
+  				confirmButtonColor: '#9ccc65',
+  				closeOnConfirm: false }, function(){
 
 
   					//checks to see if user is already in the league
   					for (var i = 0; i < $scope.portfolios.length; i++){
   						if ($scope.portfolios[i].leagueId == invite.leagueId){
-  							swal("Cannot Join", "You're already in this league!", "error"); 
+  							swal("Cannot Join", "You're already in this league!", "error");
   							return false;
   						}
   					}
 
   					// joining the league
   					$scope.joinLeague(invite.leagueId);
-  					swal("Joined!", "You are now apart of this league!", "success"); 
+  					swal("Joined!", "You are now apart of this league!", "success");
   				});
 
   	// changes that message to read
 		LeagueInvite.markRead(invite.id).then(function(){
 			getInvitesByUserId();
 		});
-  }
+  };
 
   getInvitesByUserId();
 
@@ -207,15 +209,13 @@ app
 				// if coming from profile page, fixes the key to match DirectMessages format
 				$scope.sendTo.recipientId = user.id;
 				$scope.sendTo.recipientUsername = user.username;
-				console.log('was redirected, here: ', $scope.sendTo);
-				console.log('list before iteration', $scope.unreadOpenMessages)
 
 				// // if a previous conversation has already been started between users, open it
 				// for (var i = 0; i < $scope.unreadOpenMessages.length; i++){
 
 				// 	// setting the recipientId based on if the last message was sent or received
 				// 	var recipientId = ($scope.unreadOpenMessages[i].recipientId == $scope.id ? $scope.unreadOpenMessages[i].UserId : $scope.unreadOpenMessages[i].recipientId )
-					
+
 				// 	if ($scope.unreadOpenMessages[i].recipientId == recipientId){
 				// 		swal('Message Center','Fetching a previously started conversation');
 				// 		$scope.currentTab = i+1
@@ -232,4 +232,4 @@ app
 
 	// fetches new info every 2 seconds
 	setInterval(updateMessageCenter, 2000);
-});
+}]);

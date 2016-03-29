@@ -91,7 +91,7 @@ angular.module('app.portfolio', [])
 	$rootScope.$on('update', function(){
 		$scope.updateMarketPrice();
 		updatePortfolio();
-	})
+	});
 
 	function ableToSell(){
 		for (var i = 0; i < $scope.stocks.length; i++){
@@ -169,7 +169,7 @@ angular.module('app.portfolio', [])
 
 	$scope.twoDecimal = function(val){
 			return val.toFixed(2);
-		}
+		};
 
 	updatePortfolio();
 

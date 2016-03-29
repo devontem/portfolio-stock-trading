@@ -1,4 +1,4 @@
-var app = angular.module('app')
+var app = angular.module('app');
 
 app.controller('MainForumController', ['$scope', '$window', 'forumFactory', '$rootScope', '$location', '$anchorScroll','topicFactory', function($scope, $window, forumFactory, $rootScope, $location, $anchorScroll, topicFactory){
 
@@ -15,7 +15,10 @@ app.controller('MainForumController', ['$scope', '$window', 'forumFactory', '$ro
 
   $scope.createTopic = function(topic){
     forumFactory.addNewTopic(topic).then(function(err, res){
-      if(err){console.log(err)}
+      if (err) {
+        console.log(err);
+        return;
+      }
     }).then(function(){
       $scope.topic.title = '';
       $scope.topic.description = '';
@@ -39,7 +42,7 @@ app.controller('MainForumController', ['$scope', '$window', 'forumFactory', '$ro
               $scope.allTopics[index].replies = replies.data.length;
 
             });
-        })(i)
+        })(i);
       }
 
     });
@@ -49,7 +52,7 @@ app.controller('MainForumController', ['$scope', '$window', 'forumFactory', '$ro
     if($scope.allTopics.length > 0){
       return true;
     }
-  }
+  };
 
 
   $scope.goToTop = function(){

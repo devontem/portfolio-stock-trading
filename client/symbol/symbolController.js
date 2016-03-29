@@ -30,24 +30,24 @@ app.controller('SymbolController', ['$scope', '$http', 'WatchlistFactory','symbo
 
   $scope.addToWatchlist = function (symbol){
     $scope.userId = $window.localStorage.getItem('com.tp.userId');
-    
+
     Materialize.toast('Watchlist Updated', 3000);
     WatchlistFactory.getWatchlist($scope.userId)
 
     .then(function (list){
-      console.log(list,'list')
-    })
+      return;
+    });
 
 
     var data = {
-    
+
       userid : $scope.userId,
       symbol : symbol
-    }
-  symbolFactory.addToWatchlist(data)
-  .then()
-  }
+    };
 
+  symbolFactory.addToWatchlist(data)
+    .then();
+  };
   $scope.openModal = function(){
     $('#modal1').openModal();
   };
@@ -63,4 +63,3 @@ app.controller('SymbolController', ['$scope', '$http', 'WatchlistFactory','symbo
 
 
 }]);
-

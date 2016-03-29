@@ -130,7 +130,7 @@ app
         }else{
           $scope.emailsent = true;
         }
-      })
+      });
   };
 
   //clear out input fields
@@ -138,7 +138,7 @@ app
     $scope.user.username = '';
     $scope.user.password = '';
     $scope.user.email = '';
-  }
+  };
 
   $scope.signup = function(user){
     Auth.createuser(user)
@@ -200,13 +200,13 @@ app
     DashboardFactory.getUserLeagues(userId)
       .then(function(userLeagues){
         $scope.userLeagues = userLeagues;
-      })
+      });
   };
 
 
   $window.onload = function(e) {
     $scope.getUserLeagues();
-  }
+  };
 
   $rootScope.$on('userSignedIn', function(){
      $scope.getUserLeagues();
@@ -214,7 +214,7 @@ app
 
   $rootScope.$on('newleague', function(){
     $scope.getUserLeagues();
-  })
+  });
 
   // Handle's Messages Notifications
   function getOpenAndUnreadMessages(){
@@ -247,7 +247,9 @@ app
       // updating counter
       var counter = 0;
       $scope.invites.forEach(function(invite){
-        if (!invite.read){ counter++ }
+        if (!invite.read) {
+          counter++;
+        }
       });
       $scope.unreadInvites = counter;
     });

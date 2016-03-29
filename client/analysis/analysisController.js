@@ -5,11 +5,10 @@ app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFact
   // var test;
 
   // console.log('SCOPE SYMBOL:', test)
-  var temp = ""
+  var temp = "";
   $scope.stock.symbol='';
   $scope.stock.symbol = $window.sym;
   $scope.displayStock = '';
-  console.log($scope.stock.symbol,'symbple')
 
 
   // function watchlistToAnalysis(symbol){
@@ -48,12 +47,11 @@ app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFact
         $scope.stock = stock;
         $scope.displayStock = $scope.stock.symbol;
         $scope.searched = true;
-        console.log($scope.stock)
       }).then(function(){
         $scope.stock.symbol = '';
         $scope.submitted = true;
-      })
-  }
+      });
+  };
 
   $scope.getchart = function(stock){
     stock.end = moment(stock.end).format("YYYY-MM-DD").toString();
@@ -74,7 +72,7 @@ app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFact
 
             d.date = formatDate.parse(d.Date);
             d.close = +d.Close;
-          })
+          });
 
           x.domain(d3.extent(data, function(d) { return d.date; }));
           y.domain(d3.extent(data, function(d) { return d.close; }));

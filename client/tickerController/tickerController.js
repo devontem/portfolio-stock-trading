@@ -1,6 +1,6 @@
 
 
-var app = angular.module('app')
+var app = angular.module('app');
 app.controller('WatchlistController', ['$scope', '$http', 'symbolFactory', 'WatchlistFactory',  '$rootScope', '$location','$window', function($scope, $http, symbolFactory, WatchlistFactory,  $rootScope, $location,$window){
 
 
@@ -13,4 +13,4 @@ app.controller('WatchlistController', ['$scope', '$http', 'symbolFactory', 'Watc
 }])
 
 
-.factory()
+.factory();
