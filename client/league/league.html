@@ -12,14 +12,13 @@
 </style>
 
 
-<div style="margin: 20px" ng-cloak>
+<div style="margin: 50px" ng-cloak>
 
   <div class="row" >
     <div class="col s6 m6 l6">
       <div ng-if="!hasStarted" ui-view="preleague"></div>
       <!-- <div ui-view="symbol"></div> -->
-      <!-- <div ng-if="!hasEnded && hasStarted" ui-view="portfolio"></div> -->
-      <div ui-view="portfolio"></div>
+      <div ng-if="!hasEnded && hasStarted"ui-view="portfolio"></div>
        <div ng-if="hasEnded" ui-view="leagueResults"></div>
        <div ui-view='messageboard'></div>
        <div ui-view='recentTransactions'></div>

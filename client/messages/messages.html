@@ -26,7 +26,7 @@
             <ul ng-if="tab === 'invites'" class="collection">
                 <li ng-class="!invite.read ? 'teal lighten-5' : ''" ng-repeat="invite in invites" ng-click="openInvite(invite)" class="collection-item avatar clickable">
                   <i class="material-icons circle orange">email</i>
-                  <p class="title orange-text text-darken-3 text-left">League Invite: <b>{{invite.leaguename}}</b></p>
+                  <p class="title orange-text text-darken-3 text-left">League Invite</p>
                   <!-- {{msg}} -->
                   <p class="text-left">From: {{invite.username[0].toUpperCase()+invite.username.slice(1) }}</p>
                   <p class="green-text text-left">END DATE: {{invite.end | date:'mediumDate'}}</p>
