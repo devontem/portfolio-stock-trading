@@ -30,6 +30,12 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
         templateUrl: 'watchlist/watchlist.html'
       })
 
+      .state('ticker',{
+        url:'/ticker',
+        controller: 'tickerController',
+        templateUrl:'ticker/ticker.html'
+      })
+
       .state('dashboard', {
         url: '/dashboard',
         authenticate: true,
