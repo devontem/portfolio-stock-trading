@@ -27,3 +27,13 @@ gulp.task('test', function () {
 		// gulp-mocha needs filepaths so you can't have any plugins before it
 		.pipe(mocha({reporter: 'nyan'}));
 });
+
+gulp.task('concat', function() {
+  return gulp.src(['client/**/*.js', '!client/bower_components{,/**}'])
+    .pipe(concat('app.js'))
+    .pipe(gulp.dest('client/dist/'));
+});
+
+gulp.task('concat:watch', function () {
+  gulp.watch('client/**/*.js', ['concat']);
+});
