@@ -54,60 +54,60 @@ describe("server", function() {
     });
   });
 
-  // describe("GET /api/portfolios without logged in", function () {
-  //   it("should return that a token is not provided", function (done) {
-  //     request
-  //       .get('/api/portfolios/1/1')
-  //       .expect('Token not provided')
-  //       .expect(403, done);
-  //   });
-  // });
-  //
-  // var userid;
-  // var token;
-  //
-  // describe("POST /api/users", function () {
-  //   it("should create user", function (done) {
-  //     request
-  //       .post('/api/users/')
-  //       .send({username: 'john', email: 'john', password: 'john'})
-  //       .expect(200, done);
-  //   });
-  // });
-  //
-  // describe("POST /api/users/signin", function () {
-  //   it("should sign in user", function (done) {
-  //     request
-  //       .post('/api/users/signin')
-  //       .send({ email: 'john', password: 'john'})
-  //       .expect(200)
-  //       .end(function(err, res){
-  //         if((err)) return done(err);
-  //         userid = res.body.userId;
-  //         token = res.body.token;
-  //         done();
-  //       });
-  //   });
-  // });
-  //
-  // describe("POST", function(){
-  //   it("should create a new leageue", function(done){
-  //     request
-  //       .post('/api/leagues')
-  //       .send({
-  //           token: token,
-  //           creatorId: 1936,
-  //           name: 'Mocha Testing',
-  //           max: 100,
-  //           balance: 200,
-  //           start: null,
-  //           end: null,
-  //           private: true,
-  //           code: '123'
-  //       })
-  //       .expect(200, done);
-  //   });
-  // });
+  describe("GET /api/portfolios without logged in", function () {
+    it("should return that a token is not provided", function (done) {
+      request
+        .get('/api/portfolios/1/1')
+        .expect('Token not provided')
+        .expect(403, done);
+    });
+  });
+
+  var userid;
+  var token;
+
+  describe("POST /api/users", function () {
+    it("should create user", function (done) {
+      request
+        .post('/api/users/')
+        .send({username: 'john', email: 'john', password: 'john'})
+        .expect(200, done);
+    });
+  });
+
+  describe("POST /api/users/signin", function () {
+    it("should sign in user", function (done) {
+      request
+        .post('/api/users/signin')
+        .send({ email: 'john', password: 'john'})
+        .expect(200)
+        .end(function(err, res){
+          if((err)) return done(err);
+          userid = res.body.userId;
+          token = res.body.token;
+          done();
+        });
+    });
+  });
+
+  describe("POST", function(){
+    it("should create a new leageue", function(done){
+      request
+        .post('/api/leagues')
+        .send({
+            token: token,
+            creatorId: 1936,
+            name: 'Mocha Testing',
+            max: 100,
+            balance: 200,
+            start: null,
+            end: null,
+            private: true,
+            code: '123'
+        })
+        .expect(200, done);
+    });
+  });
 
 
   describe("POST /api/users/delete", function () {
