@@ -23,8 +23,8 @@
     <div class="row card tables">
       <div class="col s12">
         <ul class="tabs">
-          <li class="tab col s3 m5 clickable" ng-class="currentTab === 'user' ? 'tab-highlight' : ''" ng-click="showUserLeagues()"><span  class="active" href="#test2">Leagues You Are In</span></li>
-          <li ng-class="currentTab === 'toJoin' ? 'tab-highlight' : ''" class="tab col s3 m5 clickable" ng-click="showToJoin()"><span href="#test1">Available Public Leagues</span></li>
+          <li class="tab col s3 m5 clickable" ng-class="currentTab === 'user' ? 'tab-highlight' : ''" ng-click="showUserLeagues()"><span class="active" href="#test2">My Leagues</span></li>
+          <li ng-class="currentTab === 'toJoin' ? 'tab-highlight' : ''" class="tab col s3 m5 clickable" ng-click="showToJoin()"><span href="#test1">Join a Public League</span></li>
         </ul>
         <div class="divider"></div>
       </div>
@@ -68,7 +68,7 @@
                 <br>Don't worry. It's incredibly easy to get started.</p>
             </div>
             <div class="card-action">
-              <a ng-click="showToJoin()">Click here to see all open public leagues</a>
+              <a style="color: red" ng-click="showToJoin()">Click here to join a public league</a>
             </div>
           </div>
         </div>
@@ -104,22 +104,7 @@
 
           </div>
           </div>
-          <!-- Prompt user to create  league if none exist -->
-          <div class="col s12" ng-if="numtojoin === 0">
-            <div class="col s12" ng-if="portfolios.length === 0">
-              <div class="card grey lighten-2 center">
-                <div class="card-content">
-                  <span class="card-title">Uh Oh!</span>
-                  <p>It looks like there are no currently available public leagues. If you would like to make, be our guest.</p>
-                </div>
-                <div class="card-action">
-                  <a href="#">Create a League</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
 
       <addleague-directive show='showadd' width='450px' height='650px'>
       <div ng-if="showadd" class="signup">
@@ -144,7 +129,7 @@
         </form>
       </div>
       </addleague-directive>
-      <!-- <div ui-view="badge"> -->
+
 
       </div>
   </div>
