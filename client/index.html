@@ -155,6 +155,7 @@
                 </div>
                 <div class="col l4 offset-l2 s12">
                   <a href="https://github.com/hrr12-04pistons/2016-01-thesis"><img div="github" height="80" title="GitHub" src="../assets/img/github.png" onmouseover="this.src='../assets/img/github.hover.png'" onmouseout="this.src='../assets/img/github.png'"></a>
+                  <img height="80" src="../assets/img/app-store.png">
                 </div>
               </div>
             </div>
@@ -173,8 +174,8 @@
 
     <div class="ticker" ng-controller="tickerController" ng-show="ticker">
       <div ng-class="{moving: moving}" ng-click="moveLeft()" class="viewport">
-        <div ng-repeat="item in boxes" class="box"> 
-          <span class="whitetext"><b>{{ item[0] }}</b>&nbsp</span> 
+        <div ng-repeat="item in boxes" class="box">
+          <span class="whitetext"><b>{{ item[0] }}</b>&nbsp</span>
           <span class="whitetext"> {{item[1]}} &nbsp </span>
           <span ng-class="isPositive(item[2])">{{item[2]}}&nbsp</span>
           <span class="whitetext">{{item[3]}}  &nbsp</span>
