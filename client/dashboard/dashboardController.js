@@ -50,6 +50,9 @@ angular.module('app.dashboard', [])
 
 
   $scope.pickstart = function(){
+
+    var yesterday = new Date((new Date()).valueOf()-1000*60*60*24);
+
     var start = $('#startdate').pickadate({
       onSet: function (context) {
         $scope.league.start = new Date(context.select);
@@ -58,8 +61,9 @@ angular.module('app.dashboard', [])
           $('#startdate').focus();
       },
       selectMonths: true,
-      selectYears: 15,
-      editable: true
+      selectYears: 1,
+      editable: true,
+      min: true
     });
     var picker = start.pickadate('picker');
     start.on('click', function(event) {
@@ -81,8 +85,9 @@ angular.module('app.dashboard', [])
           $('#enddate').focus();
       },
       selectMonths: true,
-      selectYears: 15,
-      editable: true
+      selectYears: 1,
+      editable: true,
+      min: true
     });
     var pickers = end.pickadate('picker');
     end.on('click', function(event) {
