@@ -321,6 +321,14 @@ var averageReturner = function (UserId, currentReturn) {
     user.update({
       averageReturn: average
     });
+
+    if (average > 5) {
+      badgeController.postBadgeServer(UserId, 7);
+    } else if (average > 10) {
+      badgeController.postBadgeServer(UserId, 8);
+    } else if (average > 15) {
+      badgeController.postBadgeServer(UserId, 9);
+    }
   });
 };
 
