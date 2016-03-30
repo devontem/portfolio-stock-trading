@@ -203,6 +203,12 @@ app
       });
   };
 
+  // to use material box image
+
+  $scope.image = function(){
+    $('.materialboxed').materialbox();
+  }
+
 
   $window.onload = function(e) {
     $scope.getUserLeagues();
