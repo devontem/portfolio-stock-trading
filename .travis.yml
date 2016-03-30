@@ -1,6 +1,16 @@
 language: node_js
+services:
+  - mysql
+dist: trusty
+sudo: required
+addons:
+  apt:
+    packages:
+    - mysql-server-5.6
+    - mysql-client-core-5.6
+    - mysql-client-5.6
 node_js:
-  - "5"
+  # - "5"
   # - "5.1"
   # - "4"
   # - "4.2"
@@ -11,3 +21,4 @@ before_script:
   - 'export CHROME_BIN=chromium-browser'
   - 'npm install -g bower karma grunt-cli'
   - 'npm install' # install npm packages
+  -  mysql -u root -e 'create database pistonsdb;'
