@@ -1,5 +1,5 @@
 
-var app = angular.module('app')
+var app = angular.module('app');
 app.controller('WatchlistController', ['$scope', '$http', 'symbolFactory', 'WatchlistFactory',  '$rootScope', '$location','$window', function($scope, $http, symbolFactory, WatchlistFactory,  $rootScope, $location,$window){
 
   $scope.watchlist = [];
@@ -10,6 +10,9 @@ var userid = $window.localStorage.getItem('com.tp.userId');
 
 
 $scope.isPositive = function (val){
+  if (!val) {
+    return;
+  }
   val = val.slice(0,-1);
   var result = parseFloat(val);
   if(result > 0) {
@@ -90,7 +93,7 @@ $scope.getWatchlist = function (){
             // result1[1]=str.concat(decimal +'%');
             // result1 = result1.join('.');
 
-            
+
             var res = result1.replace(/\%/,'')
             var sign = res[0];
             var decimal = res.substr(1)

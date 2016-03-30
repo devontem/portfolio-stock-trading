@@ -16,7 +16,9 @@ module.exports.addLeague = function (req, res){
   var randomCode = null;
 
   // assigns a random secret code for private rooms
-  if (req.body.private) { randomCode = makeCode(); };
+  if (req.body.private) {
+    randomCode = makeCode();
+  }
 
   League.create({
     ownerid: creatorId,
@@ -43,6 +45,11 @@ module.exports.addLeague = function (req, res){
         rank: 0
       })
       .then( function(res) {
+        if (req.body.private) {
+          badgeController.postBadgeServer(creatorId, 6);
+        } else {
+          badgeController.postBadgeServer(creatorId, 10);
+        }
         console.log('successfully added');
       });
 
@@ -75,6 +82,7 @@ module.exports.joinLeague = function (req, res){
         rank: 0
       })
       .then(function (league) {
+        badgeController.postBadgeServer(req.body.userId, 10);
         res.send(league);
       })
       .catch(function (err) {
@@ -279,7 +287,7 @@ module.exports.publicLeagueAutoPilot = function(name, max, balance, hour, durati
   .then(function (league) {
       console.log('successfully added');
   });
-}
+};
 
 ////////////////////////////////////////
 
@@ -321,6 +329,14 @@ var averageReturner = function (UserId, currentReturn) {
     user.update({
       averageReturn: average
     });
+
+    if (average > 5) {
+      badgeController.postBadgeServer(UserId, 7);
+    } else if (average > 10) {
+      badgeController.postBadgeServer(UserId, 8);
+    } else if (average > 15) {
+      badgeController.postBadgeServer(UserId, 9);
+    }
   });
 };
 
