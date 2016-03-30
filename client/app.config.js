@@ -8,13 +8,6 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
 
     $stateProvider
 
-      // .state('symbol', {
-      //   url: '/symbol',
-      //   controller: 'SymbolController',
-      //   templateUrl: 'symbol/symbol.html'
-
-      // })
-
       .state('signin', {
         url: '/',
         authenticate: true,
@@ -44,12 +37,7 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
             controller: 'DashboardController',
             controllerAs: 'dashboard',
             templateUrl: 'dashboard/dashboard.html'
-          },
-          'badge@dashboard': {
-            controller: 'BadgeController',
-            controllerAs: 'badge',
-            templateUrl: 'badges/badge.html'
-          },
+          }
         }
       })
 
@@ -90,12 +78,12 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
       .state('profiles', {
         url: '/profiles/:userId',
         authenticate: false,
-        views:{
+        views: {
           '': {
             controller: 'ProfileController',
             templateUrl: 'profile/profile.html'
           },
-          'badge@profiles': {
+          'badges@profiles': {
             controller: 'BadgeController',
             controllerAs: 'badge',
             templateUrl: 'badges/badge.html'
@@ -159,7 +147,7 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
             templateUrl: 'symbol/symbol.html'
           }
         }
-      })
+      });
 
     $httpProvider.interceptors.push('AttachTokens');
 

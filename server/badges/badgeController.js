@@ -85,67 +85,62 @@ var badgeMaker = function(){
 
   Badge.create({
     name: 'Seeded',
-    text: 'Badge which seeds the database. Is not a real bad. Used as a flag to test seeding'
+    text: 'Badge which seeds the database. Is not a real bad. Used as a flag to test seeding',
+    id: 1
   });
   Badge.create({
     name: 'Welcome',
     text: 'The first million starts with the first dollar. You earned this badge for signing up with Portfol.io',
-    icon: 'flaticon-commerce'
+    icon: 'flaticon-commerce',
+    id: 2
   });
   Badge.create({
     name: "The Winner's Circle",
     text: 'Congrats! You won your first league. Now for hundred more!',
-    icon: 'flaticon-ribbon'
+    icon: 'flaticon-ribbon',
+    id: 3
   });
   Badge.create({
     name: "Second Place",
     text: 'Congrats! You earned second place!',
-    icon: 'flaticon-two-1'
+    icon: 'flaticon-two-1',
+    id: 4
   });
   Badge.create({
     name: "Third Place",
     text: 'Congrats! You earned Third place!',
-    icon: 'flaticon-three'
-  });
-  Badge.create({
-    name: 'Three Consecutive Logins',
-    text: 'You Logged in for Three Consecutive Days. Woot!',
-    icon: 'flaticon-time'
-  });
-  Badge.create({
-    name: 'Five Consecutive Logins',
-    text: 'You Logged in for Five Consecutive Days. Woot!',
-    icon: 'flaticon-interface'
-  });
-  Badge.create({
-    name: 'Week 1',
-    text: 'You Logged in every day for one week. Keep up the great work bigshot!',
-    icon: 'flaticon-days'
+    icon: 'flaticon-three',
+    id: 5
   });
   Badge.create({
     name: 'Private League',
     text: 'You joined your first private league!',
-    icon: 'flaticon-tool'
+    icon: 'flaticon-tool',
+    id: 6
   });
   Badge.create({
-    name: 'Beginner Broker',
+    name: '5% Average Return!',
+    text: 'Great work! You are in the bigtime now!',
+    icon: 'flaticon-business',
+    id: 7
+  });
+  Badge.create({
+    name: '10% Average Return!',
     text: 'You joined your first public league! Enjoy',
-    icon: 'flaticon-circle'
+    icon: 'flaticon-graphic',
+    id: 8
   });
   Badge.create({
-    name: '100K',
-    text: 'You earned your first $100,000!',
-    icon: 'flaticon-money'
+    name: '15% Average Return!',
+    text: 'You joined your first public league! Enjoy',
+    icon: 'flaticon-line',
+    id: 9
   });
   Badge.create({
-    name: '1 Mil',
-    text: 'You earned your first million!',
-    icon: 'flaticon-money-2'
-  });
-  Badge.create({
-    name: '5 Mil',
-    text: 'Five Million Earned?!?!?! Time to start looking into retirement',
-    icon: 'flaticon-business'
+    name: 'First Public League',
+    text: 'You joined your first public league!',
+    icon: 'flaticon-symbols',
+    id: 10
   });
 };
 

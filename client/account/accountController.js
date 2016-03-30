@@ -52,10 +52,10 @@ app.controller('AccountController', ['$scope', '$window', 'AccountFactory', '$lo
   $scope.getUser();
 
   $scope.newemail = {};
-  $scope.newemail.userId = $scope.id
+  $scope.newemail.userId = $scope.id;
 
   $scope.newpw = {};
-  $scope.newpw.userId = $scope.id
+  $scope.newpw.userId = $scope.id;
 
   $scope.change = false;
 
@@ -118,19 +118,19 @@ app.controller('AccountController', ['$scope', '$window', 'AccountFactory', '$lo
     $scope.newemail.email = '';
     $scope.newemail.confirmemail = '';
     $scope.newemail.password = '';
-  }
+  };
 
   var clearpwupdate = function(){
     $scope.newpw.newpw = '';
     $scope.newpw.oldpw = '';
     $scope.newpw.confirmnewpw = '';
-  }
+  };
 
   $scope.updateEmail = function(newemail){
     if(newemail.email !== newemail.confirmemail){
       Materialize.toast('Email did not match.', 2000);
-      return 
-    };
+      return;
+    }
     AccountFactory.updateEmail($scope.newemail)
       .then(function(user){
         if(user === 'Wrong password' ){
@@ -142,15 +142,15 @@ app.controller('AccountController', ['$scope', '$window', 'AccountFactory', '$lo
           clearemailupdate();
         }else{
           Materialize.toast('No user found!', 2000);
-        };
-      })
+        }
+      });
   };
 
   $scope.updatePW = function(newpw){
     if(newpw.newpw !== newpw.confirmnewpw){
       Materialize.toast('New passwords do not match.', 2000);
-      return 
-    };
+      return;
+    }
     AccountFactory.updatePW($scope.newpw)
       .then(function(user){
         if(user === 'Wrong password' ){
@@ -160,8 +160,8 @@ app.controller('AccountController', ['$scope', '$window', 'AccountFactory', '$lo
           clearpwupdate();
         }else{
           Materialize.toast('No user found!', 2000);
-        };
-      })
+        }
+      });
   };
 
 

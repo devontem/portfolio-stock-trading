@@ -11,11 +11,9 @@
 
 </style>
 
-
 <div style="margin: 50px" ng-cloak>
-
   <div class="row" >
-    <div class="col s6 m6 l6">
+    <div class="col s7 m7 l7">
       <div ng-if="!hasStarted" ui-view="preleague"></div>
       <!-- <div ui-view="symbol"></div> -->
       <div ng-if="!hasEnded && hasStarted"ui-view="portfolio"></div>
@@ -23,50 +21,9 @@
        <div ui-view='messageboard'></div>
        <div ui-view='recentTransactions'></div>
     </div>
-    <div class="col s6 m6 l6">
+    <div class="col s5 m5 l5">
       <div id="lb" ui-view="leaderboard"></div>
       <div ui-view="news"></div>
     </div>
   </div>
-
-
-
-
-<!-- The original layout -->
-
-
-
-<!-- <div class="league-wrapper">
-  <div class="league-container row" ng-cloak style="padding-bottom: 100px">
-
-
-      <div class="col s12 m12 l7 portfolio-box">
-
-        <div ng-if="!hasStarted" ui-view="preleague"></div>
-
-        <div ng-if="!hasEnded && hasStarted"ui-view="portfolio"></div>
-         <div ng-if="hasEnded" ui-view="leagueResults"></div>
-      </div>
-
-      <div class="col s12 m12 l5 leaderboard-box">
-
-        <div ui-view="leaderboard"></div>
-      </div>
-
-      <div class="col s12 m12 l5 news-box">
-
-        <div ui-view="news"></div>
-      </div>
-      <div class="row"></div>
-        <div class="col s12 m6 l6 messageboard-box card">
-
-          <div ui-view="messageboard"></div>
-        </div>
-        <div class="col s6 m1 l1 messageboard-box card"></div>
-        <div class='col s6 m5 l5 recentTransactions-box card'>
-          <div ui-view='recentTransactions'></div>
-        </div>
-
-      </div>
-  </div>
-</div> -->
+</div>
