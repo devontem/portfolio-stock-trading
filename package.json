@@ -59,15 +59,14 @@
     "gulp-concat": "^2.6.0",
     "gulp-jshint": "^2.0.0",
     "gulp-mocha": "^2.2.0",
-    "gulp-sass": "^2.2.0"
+    "gulp-sass": "^2.2.0",
+    "del": "^2.2.0"
   },
   "devDependencies": {
     "angular": "^1.5.1",
     "angular-mocks": "^1.5.1",
     "angular-sanitize": "^1.5.3",
     "angular-ui-router": "^0.2.18",
-    "del": "^2.2.0",
-
     "jasmine-core": "^2.4.1",
     "jshint": "^2.9.1",
     "karma": "^0.13.22",
