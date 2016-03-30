@@ -2,17 +2,17 @@
   <div class="container">
     <!-- Initial Card for the Header -->
     <div class="row header">
-      <div class="col s12 l8">
+      <div class="col s6 l8">
         <div class="card-panel z-index-5 center">
           <h2>Dashboard</h2>
         </div>
       </div>
-      <div class="col s12 l4">
-        <div class="card-panel z-index-5 center">
+      <div class="col s6 l4">
+        <div class="z-index-5 center">
           <section>
             <h7 class="btn std-btn" ng-click="toggleAdd()">Create Private League</h7>
           </section>
-          <div class="divider"></div>
+
           <section>
             <h7 class="btn std-btn" ng-click="joinPrivate()">Join Private League</h7>
           </section>
@@ -20,11 +20,11 @@
       </div>
     </div>
     <!-- Sets up the tabs -->
-    <div class="row card tables">
+    <div class="row tables" style="background-color: white">
       <div class="col s12">
-        <ul class="tabs">
-          <li class="tab col s3 m5 clickable" ng-class="currentTab === 'user' ? 'tab-highlight' : ''" ng-click="showUserLeagues()"><span  class="active" href="#test2">Leagues You Are In</span></li>
-          <li ng-class="currentTab === 'toJoin' ? 'tab-highlight' : ''" class="tab col s3 m5 clickable" ng-click="showToJoin()"><span  href="#test1">Available Leagues To Join</span></li>
+        <ul class="tabs" style="margin-top: 7px">
+          <li class="tab col s3 m5 clickable" ng-class="currentTab === 'user' ? 'tab-highlight' : ''" ng-click="showUserLeagues()"><span class="active" href="#test2">My Leagues</span></li>
+          <li ng-class="currentTab === 'toJoin' ? 'tab-highlight' : ''" class="tab col s3 m5 clickable" ng-click="showToJoin()"><span href="#test1">Join a Public League</span></li>
         </ul>
         <div class="divider"></div>
       </div>
@@ -57,31 +57,18 @@
             </table>
 
           </div>
-            <!-- If the user is not in leagues, prompt them to join one -->
-          <div class="col s12" ng-if="portfolios.length === 0">
-            <div class="card grey lighten-2 center">
-              <div class="card-content ">
-                <span class="card-title">What?</span>
-                <p>It looks like you haven't joined any leagues yet. :(
-                  <br> Don't worry. It's incredibly easy to get started.</p>
-              </div>
-              <div class="card-action">
-                <a href="#">Check Out Available Leagues</a>
-              </div>
-            </div>
-          </div>
 
         </div>
-        <!-- If user is in leagues, show those -->
+        <!-- If user isnt in leagues, show below -->
         <div class="col s12" ng-if="portfolios.length === 0">
-          <div class="card grey lighten-2 center">
+          <div class="card white lighten-2 center">
             <div class="card-content">
               <span class="card-title">What?</span>
               <p>It looks like you haven't joined any leagues yet. :(
-                <br> Don't worry. It's incredibly easy to get started.</p>
+                <br>Don't worry. It's incredibly easy to get started.</p>
             </div>
             <div class="card-action">
-              <a href="#">Check Out Available Leagues</a>
+              <a style="color: red; cursor: pointer;" ng-click="showToJoin()">Click here to join a public league</a>
             </div>
           </div>
         </div>
@@ -117,22 +104,7 @@
 
           </div>
           </div>
-          <!-- Prompt user to create  league if none exist -->
-          <div class="col s12" ng-if="numtojoin === 0">
-            <div class="col s12" ng-if="portfolios.length === 0">
-              <div class="card grey lighten-2 center">
-                <div class="card-content">
-                  <span class="card-title">Uh Oh!</span>
-                  <p>It looks like there are no currently available public leagues. If you would like to make, be our guest.</p>
-                </div>
-                <div class="card-action">
-                  <a href="#">Create a League</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
 
       <addleague-directive show='showadd' width='450px' height='650px'>
       <div ng-if="showadd" class="signup">
@@ -152,19 +124,12 @@
           <input type="date" id="startdate" ng-model='league.start' ng-click="pickstart()" format-date required>
           <label>End Date: </label><br>
           <input type="date" id="enddate" ng-model='league.end' ng-click="pickend()" format-date required>
-<!--           <span>
-            <input name="isPrivate" ng-model="league.isPrivate" value="false" type="radio" id="test1" />
-            <label for="test1">Public League</label>
-          </span> -->
-         <!--  <span>
-            <input name="isPrivate" ng-model="league.isPrivate" value="true" type="radio" id="test2" />
-            <label for="test2">Private League</label>
-          </span> -->
+
           <button class="waves-effect waves-light btn std-btn center">Create</button>
         </form>
       </div>
       </addleague-directive>
-      <div ui-view="badge">
+
 
       </div>
   </div>

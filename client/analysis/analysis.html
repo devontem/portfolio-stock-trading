@@ -27,14 +27,14 @@
                 <section class="col s6">
                   <span>
                   <label>From:
-                  <input id="datepick1" ng-model="stock.start" type="date" class="datepicker">
+                  <input id="startdate" ng-model="stock.start" type="date" ng-click="pickstart()" format-date>
                   </label>
                   </span>
                 </section>
                 <section class="col s6">
                   <span>
                   <label>To:
-                  <input id="datepick2" ng-model="stock.end" type="date" class="datepicker">
+                  <input id="enddate" ng-model="stock.end" type="date" ng-click="pickend()" format-date>
                   </label>
                   </span>
                 </section>

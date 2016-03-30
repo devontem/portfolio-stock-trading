@@ -1,10 +1,16 @@
-
+<style>
+#chart1 {
+	height:300px;
+	width:300px;
+	padding: 3px 5px;
+}
+</style>
 <!-- STOCKS MODAL -->
 <div class="row">
 	<div class="myPortfolio">
 		<nav>
 	    <div class="nav-wrapper">
-	      <a class="brand-logo">My Portfolio</a>
+	      <a class="brand-logo">Portfolio</a>
 	      <ul class="right hide-on-med-and-down">
 	        <!-- <li><a href="sass.html"><i class="material-icons">search</i></a></li> -->
 	        <!-- <li><a href="badges.html"><div ui-view="symbol"></div></a></li> -->
@@ -49,7 +55,7 @@
 	<div class="myPortfolio make-trades">
 		<nav>
 	    <div class="nav-wrapper">
-	      <a class="brand-logo">Make a Trade</a>
+	      <a class="brand-logo">Trade</a>
 	      <ul class="right hide-on-med-and-down">
 	      <li class="symbol-button"><div ui-view="order"></li>
 	      <li class="symbol-button"><div ui-view="symbol"></li>
@@ -78,7 +84,7 @@
 					<section class='col s12' ng-if='stock'>
 						<br>
 					<section stock-datang-if="stock" class="col s6">
-							
+
 							<p class="perc">Close:   {{stock.close}}</p>
 							<p class="perc">Open:    {{stock.open}}</p>
 							<p class="perc">Target:  {{stock.yrTarget}}</p>
@@ -94,16 +100,7 @@
 				</section>
 				</article>
 				<article class="widget-container col s6" style='height: 400px'>
-					<!--<p class="action-title">MOST ACTIVE STOCKS</p>
-					<p class="widget" width="100%" align="center"><iframe width="250" height="120" scrolling="no" frameborder="0" style="border:none;" src="//widgets.freestockcharts.com/WidgetServer/WatchListWidget.aspx?sym=BAC,WLL,SIRI,FCX,CHK,EEM,CBK,MSFT&style=WLBlueStyle&w=200"></iframe></p> <!-- End FreeStockCharts.com WatchList Widget 
-					END OF EIDGET -->
-                    <style>
-                    #chart1 {
-                    	height:300px;
-                    	width:300px;
-                    	padding: 3px 5px;
-                    }
-                    </style>
+
 					<div ng-controller='PortfolioChartController' id='chart2'>
 	                <div id="chart1" ac-chart="chartType" ac-data="data1" ac-config="config1"></div>
 	            </div>
@@ -135,7 +132,7 @@
 
 				  <div class="row stock-calculator">
 					  <section class="col s3">
-					  	<span>NUMBER OF STOCKS: </span>
+					  	<span># of Shares</span>
 						  <div class="chip">
 						    <input class="stockAmount" ng-change="updateAmounts()" ng-model="stockAmount" required>
 						  </div>
@@ -164,8 +161,6 @@
 				  <article>
 						<a ng-click='performAction()' class="waves-effect waves-light btn center trade-button std-btn">TRADE FOR A TOTAL OF <span class="larger">{{ total || 0 | currency}}</span></a>
 				  </article>
-
-
 
 				</article>
 			</div>
