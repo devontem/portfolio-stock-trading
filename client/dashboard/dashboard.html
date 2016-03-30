@@ -8,7 +8,7 @@
         </div>
       </div>
       <div class="col s12 l4">
-        <div class="card-panel z-index-5 center">
+        <div class="z-index-5 center">
           <section>
             <h7 class="btn std-btn" ng-click="toggleAdd()">Create Private League</h7>
           </section>
@@ -20,7 +20,7 @@
       </div>
     </div>
     <!-- Sets up the tabs -->
-    <div class="row card tables">
+    <div class="row tables" style="background-color: white">
       <div class="col s12">
         <ul class="tabs">
           <li class="tab col s3 m5 clickable" ng-class="currentTab === 'user' ? 'tab-highlight' : ''" ng-click="showUserLeagues()"><span class="active" href="#test2">My Leagues</span></li>
@@ -61,14 +61,14 @@
         </div>
         <!-- If user isnt in leagues, show below -->
         <div class="col s12" ng-if="portfolios.length === 0">
-          <div class="card grey lighten-2 center">
+          <div class="card white lighten-2 center">
             <div class="card-content">
               <span class="card-title">What?</span>
               <p>It looks like you haven't joined any leagues yet. :(
                 <br>Don't worry. It's incredibly easy to get started.</p>
             </div>
             <div class="card-action">
-              <a style="color: red" ng-click="showToJoin()">Click here to join a public league</a>
+              <a style="color: red; cursor: pointer;" ng-click="showToJoin()">Click here to join a public league</a>
             </div>
           </div>
         </div>
