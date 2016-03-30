@@ -89,7 +89,6 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
             templateUrl: 'badges/badge.html'
           },
         }
-
       })
 
       .state('league', {

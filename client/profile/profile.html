@@ -7,10 +7,8 @@
         		<img ng-src="{{image}}" />
         	</div>
           <div class="collection clickable">
-            <a ng-class="active === 'accountInfo' ? 'active' : ''" class="collection-item" ng-click="showAccount()">Add Friend</a>
             <a ng-class="active === 'editLogin' ? 'active' : ''" class="collection-item" ng-click="sendMessage()">Send Message</a>
             <a data-target="invite-modal" class="collection-item modal-trigger">Send League Invite</a>
-            <a class="collection-item red-text" ng-click="delete()">REPORT USER</a>
           </div>
         </div>
         <div class="col s12 l8">
