@@ -24,7 +24,7 @@
       <div class="col s12">
         <ul class="tabs">
           <li class="tab col s3 m5 clickable" ng-class="currentTab === 'user' ? 'tab-highlight' : ''" ng-click="showUserLeagues()"><span  class="active" href="#test2">Leagues You Are In</span></li>
-          <li ng-class="currentTab === 'toJoin' ? 'tab-highlight' : ''" class="tab col s3 m5 clickable" ng-click="showToJoin()"><span  href="#test1">Available Leagues To Join</span></li>
+          <li ng-class="currentTab === 'toJoin' ? 'tab-highlight' : ''" class="tab col s3 m5 clickable" ng-click="showToJoin()"><span href="#test1">Available Public Leagues</span></li>
         </ul>
         <div class="divider"></div>
       </div>
@@ -57,31 +57,18 @@
             </table>
 
           </div>
-            <!-- If the user is not in leagues, prompt them to join one -->
-          <div class="col s12" ng-if="portfolios.length === 0">
-            <div class="card grey lighten-2 center">
-              <div class="card-content ">
-                <span class="card-title">What?</span>
-                <p>It looks like you haven't joined any leagues yet. :(
-                  <br> Don't worry. It's incredibly easy to get started.</p>
-              </div>
-              <div class="card-action">
-                <a href="#">Check Out Available Leagues</a>
-              </div>
-            </div>
-          </div>
 
         </div>
-        <!-- If user is in leagues, show those -->
+        <!-- If user isnt in leagues, show below -->
         <div class="col s12" ng-if="portfolios.length === 0">
           <div class="card grey lighten-2 center">
             <div class="card-content">
               <span class="card-title">What?</span>
               <p>It looks like you haven't joined any leagues yet. :(
-                <br> Don't worry. It's incredibly easy to get started.</p>
+                <br>Don't worry. It's incredibly easy to get started.</p>
             </div>
             <div class="card-action">
-              <a href="#">Check Out Available Leagues</a>
+              <a ng-click="showToJoin()">Click here to see all open public leagues</a>
             </div>
           </div>
         </div>
@@ -152,19 +139,12 @@
           <input type="date" id="startdate" ng-model='league.start' ng-click="pickstart()" format-date required>
           <label>End Date: </label><br>
           <input type="date" id="enddate" ng-model='league.end' ng-click="pickend()" format-date required>
-<!--           <span>
-            <input name="isPrivate" ng-model="league.isPrivate" value="false" type="radio" id="test1" />
-            <label for="test1">Public League</label>
-          </span> -->
-         <!--  <span>
-            <input name="isPrivate" ng-model="league.isPrivate" value="true" type="radio" id="test2" />
-            <label for="test2">Private League</label>
-          </span> -->
+
           <button class="waves-effect waves-light btn std-btn center">Create</button>
         </form>
       </div>
       </addleague-directive>
-      <div ui-view="badge">
+      <!-- <div ui-view="badge"> -->
 
       </div>
   </div>
