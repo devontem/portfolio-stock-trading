@@ -1,3 +1,18 @@
+#Portfol.io
+
+_A Fantasy Stock Trading App_
+
+Join a League. Create a stock portfolio using fake money but real, up-to-date data. When the league ends, see how you stack up against other users.
+
+###Who Should Use Portfol.io?
+Short Answer: You. Me. Everyone.
+Long Answer:
+
+
+## Development
+## Concatenation
+Only one non-vendor javascript file is referenced on the 
+
 ## SASS
 
 If you want to compile sass, you have two options. You can can run `gulp sass` or `npm run sass`. Either will compile correctly. Alternatively, you can run `gulp sass:watch` to constantly watch for changes you make and compile as you go.
