@@ -90,8 +90,17 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
       .state('profiles', {
         url: '/profiles/:userId',
         authenticate: false,
-        controller: 'ProfileController',
-        templateUrl: 'profile/profile.html'
+        views:{
+          '': {
+            controller: 'ProfileController',
+            templateUrl: 'profile/profile.html'
+          },
+          'badge@profiles': {
+            controller: 'BadgeController',
+            controllerAs: 'badge',
+            templateUrl: 'badges/badge.html'
+          },
+        }
       })
 
       .state('league', {

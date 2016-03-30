@@ -1,12 +1,6 @@
-<div class="row">
-  <div class="myPortfolio col s12 m10">
-    <nav>
-      <div class="nav-wrapper">
-        <a class="brand-logo">Badges Earned</a>
-      </div>
-    </nav>
 
-    <div class="card-panel" ng-mouseenter="tooltipper()" ng-mouseleave="removeTooltips()">
+
+    <div class="" ng-mouseenter="tooltipper()" ng-mouseleave="removeTooltips()">
       <div>
         <div>
           <div class="row" >
@@ -20,12 +14,7 @@
       </div>
     </div>
 
-    <nav>
-      <div class="nav-wrapper">
-        <a class="brand-logo">Possible Badges</a>
-      </div>
-    </nav>
-    <div class="card-panel" ng-mouseenter="tooltipper()" ng-mouseleave="removeTooltips()">
+    <div class="" ng-mouseenter="tooltipper()" ng-mouseleave="removeTooltips()">
       <div>
         <div>
           <div class="row" >
@@ -39,5 +28,21 @@
       </div>
     </div>
 
-  </div>
-</div>
+    <section class="info-box">
+            <div class="info-box-header  teal lighten-3">
+              <p>Badges Earned</p>
+            </div>
+              <div ui-view="badge">
+            <div>
+            </div>
+          </section>
+
+          <section class="info-box">
+            <div class="info-box-header  teal lighten-3">
+              <p>Badges Earned</p>
+            </div>
+              <div ui-view="badge">
+            <div>
+            </div>
+          </section>
+

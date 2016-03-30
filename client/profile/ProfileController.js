@@ -1,7 +1,10 @@
 angular.module('app.profile', [])
 
 .controller('ProfileController', ['$scope', '$window', '$stateParams', 'LeagueInvite', 'DashboardFactory', 'AccountFactory', 'DirectMessage', function($scope, $window, $stateParams, LeagueInvite, DashboardFactory, AccountFactory, DirectMessage){
-	$scope.id = $stateParams.userId;
+	// user profile id (the user id of the page being visited)
+  $scope.id = $stateParams.userId;
+  // user id of current user
+  $scope.userid = $window.localStorage.getItem('com.tp.userId');
 	$scope.username = $window.localStorage.getItem('com.tp.username');
 
 	$scope.getUserLeagues = function () {
@@ -32,6 +35,11 @@ angular.module('app.profile', [])
   };
 
   $scope.sendMessage = function(){
+    //prevents user from sending messages to themselves
+    if ($scope.id == $scope.userid){
+      Materialize.toast('You cannot send messages to you yourself!', 5000);
+      return false;
+    }
     DirectMessage.setSendTo($scope.user);
     $window.location.href = '/#/messages';
   };
@@ -44,7 +52,6 @@ angular.module('app.profile', [])
 
 
   //League Invite Logic
-  $scope.userid = $window.localStorage.getItem('com.tp.userId');
   $scope.getVisitorLeagues = function () {
     DashboardFactory.getUserLeagues($scope.userid)
       .then(function(portfolios){
