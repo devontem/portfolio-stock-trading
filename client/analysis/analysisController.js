@@ -1,58 +1,43 @@
 app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFactory', '$window', '$rootScope', function($scope, WatchlistFactory,AnalysisFactory, $window, $rootScope){
 
   $scope.stock = {};
+  // $scope.stock.symbol;
+  // var test;
+
+  // console.log('SCOPE SYMBOL:', test)
   var temp = "";
   $scope.stock.symbol='';
   $scope.stock.symbol = $window.sym;
   $scope.displayStock = '';
 
-  // Functionality for Materialize Date Picker
-  $scope.pickstart = function(){
-    var start = $('#startdate').pickadate({
-      onSet: function (context) {
-        $scope.stock.start = new Date(context.select);
-      },
-      onClose: function() {
-          $('#startdate').focus();
-      },
-      selectMonths: true,
-      selectYears: 15,
-      editable: true
-    });
-    var picker = start.pickadate('picker');
-    start.on('click', function(event) {
-        if (picker.get('open')) {
-            picker.close();
-        } else {
-            picker.open();
-        }
-        event.stopPropagation();
-    });
-  };
 
-  $scope.pickend = function(){
-    var end = $('#enddate').pickadate({
-      onSet: function (context) {
-        $scope.stock.end = new Date(context.select);
-      },
-      onClose: function() {
-          $('#enddate').focus();
-      },
-      selectMonths: true,
-      selectYears: 15,
-      editable: true
-    });
-    var pickers = end.pickadate('picker');
-    end.on('click', function(event) {
-        if (pickers.get('open')) {
-            pickers.close();
-        } else {
-            pickers.open();
-        }
-        event.stopPropagation();
-    });
-  };
-// end functionality for Materialize Date Picker
+  // function watchlistToAnalysis(symbol){
+  //   $scope.stock.symbol = symbol;
+  //   console.log($scope.stock.symbol,'lolo')
+  // }
+
+//   $rootScope.$on('watchToChart', function(event, data){
+//     console.log('DATATATTAT', data)
+//     console.log(test, 'TEST TEST TEST')
+//     test = data.symbol;
+//     console.log('INSIDE ROOT', data.symbol)
+//     console.log(test, 'WS WS WS')
+//   });
+
+// console.log('AFTER:', test)
+
+
+
+  // $rootScope.$on('symbolAnalysis', function (event, data){
+  //   console.log(data,'data');
+  //   $scope.stock.symbol = data;
+  //   console.log($scope.stock.symbol, 'yoyo');
+
+
+
+
+  //   //watchlistToAnalysis(data);
+  // })
 
   $scope.submitted = false;
   $scope.searched = false;

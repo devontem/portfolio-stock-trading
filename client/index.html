@@ -149,13 +149,12 @@
   <footer class="page-footer" ng-show="!loggedin">
             <div class="container">
               <div class="row">
-                <div class="col m6 l6 s12">
+                <div class="col l6 s12">
                   <h5>Portfol.io</h5>
                   <p>Play smart. Win Big.</p>
                 </div>
-                <div class="col m6 l6 s12">
-                  <a style="padding-right: 50px" href="https://github.com/hrr12-04pistons/2016-01-thesis"><img div="github" height="80" title="GitHub" src="../assets/img/github.png" onmouseover="this.src='../assets/img/github.hover.png'" onmouseout="this.src='../assets/img/github.png'"></a>
-                  <a href="https://github.com/hrr12-04pistons/2016-01-thesis"><img div="github" height="80" title="Get Portfol.io from App Store" src="../assets/img/app-store.png"</a>
+                <div class="col l4 offset-l2 s12">
+                  <a href="https://github.com/hrr12-04pistons/2016-01-thesis"><img div="github" height="80" title="GitHub" src="../assets/img/github.png" onmouseover="this.src='../assets/img/github.hover.png'" onmouseout="this.src='../assets/img/github.png'"></a>
                 </div>
               </div>
             </div>
@@ -174,8 +173,8 @@
 
     <div class="ticker" ng-controller="tickerController" ng-show="ticker">
       <div ng-class="{moving: moving}" ng-click="moveLeft()" class="viewport">
-        <div ng-repeat="item in boxes" class="box">
-          <span class="whitetext"><b>{{ item[0] }}</b>&nbsp</span>
+        <div ng-repeat="item in boxes" class="box"> 
+          <span class="whitetext"><b>{{ item[0] }}</b>&nbsp</span> 
           <span class="whitetext"> {{item[1]}} &nbsp </span>
           <span ng-class="isPositive(item[2])">{{item[2]}}&nbsp</span>
           <span class="whitetext">{{item[3]}}  &nbsp</span>
