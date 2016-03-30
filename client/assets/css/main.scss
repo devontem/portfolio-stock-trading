@@ -683,9 +683,9 @@ th{
 .badge-ribbon {
  position: relative;
  background: $accent-color;
- height: 100px;
- width: 100px;
- margin-bottom: 40px;
+ height: 70px;
+ width: 70px;
+ margin: 20px;
  -moz-border-radius:    50px;
  -webkit-border-radius: 50px;
  border-radius:         50px;
@@ -695,10 +695,10 @@ th{
 .badge-ribbon:after {
   content: '';
   position: absolute;
-  border-bottom: 70px solid $accent-color;
-  border-left: 40px solid transparent;
-  border-right: 40px solid transparent;
-  top: 70px;
+  border-bottom: 49px solid $accent-color;
+  border-left: 28px solid transparent;
+  border-right: 28px solid transparent;
+  top: 49px;
   left: -10px;
   -webkit-transform: rotate(-140deg);
   -moz-transform:    rotate(-140deg);
@@ -718,9 +718,9 @@ th{
 .possible-badge-ribbon {
  position: relative;
  background: #90a4ae;
- height: 100px;
- width: 100px;
- margin-bottom: 40px;
+ height: 70px;
+ width: 70px;
+ margin: 20px;
  -moz-border-radius:    50px;
  -webkit-border-radius: 50px;
  border-radius:         50px;
@@ -730,10 +730,10 @@ th{
 .possible-badge-ribbon:after {
   content: '';
   position: absolute;
-  border-bottom: 70px solid #90a4ae;
-  border-left: 40px solid transparent;
-  border-right: 40px solid transparent;
-  top: 70px;
+  border-bottom: 49px solid #90a4ae;
+  border-left: 28px solid transparent;
+  border-right: 28px solid transparent;
+  top: 49px;
   left: -10px;
   -webkit-transform: rotate(-140deg);
   -moz-transform:    rotate(-140deg);
