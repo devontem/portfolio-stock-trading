@@ -1,15 +1,12 @@
 app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFactory', '$window', '$rootScope', function($scope, WatchlistFactory,AnalysisFactory, $window, $rootScope){
 
   $scope.stock = {};
-  // $scope.stock.symbol;
-  // var test;
-
-  // console.log('SCOPE SYMBOL:', test)
   var temp = "";
   $scope.stock.symbol='';
   $scope.stock.symbol = $window.sym;
   $scope.displayStock = '';
 
+  // Functionality for Materialize Date Picker
   $scope.pickstart = function(){
     var start = $('#startdate').pickadate({
       onSet: function (context) {
@@ -55,35 +52,7 @@ app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFact
         event.stopPropagation();
     });
   };
-
-
-  // function watchlistToAnalysis(symbol){
-  //   $scope.stock.symbol = symbol;
-  //   console.log($scope.stock.symbol,'lolo')
-  // }
-
-//   $rootScope.$on('watchToChart', function(event, data){
-//     console.log('DATATATTAT', data)
-//     console.log(test, 'TEST TEST TEST')
-//     test = data.symbol;
-//     console.log('INSIDE ROOT', data.symbol)
-//     console.log(test, 'WS WS WS')
-//   });
-
-// console.log('AFTER:', test)
-
-
-
-  // $rootScope.$on('symbolAnalysis', function (event, data){
-  //   console.log(data,'data');
-  //   $scope.stock.symbol = data;
-  //   console.log($scope.stock.symbol, 'yoyo');
-
-
-
-
-  //   //watchlistToAnalysis(data);
-  // })
+// end functionality for Materialize Date Picker
 
   $scope.submitted = false;
   $scope.searched = false;
