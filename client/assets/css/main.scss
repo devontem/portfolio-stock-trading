@@ -784,3 +784,58 @@ th{
 		}
 	}
 }
+
+.positive {
+  color: green;
+}
+
+.negative {
+  color: red;
+}
+
+.whitetext {
+  color: white;
+}
+
+.ticker {
+  width: 50%;
+  height: 40px;
+  overflow: hidden;
+  position: relative;
+}
+.ticker .viewport {
+  position: absolute;
+  height: 40px;
+  white-space: nowrap;
+}
+.ticker .viewport.moving {
+  -webkit-animation: moveLeft 0 0s linear infinite;
+          animation: moveLeft 0 0s linear infinite;
+}
+.ticker .viewport .box {
+  display: inline-block;
+  width: 220px;
+  height: 100%;
+  margin: 0 5px;
+  text-align: center;
+}
+@-webkit-keyframes moveLeft {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(-100px);
+            transform: translateX(-100px);
+  }
+}
+@keyframes moveLeft {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(-110px);
+            transform: translateX(-110px);
+  }
+}

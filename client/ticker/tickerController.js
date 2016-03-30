@@ -1,5 +1,5 @@
 var app = angular.module('app')
-app.controller('tickerController', ['$scope', '$http', 'Ticker','symbolFactory', 'WatchlistFactory',  '$rootScope', '$location','$window', function($scope, $http, Ticker, symbolFactory, WatchlistFactory,  $rootScope, $location,$window){
+app.controller('tickerController', ['$scope', '$http', 'Ticker','symbolFactory', 'WatchlistFactory',  '$rootScope', '$location','$window', '$timeout', '$interval', function($scope, $http, Ticker, symbolFactory, WatchlistFactory,  $rootScope, $location,$window, $timeout, $interval){
 
 $scope.stocks=[];
 $scope.allstocks=[];
@@ -43,6 +43,13 @@ function decimalAdjust(type, value, exp) {
     };
   }
 
+  $scope.boxes = [];
+
+  $scope.ticker = true;
+  $rootScope.$on('search', function(){
+    $scope.ticker = false;
+  });
+
 $scope.getAllPortfolioId = function (){
   //button
   $scope.stocks=[];
@@ -68,7 +75,6 @@ $scope.getAllPortfolioId = function (){
 
      	Ticker.stocksQuery($scope.stocks)
      	.then(function (stockinfo){
-     		//console.log(stockinfo.data,'$$$$')
 
      		stockinfo.data.pop()
            stockinfo.data.forEach(function(stock){
@@ -92,11 +98,31 @@ $scope.getAllPortfolioId = function (){
           $scope.finalstocks.push($scope.allstocks)
           $scope.allstocks=[];
      })
-           console.log($scope.finalstocks,'yooo')
+           $scope.boxes = [];
+           for(var i=0; i<$scope.finalstocks.length; i++){
+             $scope.boxes.push($scope.finalstocks[i]);
+           }
+
+           $scope.moving = false;
+           $scope.moveLeft = function() {
+             $scope.moving = true;
+             $interval(function() {
+               console.log($scope.boxes)
+               if ($scope.moving) {
+                 $scope.boxes.push($scope.boxes.shift());
+               }
+               $scope.moving = !$scope.moving;
+             }, 2000);
+
+           };
+           $scope.moveLeft();
        })
   })
  })
 }
+
+$scope.getAllPortfolioId()
+
 }])
 
 
@@ -112,7 +138,6 @@ $scope.getAllPortfolioId = function (){
         
       })
       .then(function(data){
-      	console.log('donnnnee')
       	return data;
       })
       

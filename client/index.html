@@ -38,6 +38,7 @@
       <div class="nav-wrapper">
         <span class="brand-img"></span>
         <a ng-href="{{loggedin ? '/#/dashboard':'#'}}" class="brand-logo">Portfol.io</a>
+
         <ul id="nav-mobile" class="right hide-on-med-and-down">
 
           <li style="padding-right: 15px" ng-show="loggedin"><span class="red-text text-lighten-2">Welcome, {{username[0].toUpperCase()+username.slice(1)}}!</span></li>
@@ -72,13 +73,6 @@
           <li><a ng-show="!loggedin" ng-click="toggleLogin()">Login</a></li>
 
           <li><a ng-show="!loggedin" ng-click="toggleSignup()">Sign Up</a></li>
-
-      <!--    <li><a href="#/forum" ng-show="loggedin">Forum</a></li>
-          <li><a href="#/analysis" ng-show="loggedin">Chart</a></li>
-          <li><a href="#/messages" ng-show="loggedin">Messages<span ng-if="unreadMessages" class="badge circle red white-text">{{unreadMessages}}</span></a></li><!--
-          <!-- <li><a ng-href="#/profiles/{{id }}" ng-show="loggedin">Profile</a></li>
-          <li><a href="#/account" ng-show="loggedin">Account</a></li>
-          <li><a href="#/watchlist" ng-show="loggedin">Watchlist</a></li> -->
 
           <li ng-show="loggedin" style="padding-right: 15px">
 
@@ -176,6 +170,18 @@
     <h5 class="col s1 offset-s1 search-bar-title"> Quote</h5>
     <input ng-model="stockInput" class="col s1 searchquote" type="text" placeholder="enter symbol" required>
     <a ng-click="stockSearch()" class="waves-effect waves-light btn std-btn col s1 bot-search"><i class="material-icons">search</i></a>
+
+    <div class="ticker" ng-controller="tickerController" ng-show="ticker">
+      <div ng-class="{moving: moving}" ng-click="moveLeft()" class="viewport">
+        <div ng-repeat="item in boxes" class="box"> 
+          <span class="whitetext"><b>{{ item[0] }}</b>&nbsp</span> 
+          <span class="whitetext"> {{item[1]}} &nbsp </span>
+          <span ng-class="isPositive(item[2])">{{item[2]}}&nbsp</span>
+          <span class="whitetext">{{item[3]}}  &nbsp</span>
+        </div>
+      </div>
+    </div>
+
     <span ng-show="hasSearched" class="col s1 stockquote">{{stock.Symbol}}</span>
     <span ng-show="hasSearched" class="col s1">Price: {{stock.LastTradePriceOnly | currency}}</span>
     <span ng-show="hasSearched" class="col s1">Bid: {{stock.Bid | currency}}</span>
@@ -183,32 +189,6 @@
     <span ng-show="hasSearched" class="col s1">Change: {{stock.ChangeinPercent}} </span>
     <span ng-show="hasSearched" class="col s1">Volume: {{stock.Volume}}</span>
     <span ng-show="hasSearched" class="col s1" ng-click="addToWatchlist(stock.Symbol)"><a class="waves-effect waves-light btn std-btn">Watch</a></span>
-    <span class = 'ticker'>
-<!--<FORM NAME="marquee1">
-<INPUT NAME="text" SIZE=100
-VALUE=" AAPL down GILD up FEYE down GS up JPM down TWTR up LNKD down FB up F down AMGN up P down"
->
-</FORM>-->
-</span>
-<SCRIPT>
-<!--
-/*Text box marquee by Dave Methvin,
-Windows Magazine
-May be used/modified if credit line is
-retained*/
-// ScrollSpeed = 300
-// ScrollChars = 1
-// function ScrollMarquee() {
-// window.setTimeout('ScrollMarquee()',ScrollSpeed);
-
-// var msg = document.marquee1.text.value;
-// document.marquee1.text.value =
-// msg.substring(ScrollChars) +
-// msg.substring(0,ScrollChars);
-// }
-// ScrollMarquee()
-//-->
-</SCRIPT>
 
   </div>
 

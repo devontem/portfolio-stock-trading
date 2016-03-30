@@ -7,6 +7,7 @@ angular.module('app.botbar', [])
   // Initializes variable if the user has not searched yet
   $scope.hasSearched = false;
 
+
   $scope.stockSearch = function () {
     var stockName = $scope.stockInput.toUpperCase();
     BotbarFactory.searchStock(stockName).then(function(stock){
@@ -18,6 +19,9 @@ angular.module('app.botbar', [])
         $scope.hasSearched = true;
     }
     });
+
+    $rootScope.$emit('search');
+
     $scope.stockInput = "";
   };
   
