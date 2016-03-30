@@ -7,7 +7,7 @@ var del = require('del');
 
 // Sets up sass
 gulp.task('sass', function () {
-  return gulp.src('./client/assets/css/*.scss')
+  return gulp.src('./client/assets/css/main.scss, ./client/assets/css/_variables.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('./client/assets/css'));
 });
