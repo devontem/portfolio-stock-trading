@@ -136,6 +136,12 @@ var badgeMaker = function(){
     icon: 'flaticon-line',
     id: 9
   });
+  Badge.create({
+    name: 'First Public League',
+    text: 'You joined your first public league!',
+    icon: 'flaticon-symbols',
+    id: 10
+  });
 };
 
 //Tests if the badges have been seeded
