@@ -5,6 +5,7 @@ app.controller('AccountController', ['$scope', '$window', 'AccountFactory', '$lo
   $scope.active = 'accountInfo';
   $scope.editMode = false;
 
+  //delete user 
   $scope.delete = function(){
     var userid = $scope.id;
     swal({   title: "Are you sure?",
@@ -32,6 +33,7 @@ app.controller('AccountController', ['$scope', '$window', 'AccountFactory', '$lo
       });
   };
 
+  //get leagues by userid
   $scope.getLeaguesByOwnerId = function(){
     AccountFactory.getLeaguesByOwnerId($scope.id).then(function(data){
       $scope.leagues = data;
@@ -97,6 +99,7 @@ app.controller('AccountController', ['$scope', '$window', 'AccountFactory', '$lo
     $scope.currentLeague = league;
   };
 
+  //edit leagues user created
   $scope.editLeague = function(){
     var league = $scope.currentLeague;
 
@@ -114,18 +117,21 @@ app.controller('AccountController', ['$scope', '$window', 'AccountFactory', '$lo
     });
   };
 
+  //clear out input box
   var clearemailupdate = function(){
     $scope.newemail.email = '';
     $scope.newemail.confirmemail = '';
     $scope.newemail.password = '';
   };
 
+  //clear out input box
   var clearpwupdate = function(){
     $scope.newpw.newpw = '';
     $scope.newpw.oldpw = '';
     $scope.newpw.confirmnewpw = '';
   };
 
+  //allow user to update email
   $scope.updateEmail = function(newemail){
     if(newemail.email !== newemail.confirmemail){
       Materialize.toast('Email did not match.', 2000);
@@ -146,6 +152,7 @@ app.controller('AccountController', ['$scope', '$window', 'AccountFactory', '$lo
       });
   };
 
+  //allow user to update password
   $scope.updatePW = function(newpw){
     if(newpw.newpw !== newpw.confirmnewpw){
       Materialize.toast('New passwords do not match.', 2000);
@@ -164,7 +171,7 @@ app.controller('AccountController', ['$scope', '$window', 'AccountFactory', '$lo
       });
   };
 
-
+  //delete leagues user created
   $scope.deleteLeague = function(){
     swal({title: "Are you sure?",
           text: "All associated portfolios and transactions will also be removed",
@@ -183,7 +190,7 @@ app.controller('AccountController', ['$scope', '$window', 'AccountFactory', '$lo
           });
   };
 
-
+  //update user profile image
   $scope.upload = function (file) {
     var r = new FileReader();
     r.onload = function(){

@@ -7,7 +7,7 @@ angular.module('app.botbar', [])
   // Initializes variable if the user has not searched yet
   $scope.hasSearched = false;
 
-
+  //on click "search" for stock quote
   $scope.stockSearch = function () {
     var stockName = $scope.stockInput.toUpperCase();
     BotbarFactory.searchStock(stockName).then(function(stock){
@@ -25,6 +25,7 @@ angular.module('app.botbar', [])
     $scope.stockInput = "";
   };
   
+  //on click add to watch list from search bar
   $scope.addToWatchlist = function (symbol){
     $scope.userId = $window.localStorage.getItem('com.tp.userId');
     

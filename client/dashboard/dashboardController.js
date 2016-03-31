@@ -1,5 +1,6 @@
 angular.module('app.dashboard', [])
 
+//fixed date format to prevent Angular date format error
 .directive("formatDate", function(){
   return {
    require: 'ngModel',
@@ -11,6 +12,7 @@ angular.module('app.dashboard', [])
   };
 })
 
+//modal for create league
 .directive('addleagueDirective', function() {
   return {
     restrict: 'E',
@@ -48,7 +50,7 @@ angular.module('app.dashboard', [])
   $scope.sortEnd = 'endDate';
   $scope.sortReverse = false;
 
-
+  //date picker for league starting date
   $scope.pickstart = function(){
 
     var yesterday = new Date((new Date()).valueOf()-1000*60*60*24);
@@ -76,6 +78,7 @@ angular.module('app.dashboard', [])
     });
   };
 
+  //date picker for league ending date
   $scope.pickend = function(){
     var end = $('#enddate').pickadate({
       onSet: function (context) {
@@ -106,6 +109,7 @@ angular.module('app.dashboard', [])
     $scope.showadd = !$scope.showadd;
   };
 
+  //create leaguee 
   $scope.addLeague = function (league) {
     var start = moment(league.start).utc().hour(13).minute(30);
     var end = moment(league.end).utc().hour(20);
@@ -134,6 +138,7 @@ angular.module('app.dashboard', [])
       });
   };
 
+  //toggle tabs leagues to join and public leagues
   $scope.showToJoin = function () {
     $scope.currentTab = 'toJoin';
 
@@ -143,6 +148,7 @@ angular.module('app.dashboard', [])
     $scope.currentTab = 'user';
   };
 
+  //retrieve user leagues with userId
   $scope.getUserLeagues = function () {
     var userId = $window.localStorage.getItem('com.tp.userId');
     DashboardFactory.getUserLeagues(userId)
@@ -162,6 +168,7 @@ angular.module('app.dashboard', [])
       });
   };
 
+  //join league
   $scope.joinLeague = function (leagueId) {
     var userId = $window.localStorage.getItem('com.tp.userId');
     DashboardFactory.joinLeague(leagueId, userId)
@@ -170,10 +177,8 @@ angular.module('app.dashboard', [])
         $rootScope.$emit('newleague');
       });
   };
-//returns all public leagues
-//
 
-
+  //get all public leagues
   $scope.getLeaguesToJoin = function () {
     var userId = $window.localStorage.getItem('com.tp.userId');
     DashboardFactory.getAvailLeagues()
@@ -198,7 +203,7 @@ angular.module('app.dashboard', [])
       });
   };
 
-
+  //check for leagues not joined
   $scope.notjoined = function(league){
     for(var i=0; i<$scope.portfolios.length; i++){
       if(league.id === $scope.portfolios[i].leagueId) return false;
@@ -206,16 +211,19 @@ angular.module('app.dashboard', [])
     return true;
   };
 
+  //check for public leagues
   $scope.notprivate = function(league){
     return !league.private;
   };
 
+  //check if leagues hits capacity
   $scope.notfull = function(league){
     if(league.maxNum - league.usersJoined > 0){
       return true;
     }
   };
 
+  //check if leagues started yet
   $scope.notstarted = function(league){
     var now = new Date();
     var convertedNow = moment.utc(now).format();
@@ -226,6 +234,7 @@ angular.module('app.dashboard', [])
     }
   };
 
+  //join private league
   $scope.joinPrivate = function(){
     swal({title: "Join a Private League",
           text: "If you don't know the league code, ask the league owner.",
@@ -260,23 +269,6 @@ angular.module('app.dashboard', [])
             return false;
           }
         });
-  };
-
-  $scope.autoAddLeague = function (name, max, balance, hour) {
-    var league = {};
-    var tomorrow = new Date(new Date().getTime() + hour * 60 * 60 * 1000);
-    var dayLater = new Date(new Date().getTime() + (hour + 24) * 60 * 60 * 1000);
-    var start = moment(tomorrow).utc().hour(13).minute(30);
-    var end = moment(dayLater).utc().hour(20);
-    league.start = start.format();
-    league.end = end.format();
-    league.name = name;
-    league.max = max;
-    league.balance = balance;
-    league.isPrivate = false;
-    league.creatorId = 1000;
-    league.creatorName = 'Admin';
-    DashboardFactory.addLeague(league);
   };
 
   $scope.getUserLeagues();
