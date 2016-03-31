@@ -2,9 +2,6 @@ var app = angular.module('app');
 
 app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$window', 'forumFactory', '$location', '$anchorScroll', function($scope, topicFactory, $stateParams, $window, forumFactory, $location, $anchorScroll){
 
-  // functionality to show and hide reply form field
-  $scope.replyClicked = false;
-
   $scope.reply = function(){
     $scope.replyClicked = true;
   };
@@ -72,11 +69,6 @@ app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$w
   $scope.getOneTopic();
   $scope.getAllReplies();
   $anchorScroll();
-
-
-  // $scope.hasPosts = function(){
-  //   return $scope.allReplies.length > 3;
-  // }
 
 
   $scope.usersPost = function(user){
