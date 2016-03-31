@@ -11,7 +11,7 @@ angular.module('app.botbar', [])
   $scope.stockSearch = function () {
     var stockName = $scope.stockInput.toUpperCase();
     BotbarFactory.searchStock(stockName).then(function(stock){
-      if(!stock.Ask){
+      if(stock.Ask === 'N/A'){
         Materialize.toast('Please enter valid symbol!', 3000);
       }
       else{
@@ -21,6 +21,10 @@ angular.module('app.botbar', [])
     });
 
     $rootScope.$emit('search');
+    $rootScope.$on('off', function(){
+      console.log('yoyoyoyo')
+      $scope.hasSearched = false;
+    })
 
     $scope.stockInput = "";
   };
