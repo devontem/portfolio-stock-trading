@@ -37,7 +37,7 @@ angular.module('app.profile', [])
   $scope.sendMessage = function(){
     //prevents user from sending messages to themselves
     if ($scope.id == $scope.userid){
-      Materialize.toast('You cannot send messages to you yourself!', 5000);
+      Materialize.toast('You cannot send messages to yourself!', 5000);
       return false;
     }
     DirectMessage.setSendTo($scope.user);

@@ -16,7 +16,7 @@
     		      <i class="material-icons circle blue">perm_identity</i>
     		      <p class="title blue-text text-darken-3 text-left">Direct Message</p>
     		      <!-- {{msg}} -->
-    		      <p class="text-left">From: {{ msg.recipientId == id ? msg.username[0].toUpperCase()+msg.username.slice(1) : msg.recipientUsername[0].toUpperCase()+msg.recipientUsername.slice(1) }}</p>
+    		      <p class="text-left">From: {{ msg.recipientId == id ? msg.username[0].toUpperCase()+msg.username.slice(1) : msg.recipientUsername[0].toUpperCase()+msg.recipientUsername.slice(1) }} </p>
     		      <p class="green-text text-left">MSG: "{{msg.message | limitTo: 15}}.."</p>
     		      </p>
     		      <a ng-if="!!!msg.read" class="secondary-content"><i class="material-icons red-text">new_releases</i></a>

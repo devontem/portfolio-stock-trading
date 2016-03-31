@@ -25,6 +25,8 @@ module.exports.sendMessage = function(req, res){
 
 	User.findById(recipientId).then(function(recipient){
 
+		console.log('sender username', req.body.senderUsername)
+
 		DirectMessage.create({
 			UserId: senderId,
 			username: req.body.senderUsername,
@@ -33,8 +35,8 @@ module.exports.sendMessage = function(req, res){
 			message: req.body.message,
 			read: false,
 			closed: false
-		}).then(function(){
-			res.send('Direct Message Sent.');
+		}).then(function(data){
+			res.send(data);
 		})
 
 	});
