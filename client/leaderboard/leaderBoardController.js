@@ -15,7 +15,6 @@ app.controller('LeaderBoardController', ['$scope', '$window', '$stateParams', 'D
         for(var i=0; i<portfolios.length; i++){
           if(portfolios[i].UserId === Number($scope.userId)) joined = true;
         }
-        console.log(joined)
         if(!joined) {
           $window.location.href = '/#/dashboard';
           Materialize.toast('You are not in the league.',1000);
@@ -24,7 +23,6 @@ app.controller('LeaderBoardController', ['$scope', '$window', '$stateParams', 'D
         $scope.portfolios = portfolios;
         $scope.leagueName = portfolios[0].leaguename;
         $scope.code = portfolios[0].code;
-        console.log($scope.portfolios,'*********')
       });
   };
 
