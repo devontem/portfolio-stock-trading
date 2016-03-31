@@ -40,10 +40,14 @@ pre{
 .brand-logo {
 	margin-left: 10px;
 }
-
+.splash-wrapper{
+	background: #313A43;
+}
 .splash-page {
-	padding-top: 25px;
+	padding-top: 1px;
 	padding-bottom: 50px;
+	min-height: 100vh;
+
 }
 
 .get-started {
@@ -55,6 +59,55 @@ pre{
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: bottom;
+}
+
+.img-bg{
+	position: relative;
+	z-index: 10;
+
+	.container{
+		margin-top: 140px
+	}
+}
+
+.img-bg:after {
+    content : "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url('../img/stock-market.jpg');
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    opacity : 0.25;
+    z-index: -1;
+}
+
+.mobile-app{
+
+	.container{
+		margin-top: 70px;
+	}
+	.devices{
+		margin-top: 60px;
+
+		img{
+			width: 100%;
+		}
+	}
+}
+
+.how-to-play{
+	background: #E9533A;
+
+	img{
+		width: 100%;
+	}
+
+	.container{
+		margin-top: 60px;
+	}
 }
 
 #get-started-slogan {
@@ -72,17 +125,25 @@ pre{
 	background-image: url("../img/stock-market.jpeg");
 	text-align: center;
 	background: #ECC132;
+	background: #70A644;
 	color: white;
 
-	.title{
-		color: #F6E7B3;
+	img{
+		width: 100%;
 	}
-	.card-panel{
-		background: #F6E7B3;
-		padding: 20px;
-		font-size: 1.2em;
-		color: $font;
+	.money img{
+		width: 25%;
+    margin: -5px 20px;
 	}
+	.container{
+		margin-top: 70px;
+	}
+}
+
+.splash-text p{
+	font-size: 1.2em;
+  text-transform: uppercase;
+    /* font-weight: bold; */
 }
 
 footer.page-footer{
@@ -101,7 +162,7 @@ footer.page-footer{
 }
 
 .team-info {
-	background-color: #F39C12;
+	background-color: #ddd;
 	text-align: center;
 	color: black;
 
@@ -112,7 +173,7 @@ footer.page-footer{
 	.card-content {
 		padding: 10px;
     min-height: 90px;
-		background: #FBE4C0;
+		/*background: #FBE4C0;*/
 		color: $font;
 	}
 }

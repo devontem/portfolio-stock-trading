@@ -1,146 +1,188 @@
-<div class="splash-page get-started">
-
-  <div id="get-started-slogan">
-    <h2>Bringing Wall Street to You</h2>
-    <h4>Compete and Put Together a Winning Stock Portfolio Today!</h4>
-    </h2>
-  </div>
-  <br>
-  <div id="join-button">
-    <a ng-show="!loggedin" class="waves-effect waves-light btn-large" ng-click="toggleSignup()">Start Trading</a>
-  </div>
-
-
-</div>
-
-<signup-directive show='showsignup' width='350px' height='500px'>
-  <div ng-if="showsignup" class="signup">
-    <h1 class="brand-logo"> Sign Up </h1>
-    <form name="signinForm" ng-submit='signup(user)'>
-      <label>User Name </label><br>
-      <input type='text' ng-model='user.username' required>
-      <br>
-      <label>Email </label><br>
-      <input type='email' ng-model='user.email' required>
-      <br>
-      <label>Password </label><br>
-      <input type="password" ng-model='user.password' required><br>
-      <br>
-      <button class="waves-effect waves-light btn std-btn">Sign Up</button>
-    </form>
-  </div>
-</signup-directive>
-
-<div class="splash-page more-info">
-  <div class="container row">
-    <h3 class="title">What is Portfol.io?</h3>
-    <div class="card-panel col s6" style="text-align: left;">
-      <p>Portfol.io is a web-based stock market game where you compete against others in creating the highest returning stock portfolio through buying and selling stocks during trading hours and based on real-time market prices.</p>
-
-       <p>You can join a daily or weekly public league, or create a private league of your own! And play in as many leagues as you would like.</p>
-
-       <p>Start playing today!</p>
+<div class="splash-wrapper">
+  <div class="splash-page get-started">
+    <div id="get-started-slogan">
+      <h2>Bringing Wall Street to You</h2>
+      <h4>Compete and Put Together a Winning Stock Portfolio Today!</h4>
+      </h2>
     </div>
-    <div class="app-video col s6">
-      <img src="http://www.unblocker.yt/_/img/video_placeholder.jpg">
+    <br>
+    <div id="join-button">
+      <a ng-show="!loggedin" class="waves-effect waves-light btn-large" ng-click="toggleSignup()">Start Trading</a>
     </div>
-  </div>
-</div>
-
-<div class="splash-page more-info">
-  <div class="container row">
-    <h3 class="title"></h3>
 
 
   </div>
-</div>
 
-<div class="splash-page team-info">
+  <signup-directive show='showsignup' width='350px' height='500px'>
+    <div ng-if="showsignup" class="signup">
+      <h1 class="brand-logo"> Sign Up </h1>
+      <form name="signinForm" ng-submit='signup(user)'>
+        <label>User Name </label><br>
+        <input type='text' ng-model='user.username' required>
+        <br>
+        <label>Email </label><br>
+        <input type='email' ng-model='user.email' required>
+        <br>
+        <label>Password </label><br>
+        <input type="password" ng-model='user.password' required><br>
+        <br>
+        <button class="waves-effect waves-light btn std-btn">Sign Up</button>
+      </form>
+    </div>
+  </signup-directive>
 
-  <h2 class="title">The Team</h2>
-  <div class="row">
-    <div class="offset-s1 col s2 ">
-      <div class="card">
-        <div class="card-image">
-          <img src="https://avatars2.githubusercontent.com/u/11836852?v=3&s=400">
+  <div class="splash-page more-info">
+    <div class="container row">
+<!--     <h3 class="title white-text left-align"><b>HOW TO PLAY</b></h3> -->
+      <div class="col s12 m5" style="text-align: left;">
+        <h5 class="title white-text left-align">1. PICK A LEAGUE</h5>
+        <div class="card">
+          <img src="/assets/img/leagues.png" />
         </div>
-        <div class="card-content">
-          <p><b>Jordan Murphy</b></p>
-          <div class="divider"></div>
-          <p style="font-style: italic;">Project Owner</p>
-          <p>Full-Stack Software Engineer</p>
+        <h5 class="title white-text left-align">2. CHOOSE STOCKS</h5>
+        <div class="card">
+          <img src="/assets/img/portfolio.png" />
         </div>
-<!--         <div class="card-action">
-          <a href="#">This is a link</a>
-        </div> -->
       </div>
-    </div>
-    <div class="col s2 ">
-      <div class="card">
-        <div class="card-image">
-          <img src="https://avatars2.githubusercontent.com/u/15037331?v=3&s=400">
-        </div>
-        <div class="card-content">
-          <p><b>Ted Hsiao</b></p>
-          <div class="divider"></div>
-          <p style="font-style: italic;">SCRUM Master</p>
-          <p>Full-Stack Software Engineer</p>
-        </div>
-<!--         <div class="card-action">
-          <a href="#">This is a link</a>
-        </div> -->
-      </div>
-    </div>
-    <div class="col s2 ">
-      <div class="card">
-        <div class="card-image">
-          <img src="https://avatars0.githubusercontent.com/u/3604690?v=3&s=400">
-        </div>
-        <div class="card-content">
-          <p><b>Devonte MacGlashan</b></p>
-          <div class="divider"></div>
-          <br>
-          <p>Full-Stack Software Engineer</p>
-        </div>
-<!--         <div class="card-action">
-          <a href="#">This is a link</a>
-        </div> -->
-      </div>
-    </div>
-    <div class="col s2 ">
-      <div class="card">
-        <div class="card-image">
-          <img src="https://avatars3.githubusercontent.com/u/13694461?v=3&s=400">
-        </div>
-        <div class="card-content">
-          <p><b>Sonny Sheth</b></p>
-          <div class="divider"></div>
-          <br>
-          <p>Full-Stack Software Engineer</p>
-        </div>
-<!--         <div class="card-action">
-          <a href="#">This is a link</a>
-        </div> -->
-      </div>
-    </div>
-    <div class="col s2 ">
-      <div class="card">
-        <div class="card-image">
-          <img src="https://avatars0.githubusercontent.com/u/8886742?v=3&s=400">
-        </div>
-        <div class="card-content">
-          <p><b>Jonathon Lo</b></p>
-          <div class="divider"></div>
-          <br>
-          <p>Full-Stack Software Engineer</p>
-        </div>
-<!--         <div class="card-action">
-          <a href="#">This is a link</a>
-        </div> -->
+      <div class="money col s12 m7">
+        <h5 class="title white-text left-align">3. TRACK PROGRESS, EARN BADGES, HAVE FUN!</h5>
+        <img class="center" src="/assets/img/winner.png" />
+        <img class="center" src="/assets/img/money1.png" />
+        <img class="center" src="/assets/img/money2.png" />
+        <img class="center" src="/assets/img/money3.png" />
+
       </div>
     </div>
   </div>
-  <div class="row">
+
+  <div class="splash-page img-bg">
+    <div class="container row">
+      <h3 class="title white-text"><b>LEARN. WIN. COMPETE.</b></h3>
+      <div class="splash-text col s6 white-text" style="text-align: left;">
+        <p>Portfol.io is a web-based stock market game where you compete against others in creating the highest returning stock portfolio through buying and selling stocks during trading hours and based on real-time market prices.</p>
+
+         <p>You can join a daily or weekly public league, or create a private league of your own! And play in as many leagues as you would like.</p>
+
+      </div>
+      <div class="app-video col s6">
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="splash-page how-to-play">
+    <div class="container row">
+      <h3 class="title white-text"><b>APP DEMO</b></h3>
+      <div class="splash-text offset-m2 col s12 m8 white-text" style="text-align: left;">
+        
+      <img src="http://digitalsynopsis.com/wp-content/uploads/2013/12/link-to-specific-time-youtube-video.jpg" />
+      </div>
+    </div>
+  </div>
+
+  <div class="splash-page mobile-app">
+    <div class="container row">
+      <div class="splash-text col s12 m6 white-text" style="text-align: left;">
+      <h3 class="title white-text"><b>PLAY ANYWHERE. NEVER MISS AN UPDATE.</b></h3>
+        <p>Portfol.io is available on the web, but also on iOS devices.</p>
+
+        <p>From the companion mobile app you can check on your stocks, and make transactions just in case you need to make any last minute changes to your portfolio.</p>
+
+      </div>
+      <div class="devices col s12 m6">
+        <img src="/assets/img/devices1.png">
+      </div>
+    </div>
+  </div>
+
+  <div class="splash-page team-info">
+
+    <div class="row">
+      <div class="container">
+        <h3 class="title white-text left-align"><b>THE TEAM</b></h3>
+      </div>
+      <div class="offset-l1 col s12 m4 l2 ">
+        <div class="card">
+          <div class="card-image">
+            <img src="https://avatars2.githubusercontent.com/u/11836852?v=3&s=400">
+          </div>
+          <div class="card-content">
+            <p><b>Jordan Murphy</b></p>
+            <div class="divider"></div>
+            <p style="font-style: italic;">Project Owner</p>
+            <p>Full-Stack Software Engineer</p>
+          </div>
+  <!--         <div class="card-action">
+            <a href="#">This is a link</a>
+          </div> -->
+        </div>
+      </div>
+      <div class="col s12 m4 l2 ">
+        <div class="card">
+          <div class="card-image">
+            <img src="https://avatars2.githubusercontent.com/u/15037331?v=3&s=400">
+          </div>
+          <div class="card-content">
+            <p><b>Ted Hsiao</b></p>
+            <div class="divider"></div>
+            <p style="font-style: italic;">SCRUM Master</p>
+            <p>Full-Stack Software Engineer</p>
+          </div>
+  <!--         <div class="card-action">
+            <a href="#">This is a link</a>
+          </div> -->
+        </div>
+      </div>
+      <div class="col s12 m4 l2 ">
+        <div class="card">
+          <div class="card-image">
+            <img src="https://avatars0.githubusercontent.com/u/3604690?v=3&s=400">
+          </div>
+          <div class="card-content">
+            <p><b>Devonte MacGlashan</b></p>
+            <div class="divider"></div>
+            <br>
+            <p>Full-Stack Software Engineer</p>
+          </div>
+  <!--         <div class="card-action">
+            <a href="#">This is a link</a>
+          </div> -->
+        </div>
+      </div>
+      <div class="col s12 m4 l2 ">
+        <div class="card">
+          <div class="card-image">
+            <img src="https://avatars3.githubusercontent.com/u/13694461?v=3&s=400">
+          </div>
+          <div class="card-content">
+            <p><b>Sonny Sheth</b></p>
+            <div class="divider"></div>
+            <br>
+            <p>Full-Stack Software Engineer</p>
+          </div>
+  <!--         <div class="card-action">
+            <a href="#">This is a link</a>
+          </div> -->
+        </div>
+      </div>
+      <div class="col s12 m4 l2 ">
+        <div class="card">
+          <div class="card-image">
+            <img src="https://avatars1.githubusercontent.com/u/8886742?v=3&s=400">
+          </div>
+          <div class="card-content">
+            <p><b>Jonathon Lo</b></p>
+            <div class="divider"></div>
+            <br>
+            <p>Full-Stack Software Engineer</p>
+          </div>
+  <!--         <div class="card-action">
+            <a href="#">This is a link</a>
+          </div> -->
+        </div>
+      </div>
+    </div>
+      <div class="row">
     <img hspace="20" height="80" title="AngularJS" src="../assets/img/angular.png">
     <img hspace="20" height="60" title="NodeJS" src="../assets/img/nodeJS.png">
     <img hspace="20" height="40" title="Express" src="../assets/img/express.png">
@@ -151,3 +193,4 @@
     <img height="80" title="React Native" src="../assets/img/react-logo.svg">
   </div>
 </div>
+  </div>
