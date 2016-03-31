@@ -1,7 +1,7 @@
 angular.module('app.portfolio', [])
 
 .controller('PortfolioController', ['$scope', '$window', '$stateParams', 'Portfolio', '$rootScope', function($scope, $window, $stateParams, Portfolio, $rootScope){
-	// MAKE A TRADE MODAL
+
 	$scope.leagueId = $stateParams.leagueId;
 	$scope.userId = $window.localStorage.getItem('com.tp.userId');
 	$scope.fees = 10;
@@ -12,10 +12,7 @@ angular.module('app.portfolio', [])
 		return $scope.chooseStock(data);
 	});
 
-	$scope.ordtype = function(){
-
-	};
-
+	//clear all inputs;
 	$scope.resetFields = function (){
 		$scope.stock = undefined;
 		$scope.stockAmount = '';
@@ -88,11 +85,13 @@ angular.module('app.portfolio', [])
 		}
 	};
 
+	//update portfolio stock prices
 	$rootScope.$on('update', function(){
 		$scope.updateMarketPrice();
 		updatePortfolio();
 	});
 
+	//check if user selling stocks within what he owns
 	function ableToSell(){
 		for (var i = 0; i < $scope.stocks.length; i++){
 			if ($scope.stocks[i].symbol === $scope.stock.symbol){
@@ -108,6 +107,7 @@ angular.module('app.portfolio', [])
 		return false;
 	}
 
+	//on click sell stock symbol in portofolio component
 	$scope.sellStock = function(stock){
     $scope.chooseStock(stock.symbol);
     $scope.action = true;
@@ -118,11 +118,13 @@ angular.module('app.portfolio', [])
     }, 1500);
 	};
 
+	//on change - calculate total cost amount
 	$scope.updateAmounts = function(){
 		$scope.estPrice = $scope.stockAmount * $scope.singlePrice;
 		$scope.total = $scope.estPrice + $scope.fees;
 	};
 
+	//update market price for portfolio
 	$scope.updateMarketPrice = function(){
 			updatePortfolio();
 			if ($scope.stocks.length > 0){
@@ -137,9 +139,6 @@ angular.module('app.portfolio', [])
 				});
 			}
 		};
-
-	// MY STOCKS MODAL
-	// $scope.updateMarketPrice();
 
 	function updatePortfolio(){
 		var leagueId = $stateParams.leagueId;
@@ -169,7 +168,7 @@ angular.module('app.portfolio', [])
 
 	$scope.twoDecimal = function(val){
 			return val.toFixed(2);
-		};
+	};
 
 	updatePortfolio();
 

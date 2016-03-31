@@ -1,11 +1,13 @@
 var app = angular.module('app')
 
+//reverse transactions so newest go first
 .filter('reverse', function() {
   return function(items) {
     return items.slice().reverse();
   };
 })
 
+//absolute all negative to positive, for # shares bougth/sold
 .filter('negative', function () {
    return function (items) {
     if(items <1){
@@ -25,6 +27,7 @@ var app = angular.module('app')
   $scope.transactions = [];
   $scope.usernames = {};
 
+  //fetch all transaction in league by leagueid
   $scope.getleagueTransactions = function (arr) {
     	  $scope.transactions =[];
         transactionFactory.getleagueTransactions(arr)
@@ -41,6 +44,8 @@ var app = angular.module('app')
         		});
         });
   };
+
+  //to receive latest transactions;
   $scope.getPortfolios = function () {
   	leaderBoardFactory.getPortfolios(leagueId)
   	  .then(function (portfolios) {

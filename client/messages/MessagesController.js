@@ -40,7 +40,6 @@ app
 
 			// set all messages as read once retrieved
 			// DirectMessage.markAllMessagesReadBetween($scope.id, $scope.recipientId).then(function(){
-			// 	console.log('All messages now marked as read in database.')
 
 				//refresh inbox
 				getOpenAndUnreadMessages();

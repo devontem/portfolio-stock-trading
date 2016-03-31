@@ -3,6 +3,7 @@ app.controller('orderStatusController', ['$scope', '$window', '$stateParams', 'o
   $scope.userId = $window.localStorage.getItem('com.tp.userId');
   $scope.leagueId = $stateParams.leagueId;
 
+  //retrieve user orders
   $scope.getOrders = function(){
     var userleague = {
       userId: $scope.userId,
@@ -14,14 +15,17 @@ app.controller('orderStatusController', ['$scope', '$window', '$stateParams', 'o
       });
   };
 
+  //open modal for order status
   $scope.openModal = function(){
     $('#modal2').openModal();
   };
 
+  //close modal for order status
   $scope.closeModal = function(){
     $('#modal2').closeModal();
   };
 
+  //allow user to cancel open orders
   $scope.cancel = function(orderid){
     swal({   title: "Are you sure?",
       text: "Cancel this order.",

@@ -100,6 +100,7 @@ angular.module('app.profile', [])
     return -1;
   };
 
+  //send invites to another users to join a league
   $scope.sendInvite = function(){
     if (!$scope.leagueInvites.length){
       Materialize.toast("Please select leagues before sending.", 3000);

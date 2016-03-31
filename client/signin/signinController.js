@@ -140,6 +140,7 @@ app
     $scope.user.email = '';
   };
 
+  //new user signup
   $scope.signup = function(user){
     Auth.createuser(user)
       .then(function(data){
@@ -162,6 +163,7 @@ app
       });
   };
 
+  //user login
   $scope.signin = function(user){
     Auth.loginuser(user).then(function(data){
       if(data === 'User not found'){
@@ -195,6 +197,7 @@ app
     $window.location.href = '/#/';
   };
 
+  //get all user's leagues
   $scope.getUserLeagues = function () {
     var userId = $window.localStorage.getItem('com.tp.userId');
     DashboardFactory.getUserLeagues(userId)
