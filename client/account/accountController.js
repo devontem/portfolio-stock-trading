@@ -200,13 +200,10 @@ app.controller('AccountController', ['$scope', '$window', 'AccountFactory', '$lo
       })
         .then(function (resp) {
             Materialize.toast('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data, 5000);
-            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
         }, function (resp) {
-            Materialize.toast('Error status: ' + resp.status, 5000);
-            console.log('Error status: ' + resp.status);
+            Materialize.toast('Error', 5000);
         }, function (evt) {
             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
         });
     };
     r.readAsDataURL(file);
