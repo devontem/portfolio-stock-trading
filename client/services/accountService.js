@@ -14,20 +14,6 @@ app
       });
     };
 
-    var editLogin = function(user){
-      console.log(user.userId)
-      return $http.put('api/users/'+user.userId, {
-          id: user.userId,
-          email: user.email,
-          password: user.pass,
-          oldpassword: user.oldpass
-        }
-      )
-      .then(function(user){
-        return user;
-      })
-    };
-
     var getSingleUser = function(userID){
       return $http({
         method: 'POST',
