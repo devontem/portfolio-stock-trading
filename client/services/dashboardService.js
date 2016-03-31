@@ -32,7 +32,7 @@ app
         data: {userId: userId}
       })
       .then( function (portfolios) {
-        // TODO: Structure this appropriately once you have the exact route
+
         return portfolios.data;
       }
       );
@@ -44,7 +44,7 @@ app
         url: '/api/leagues/'
       })
       .then(function(leagues){
-        // TODO: Structure this appropriately once you have the exact route
+
         return leagues.data;
       });
     };
@@ -55,7 +55,7 @@ app
         url: '/api/leagues/'+id
       })
       .then(function(leagues){
-        // TODO: Structure this appropriately once you have the exact route
+
         return leagues.data;
       });
     }

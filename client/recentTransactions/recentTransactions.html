@@ -1,49 +1,49 @@
+<div class="col s12 m12">
+  <nav>
+    <div class="nav-wrapper">
+      <a class="brand-logo" style="font-size: 20px">Recent Transactions</a>
+    </div>
+  </nav>
 
-   <div class="col s12 m12">
-      <nav>
-        <div class="nav-wrapper">
-          <a class="brand-logo" style="font-size: 20px">Recent Transactions</a>
-        </div>
-      </nav>
-       <div class="card-content black-text">
-         <div class="leaderboard-container" style="height: 300px;
-           overflow-x: auto;" scroll-directive="posts">
+   <div class="card-content black-text">
+     <div class="leaderboard-container" style="height: 300px;
+       overflow-x: auto;" scroll-directive="posts">
 
 
-           <table class="centered" style="padding-bottom: 15px; float:top">
-            <thead>
-              <tr>
-                  <th data-field="Member">League Member</th>
-                  <th data-field="Transaction">Transaction</th>
-                  <th data-field="Shares">Shares</th>
-                  <th data-field="Stock">Stock</th>
-                  <th data-field="Time">Time</th>
-              </tr>
-            </thead>
-             <tbody ng-repeat="transaction in transactions | reverse">
-               <tr class="recentTransactions">
-                 <td>
-                  {{transaction.portfolioid}}
-                 </td>
+       <table class="centered" style="padding-bottom: 15px; float:top">
+        <thead>
+          <tr>
+              <th data-field="Member">League Member</th>
+              <th data-field="Transaction">Transaction</th>
+              <th data-field="Shares">Shares</th>
+              <th data-field="Stock">Stock</th>
+              <th data-field="Time">Time</th>
+          </tr>
+        </thead>
+         <tbody ng-repeat="transaction in transactions | reverse">
+           <tr class="recentTransactions">
+             <td>
+              {{transaction.portfolioid}}
+             </td>
 
-                 <td>
-                  <span ng-show="transaction.buysell > 0"> bought</span>
-                  <span ng-show="transaction.buysell < 0"> sold </span>
-                 </td>
+             <td>
+              <span ng-show="transaction.buysell > 0"> bought</span>
+              <span ng-show="transaction.buysell < 0"> sold </span>
+             </td>
 
-                 <td>
-                  {{transaction.buysell | negative}}
-                 </td>
+             <td>
+              {{transaction.buysell | negative}}
+             </td>
 
-                 <td>
-                 <span ng-show='transaction.buysell > 1 || transaction.buysell < -1'></span>
-                 {{transaction.symbol}}
-                 </td>
+             <td>
+             <span ng-show='transaction.buysell > 1 || transaction.buysell < -1'></span>
+             {{transaction.symbol}}
+             </td>
 
-                 <td>{{ transaction.time }} </td>
-               </tr>
-             </tbody>
-           </table>
-         </div>
+             <td>{{ transaction.time }} </td>
+           </tr>
+         </tbody>
+       </table>
+     </div>
 
-   </div>
+</div>

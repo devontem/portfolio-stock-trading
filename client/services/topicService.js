@@ -13,7 +13,6 @@ app.factory('topicFactory', ['$http', function($http){
     });
   };
 
-  // add topicId back as an argument
   var showAllReplies = function(topicId){
     return $http({
       method: 'GET',

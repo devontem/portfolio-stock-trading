@@ -79,10 +79,10 @@ app
 .controller('SigninController', ['$scope', '$window', 'Auth', 'DirectMessage', '$rootScope', 'DashboardFactory', 'LeagueInvite', function($scope, $window, Auth, DirectMessage, $rootScope, DashboardFactory, LeagueInvite){
   $scope.user = {};
   $scope.id = $window.localStorage.getItem('com.tp.userId') || undefined;
-  //$scope.loggedin = false;
+
   $scope.username;
 
-  // $scope.userLeagues;
+
   $scope.authorize = function(){
     if(Auth.isAuth()){
       $scope.loggedin = true;
@@ -239,7 +239,7 @@ app
       if (counter !== $scope.unreadMessages){
         $scope.unreadMessages = counter;
       }
-      // $scope.unreadOpenMessages = data;
+
     });
   }
 

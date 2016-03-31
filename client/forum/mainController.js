@@ -2,11 +2,15 @@ var app = angular.module('app');
 
 app.controller('MainForumController', ['$scope', '$window', 'forumFactory', '$rootScope', '$location', '$anchorScroll','topicFactory', function($scope, $window, forumFactory, $rootScope, $location, $anchorScroll, topicFactory){
 
+  // these filters are to show the newest topics first
   $scope.sortLatest = 'createdAt';
   $scope.sortReverse = true;
+
   $scope.topic = {};
+
   $scope.topic.username = $window.localStorage.getItem('com.tp.username');
   $scope.topic.userId = $window.localStorage.getItem('com.tp.userId');
+
   $scope.allTopics;
 
   //modal when create new forum
@@ -36,7 +40,7 @@ app.controller('MainForumController', ['$scope', '$window', 'forumFactory', '$ro
       $scope.allTopics = data.data;
 
       for(var i = 0; i < $scope.allTopics.length; i++){
-
+        // an IIFE is required here bc of async issues
         (function(index){
           $scope.allTopics[index].replies = 0;
           topicFactory.showAllReplies($scope.allTopics[index].id)

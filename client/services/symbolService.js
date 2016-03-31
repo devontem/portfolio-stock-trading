@@ -18,11 +18,9 @@ app.factory('symbolFactory', function($http){
       method: 'Post',
       url:'/api/watchlist',
       data: data
-      
-  })
+
+    })
   }
-
-
 
   return {
     addToWatchlist:addToWatchlist,

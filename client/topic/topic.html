@@ -1,88 +1,75 @@
+<!-- Link to return to Forum Page -->
 <ul class="pagination">
   <li class="disabled"><a href="#!"><i class="material-icons"></i></a></li>
   <li class="active"><a href="#/forum">Back to Forum</a></li>
   <li class="waves-effect"><a href="#!"><i class="material-icons"></i></a></li>
 </ul>
 
+<!-- Beginning of topics display -->
 <div class="container">
-<div class="row" style="width: 100%;" id="loc-1">
-  <div class="col s12 m12" style="overflow-x: auto;">
-    <div class="card-panel white">
+  <div class="row" style="width: 100%;" id="loc-1">
+    <div class="col s12 m12" style="overflow-x: auto;">
+      <div class="card-panel white">
 
-      <h5>{{topicInfo.title}}</h5>
-      <p style="font-size: 16px">{{topicInfo.description}}</p>
-      <p style="text-align: right; font-size: 18px">-{{topicInfo.creatorName}}, <span style="font-style: italic; font-size: 14px">{{topicInfo.createdAt | date:"longDate"}}</span></p>
-      <a style="float: right;" ng-if="hasReplies" ng-click="scrollTo(2)" class="waves-effect waves-light">Go to Latest Reply</a>
+        <h5>{{topicInfo.title}}</h5>
+        <p style="font-size: 16px">{{topicInfo.description}}</p>
+        <p style="text-align: right; font-size: 18px">-{{topicInfo.creatorName}}, <span style="font-style: italic; font-size: 14px">{{topicInfo.createdAt | date:"longDate"}}</span></p>
 
-      <a ng-if="hasReplies" ng-click="scrollTo(2)" class="waves-effect waves-light btn modal-trigger">REPLY</a>
-      <div class="row" ng-if="replyClicked">
-        <form class="col s12">
-          <div class="row">
-            <div class="input-field col s12">
-              <i class="material-icons prefix">mode_edit</i>
-              <textarea id="textarea1" class="materialize-textarea" ng-model="topicReply.message">
+        <!-- anchor scroll to latest reply to topic -->
+        <a style="float: right;" ng-if="hasReplies" ng-click="scrollTo(2)" class="waves-effect waves-light">Go to Latest Reply</a>
+        <!-- anchor scroll to submit a reply -->
+        <a ng-if="hasReplies" ng-click="scrollTo(2)" class="waves-effect waves-light btn modal-trigger">REPLY</a>
 
-              </textarea>
-              <label for="textarea1">Reply here</label>
-            </div>
-          </div>
-          <button class="btn waves-effect waves-light" type="submit" name="action" ng-click="submitReply(topicReply)">Submit Reply
-              <i class="material-icons right">send</i>
-          </button>
-          <button class="btn waves-effect waves-light" type="submit" name="action" ng-click="cancelReply()">Cancel
-              <i class="material-icons right">send</i>
-          </button>
-        </form>
-      </div>
+        <!-- display all replies to topic -->
+        <div style="overflow-x: auto;">
+        <table>
+          <tbody>
+            <tr ng-repeat="reply in allReplies">
+              <td>
+                <div class="row">
+                  <div class="col s12 m10">
+                    <div class="card-panel #eceff1 blue-grey lighten-5">
+                      <span class="black-text">
+                        <!-- pre tag used to maintain line breaks -->
+                        <!-- linky used to make all links hyperlinks -->
+                        <pre ng-bind-html="reply.message | linky:'_blank'"></pre>
+                      </span>
+                      <p style="text-align: right;">
+                        - {{reply.userName}} |
+                        <span style="font-size: 10px; font-style: italic;">{{momentJS(reply.createdAt)}}</span>
+                      </p>
 
-
-
-      <div style="overflow-x: auto;">
-      <table>
-        <tbody>
-          <tr ng-repeat="reply in allReplies">
-            <td>
-              <div class="row">
-                <div class="col s12 m10">
-                  <div class="card-panel #eceff1 blue-grey lighten-5">
-                    <span class="black-text">
-                      <pre ng-bind-html="reply.message | linky:'_blank'"></pre>
-                    </span>
-                    <p style="text-align: right;">
-                      - {{reply.userName}} |
-                      <span style="font-size: 10px; font-style: italic;">{{momentJS(reply.createdAt)}}</span>
-                    </p>
-
-                    <p ng-if="usersPost(reply.userId)" style="text-align: right;" >
-                      <a ng-click="deleteReply(reply.id)">DELETE</a>
+                      <p ng-if="usersPost(reply.userId)" style="text-align: right;" >
+                        <a ng-click="deleteReply(reply.id)">DELETE</a>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <h3>Quick Reply</h3>
-      <div class="row">
-        <form class="col s12">
-          <div class="row">
-            <div class="input-field col s12">
-              <textarea id="textarea1" class="materialize-textarea" ng-model="topicReply.message">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- reply form -->
+        <h3>Quick Reply</h3>
+        <div class="row">
+          <form class="col s12">
+            <div class="row">
+              <div class="input-field col s12">
+                <textarea id="textarea1" class="materialize-textarea" ng-model="topicReply.message">
 
-              </textarea>
-              <label for="textarea1">Enter message here</label>
+                </textarea>
+                <label for="textarea1">Enter message here</label>
+              </div>
             </div>
-          </div>
-          <button class="btn waves-effect waves-light" type="submit" name="action" ng-click="submitReply(topicReply)">Submit Reply
-              <i class="material-icons right">send</i>
-          </button>
-          <button class="btn waves-effect waves-light" type="submit" name="action" ng-click="cancelReply()">Clear
-          </button>
-        </form>
-      </div>
-      <div id="loc-2"><a style="float: right; padding-bottom: 10px" ng-show="hasReplies" ng-click="scrollTo(1)" class="waves-effect waves-light">Back to Top</a></div>
+            <button class="btn waves-effect waves-light" type="submit" name="action" ng-click="submitReply(topicReply)">Submit Reply
+                <i class="material-icons right">send</i>
+            </button>
+            <button class="btn waves-effect waves-light" type="submit" name="action" ng-click="cancelReply()">Clear
+            </button>
+          </form>
+        </div>
+        <div id="loc-2"><a style="float: right; padding-bottom: 10px" ng-show="hasReplies" ng-click="scrollTo(1)" class="waves-effect waves-light">Back to Top</a></div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>

@@ -1,4 +1,3 @@
-
 <!-- Modal Trigger -->
 <a ng-click="openModal()" class="waves-effect waves-light btn modal-trigger">Find Symbol</a>
 
@@ -20,7 +19,7 @@
                      <td>{{result.name}}</td>
                      <td><h3>{{result.symbol}}</h3></td>
                      <td><button class= 'btn std-btn' ng-click="populate(result.symbol)">Trade</button></td>
-                     <td><button class= 'btn std-btn' ng-click='addToWatchlist(result.symbol)'>Watch</button></td>                     
+                     <td><button class= 'btn std-btn' ng-click='addToWatchlist(result.symbol)'>Watch</button></td>
                   </tr>
                  </table>
                </div>
@@ -30,9 +29,6 @@
       </div>
     </div>
   </div>
-<!--   <div class="modal-footer">
-    <a ng-click="closeModal()" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
-  </div> -->
 </div>
 
 <script>

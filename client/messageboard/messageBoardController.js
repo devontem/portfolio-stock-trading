@@ -33,7 +33,9 @@ app.controller('MessageBoardController', ['$scope', 'messageBoardFactory', '$roo
     $scope.posts = posts.data;
   });
 };
-
+  // setInterval is turned off bc of heroku deployment and not have
+  // server running all the time, but otherwise setInterval is a temp
+  // workaround to update the messageboard in real time
   showPosts();
   // $window.setInterval(showPosts, 1000);
 
