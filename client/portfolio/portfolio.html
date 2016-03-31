@@ -1,5 +1,3 @@
-
-<!-- STOCKS MODAL -->
 <div class="row">
 	<div class="myPortfolio">
 		<nav>
@@ -50,9 +48,8 @@
 	    <div class="nav-wrapper">
 	      <a class="brand-logo" style="font-size: 20px">Trade</a>
 	      <ul class="right hide-on-med-and-down">
-	      <li class="symbol-button"><div ui-view="order"></li>
-	      <li class="symbol-button"><div ui-view="symbol"></li>
-	        <!-- <li><a href="collapsible.html"><i class="material-icons">refresh</i></a></li> -->
+	      	<li class="symbol-button"><div ui-view="order"></li>
+	      	<li class="symbol-button"><div ui-view="symbol"></li>
 	      </ul>
 	    </div>
 	  </nav>
@@ -83,19 +80,18 @@
 							<p class="perc">Target:  {{stock.yrTarget}}</p>
 							<p class="perc">Volume:  {{stock.vol}}</p>
 						</section>
+
 						<section ng-if="stock" class="col s6">
 							<p class="perc">AvgDailyVol:  {{stock.avgVol}}</p>
 							<p class="perc">MarktCap: {{stock.mrktCap}}</p>
 							<p class="perc">Yield:   {{stock.yield}}</p>
 							<p class="perc">P/E:     {{stock.pe}}</p>
 						</section>
+
 					</section>
 				</section>
 				</article>
 				<article class="widget-container col s6" style='height: 400px'>
-					<!--<p class="action-title">MOST ACTIVE STOCKS</p>
-					<p class="widget" width="100%" align="center"><iframe width="250" height="120" scrolling="no" frameborder="0" style="border:none;" src="//widgets.freestockcharts.com/WidgetServer/WatchListWidget.aspx?sym=BAC,WLL,SIRI,FCX,CHK,EEM,CBK,MSFT&style=WLBlueStyle&w=200"></iframe></p> <!-- End FreeStockCharts.com WatchList Widget
-					END OF EIDGET -->
                     <style>
                     #chart1 {
                     	height:300px;
@@ -163,8 +159,6 @@
 				  <article>
 						<a ng-click='performAction()' class="waves-effect waves-light btn center trade-button std-btn">TRADE FOR A TOTAL OF <span class="larger">{{ total || 0 | currency}}</span></a>
 				  </article>
-
-
 
 				</article>
 			</div>
