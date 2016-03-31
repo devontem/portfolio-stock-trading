@@ -13,7 +13,7 @@ app.controller('BadgeController', ['$scope', 'BadgeFactory', '$window', function
     $('.tooltipped').tooltip('remove');
   };
 
-
+  //get badges a user earned
   $scope.getBadges = function () {
     BadgeFactory.getBadges(userId).then(
       function (res) {
@@ -34,6 +34,7 @@ app.controller('BadgeController', ['$scope', 'BadgeFactory', '$window', function
     );
   };
 
+  //get badges not earned yet
   $scope.getPossibleBadges = function () {
     BadgeFactory.getPossibleBadges(userId).then(
       function (res) {

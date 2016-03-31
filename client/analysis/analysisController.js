@@ -1,15 +1,13 @@
 app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFactory', '$window', '$rootScope', function($scope, WatchlistFactory,AnalysisFactory, $window, $rootScope){
 
   $scope.stock = {};
-  // $scope.stock.symbol;
-  // var test;
 
-  // console.log('SCOPE SYMBOL:', test)
   var temp = "";
   $scope.stock.symbol='';
   $scope.stock.symbol = $window.sym;
   $scope.displayStock = '';
 
+  //pick start date for stock chart with materialize date picker
   $scope.pickstart = function(){
       var start = $('#startdate').pickadate({
         onSet: function (context) {
@@ -33,6 +31,7 @@ app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFact
       });
     };
 
+    //pick end date for stock chart with materialize date picker
     $scope.pickend = function(){
       var end = $('#enddate').pickadate({
         onSet: function (context) {
@@ -59,6 +58,8 @@ app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFact
 
   $scope.submitted = false;
   $scope.searched = false;
+
+  //display stock information in stock chart page
   $scope.stockinfo = function(stock){
     AnalysisFactory.getinfo(stock)
       .then(function(stock){
@@ -71,6 +72,7 @@ app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFact
       });
   };
 
+  //display stock chart
   $scope.getchart = function(stock){
     stock.end = moment(stock.end).format("YYYY-MM-DD").toString();
     stock.start = moment(stock.start).format("YYYY-MM-DD").toString();
@@ -84,6 +86,7 @@ app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFact
           .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+        //backend will load stock historical data to data.csv file
         d3.csv("/analysis/data.csv", function(error, data) {
           if (error) throw error;
             data.forEach(function(d){
@@ -120,6 +123,7 @@ app.controller('AnalysisController', ['$scope', 'WatchlistFactory','AnalysisFact
 
   };
 
+  //codes below is setting up D3 chart
   var margin = {top: 20, right: 20, bottom: 30, left: 50},
       width = 960 - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom;
