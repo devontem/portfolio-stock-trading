@@ -1,36 +1,38 @@
 <div class="container">
-<div class="row" style="width: 100%;">
-  <div class="col s12 m12" style="overflow-x: auto;">
-    <div class="card-panel white">
-      <h3>Forum</h3>
-      <a ng-click="openModal()" class="waves-effect waves-light btn modal-trigger">Create New Topic</a>
-      <div style="overflow-x: auto;">
-      <table class="highlight centered" id="createTopicScroll">
-        <thead id="top" ng-show="oneTopic()">
-          <tr>
-              <th data-field="Topic">Topic</th>
-              <th data-field="Started By">Created By</th>
-              <th data-field="Date Started">Created On</th>
-              <th data-field="Replies">Replies</th>
-          </tr>
-        </thead>
+  <div class="row" style="width: 100%;">
+    <div class="col s12 m12" style="overflow-x: auto;">
+      <div class="card-panel white">
+        <h3>Forum</h3>
+        <!-- this is the modal button to create a new topic -->
+        <a ng-click="openModal()" class="waves-effect waves-light btn modal-trigger">Create New Topic</a>
 
+        <div style="overflow-x: auto;">
 
-        <tbody>
-          <tr ng-repeat="topic in allTopics | orderBy:sortLatest:sortReverse">
-            <td><a href="#/topics/{{topic.id}}" style="color: orange">{{topic.title}}</a></td>
-            <td>{{topic.creatorName}}</td>
-            <td>{{topic.createdAt | date:"longDate"}}</td>
-            <td>{{topic.replies}}</td>
-          </tr>
-        </tbody>
-      </table>
+        <!-- the forum topics table starts here -->
+        <table class="highlight centered" id="createTopicScroll">
+          <thead id="top" ng-show="oneTopic()">
+            <tr>
+                <th data-field="Topic">Topic</th>
+                <th data-field="Started By">Created By</th>
+                <th data-field="Date Started">Created On</th>
+                <th data-field="Replies">Replies</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr ng-repeat="topic in allTopics | orderBy:sortLatest:sortReverse">
+              <td><a href="#/topics/{{topic.id}}" style="color: orange">{{topic.title}}</a></td>
+              <td>{{topic.creatorName}}</td>
+              <td>{{topic.createdAt | date:"longDate"}}</td>
+              <td>{{topic.replies}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        </div>
       </div>
     </div>
-  </div>
 </div>
-
-
 
 <!-- Modal Structure -->
 <div id="createForumPost" class="modal" style="width: 100%">
@@ -61,6 +63,8 @@
   </div>
 </div>
 </div>
+
+<!-- This script tag works in conjuction with controller function to open and close the materialize modal -->
 <script>
  $(document).ready(function(){
 
