@@ -8,6 +8,7 @@ app.controller('MessageBoardController', ['$scope', 'messageBoardFactory', '$roo
   $scope.userPost.name = $window.localStorage.getItem('com.tp.username');
   $scope.userPost.leagueId = $stateParams.leagueId;
 
+  //Add new message to board
   $scope.messageBoardPost = function(){
 
     messageBoardFactory.submitPost($scope.userPost).then(function(){
@@ -25,7 +26,7 @@ app.controller('MessageBoardController', ['$scope', 'messageBoardFactory', '$roo
 
   $scope.leagueId;
 
-
+  //retrieve all messages by leagueId
   var showPosts = function(){
     messageBoardFactory.showPosts($scope.userPost.leagueId).then(function(posts){
     var posts = posts;

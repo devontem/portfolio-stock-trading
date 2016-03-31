@@ -6,6 +6,7 @@ app.controller('LeagueController', ['$scope', '$stateParams', 'DashboardFactory'
   // initialize a flag indicating that the league has not started yet
   $scope.hasStarted = false;
   $scope.hasEnded = false;
+
   // grab the current moment using moment.js
   var currentMoment = moment().utc();
 
@@ -15,7 +16,6 @@ app.controller('LeagueController', ['$scope', '$stateParams', 'DashboardFactory'
       $scope.hasStarted = false;
     } else {
       $scope.hasStarted = true;
-      // TODO: add this to the databse
     }
   };
 
@@ -25,10 +25,10 @@ app.controller('LeagueController', ['$scope', '$stateParams', 'DashboardFactory'
       $scope.hasEnded = true;
     } else {
       $scope.hasEnded = false;
-      // TODO: add this to the databse
     }
   };
 
+  //check if market is open
   $scope.checkTradingHours = function () {
     var tradingStart = moment().utc().hour(13).minute(30);
     var tradingEnd = moment().utc().hour(20);

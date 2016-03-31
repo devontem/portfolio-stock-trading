@@ -94,7 +94,6 @@ app
 
     return {
       deleteAccount: deleteAccount,
-      editLogin: editLogin,
       getSingleUser: getSingleUser,
       getLeaguesByOwnerId: getLeaguesByOwnerId,
       editOneLeague: editOneLeague,
