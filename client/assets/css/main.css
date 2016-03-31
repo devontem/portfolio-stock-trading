@@ -27,9 +27,13 @@ pre {
 .brand-logo {
   margin-left: 10px; }
 
+.splash-wrapper {
+  background: #313A43; }
+
 .splash-page {
-  padding-top: 25px;
-  padding-bottom: 50px; }
+  padding-top: 1px;
+  padding-bottom: 50px;
+  min-height: 100vh; }
 
 .get-started {
   background-color: #E34C52;
@@ -40,6 +44,40 @@ pre {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: bottom; }
+
+.img-bg {
+  position: relative;
+  z-index: 10; }
+  .img-bg .container {
+    margin-top: 140px; }
+
+.img-bg:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: url("../img/stock-market.jpg");
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  opacity: 0.25;
+  z-index: -1; }
+
+.mobile-app .container {
+  margin-top: 70px; }
+
+.mobile-app .devices {
+  margin-top: 60px; }
+  .mobile-app .devices img {
+    width: 100%; }
+
+.how-to-play {
+  background: #E9533A; }
+  .how-to-play img {
+    width: 100%; }
+  .how-to-play .container {
+    margin-top: 60px; }
 
 #get-started-slogan {
   text-align: center;
@@ -54,14 +92,20 @@ pre {
   background-image: url("../img/stock-market.jpeg");
   text-align: center;
   background: #ECC132;
+  background: #70A644;
   color: white; }
-  .more-info .title {
-    color: #F6E7B3; }
-  .more-info .card-panel {
-    background: #F6E7B3;
-    padding: 20px;
-    font-size: 1.2em;
-    color: #2C3D50; }
+  .more-info img {
+    width: 100%; }
+  .more-info .money img {
+    width: 25%;
+    margin: -5px 20px; }
+  .more-info .container {
+    margin-top: 70px; }
+
+.splash-text p {
+  font-size: 1.2em;
+  text-transform: uppercase;
+  /* font-weight: bold; */ }
 
 footer.page-footer {
   margin-top: 0px; }
@@ -77,7 +121,7 @@ footer.page-footer {
   margin-left: 25px; }
 
 .team-info {
-  background-color: #F39C12;
+  background-color: #ddd;
   text-align: center;
   color: black; }
   .team-info .title {
@@ -86,7 +130,7 @@ footer.page-footer {
   .team-info .card-content {
     padding: 10px;
     min-height: 90px;
-    background: #FBE4C0;
+    /*background: #FBE4C0;*/
     color: #2C3D50; }
 
 .league-container {
