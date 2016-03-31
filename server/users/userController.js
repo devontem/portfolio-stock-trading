@@ -185,7 +185,8 @@ module.exports.profileImage = function(req, res){
   User.findOne({where:{ id: req.body.userId }})
     .then(function(user){
       if(user){
-        user.update({ image : req.body.image });
+        user.update({ image : req.body.image,
+                      password: user.password });
       }else{
         res.status(404).json('No user found!');
       }

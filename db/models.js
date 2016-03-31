@@ -47,9 +47,9 @@ User.beforeCreate(function(user, options) {
   user.password = user.hashPassword();
 });
 
-User.beforeUpdate(function(user, options) {
-  user.password = user.hashPassword();
-});
+// User.beforeUpdate(function(user, options) {
+//   user.password = user.hashPassword();
+// });
 
 var Watchlist = orm.define('Watchlist', {
   symbol: Sequelize.STRING
