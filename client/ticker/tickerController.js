@@ -17,28 +17,26 @@ $scope.isPositive = function (val){
     }
     else {
       return 'negative';
-    }  
+    }
 
 }
 
+$scope.boxes = [];
 
+$scope.ticker = true;
 
-  $scope.boxes = [];
+$rootScope.$on('search', function(){
+  $scope.ticker = false;
 
-  $scope.ticker = true;
-  $rootScope.$on('search', function(){
-    $scope.ticker = false;
-
-    setTimeout(function(){
-      $scope.ticker=true;
-      $rootScope.$emit('off')
-    }, 15000)
-  });
-
+  setTimeout(function(){
+    $scope.ticker=true;
+    $rootScope.$emit('off')
+  }, 15000)
+});
 
 
 $scope.getAllPortfolioId = function (){
-  
+
   $scope.stocks=[];
   $scope.finalstocks=[];
   $scope.temp = [];
@@ -50,8 +48,8 @@ $scope.getAllPortfolioId = function (){
   	.then(function (list){
       for(var stock in list.data){
         $scope.stocks.push(stock);
-    }
-      })
+      }
+    })
 
   //get all stock of a user (include both watch list and every portfolio)
   Ticker.getAllPortfolioId(userId)
@@ -69,26 +67,30 @@ $scope.getAllPortfolioId = function (){
      	.then(function (stockinfo){
 
      		stockinfo.data.pop()
-           stockinfo.data.forEach(function(stock){
+          stockinfo.data.forEach(function(stock){
 
-          stock.forEach(function(result){
-          var result1 = result.replace(/\"/g,'');
-          if(/[\%]/.test(result1)){
-              
-              var res = result1.replace(/\%/,'')
-              var sign = res[0];
-              var decimal = res.substr(1)
-              var ans = parseFloat(decimal).toFixed(2)
-              var final = sign + ans.toString()
-              result1=final.concat('%')
-          }
-          $scope.allstocks.push(result1)
-     	})
-          $scope.finalstocks.push($scope.allstocks)
-          $scope.allstocks=[];
-     })
+            stock.forEach(function(result){
+
+              var result1 = result.replace(/\"/g,'');
+              if(/[\%]/.test(result1)){
+
+                  var res = result1.replace(/\%/,'')
+                  var sign = res[0];
+                  var decimal = res.substr(1)
+                  var ans = parseFloat(decimal).toFixed(2)
+                  var final = sign + ans.toString()
+                  result1=final.concat('%')
+              }
+              $scope.allstocks.push(result1)
+       	    })
+
+            $scope.finalstocks.push($scope.allstocks)
+            $scope.allstocks=[];
+          })
+
            $scope.boxes = [];
-           for(var i=0; i<$scope.finalstocks.length; i++){
+
+           for(var i = 0; i < $scope.finalstocks.length; i++){
              $scope.boxes.push($scope.finalstocks[i]);
            }
 
@@ -106,30 +108,29 @@ $scope.getAllPortfolioId = function (){
            };
            $scope.moveLeft();
        })
+    })
   })
- })
 }
 
-$scope.getAllPortfolioId()
+  $scope.getAllPortfolioId();
 
 }])
 
 
 .factory('Ticker', function ($http) {
 
-	var  getAllPortfolioId = function(userID){
-		//console.log(userID,'id');
+	var getAllPortfolioId = function(userID){
 
       return $http({
         method: 'post',
         url: '/api/ticker/',
         data: {id: userID}
-        
+
       })
       .then(function(data){
       	return data;
       })
-      
+
   }
 
   var getAllUserStocks = function(data) {
@@ -139,7 +140,7 @@ $scope.getAllPortfolioId()
   		data: {ids: data}
   	})
   }
-   
+
   var stocksQuery = function (data) {
   	return $http({
   		method: 'Post',
@@ -147,8 +148,6 @@ $scope.getAllPortfolioId()
   		data: {stocks: data}
   	})
   }
-
-
 
   return {
   	getAllUserStocks:getAllUserStocks,
