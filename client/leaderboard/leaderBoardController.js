@@ -10,7 +10,7 @@ app.controller('LeaderBoardController', ['$scope', '$window', '$stateParams', 'D
     // this will call a factory function to grab http data from server and assign returned data to $scope.members;
     leaderBoardFactory.getPortfolios($scope.leagueId)
       .then(function(portfolios){
-        //var userId = $window.localStorage.getItem('com.tp.userId');
+
         var joined = false;
         for(var i=0; i<portfolios.length; i++){
           if(portfolios[i].UserId === Number($scope.userId)) joined = true;
@@ -33,10 +33,11 @@ app.controller('LeaderBoardController', ['$scope', '$window', '$stateParams', 'D
     });
   };
 
+  // once we have league ID, call to initialize leaderboard
   $scope.getLeagueById();
   $scope.getLeaderBoard();
-  // once we have league ID, call to initialize leaderboard
-  //$scope.getLeaderBoard(leagueId);
+
+  // to update the leaderboard when users makes portfolio trxn
   $rootScope.$on("PortfolioUpdate", function(){
     $scope.getLeaderBoard();
   });
