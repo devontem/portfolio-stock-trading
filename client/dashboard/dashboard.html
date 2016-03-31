@@ -57,19 +57,6 @@
             </table>
 
           </div>
-            <!-- If the user is not in leagues, prompt them to join one -->
-          <div class="col s12" ng-if="portfolios.length === 0">
-            <div class="card grey lighten-2 center">
-              <div class="card-content ">
-                <span class="card-title">What?</span>
-                <p>It looks like you haven't joined any leagues yet. :(
-                  <br> Don't worry. It's incredibly easy to get started.</p>
-              </div>
-              <div class="card-action">
-                <a href="#">Check Out Available Leagues</a>
-              </div>
-            </div>
-          </div>
 
         </div>
         <!-- If user is in leagues, show those -->
@@ -81,7 +68,7 @@
                 <br> Don't worry. It's incredibly easy to get started.</p>
             </div>
             <div class="card-action">
-              <a href="#">Check Out Available Leagues</a>
+              <a style="color: red; cursor:pointer;"ng-click="showToJoin()">Check Out Available Leagues</a>
             </div>
           </div>
         </div>
@@ -118,19 +105,7 @@
           </div>
           </div>
           <!-- Prompt user to create  league if none exist -->
-          <div class="col s12" ng-if="numtojoin === 0">
-            <div class="col s12" ng-if="portfolios.length === 0">
-              <div class="card grey lighten-2 center">
-                <div class="card-content">
-                  <span class="card-title">Uh Oh!</span>
-                  <p>It looks like there are no currently available public leagues. If you would like to make, be our guest.</p>
-                </div>
-                <div class="card-action">
-                  <a href="#">Create a League</a>
-                </div>
-              </div>
-            </div>
-          </div>
+
         </div>
       </div>
 
@@ -152,14 +127,7 @@
           <input type="date" id="startdate" ng-model='league.start' ng-click="pickstart()" format-date required>
           <label>End Date: </label><br>
           <input type="date" id="enddate" ng-model='league.end' ng-click="pickend()" format-date required>
-<!--           <span>
-            <input name="isPrivate" ng-model="league.isPrivate" value="false" type="radio" id="test1" />
-            <label for="test1">Public League</label>
-          </span> -->
-         <!--  <span>
-            <input name="isPrivate" ng-model="league.isPrivate" value="true" type="radio" id="test2" />
-            <label for="test2">Private League</label>
-          </span> -->
+
           <button class="waves-effect waves-light btn std-btn center">Create</button>
         </form>
       </div>
