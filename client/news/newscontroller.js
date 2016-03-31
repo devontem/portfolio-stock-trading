@@ -3,6 +3,7 @@ app.controller('NewsController', ['$scope', '$window', '$stateParams', 'News', f
 
   $scope.tweets = [];
 
+  //fetch tweets base on user portfolios
   $scope.getTweets= function(){
 
     var leagueId = $stateParams.leagueId;

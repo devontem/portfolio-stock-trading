@@ -1,7 +1,7 @@
 app.controller('PortfolioChartController', ['$scope', 'Portfolio', '$stateParams', '$window', '$rootScope', function($scope, Portfolio, $stateParams, $window, $rootScope){
 
 
-
+//pie chart for cash/equity in trading component
 $scope.data1 = {
 		series: ['yo', 'yo1'],
 		data: [{
@@ -27,9 +27,7 @@ $scope.data1 = {
 		innerRadius: 0
 	};
 
-
-
-
+//collect user cash balance and total balance
 $scope.getBalance = function (){
 	var leagueId = $stateParams.leagueId;
 	var userId = $window.localStorage.getItem('com.tp.userId');
@@ -43,6 +41,7 @@ $scope.getBalance = function (){
 
 };
 
+//grab updated balance after a trade
 $rootScope.$on('bought', function(){
 	$scope.getBalance();
 });

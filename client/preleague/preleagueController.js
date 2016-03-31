@@ -3,6 +3,7 @@ app.controller('PreLeagueController', ['$scope', '$stateParams', 'preLeagueFacto
   $scope.leagueId = $stateParams.leagueId;
   $scope.leagueName;
 
+  //grab league name and display on league page
   $scope.getLeagueName = function(){
     preLeagueFactory.getName($scope.leagueId)
       .then(function(name){
@@ -17,6 +18,7 @@ app.controller('PreLeagueController', ['$scope', '$stateParams', 'preLeagueFacto
 
   $scope.leagueInfo;
 
+  //get league info with league ID
   $scope.getLeagueById = function(){
     DashboardFactory.getLeagueById($scope.leagueId).then(function(data){
       $scope.leagueInfo = data;

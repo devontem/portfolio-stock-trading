@@ -5,6 +5,7 @@ $scope.stocks=[];
 $scope.allstocks=[];
 $scope.finalstocks=[];
 
+//chage color base on positive or negative price change
 $scope.isPositive = function (val){
   if (!val) {
     return;
@@ -52,6 +53,7 @@ $scope.getAllPortfolioId = function (){
     }
       })
 
+  //get all stock of a user (include both watch list and every portfolio)
   Ticker.getAllPortfolioId(userId)
   .then(function (portfolios){
      $scope.portfolios = portfolios.data;
@@ -90,11 +92,11 @@ $scope.getAllPortfolioId = function (){
              $scope.boxes.push($scope.finalstocks[i]);
            }
 
+            //animation for ticker to move
            $scope.moving = false;
            $scope.moveLeft = function() {
              $scope.moving = true;
              $interval(function() {
-               //console.log($scope.boxes)
                if ($scope.moving) {
                  $scope.boxes.push($scope.boxes.shift());
                }
