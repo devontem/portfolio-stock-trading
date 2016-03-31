@@ -17,31 +17,10 @@ $scope.isPositive = function (val){
 
 }
 
-function decimalAdjust(type, value, exp) {
-    // If the exp is undefined or zero...
-    if (typeof exp === 'undefined' || +exp === 0) {
-      return Math[type](value);
-    }
-    value = +value;
-    exp = +exp;
-    // If the value is not a number or the exp is not an integer...
-    if (isNaN(value) || !(typeof exp === 'number' && exp % 1 === 0)) {
-      return NaN;
-    }
-    // Shift
-    value = value.toString().split('e');
-    value = Math[type](+(value[0] + 'e' + (value[1] ? (+value[1] - exp) : -exp)));
-    // Shift back
-    value = value.toString().split('e');
-    return +(value[0] + 'e' + (value[1] ? (+value[1] + exp) : exp));
-  }
-
-  // Decimal round
-  if (!Math.round10) {
-    Math.round10 = function(value, exp) {
-      return decimalAdjust('round', value, exp);
-    };
-  }
+$scope.print = function (){
+  console.log('aljfalfjafafj;asjfasfjaffucks hit')
+}
+$scope.print();
 
   $scope.boxes = [];
 
@@ -51,9 +30,10 @@ function decimalAdjust(type, value, exp) {
   });
 
 $scope.getAllPortfolioId = function (){
-  //button
+  
   $scope.stocks=[];
   $scope.finalstocks=[];
+  $scope.temp = [];
 
   var userId = $window.localStorage.getItem('com.tp.userId');
 
@@ -70,8 +50,11 @@ $scope.getAllPortfolioId = function (){
      $scope.portfolios = portfolios.data;
      Ticker.getAllUserStocks($scope.portfolios)
      .then(function (stocks){
-     	$scope.stocks = $scope.stocks.concat(stocks.data);
-     	console.log($scope.stocks,'stocks')
+
+     	$scope.temp = $scope.temp.concat(stocks.data);
+      $scope.temp.forEach(function(stock){
+        $scope.stocks.push(stock.toUpperCase())
+      })
 
      	Ticker.stocksQuery($scope.stocks)
      	.then(function (stockinfo){
@@ -82,16 +65,13 @@ $scope.getAllPortfolioId = function (){
           stock.forEach(function(result){
           var result1 = result.replace(/\"/g,'');
           if(/[\%]/.test(result1)){
-            result1 = result1.split('.')
-            var res = result1[1].replace(/\%/,'')
-            result1[1]= res
-            var decimal = Math.round10(result1[1]);
-            if(decimal <10){
-              decimal = decimal * 10
-            }
-            var str =''
-            result1[1]=str.concat(decimal +'%')
-            result1 = result1.join('.')
+              
+              var res = result1.replace(/\%/,'')
+              var sign = res[0];
+              var decimal = res.substr(1)
+              var ans = parseFloat(decimal).toFixed(2)
+              var final = sign + ans.toString()
+              result1=final.concat('%')
           }
           $scope.allstocks.push(result1)
      	})
@@ -107,7 +87,7 @@ $scope.getAllPortfolioId = function (){
            $scope.moveLeft = function() {
              $scope.moving = true;
              $interval(function() {
-               console.log($scope.boxes)
+               //console.log($scope.boxes)
                if ($scope.moving) {
                  $scope.boxes.push($scope.boxes.shift());
                }
@@ -129,7 +109,7 @@ $scope.getAllPortfolioId()
 .factory('Ticker', function ($http) {
 
 	var  getAllPortfolioId = function(userID){
-		console.log(userID,'id');
+		//console.log(userID,'id');
 
       return $http({
         method: 'post',
