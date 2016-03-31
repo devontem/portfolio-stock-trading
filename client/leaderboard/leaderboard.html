@@ -21,7 +21,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="portfolio in portfolios | orderBy: rank">
+        <tr ng-repeat="portfolio in portfolios | orderBy: 'rank'">
           <td class="tdcenter">{{portfolio.rank}}</td>
           <td class="tdcenter"><a ng-href="/#/profiles/{{portfolio.UserId}}">{{portfolio.username}}</a></td>
           <td class="tdcenter">{{portfolio.balance + portfolio.portfolioValue  | currency : symbol : fractionSize}}</td>
