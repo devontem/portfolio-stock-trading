@@ -15,8 +15,6 @@ module.exports = function(app){
 
   app.post('/getuser', userController.getSingleUser);
 
-	app.put('/:id', userController.updateUser);
-
   app.post('/profileimage', userController.profileImage);
 
   app.post('/updateemail', userController.updateEmail);

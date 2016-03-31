@@ -5,9 +5,12 @@ var domain = process.env.MAILGUN_DOMAIN || 'sandbox5e718182e3c24b69a06f7da83d141
 var api_key = process.env.MAILGUN_API_KEY || 'key-983c9a49f87895b83eeb82f07388eef4';
 var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 
+
+//new user sign up
 module.exports.newUser = function (req, res){
   User.findOne({where:{ username: req.body.username }})
     .then(function (user) {
+      //check if username taken
       if(!user){
         User.findOne({where: {email: req.body.email}})
           .then(function(user){
@@ -47,6 +50,7 @@ module.exports.newUser = function (req, res){
     });
 };
 
+//get all users
 module.exports.getUsers = function(req, res){
   User.findAll().then(function (users) {
     if(!users) {
@@ -60,6 +64,7 @@ module.exports.getUsers = function(req, res){
   });
 };
 
+//get user with userid in params
 module.exports.getUserById = function (req, res) {
   User.findOne({ id: req.params.id })
     .then(function (user) {
@@ -70,6 +75,7 @@ module.exports.getUserById = function (req, res) {
     });
 };
 
+//get users with id in req.body
 module.exports.getSingleUser = function (req, res) {
   User.findOne({where: { id: req.body.id }})
     .then(function (user) {
@@ -80,6 +86,7 @@ module.exports.getSingleUser = function (req, res) {
     });
 };
 
+//forgot password and send email to user with temp password
 module.exports.forgotpw = function(req, res){
   User.findOne({where: {email: req.body.email }})
     .then(function(user){
@@ -112,39 +119,9 @@ following:\n'+ temppw + '\n\nPlease go to Portfol.io and log in with your tempor
     .catch(function (err) {
       res.send(err);
     });
-}
-
-module.exports.updateUser = function (req, res) {
-  var iden = req.params.id;
-  User.findOne({ where: { id: iden }})
-    .then(function (user) {
-      User.findOne({ where: { email: req.body.email }})
-        .then(function(check){
-          if(check){
-            res.end("Email already taken");
-          }else{
-            if(user){
-              if(!user.validPassword(req.body.oldpassword, user.password)){
-                res.end("Wrong old password");
-              }else{
-                user.update({
-                  id: iden,
-                  password: req.body.password,
-                  email: req.body.email
-                })
-                .then(function(user){
-                  res.json('User updated');
-                });
-              }
-            }
-          }
-        });
-    })
-    .catch(function (err) {
-      res.send("Error updating user: ", err);
-    });
 };
 
+//delete user
 module.exports.deleteUser= function (req, res) {
   User.findOne({where: { id: req.body.id }})
     .then(function (user) {
@@ -158,6 +135,7 @@ module.exports.deleteUser= function (req, res) {
     });
 };
 
+//user login verification and give token to client
 module.exports.signIn = function (req, res){
   User.findOne({where:{ email: req.body.email }})
     .then(function (user) {
@@ -181,12 +159,12 @@ module.exports.signIn = function (req, res){
     });
 };
 
+//add profile image in to database
 module.exports.profileImage = function(req, res){
   User.findOne({where:{ id: req.body.userId }})
     .then(function(user){
       if(user){
-        user.update({ image : req.body.image,
-                      password: user.password });
+        user.update({ image : req.body.image });
       }else{
         res.status(404).json('No user found!');
       }
@@ -196,6 +174,7 @@ module.exports.profileImage = function(req, res){
     });
 }
 
+//update Email
 module.exports.updateEmail = function (req, res){
   
   User.findOne({where: {id: req.body.userId }})
@@ -225,6 +204,7 @@ module.exports.updateEmail = function (req, res){
     });
 };
 
+//update password
 module.exports.updatePW = function (req, res){
 
   User.findOne({where: {id: req.body.userId }})
