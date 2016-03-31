@@ -9,10 +9,12 @@ app.controller('MainForumController', ['$scope', '$window', 'forumFactory', '$ro
   $scope.topic.userId = $window.localStorage.getItem('com.tp.userId');
   $scope.allTopics;
 
+  //modal when create new forum
   $scope.openModal = function(){
     $('#createForumPost').openModal();
   };
 
+  //add new topic
   $scope.createTopic = function(topic){
     forumFactory.addNewTopic(topic).then(function(err, res){
       if (err) {
@@ -28,6 +30,7 @@ app.controller('MainForumController', ['$scope', '$window', 'forumFactory', '$ro
     });
   };
 
+  //retrieve all topics in forum
   $scope.showAllTopics = function(){
     forumFactory.showAllTopics().then(function(data){
       $scope.allTopics = data.data;
@@ -54,7 +57,7 @@ app.controller('MainForumController', ['$scope', '$window', 'forumFactory', '$ro
     }
   };
 
-
+  //automatically go to top of the page
   $scope.goToTop = function(){
     $location.hash('top');
     $anchorScroll();

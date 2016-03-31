@@ -5,6 +5,7 @@ app.controller('LeaderBoardController', ['$scope', '$window', '$stateParams', 'D
   $scope.leagueName;
   $scope.userId = $window.localStorage.getItem('com.tp.userId');
 
+  //get all portfolios in certain league
   $scope.getLeaderBoard = function(){
     // this will call a factory function to grab http data from server and assign returned data to $scope.members;
     leaderBoardFactory.getPortfolios($scope.leagueId)
@@ -25,6 +26,7 @@ app.controller('LeaderBoardController', ['$scope', '$window', '$stateParams', 'D
       });
   };
 
+  //get private league code
   $scope.getLeagueById = function(){
     DashboardFactory.getLeagueById($scope.leagueId).then(function(data){
       $scope.secretCode = data.code;
