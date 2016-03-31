@@ -8,7 +8,6 @@ angular.module('app.portfolio', [])
 	$scope.estPrice = 0;
 	$scope.action = false;
 	$scope.singlePrice = 0;
-
 	$rootScope.$on('symbolRetrieved', function(event, data){
 		return $scope.chooseStock(data);
 	});
@@ -31,7 +30,7 @@ angular.module('app.portfolio', [])
 		stockName = stockName.toLowerCase();
 		Portfolio.getStock(stockName).then(function(stock){
 			stock = stock.data;
-			if(!stock.Ask){
+			if(stock.Ask === 'N/A'){
 				Materialize.toast('Please enter a valid symbol!',3000);
 			}
 			else {

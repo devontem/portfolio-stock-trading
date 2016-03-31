@@ -27,7 +27,14 @@ $scope.isPositive = function (val){
   $scope.ticker = true;
   $rootScope.$on('search', function(){
     $scope.ticker = false;
+
+    setTimeout(function(){
+      $scope.ticker=true;
+      $rootScope.$emit('off')
+    }, 15000)
   });
+
+
 
 $scope.getAllPortfolioId = function (){
   
