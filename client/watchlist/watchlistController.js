@@ -82,18 +82,6 @@ $scope.getWatchlist = function (){
           var result1 = result.replace(/\"/g,'');
           if(/[\%]/.test(result1)){
 
-            // result1 = result1.split('.');
-            // var res = result1[1].replace(/\%/,'');
-            // result1[1]= res;
-            // var decimal = Math.round10(result1[1]);
-            // if(decimal <10){
-            //   decimal = decimal * 10;
-            // }
-            // var str ='';
-            // result1[1]=str.concat(decimal +'%');
-            // result1 = result1.join('.');
-
-
             var res = result1.replace(/\%/,'')
             var sign = res[0];
             var decimal = res.substr(1)

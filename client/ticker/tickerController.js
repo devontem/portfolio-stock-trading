@@ -6,6 +6,9 @@ $scope.allstocks=[];
 $scope.finalstocks=[];
 
 $scope.isPositive = function (val){
+  if (!val) {
+    return;
+  }
   val = val.slice(0,-1);
   var result = parseFloat(val);
   if(result > 0) {
@@ -17,10 +20,7 @@ $scope.isPositive = function (val){
 
 }
 
-$scope.print = function (){
-  console.log('aljfalfjafafj;asjfasfjaffucks hit')
-}
-$scope.print();
+
 
   $scope.boxes = [];
 
