@@ -8,7 +8,7 @@ module.exports.stockdata = function(req, res){
   http.get('http://ichart.finance.yahoo.com/table.csv?s='+req.body.symbol+'&a='+start[1]+'&b='+start[2]+'&c='+start[0]+'&d='+end[1]+'&e='+end[2]+'&f='+end[0]+'&ignore=.csv', function(err, response){
     if(response){
       fs.writeFile('client/analysis/data.csv', response.buffer.toString(), 'utf8', function(err){
-        if(err) return console.log("************")
+        if(err) return console.log("error")
       });
       res.send('data received');
     }else{
