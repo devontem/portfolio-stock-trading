@@ -123,25 +123,27 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
             controller: 'NewsController',
             templateUrl: 'news/news.html'
           },
-
+          // recent transactions view within league page
           'recentTransactions@league': {
             controller: 'recentTransactionsController',
             templateUrl: 'recentTransactions/recentTransactions.html'
           },
-
+          // message board view within league page
           'messageboard@league': {
             controller: 'MessageBoardController',
             templateUrl: 'messageboard/messageboard.html'
           },
-
+          // league results view within league page
           'leagueResults@league': {
             controller: 'LeagueResultsController',
             templateUrl: 'leagueResults/leagueResults.html'
           },
+          // before league starts view within league page
           'preleague@league': {
             controller: 'PreLeagueController',
             templateUrl: 'preleague/preleague.html'
           },
+          // symbol lookup modal view
           'symbol@league':{
             controller: 'SymbolController',
             templateUrl: 'symbol/symbol.html'
