@@ -20,7 +20,7 @@ app
 		var recipientId = $scope.sendTo.recipientId == $scope.id ? $scope.sendTo.UserId : $scope.sendTo.recipientId;
 
 		var msg = {};
-		msg.username = $scope.username;
+		msg.senderUsername = $scope.username;
 		msg.message = $scope.input;
 
 		DirectMessage.sendMessage($scope.id, recipientId, msg).then(function(){
