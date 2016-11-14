@@ -30,7 +30,7 @@
 
               <li class="collection-item"><p>Profile Photo:</p>
                 <span id="uploadbox">
-                  <img ng-show="!file" src="{{image}}">
+                  <img ng-show="!file" src="{{ image || './../assets/img/no-avatar.png' }}">
                   <img ng-show="file" ngf-thumbnail="file" width="200px">
                 </span>
                 <br>
