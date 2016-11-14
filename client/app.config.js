@@ -41,11 +41,11 @@ var app = angular.module('app', ['ui.router', 'app.dashboard', 'app.portfolio', 
         }
       })
 
-      .state('analysis', {
-        url: '/analysis',
-        controller: 'AnalysisController',
-        templateUrl: 'analysis/analysis.html'
-      })
+      // .state('analysis', {
+      //   url: '/analysis',
+      //   controller: 'AnalysisController',
+      //   templateUrl: 'analysis/analysis.html'
+      // })
 
       .state('forum', {
         url: '/forum',
