@@ -88,6 +88,9 @@ pre {
   margin: 0px auto;
   text-align: center; }
 
+.marg-right-15 {
+  margin-right: 15px;
+}
 .more-info {
   background-image: url("../img/stock-market.jpeg");
   text-align: center;

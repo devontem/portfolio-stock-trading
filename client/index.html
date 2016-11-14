@@ -176,8 +176,8 @@
             </div>
   </footer>
 
-  <div class="botBar row" ng-controller="BotBarController" ng-if="loggedin" style='margin-top: 50ox'>
-    <h5 class="col s1 offset-s1 search-bar-title"> Quote</h5>
+  <div class="botBar row hide-on-med-and-down" ng-controller="BotBarController" ng-if="loggedin">
+    <h5 class="col s1 offset-s1 search-bar-title marg-right-15"> Quote</h5>
     <input ng-model="stockInput" class="col s1 searchquote" type="text" placeholder="enter symbol" required>
     <a ng-click="stockSearch()" class="waves-effect waves-light btn std-btn col s1 bot-search"><i class="material-icons">search</i></a>
 
