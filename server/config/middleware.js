@@ -43,8 +43,9 @@ module.exports = function (app, express) {
   app.use(express.static(__dirname + '/../../client'));
 
 
-  limitOrder();
-  dayOrder();
+  // interval functions
+  // limitOrder();
+  // dayOrder();
 
   publicLeagueAutoPilot('Rookie League', 10, 25000, 48, 'daily');
   publicLeagueAutoPilot('Junior Broker League', 10, 75000, 48, 'daily');
