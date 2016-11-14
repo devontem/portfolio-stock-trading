@@ -206,11 +206,6 @@ app
       });
   };
 
-
-  $window.onload = function(e) {
-    $scope.getUserLeagues();
-  };
-
   $rootScope.$on('userSignedIn', function(){
      $scope.getUserLeagues();
    });
@@ -265,6 +260,7 @@ app
 
   if ($scope.id){
     setInterval(updateMessageCenter, 3000);
+    $scope.getUserLeagues();
   }
 
   $scope.notdone = function(league){

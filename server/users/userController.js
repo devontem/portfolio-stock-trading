@@ -104,7 +104,7 @@ module.exports.forgotpw = function(req, res){
           password: temppw
         })
         var data = {
-          from: 'Excited User <me@samples.mailgun.org>',
+          from: 'Your Friends at Portfol.io!',
           to: req.body.email,
           subject: 'Your password has been reset @ Portfol.io',
           text: 'Hello dear ' + user.username + '!\nYour temporary password has been set to the\
