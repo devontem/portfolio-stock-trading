@@ -31,6 +31,10 @@ Portfol.io fills a gap. For beginners, there aren't a lot of tools out there tha
 
 Everything else should be included in the package.json. 
 
+### Forking
+Before running "NPM start", make sure to open a mysql connection on your local machine by running 'sudo mysql.server start'
+
+Besure to update the Mailgun API key and the JAWSDB API keys
 
 ### Concatenation
 Only one non-vendor javascript file is referenced on the index.html. The other files are concatenated together. The concatenation happens automatically when you run `npm start` or `npm install`. It can be triggered manually by running `gulp concat`. Additionally, if you are working on front-end files, you can run `gulp: concat:watch` which will note any file changes that you make on the front end and run the concatenation script.

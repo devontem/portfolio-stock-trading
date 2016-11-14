@@ -155,7 +155,7 @@ module.exports.signIn = function (req, res){
       }
     })
     .catch(function (err) {
-      res.send('Error finding user: ', err.message);
+      res.send('Error finding user: ' + err.message);
     });
 };
 

@@ -79,9 +79,12 @@ app
 .controller('SigninController', ['$scope', '$window', 'Auth', 'DirectMessage', '$rootScope', 'DashboardFactory', 'LeagueInvite', function($scope, $window, Auth, DirectMessage, $rootScope, DashboardFactory, LeagueInvite){
   $scope.user = {};
   $scope.id = $window.localStorage.getItem('com.tp.userId') || undefined;
-
   $scope.username;
 
+  // initialize side menu
+  $(document).ready(function(){
+    $(".button-collapse").sideNav();
+  });
 
   $scope.authorize = function(){
     if(Auth.isAuth()){
