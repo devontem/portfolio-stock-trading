@@ -83,7 +83,7 @@ app
 		if($scope.sendTo.recipientId == $scope.id){
 			var messageId = $scope.sendTo.id;
 			DirectMessage.markMessageReadById(messageId).then(function(){
-				console.log('Most recent message marked read!');
+				// console.log('Most recent message marked read!');
 			});
 		}
 		getMessagesBetween();

@@ -18,7 +18,7 @@ app
 	      url: '/api/directmessages/'+id+'/'+friendId
 	    })
 	    .then(function (data) {
-	    	console.log('get messages between', data)
+	    	// console.log('get messages between', data)
 	      return data.data[0];
 	    });
 	  }
@@ -41,7 +41,7 @@ app
 	      data: data
 	    })
 	    .then( function (data) {
-	      console.log(data)
+	      // console.log(data)
 	      return data;
 	    });
 	  }

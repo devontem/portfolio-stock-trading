@@ -108,10 +108,9 @@ app.controller('AccountController', ['$scope', '$window', 'AccountFactory', '$lo
     league.start = start.format();
     league.end = end.format();
 
-    console.log('league being sent', league);
 
     AccountFactory.editOneLeague(league.id, league).then(function(league){
-      console.log('factory callback', league);
+      // console.log('factory callback', league);
 
       swal('League Updated!', 'Everyone wants to play but nobody wants to organize the game. Good job!');
     });

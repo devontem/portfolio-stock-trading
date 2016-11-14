@@ -8,7 +8,6 @@ app.factory('symbolFactory', function($http){
       url: '/api/symbols/'+company,
     })
     .then( function (data) {
-      console.log(data)
       return data;
     });
   }

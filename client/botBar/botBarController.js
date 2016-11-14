@@ -22,7 +22,6 @@ angular.module('app.botbar', [])
 
     $rootScope.$emit('search');
     $rootScope.$on('off', function(){
-      console.log('yoyoyoyo')
       $scope.hasSearched = false;
     })
 
@@ -36,7 +35,7 @@ angular.module('app.botbar', [])
     Materialize.toast('Watchlist Updated', 3000);
     WatchlistFactory.getWatchlist($scope.userId)
     .then(function (list){
-      console.log(list,'list')
+      // console.log(list,'list')
     })
     var data = {
       userid : $scope.userId,

@@ -10,7 +10,7 @@ app
         headers: {"Content-Type": "application/json;charset=utf-8"}
       })
       .then(function(user){
-        console.log(user + ', successfully deleted');
+        // console.log(user + ', successfully deleted');
       });
     };
 
@@ -54,7 +54,7 @@ app
         url: '/api/leagues/'+id
       })
       .then(function(data){
-        console.log(data);
+        // console.log(data);
       });
     };
 

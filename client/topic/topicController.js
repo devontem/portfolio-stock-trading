@@ -52,7 +52,6 @@ app.controller('TopicController', ['$scope', 'topicFactory', '$stateParams', '$w
   };
 
   $scope.deleteReply = function(replyId){
-    console.log('clicked');
     topicFactory.deleteReply(replyId).then(function(){
       $scope.getAllReplies();
     });

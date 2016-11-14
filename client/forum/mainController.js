@@ -45,7 +45,7 @@ app.controller('MainForumController', ['$scope', '$window', 'forumFactory', '$ro
           $scope.allTopics[index].replies = 0;
           topicFactory.showAllReplies($scope.allTopics[index].id)
             .then(function(replies){
-              console.log('#ofREPLIES: ', replies);
+              // console.log('#ofREPLIES: ', replies);
               $scope.allTopics[index].replies = replies.data.length;
 
             });
