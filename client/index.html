@@ -40,112 +40,63 @@
         <a ng-href="{{loggedin ? '/#/dashboard':'#'}}" class="brand-logo">Portfol.io</a>
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 
-
+        <!-- MAIN NAVIGATION -->
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          
           <li style="padding-right: 15px" ng-show="loggedin"><span class="red-text text-lighten-2">Welcome, {{username[0].toUpperCase()+username.slice(1)}}!</span></li>
-
           <li style="padding-right: 5px"><a href="#/messages" ng-show="loggedin">Messages<span ng-if="unreadMessages || unreadInvites" class="badge circle red white-text">{{unreadMessages+unreadInvites}}</span></a></li>
-
           <li ng-show="loggedin" style="padding-right: 15px">
-
             <a href="#/dashboard" class="dropdown-button" data-hover="true" data-activates='dropdown2' data-constrainwidth="false" data-beloworigin="true">Dashboard</a>
-
           </li>
-
             <ul ng-show="loggedin" id='dropdown2' class='dropdown-content'>
                 <li class="dd-collection" ng-repeat="league in userLeagues | filter: notdone "><a ng-href="#/leagues/{{league.leagueId}}">{{league.leaguename}}</a></li>
             </ul>
-
-
           <li ng-show="loggedin">
-
             <a class='dropdown-button' data-hover="true" data-activates='dropdown1' data-constrainwidth="false" data-beloworigin="true">Resources</a>
-
           </li>
-
           <ul id='dropdown1' class='dropdown-content'>
               <li><a href="#/forum" ng-show="loggedin">Forum</a></li>
               <!-- <li><a href="#/analysis" ng-show="loggedin">Chart</a></li> -->
               <li><a href="#/watchlist" ng-show="loggedin">Watchlist</a></li>
           </ul>
-
           <li ng-controller="ClockController" ng-bind="time" class="col s2 clock teal-text text-lighten-4"></li>
-
           <li><a ng-show="!loggedin" ng-click="toggleLogin()">Login</a></li>
-
           <li><a ng-show="!loggedin" ng-click="toggleSignup()">Sign Up</a></li>
-
           <li ng-show="loggedin" style="padding-right: 15px">
-
             <a href="#/account" class="dropdown-button" data-hover="true" data-activates='dropdown3' data-constrainwidth="false" data-beloworigin="true">My Account</a>
-
           </li>
-
           <ul id='dropdown3' class='dropdown-content'>
               <li><a ng-show="loggedin" ng-click="logout()">Log Out</a></li>
           </ul>
-
         </ul>
 
-
+        <!-- SIDE NAV -->
         <ul class="side-nav" id="mobile-demo">
-          
           <li style="padding-right: 15px" ng-show="loggedin"><span class="red-text text-lighten-2">Welcome, {{username[0].toUpperCase()+username.slice(1)}}!</span></li>
-
           <li style="padding-right: 5px"><a href="#/messages" ng-show="loggedin">Messages<span ng-if="unreadMessages || unreadInvites" class="badge circle red white-text">{{unreadMessages+unreadInvites}}</span></a></li>
-
           <li ng-show="loggedin" style="padding-right: 15px">
-
             <a href="#/dashboard" class="dropdown-button" data-hover="true" data-activates='dropdown2' data-constrainwidth="false" data-beloworigin="true">Dashboard</a>
-
           </li>
-
             <ul ng-show="loggedin" id='dropdown2' class='dropdown-content'>
                 <li class="dd-collection" ng-repeat="league in userLeagues | filter: notdone "><a ng-href="#/leagues/{{league.leagueId}}">{{league.leaguename}}</a></li>
             </ul>
-
-
           <li ng-show="loggedin">
-
-            <a class='dropdown-button' data-hover="true" data-activates='dropdown1' data-constrainwidth="false" data-beloworigin="true">Resources</a>
-
+            <a href="#/forum" ng-show="loggedin">Forum</a>
           </li>
-
-          <ul id='dropdown1' class='dropdown-content'>
-              <li><a href="#/forum" ng-show="loggedin">Forum</a></li>
-              <!-- <li><a href="#/analysis" ng-show="loggedin">Chart</a></li> -->
-              <li><a href="#/watchlist" ng-show="loggedin">Watchlist</a></li>
-          </ul>
-
+          <li ng-show="loggedin">
+            <li><a href="#/watchlist" ng-show="loggedin">Watchlist</a></li>
+          </li>
+          <li ng-show="loggedin">
+            <li><a href="#/account" ng-show="loggedin">My Account</a></li>
+          </li>
+          <li ng-show="loggedin">
+            <a ng-click="logout()">Log Out</a>
+          </li>
           <li><a ng-show="!loggedin" ng-click="toggleLogin()">Login</a></li>
-
           <li><a ng-show="!loggedin" ng-click="toggleSignup()">Sign Up</a></li>
 
-          <li ng-show="loggedin" style="padding-right: 15px">
-
-            <a href="#/account" class="dropdown-button" data-hover="true" data-activates='dropdown3' data-constrainwidth="false" data-beloworigin="true">My Account</a>
-
-          </li>
-
-          <ul id='dropdown3' class='dropdown-content'>
-              <li><a ng-show="loggedin" ng-click="logout()">Log Out</a></li>
-          </ul>
-
-        </ul>
-
-        <ul class="tabs tabs-transparent">
-          <li class="tab"><a href="#test1">Test 1</a></li>
-          <li class="tab"><a class="active" href="#test2">Test 2</a></li>
-          <li class="tab disabled"><a href="#test3">Disabled Tab</a></li>
-          <li class="tab"><a href="#test4">Test 4</a></li>
         </ul>
       </div>
     </nav>
-    <div id="test1" class="col s12">Test 1</div>
-    <div id="test2" class="col s12">Test 2</div>
-    <div id="test3" class="col s12">Test 3</div>
-    <div id="test4" class="col s12">Test 4</div>
 
     <login-directive show='showlogin' width='350px' height='400px'>
       <div ng-if="showlogin" class="signup">

@@ -7,7 +7,7 @@ app.controller('ClockController', ['$scope', '$interval', function ($scope, $int
 
     //get current time with momentjs
     var currentTime = moment().utc().subtract(7, 'hour');
-    var warning = 'until stock market opens';
+    var warning = 'until NYSE opens';
     var hour = currentTime.hour();
     var minute = currentTime.minute();
     var second = currentTime.second();
@@ -16,7 +16,7 @@ app.controller('ClockController', ['$scope', '$interval', function ($scope, $int
     //calculate time til market opens/close
     if((hour>6 && hour <13) || (hour===6 && minute>=30)){
       hour = 12 - hour;
-      warning = 'until stock market closes';
+      warning = 'until NYSE closes';
       minute = 59 - minute;
 
     } else if(hour >= 13){

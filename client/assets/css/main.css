@@ -262,7 +262,7 @@ footer.page-footer {
   border-bottom-left-radius: 17px;
   border-bottom-right-radius: 17px;
   padding: 0px 10px;
-  min-width: 310px;
+  min-width: 240px;
   margin: 0px 15px;
   height: 50px; }
   .clock::before {

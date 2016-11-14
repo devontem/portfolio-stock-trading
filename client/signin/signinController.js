@@ -262,7 +262,8 @@ app
   }
 
   if ($scope.id){
-    setInterval(updateMessageCenter, 3000);
+    updateMessageCenter();
+    //setInterval(updateMessageCenter, 3000); // remove polling for time being
     $scope.getUserLeagues();
   }
 

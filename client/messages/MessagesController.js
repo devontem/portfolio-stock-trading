@@ -230,5 +230,7 @@ app
 	});
 
 	// fetches new info every 2 seconds
-	setInterval(updateMessageCenter, 2000);
+	// setInterval(updateMessageCenter, 2000);
+	// removing polling for time being
+	updateMessageCenter();
 }]);
