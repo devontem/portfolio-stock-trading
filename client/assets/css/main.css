@@ -139,6 +139,7 @@ footer.page-footer {
   margin-left: 25px; }
 
 .team-info {
+  display: none;
   background-color: #F9D955;
   text-align: center;
   color: black; }
