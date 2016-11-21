@@ -56,8 +56,10 @@ app.controller('MainForumController', ['$scope', '$window', 'forumFactory', '$ro
   };
 
   $scope.oneTopic = function(){
-    if($scope.allTopics.length > 0){
+    if ($scope.allTopics && $scope.allTopics.length > 0){
       return true;
+    } else {
+      return false;
     }
   };
 
